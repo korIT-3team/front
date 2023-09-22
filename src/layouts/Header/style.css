@@ -1,7 +1,8 @@
 #header{
-     width: 100%;
+     width: 100vw;
      height: 10vh;
 }
+
 .header-top{
      width: 100%;
      height: 3.22vh;
@@ -29,13 +30,17 @@
      height: 6.78vh;
      background-color: #184A7D;
 }
-.header-menu{
+.header-logo{
      display: flex;
      align-items: center;
      justify-content: center;
      margin-left: 8px;
 }
-.header-menu-icon{
+
+.header-logo:hover{
+     cursor: pointer;
+}
+.header-logo-icon{
      background-image: url(./assets/menu_top.png);
      background-position: 50% 50%;
      background-size: 100% 100%;

@@ -3,6 +3,7 @@ import './style.css';
 
 export default function Header() {
      
+
   return (
     <div id='header'>
      <div className="header-top">
@@ -12,9 +13,9 @@ export default function Header() {
           </div>
      </div>
      <div className="header-bottom">
-          <div className="header-menu">
-               <div className="header-menu-icon"></div>
-          </div>
+          {/* <div className="header-logo">
+               <div className="header-logo-icon"></div>
+          </div> */}
           <div className="header-function-container">
                <div className="header-function-home">
                     <div className="header-function-home-icon"></div>
