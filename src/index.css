@@ -10,6 +10,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /* word-break: break-all; : 단어의 분리를 어떻게 할 것인지 결정 */
   word-break: break-all;
+  overflow: hidden;
 }
 
 code {
