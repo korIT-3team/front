@@ -13,25 +13,21 @@ import SalesInfo from './views/Sales/SalesInfo';
 
 import './App.css';
 import { HOME_PATH, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_MENU, SALES_PLAN_PATH } from './constants';
+import Container from './layouts/Container';
 
 function App() {
 
   return (
-    <>
-      <Header/>
-      <div style = {{ display: 'flex' }}>
-        <SideMenu/>
-        <Routes>
-          <Route path={ HOME_PATH } element={ <Main/> } />
-          <Route path={ SALES_MENU } element={ <SalesMenu/> } />
-          <Route path={ SALES_PLAN_PATH } element={ <SalesPlan/> } />
-          <Route path={ ORDER_INFO_PATH } element={ <OrderInfo/> } />
-          <Route path={ RELEASE_INFO_PATH } element={ <ReleaseInfo/> } />
-          <Route path={ SALES_INFO_PATH } element={ <SalesInfo/> } />
-        </Routes>
-      </div>
-      
-    </>
+    <Routes>
+      <Route element={<Container />}>
+        <Route path={ HOME_PATH } element={ <Main/> } />
+        <Route path={ SALES_MENU } element={ <SalesMenu/> } />
+        <Route path={ SALES_PLAN_PATH } element={ <SalesPlan/> } />
+        <Route path={ ORDER_INFO_PATH } element={ <OrderInfo/> } />
+        <Route path={ RELEASE_INFO_PATH } element={ <ReleaseInfo/> } />
+        <Route path={ SALES_INFO_PATH } element={ <SalesInfo/> } />
+      </Route>
+    </Routes>
   );
 }
 

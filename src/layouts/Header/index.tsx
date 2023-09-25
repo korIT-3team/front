@@ -9,7 +9,7 @@ export default function Header() {
      <div className="header-top">
           <div className="header-info">
                <div className="header-info-user">사용자ㅤ : ㅤ1000 ㅤ아무개</div>
-               <div className="header-info-company">회사ㅤ : ㅤ1000 ㅤ회사1</div>
+               <div className="header-info-company">회사ㅤ : ㅤ1000 ㅤCompany</div>
           </div>
      </div>
      <div className="header-bottom">

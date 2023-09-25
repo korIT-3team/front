@@ -147,6 +147,18 @@
   height: 85px;
 }
 
+.side-menu-sales-active {
+  background-color: #f9f9f9;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
 .side-menu-sales:hover {
   cursor: pointer;
   background-color: #f9f9f9;
