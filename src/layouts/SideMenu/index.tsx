@@ -38,7 +38,7 @@ export default function SideMenu() {
           <div className="side-menu-human-resource-text">인사관리</div>
         </div>
         <div className={pathname === '/sales' ? 'side-menu-sales-active' : 'side-menu-sales'} onClick={onSalesMenuButtonClickHandler}>
-          <div className="side-menu-sales-icon"></div>
+          <div className={pathname === '/sales' ? 'side-menu-sales-icon-active' : 'side-menu-sales-icon'}></div>
           <div className="side-menu-sales-text">영업관리</div>
         </div>
         <div className="side-menu-funds">

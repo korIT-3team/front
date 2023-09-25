@@ -181,6 +181,14 @@
   background-position: 50% 50%;
   background-size: 100% 100%;
 }
+.side-menu-sales-icon-active {
+  width: 40px;
+  height: 40px;
+
+  background-image: url(./assets/sales_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
 
 .side-menu-sales-text {
   margin-top: 5px;
