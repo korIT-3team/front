@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import Header from './layouts/Header';
-import SideMenu from './layouts/SideMenu';
+import Container from './layouts/Container';
 
 import Main from './views/Main';
 import SalesPlan from './views/Sales/SalesPlan';
@@ -10,9 +9,9 @@ import OrderInfo from './views/Sales/OrderInfo';
 import ReleaseInfo from './views/Sales/ReleaseInfo';
 import SalesInfo from './views/Sales/SalesInfo';
 
-import './App.css';
 import { HOME_PATH, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH } from './constants';
-import Container from './layouts/Container';
+
+import './App.css';
 
 function App() {
 
