@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { HOME_PATH, SALES_MENU } from 'src/constants';
+import { HOME_PATH, SALES_PLAN_PATH } from 'src/constants';
 
 import './style.css'
 
@@ -17,7 +17,7 @@ export default function SideMenu() {
     navigator(HOME_PATH);
   }
   const onSalesMenuButtonClickHandler = () => {
-    navigator(SALES_MENU);
+    navigator(SALES_PLAN_PATH);
   }
 
 
