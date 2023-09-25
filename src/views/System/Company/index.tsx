@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function index() {
+export default function Company() {
   return (
-    <div>index</div>
+    <div>
+     
+    </div>
   )
 }
