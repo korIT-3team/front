@@ -1,0 +1,114 @@
+.sales-plan-left {
+  margin-bottom: 24px;
+
+  width: 182px;
+  height: calc(100vh - 10vh);
+
+  background-color: rgba(249, 249, 249, 1);
+}
+
+.sales-plan-left-main {
+  display: flex;
+
+  margin-left: 28px;
+  margin-bottom: 8px;
+}
+
+.sales-plan-left-main-text {
+  margin-top: 24px;
+
+  width: 101px;
+  height: 20px;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.sales-plan-left-detail {
+  display: flex;
+}
+
+.sales-plan-left-detail-left {
+  display: flex;
+  padding-left: 41px;
+}
+
+.sales-plan-left-detail-right {
+  display: flex;
+}
+
+.sales-plan-left-detail-right-text {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-top: 5px;
+}
+
+.sales-plan-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sales-plan-registration:hover {
+  cursor: pointer;
+}
+
+.order-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.order-registration:hover {
+  cursor: pointer;
+}
+
+.release-info-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.release-info-registration:hover {
+  cursor: pointer;
+}
+
+.sales-info-registration {
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sales-info-registration:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+#sales-plan-wrapper {
+  display: flex;
+}
+
+
+.sales-plan-right {
+  width: 500px;
+  height: calc(100vh - 10vh);
+
+  background-color: aquamarine;
+}
