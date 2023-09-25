@@ -1,11 +1,13 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { HOME_PATH, SALES_MENU } from 'src/constants';
 
 import './style.css'
 
 export default function SideMenu() {
+
+  const { pathname } = useLocation();
 
   // function //
   const navigator = useNavigate();
@@ -35,7 +37,7 @@ export default function SideMenu() {
           <div className="side-menu-human-resource-icon"></div>
           <div className="side-menu-human-resource-text">인사관리</div>
         </div>
-        <div className="side-menu-sales" onClick={onSalesMenuButtonClickHandler}>
+        <div className={pathname === '/sales' ? 'side-menu-sales-active' : 'side-menu-sales'} onClick={onSalesMenuButtonClickHandler}>
           <div className="side-menu-sales-icon"></div>
           <div className="side-menu-sales-text">영업관리</div>
         </div>
