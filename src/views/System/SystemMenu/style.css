@@ -1,20 +1,20 @@
-.sales-plan-left {
+.system-menu-left {
   margin-bottom: 24px;
 
   width: 182px;
   height: calc(100vh - 10vh);
 
-  background-color: rgba(249, 249, 249, 1);
+  background-color: #f9f9f9;
 }
 
-.sales-plan-left-main {
+.system-menu-left-top {
   display: flex;
 
   margin-left: 28px;
   margin-bottom: 8px;
 }
 
-.sales-plan-left-main-text {
+.system-menu-left-top-text {
   margin-top: 24px;
 
   width: 101px;
@@ -28,20 +28,20 @@
   line-height: normal;
 }
 
-.sales-plan-left-detail {
+.system-menu-left-detail {
   display: flex;
 }
 
-.sales-plan-left-detail-left {
+.system-menu-left-detail-left {
   display: flex;
   padding-left: 41px;
 }
 
-.sales-plan-left-detail-right {
+.system-menu-left-detail-right {
   display: flex;
 }
 
-.sales-plan-left-detail-right-text {
+.system-menu-left-detail-right-text {
   display: flex;
 
   flex-direction: column;
@@ -49,7 +49,7 @@
   margin-top: 5px;
 }
 
-.sales-plan-registration {
+.company-info-registration {
   margin-top: 5px;
   margin-bottom: 5px;
 
@@ -61,11 +61,11 @@
   line-height: normal;
 }
 
-.sales-plan-registration:hover {
+.company-info-registration:hover {
   cursor: pointer;
 }
 
-.order-registration {
+.dept-info-registration {
   margin-top: 5px;
   margin-bottom: 5px;
 
@@ -77,11 +77,11 @@
   line-height: normal;
 }
 
-.order-registration:hover {
+.dept-info-registration:hover {
   cursor: pointer;
 }
 
-.release-info-registration {
+.employee-info-registration {
   margin-top: 5px;
   margin-bottom: 5px;
 
@@ -93,11 +93,26 @@
   line-height: normal;
 }
 
-.release-info-registration:hover {
+.employee-info-registration:hover {
   cursor: pointer;
 }
 
-.sales-info-registration {
+.customer-info-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.customer-info-registration:hover {
+  cursor: pointer;
+}
+.product-info-registration {
   margin-top: 5px;
   margin-bottom: 20px;
 
@@ -109,6 +124,6 @@
   line-height: normal;
 }
 
-.sales-info-registration:hover {
+.product-info-registration:hover {
   cursor: pointer;
 }
