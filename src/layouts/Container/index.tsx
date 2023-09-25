@@ -6,11 +6,11 @@ import { Outlet } from 'react-router-dom'
 export default function Container() {
   return (
     <>
-          <Header/>
-          <div style = {{ display: 'flex' }}>
-               <SideMenu />
-               <Outlet />
-          </div>
+      <Header/>
+      <div style = {{ display: 'flex' }}>
+            <SideMenu />
+            <Outlet />
+      </div>
     </>
   )
 }
