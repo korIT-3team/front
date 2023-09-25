@@ -1,183 +1,225 @@
-#header{
-     width: 100vw;
-     height: 10vh;
+#header {
+  width: 100vw;
+  height: 10vh;
 }
 
-.header-top{
-     width: 100%;
-     height: 3.22vh;
-     background-color: #122647;
+.header-top {
+  width: 100%;
+  height: 3.22vh;
 
-}
-.header-info{
-     height: 3.22vh;
-     display: flex;
-     align-items: center;
-     font-size: 12px;
-     color:  white;
-     font-weight: bold;
-
-}
-.header-info-user{
-     padding-left: 8px;
-
-}
-.header-info-company{
-     margin-left: 30px;
-}
-.header-bottom{
-     display: flex;
-     height: 6.78vh;
-     background-color: #184A7D;
-}
-.header-logo{
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     margin-left: 8px;
+  background-color: #122647;
 }
 
-.header-logo:hover{
-     cursor: pointer;
-}
-.header-logo-icon{
-     background-image: url(./assets/menu_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+.header-info {
+  display: flex;
 
-     width: 35px;
-     height: 35px;
+  align-items: center;
 
-}
-.header-function-container{
-     flex:9;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-}
-.header-function-home{
-     display: flex;
-     align-items: center;
-}
-.header-function-home-icon{
-     background-image: url(./assets/home_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  height: 3.22vh;
 
-     width: 35px;
-     height: 35px;
+  color: rgba(255, 255, 255);
+  font-size: 12px;
+  font-weight: bold;
 }
-.header-function-home-text{
-     color: white;
-     margin-left: 7px;
-     margin-right: 29px;
-     font-size: 16px;
-     font-family: Inter;
-     font-weight: 400;
-     word-wrap: break-word
-}
-.header-function-search{
-     display: flex;
-     align-items: center;
-}
-.header-function-search-icon{
-     background-image: url(./assets/search_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
+.header-info-user {
+  padding-left: 8px;
 }
-.header-function-search-text{
-     color: white;
-     margin-left: 7px;
-     margin-right: 29px;
-     font-size: 16px;
-     font-family: Inter;
-     font-weight: 400;   
-     word-wrap: break-word
-}
-.header-function-save{
-     display: flex;
-     align-items: center;
-}
-.header-function-save-icon{
-     background-image: url(./assets/save_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
+.header-info-company {
+  margin-left: 30px;
 }
-.header-function-save-text{
-     color: white;
-     margin-left: 7px;
-     margin-right: 29px;
-     font-size: 16px;
-     font-family: Inter;
-     font-weight: 400;
-     word-wrap: break-word
-}
-.header-function-print{
-     display: flex;
-     align-items: center;
-}
-.header-function-print-icon{
-     background-image: url(./assets/print_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.header-function-print-text{
-     color: white;
-     margin-left: 7px;
-     margin-right: 29px;
-     font-size: 16px;
-     font-family: Inter;
-     font-weight: 400;
-     word-wrap: break-word
-}
-.header-function-delete{
-     display: flex;
-     align-items: center;
-}
-.header-function-delete-icon{
-     background-image: url(./assets/delete_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+.header-bottom {
+  display: flex;
 
-     width: 35px;
-     height: 35px;
-}
-.header-function-delete-text{
-     color: white;
-     margin-left: 7px;
-     margin-right: 29px;
-     font-size: 16px;
-     font-family: Inter;
-     font-weight: 400;
-     word-wrap: break-word
-}
-.header-function-info{
-     display: flex;
-     align-items: center;
-}
-.header-function-info-icon{
-     background-image: url(./assets/info_top.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  height: 6.78vh;
 
-     width: 35px;
-     height: 35px;
+  background-color: #184A7D;
 }
-.header-function-info-text{
-     color: white;
-     margin-left: 7px;
-     margin-right: 29px;
-     font-size: 16px;
-     font-family: Inter;
-     font-weight: 400;
-     word-wrap: break-word
+
+.header-logo {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-left: 8px;
+}
+
+.header-logo:hover {
+  cursor: pointer;
+}
+
+.header-logo-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/menu_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.header-function-container {
+  display: flex;
+
+  flex:9;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.header-function-home {
+  display: flex;
+  align-items: center;
+}
+
+.header-function-home-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/home_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.header-function-home-text {
+  margin-left: 7px;
+  margin-right: 29px;
+
+  color: rgba(255, 255, 255);
+
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word
+}
+
+.header-function-search {
+  display: flex;
+  align-items: center;
+}
+
+.header-function-search-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/search_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.header-function-search-text {
+  margin-left: 7px;
+  margin-right: 29px;
+
+  color: rgba(255, 255, 255);
+
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;   
+  word-wrap: break-word
+}
+
+.header-function-save {
+  display: flex;
+  align-items: center;
+}
+
+.header-function-save-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/save_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.header-function-save-text {
+  margin-left: 7px;
+  margin-right: 29px;
+
+  color: rgba(255, 255, 255);
+
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word
+}
+
+.header-function-print {
+  display: flex;
+  align-items: center;
+}
+
+.header-function-print-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/print_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.header-function-print-text {
+  margin-left: 7px;
+  margin-right: 29px;
+
+  color: rgba(255, 255, 255);
+
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word
+}
+
+.header-function-delete {
+  display: flex;
+  align-items: center;
+}
+
+.header-function-delete-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/delete_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+.header-function-delete-text {
+  margin-left: 7px;
+  margin-right: 29px;
+
+  color: rgba(255, 255, 255);
+
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word
+}
+
+.header-function-info {
+  display: flex;
+  align-items: center;
+}
+
+.header-function-info-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/info_top.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.header-function-info-text {
+  margin-left: 7px;
+  margin-right: 29px;
+
+  color: rgba(255, 255, 255);
+
+  font-size: 16px;
+  font-family: Inter;
+  font-weight: 400;
+  word-wrap: break-word
 }

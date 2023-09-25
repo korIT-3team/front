@@ -1,246 +1,294 @@
-#side-menu{
-     width: 81px;
-     height: calc(100vh - 10vh);
+#side-menu {
+  display: flex;
 
-     background-color: #E1E1E1;
-     display: flex;
-     flex-direction: column;
-     justify-content: space-between;
-     align-items: center;
-}
-.side-menu-home{
-     width: 81px;
-     height: 85px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  width: 81px;
+  height: calc(100vh - 10vh);
+
+  background-color: #E1E1E1;
 }
-.side-menu-home:hover{
-     background-color: #f9f9f9;
-     cursor: pointer;
+
+.side-menu-home {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
 }
+
+.side-menu-home:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
 .side-menu-home:hover .side-menu-home-icon {
-     background-image: url(./assets/home_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
 
-     width: 40px;
-     height: 40px;
+  background-image: url(./assets/home_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-home-icon{
-     background-image: url(./assets/home_left_black.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.side-menu-home-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 2px;
-}
-.side-menu-system-manage{
-     width: 81px;
-     height: 85px;
+.side-menu-home-icon {
+  width: 35px;
+  height: 35px;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  background-image: url(./assets/home_left_black.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-system-manage:hover{
-     background-color: #f9f9f9;
-     cursor: pointer;
+
+.side-menu-home-text {
+  margin-top: 2px;
+
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
+.side-menu-system-manage {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
+.side-menu-system-manage:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
 .side-menu-system-manage:hover .side-menu-system-manage-icon {
-     background-image: url(./assets/system_manage_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
 
-     width: 40px;
-     height: 40px;
+  background-image: url(./assets/system_manage_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-system-manage-icon{
-     background-image: url(./assets/system_manage_left_black.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.side-menu-system-manage-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 5px;
-}
-.side-menu-human-resource{
-     width: 81px;
-     height: 85px;
+.side-menu-system-manage-icon {
+  width: 35px;
+  height: 35px;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  background-image: url(./assets/system_manage_left_black.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-human-resource:hover{
-     background-color: #f9f9f9;
-     cursor: pointer;
+
+.side-menu-system-manage-text {
+  margin-top: 5px;
+
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
+
+.side-menu-human-resource {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
+.side-menu-human-resource:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
 .side-menu-human-resource:hover .side-menu-human-resource-icon {
-     background-image: url(./assets/human-resource_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
 
-     width: 40px;
-     height: 40px;
+  background-image: url(./assets/human-resource_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-human-resource-icon{
-     background-image: url(./assets/human-resource_left_black.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.side-menu-human-resource-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 5px;
-}
-.side-menu-sales{
-     width: 81px;
-     height: 85px;
+.side-menu-human-resource-icon {
+  width: 35px;
+  height: 35px;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  background-image: url(./assets/human-resource_left_black.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-sales:hover{
-     background-color: #f9f9f9;
-     cursor: pointer;
+
+.side-menu-human-resource-text {
+  margin-top: 5px;
+
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
+
+.side-menu-sales {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
+.side-menu-sales:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
 .side-menu-sales:hover .side-menu-sales-icon {
-     background-image: url(./assets/sales_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
 
-     width: 40px;
-     height: 40px;
+  background-image: url(./assets/sales_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-sales-icon{
-     background-image: url(./assets/sales_left_black.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.side-menu-sales-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 5px;
-}
-.side-menu-funds{
-     width: 81px;
-     height: 85px;
+.side-menu-sales-icon {
+  width: 35px;
+  height: 35px;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  background-image: url(./assets/sales_left_black.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-funds:hover{
-     background-color: #f9f9f9;
-     cursor: pointer;
+
+.side-menu-sales-text {
+  margin-top: 5px;
+
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
+
+.side-menu-funds {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
+.side-menu-funds:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
 .side-menu-funds:hover .side-menu-funds-icon {
-     background-image: url(./assets/funds_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
 
-     width: 40px;
-     height: 40px;
+  background-image: url(./assets/funds_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-funds-icon{
-     background-image: url(./assets/funds_left_black.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.side-menu-funds-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 5px;
-}
-.side-menu-search{
-     width: 81px;
-     height: 85px;
+.side-menu-funds-icon {
+  width: 35px;
+  height: 35px;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  background-image: url(./assets/funds_left_black.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-search:hover{
-     background-color: #f9f9f9;
-     cursor: pointer;
+.side-menu-funds-text {
+  margin-top: 5px;
+
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
+
+.side-menu-search {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
+.side-menu-search:hover {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
 .side-menu-search:hover .side-menu-search-icon {
-     background-image: url(./assets/search_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
+  width: 40px;
+  height: 40px;
 
-     width: 40px;
-     height: 40px;
+  background-image: url(./assets/search_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-search-icon{
-     background-image: url(./assets/search_left_black.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
-}
-.side-menu-search-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 5px;
-}
-.side-menu-logout{
-     width: 81px;
-     height: 85px;
+.side-menu-search-icon {
+  width: 35px;
+  height: 35px;
 
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
+  background-image: url(./assets/search_left_black.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
 }
-.side-menu-logout:hover{
-     cursor: pointer;
-}
-.side-menu-logout-icon{
-     background-image: url(./assets/logout_left_color.png);
-     background-position: 50% 50%;
-     background-size: 100% 100%;
 
-     width: 35px;
-     height: 35px;
+.side-menu-search-text {
+  margin-top: 5px;
+
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
-.side-menu-logout-text{
-     font-size: 12px;
-     font-weight: 700;
-     word-wrap: break-word;
-     margin-top: 5px;
+
+.side-menu-logout {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+
+.side-menu-logout:hover {
+  cursor: pointer;
+}
+
+.side-menu-logout-icon {
+  width: 35px;
+  height: 35px;
+
+  background-image: url(./assets/logout_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
+
+.side-menu-logout-text {
+  margin-top: 5px;
+  
+  font-size: 12px;
+  font-weight: 700;
+  word-wrap: break-word;
 }
