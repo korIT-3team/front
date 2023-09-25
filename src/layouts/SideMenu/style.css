@@ -62,12 +62,29 @@
   width: 81px;
   height: 85px;
 }
+.side-menu-system-manage-active{
+  background-color: #f9f9f9;
+  display: flex;
 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+.side-menu-system-manage-icon-active {
+  width: 40px;
+  height: 40px;
+
+  background-image: url(./assets/system_manage_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
 .side-menu-system-manage:hover {
   cursor: pointer;
   background-color: #f9f9f9;
 }
-
 .side-menu-system-manage:hover .side-menu-system-manage-icon {
   width: 40px;
   height: 40px;
@@ -76,7 +93,6 @@
   background-position: 50% 50%;
   background-size: 100% 100%;
 }
-
 .side-menu-system-manage-icon {
   width: 35px;
   height: 35px;
@@ -85,7 +101,6 @@
   background-position: 50% 50%;
   background-size: 100% 100%;
 }
-
 .side-menu-system-manage-text {
   margin-top: 5px;
 
@@ -93,7 +108,6 @@
   font-weight: 700;
   word-wrap: break-word;
 }
-
 .side-menu-human-resource {
   display: flex;
 
@@ -104,12 +118,10 @@
   width: 81px;
   height: 85px;
 }
-
 .side-menu-human-resource:hover {
   cursor: pointer;
   background-color: #f9f9f9;
 }
-
 .side-menu-human-resource:hover .side-menu-human-resource-icon {
   width: 40px;
   height: 40px;

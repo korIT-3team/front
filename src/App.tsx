@@ -1,8 +1,6 @@
 import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import Header from './layouts/Header';
-import SideMenu from './layouts/SideMenu';
 
 import Main from './views/Main';
 import SalesPlan from './views/Sales/SalesPlan';
@@ -11,8 +9,9 @@ import ReleaseInfo from './views/Sales/ReleaseInfo';
 import SalesInfo from './views/Sales/SalesInfo';
 
 import './App.css';
-import { HOME_PATH, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH } from './constants';
+import { HOME_PATH, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO } from './constants';
 import Container from './layouts/Container';
+import Company from './views/System/Company';
 
 function App() {
 
@@ -24,6 +23,7 @@ function App() {
         <Route path={ ORDER_INFO_PATH } element={ <OrderInfo/> } />
         <Route path={ RELEASE_INFO_PATH } element={ <ReleaseInfo/> } />
         <Route path={ SALES_INFO_PATH } element={ <SalesInfo/> } />
+        <Route path={ SYSTEM_COMPANY_INFO } element={ <Company/> } />
       </Route>
     </Routes>
   );
