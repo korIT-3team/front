@@ -10,8 +10,6 @@
 
   width: 1440px;
   height: calc(100vh - 10vh);
-
-  background-color:beige;
 }
 
 .customer-info-top {
@@ -224,7 +222,7 @@
 }
 
 .customer-info-middle-left-top {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .customer-info-middle-left-top-text {
@@ -239,8 +237,19 @@
 }
 
 .customer-info-middle-left-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 340px;
-  height: 500px;
+  height: 550px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.customer-info-middle-left-bottom-container {
+  width: 320px;
+  height: 530px;
 
   border: 1px solid #CFCFCF;
 }
@@ -254,7 +263,7 @@
 }
 
 .customer-info-middle-right-top {
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .customer-info-middle-right-top-text {
@@ -269,10 +278,181 @@
 }
 
 .customer-info-middle-right-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   width: 720px;
-  height: 500px;
+  height: 550px;
 
   border: 1px solid #CFCFCF;
+}
+
+.customer-info-middle-right-bottom-container {
+  width: 700px;
+  height: 530px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.customer-name {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.customer-name-text {
+  width: 100px;
+  height: 27px;
+
+  color: rgba(0, 0, 0, 0.80);
+
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.customer-name-input {
+  width: 400px;
+  height: 27px;
+
+  margin-left: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+}
+
+.customer-business-number {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.customer-business-number-text {
+  width: 100px;
+  height: 27px;
+
+  color: rgba(0, 0, 0, 0.80);
+
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.customer-business-number-input {
+  width: 400px;
+  height: 27px;
+
+  margin-left: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+}
+
+.customer-address {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.customer-address-text {
+  width: 100px;
+  height: 27px;
+
+  color: rgba(0, 0, 0, 0.80);
+
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.customer-address-input {
+  width: 400px;
+  height: 27px;
+
+  margin-left: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+}
+
+.customer-address-detail {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.customer-address-detail-text {
+  width: 100px;
+  height: 27px;
+
+  color: rgba(0, 0, 0, 0.80);
+
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.customer-address-detail-input {
+  width: 400px;
+  height: 27px;
+
+  margin-left: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+}
+
+.customer-tel-number {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.customer-tel-number-text {
+  width: 100px;
+  height: 27px;
+
+  color: rgba(0, 0, 0, 0.80);
+
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.customer-tel-number-input {
+  width: 400px;
+  height: 27px;
+
+  margin-left: 20px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
 }
 
 .customer-info-bottom {
