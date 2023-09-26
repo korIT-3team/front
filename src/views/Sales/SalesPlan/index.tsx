@@ -1,7 +1,8 @@
 import React from 'react'
 
-import './style.css'
 import SalesMenu from '../SalesMenu'
+
+import './style.css'
 
 export default function SalesPlan() {
   return (
