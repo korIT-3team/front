@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { HOME_PATH, SALES_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
+import { HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
 import './style.css'
 
 export default function SideMenu() {
@@ -11,6 +11,7 @@ export default function SideMenu() {
   const navigator = useNavigate();
   const showSystemMenu = pathname.includes(SYSTEM_PATH);
   const showSalesMenu = pathname.includes(SALES_PATH);
+  const showHumanMenu = pathname.includes(HUMAN_PATH);
 
   // event handler //
   const onHomeButtonClickHandler = () => {
@@ -21,6 +22,10 @@ export default function SideMenu() {
   }
   const onSystemMenuMenuButtonClickHandler = () => {
     navigator(SYSTEM_COMPANY_INFO);
+  }
+
+  const onHumanMenuMenuButtonClickHandler = () => {
+    navigator(HUMAN_EMPLOYEE_INFO);
   }
 
   // render //
@@ -35,7 +40,7 @@ export default function SideMenu() {
           <div className={ showSystemMenu ? 'side-menu-system-manage-icon-active' : 'side-menu-system-manage-icon'}></div>
           <div className="side-menu-system-manage-text">시스템관리</div>
         </div>
-        <div className="side-menu-human-resource">
+        <div className={ showHumanMenu ? 'side-menu-human-manage-active' : 'side-menu-human-resource'} onClick={onHumanMenuMenuButtonClickHandler}>
           <div className="side-menu-human-resource-icon"></div>
           <div className="side-menu-human-resource-text">인사관리</div>
         </div>
