@@ -130,6 +130,17 @@
   background-position: 50% 50%;
   background-size: 100% 100%;
 }
+.side-menu-human-manage-active{
+  background-color: #f9f9f9;
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
 
 .side-menu-human-resource-icon {
   width: 35px;
