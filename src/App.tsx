@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import Container from './layouts/Container';
 import Main from './views/Main';
 import SalesPlan from './views/Sales/SalesPlan';
