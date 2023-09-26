@@ -1,4 +1,4 @@
-.system-menu-left {
+.human-menu-left {
   margin-bottom: 24px;
 
   width: 182px;
@@ -7,14 +7,14 @@
   background-color: #f9f9f9;
 }
 
-.system-menu-left-top {
+.human-menu-left-top {
   display: flex;
 
   margin-left: 28px;
   margin-bottom: 8px;
 }
 
-.system-menu-left-top-text {
+.human-menu-left-top-text {
   margin-top: 24px;
 
   width: 101px;
@@ -28,57 +28,25 @@
   line-height: normal;
 }
 
-.system-menu-left-detail {
+.human-menu-left-detail {
   display: flex;
 }
 
-.system-menu-left-detail-left {
+.human-menu-left-detail-left {
   display: flex;
   padding-left: 41px;
 }
 
-.system-menu-left-detail-right {
+.human-menu-left-detail-right {
   display: flex;
 }
 
-.system-menu-left-detail-right-text {
+.human-menu-left-detail-right-text {
   display: flex;
 
   flex-direction: column;
 
   margin-top: 5px;
-}
-
-.company-info-registration {
-  margin-top: 5px;
-  margin-bottom: 5px;
-
-  font-family: Inter;
-  color: rgba(0, 0, 0, 0.80);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.company-info-registration:hover {
-  cursor: pointer;
-}
-
-.dept-info-registration {
-  margin-top: 5px;
-  margin-bottom: 5px;
-
-  font-family: Inter;
-  color: rgba(0, 0, 0, 0.80);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.dept-info-registration:hover {
-  cursor: pointer;
 }
 
 .employee-info-registration {
@@ -92,12 +60,23 @@
   font-weight: 400;
   line-height: normal;
 }
-
 .employee-info-registration:hover {
   cursor: pointer;
 }
+.employee-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
 
-.customer-info-registration {
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.annual-price-info-registration {
   margin-top: 5px;
   margin-bottom: 5px;
 
@@ -108,11 +87,108 @@
   font-weight: 400;
   line-height: normal;
 }
-
-.customer-info-registration:hover {
+.annual-price-info-registration:hover {
   cursor: pointer;
 }
-.product-info-registration {
+
+.annual-price-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.incentive-info-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.incentive-info-registration:hover {
+  cursor: pointer;
+}
+
+.incentive-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.manage-day-off-info-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.manage-day-off-info-registration:hover {
+  cursor: pointer;
+}
+
+.manage-day-off-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.apply-day-off-info-registration {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.apply-day-off-info-registration:hover {
+  cursor: pointer;
+}
+
+.apply-day-off-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
+.worktime-info-registration {
   margin-top: 5px;
   margin-bottom: 20px;
 
@@ -123,7 +199,19 @@
   font-weight: 400;
   line-height: normal;
 }
-
-.product-info-registration:hover {
+.worktime-info-registration:hover {
   cursor: pointer;
+}
+
+.worktime-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
 }
