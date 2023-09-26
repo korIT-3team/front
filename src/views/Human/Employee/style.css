@@ -1,0 +1,32 @@
+#employee-info-wrapper {
+  display: flex;
+
+}
+
+.employee-info-right {
+  width: calc(194.858vh - 24.62vh);
+  background-color: antiquewhite;
+}
+
+.employee-info-right-top {
+}
+
+.employee-info-right-top-title {
+  margin-left: 27px;
+  margin-top: 30px;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.employee-info-right-top-divider{
+  margin-left: 22px;
+  margin-top: 15px;
+  width: 1100px;
+  height: 1px;
+  background-color: #7698B7;
+  display: flex;
+  align-items: center;
+}
