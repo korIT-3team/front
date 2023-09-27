@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Container from './layouts/Container';
 import Main from './views/Main';
@@ -12,10 +12,38 @@ import ProductInfo from './views/System/Product';
 import './App.css';
 import Employee from './views/Human/Employee';
 import { HOME_PATH, HUMAN_ANNUAL_PRICE, HUMAN_APPLY_DAY_OFF, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, HUMAN_MANAGE_DAY_OFF, HUMAN_WORK_TIME, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_PRODUCT_INFO } from './constants';
+import { useUserStore } from './stores';
+import { useCookies } from 'react-cookie';
+import GetLoginUserResponseDto from './interfaces/response/user/get-login-user.response.dto';
+import ResponseDto from './interfaces/response/response.dto';
+import { getSignInUserRequest } from './apis';
 
 
 function App() {
+  //!              state             //
+  // // description : 유저 스토어 상태 //
+  // const { user, setUser } = useUserStore();
+  // // description : Cookie 상태 //
+  // const [cookies, setCookie] = useCookies();
 
+  //!            function             //
+  // const getSignInUserResponseHandler = (result: GetLoginUserResponseDto | ResponseDto) => {
+  //   const { code } = result;
+  //   if (code === 'NU') alert('토큰 정보가 잘못됐습니다.');
+  //   if (code === 'DE') alert('데이터베이스 에러입니다.');
+  //   if (code !== 'SU') return;
+
+  //   setUser({...result as GetLoginUserResponseDto});
+  // }
+
+  // //!             effect             //
+  // useEffect(() => {
+  //   const accessToken = cookies.accessToken;
+  //   console.log(accessToken);
+  //   if (!user && accessToken) getSignInUserRequest(accessToken).then(getSignInUserResponseHandler);
+  // }, [user]);
+
+  //!             render             //
   return (
     <Routes>
       <Route element={<Container />}>
