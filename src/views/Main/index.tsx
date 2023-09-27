@@ -50,7 +50,7 @@ export default function Main() {
     const { code } = result;
     if (code === 'NU') alert('토큰 정보가 잘못됐습니다.');
     if (code === 'DE') alert('데이터베이스 에러입니다.');
-    if (code === 'SF') alert('로그인 실패.');
+    if (code === 'SF') alert('로그인 실패');
     if (code !== 'SU') return;
 
     setUser({...result as GetLoginUserResponseDto});
@@ -84,15 +84,12 @@ export default function Main() {
   // description : 로그인 유저 정보가 바뀔 때마다 실행 //
   useEffect(()=>{
     setLogin(user !== null);
-    // const accessToken = cookies.accessToken;
-    // console.log(accessToken);
-    // if (!user && accessToken) getSignInUserRequest(accessToken).then(getSignInUserResponseHandler);
   }, [user])
 
   //!               render                  //
   return (
     <div>
-      { user ? ( <div>{user.employeeName}님 환영합니다.</div> ) : 
+      { user ? ( <div> {user.employeeName} 님 환영합니다.</div> ) : 
         (<div className='main-login-box'>
           사원번호 <input type="text" placeholder='사원번호를 입력해주세요' value={employeeCode} onChange={onEmployeeCodeChangeHandler} />
           비밀번호 <input type="password" value={password} onChange={onPasswordChangeHandler}/>
