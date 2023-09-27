@@ -63,7 +63,7 @@ export default function SideMenu() {
             <div className="side-menu-system-manage-text">시스템관리</div>
           </div>
           <div className={ showHumanMenu ? 'side-menu-human-manage-active' : 'side-menu-human-resource'} onClick={onHumanMenuMenuButtonClickHandler}>
-            <div className="side-menu-human-resource-icon"></div>
+            <div className={ showHumanMenu ? 'side-menu-human-resource-icon-active' : 'side-menu-human-resource-icon'}></div>
             <div className="side-menu-human-resource-text">인사관리</div>
           </div>
           <div className={ showSalesMenu ? 'side-menu-sales-active' : 'side-menu-sales'} onClick={onSalesMenuButtonClickHandler}>
