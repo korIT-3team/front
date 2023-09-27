@@ -16,16 +16,22 @@ export default function Employee() {
               <div className='employee-info-right-top-search-dept'>
                 <div className='employee-info-right-top-search-dept-text'>부서*</div>
                 <div className='employee-info-right-top-search-dept-box'>
-                  <div className='employee-info-right-top-search-dept-box-code'></div>
-                  <div className='employee-info-right-top-search-dept-box-button'>검색</div>
-                  <div className='employee-info-right-top-search-dept-box-name'></div>
+                  <div className='employee-info-right-top-search-dept-box-code-box'>
+                    <div className='employee-info-right-top-search-dept-box-code-box-text'>1000</div>
+                  </div>
+                  <div className='employee-info-right-top-search-button'>검색</div>
+                  <div className='employee-info-right-top-search-dept-box-name-box'>
+                    <div className='employee-info-right-top-search-dept-box-name-box-text'>아무개</div>
+                  </div>
                 </div>
               </div>
               <div className='employee-info-right-top-search-employee'>
               <div className='employee-info-right-top-search-employee-text'>사원*</div>
                 <div className='employee-info-right-top-search-employee-box'>
-                  <div className='employee-info-right-top-search-employee-box-code'></div>
-                  <div className='employee-info-right-top-search-employee-box-button'>검색</div>
+                  <div className='employee-info-right-top-search-employee-box-code-box'>
+                    <div className='employee-info-right-top-search-employee-box-code-box-text'></div>
+                  </div>
+                  <div className='employee-info-right-top-search-button'>검색</div>
                   <div className='employee-info-right-top-search-employee-box-name'></div>
                 </div>              
               </div>
