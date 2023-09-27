@@ -42,7 +42,7 @@ export default function SideMenu() {
     // description : 로그아웃 버튼 클릭 이벤트 //
     const onSignOutButtonClickHandler = () => {
       if(!user) return;
-      console.log('로그아웃 : '+user);
+      console.log('로그아웃:'+user);
       setCookie('accessToken', '', { expires: new Date(), path: HOME_PATH });
       setUser(null);
       navigator(HOME_PATH);
