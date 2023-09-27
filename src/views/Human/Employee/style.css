@@ -33,7 +33,7 @@
 .employee-info-right-top-search-condition {
   margin-top: 15px;
   margin-left: 22px;
-  width: 1080px;
+  width: 1100px;
   height: 35px;
 
   display: flex;
@@ -42,9 +42,10 @@
 
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
+  background: #F9F9F9;
 }
 
+/* 부서 */
 .employee-info-right-top-search-dept {
   width: 360px;
   height: 35px;
@@ -53,19 +54,13 @@
   justify-self: center;
   align-items: center;
   text-align: center;
-
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
 }
 
 .employee-info-right-top-search-dept-text {
   width: 120px;
   height: 35px;
 
-  border-radius: 5px 0px 0px 5px;
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
 
 	display : flex;
   justify-content : center;
@@ -94,7 +89,6 @@
 
   border: 1px solid rgba(0, 0, 0, 0.30);
   background-color: #FFF;
-
   
   display : flex;
   align-items : center;
@@ -115,7 +109,7 @@
 }
 
 .employee-info-right-top-search-dept-box-name-box {
-  margin: 4px 4px 4px 10px;
+  margin: 4px 4px 4px 11px;
   width: 102px;
   height: 27px;
 
@@ -141,6 +135,141 @@
   font-weight: 400;
 }
 
+/* 사원 */
+.employee-info-right-top-search-employee {
+  width: 360px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+}
+
+.employee-info-right-top-search-employee-text {
+  width: 120px;
+  height: 35px;
+
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.employee-info-right-top-search-employee-box {
+  width: 240px;
+  height: 35px;
+  
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.employee-info-right-top-search-employee-box-code-box {
+  margin: 4px 0px 4px 4px;
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  
+  display : flex;
+  align-items : center;
+}
+
+.employee-info-right-top-search-employee-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.employee-info-right-top-search-employee-box-name-box {
+  margin: 4px 4px 4px 11px;
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  
+  display : flex;
+  align-items : center;
+}
+
+.employee-info-right-top-search-employee-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 재직구분 */
+.employee-info-right-top-search-employment-status {
+  width: 360px;
+  height: 35px;
+
+  background-color:#FFF;
+  /* border-radius: 5px; */
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.employee-info-right-top-search-employment-status-text {
+  width: 120px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.employee-info-right-top-search-employment-status-box {
+  margin-left: 4px;
+  width: 240px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+}
+
 .employee-info-right-top-search-button {
   margin-left: 11px;
   width: 40px;
@@ -162,12 +291,6 @@
 
 
 .employee-info-right-top-search-employee {
-  width: 360px;
-  height: 35px;
-  display: flex;
-}
-
-.employee-info-right-top-search-employment-status {
   width: 360px;
   height: 35px;
   display: flex;

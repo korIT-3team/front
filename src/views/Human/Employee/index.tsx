@@ -21,7 +21,7 @@ export default function Employee() {
                   </div>
                   <div className='employee-info-right-top-search-button'>검색</div>
                   <div className='employee-info-right-top-search-dept-box-name-box'>
-                    <div className='employee-info-right-top-search-dept-box-name-box-text'>아무개</div>
+                    <div className='employee-info-right-top-search-dept-box-name-box-text'>인사부</div>
                   </div>
                 </div>
               </div>
@@ -29,15 +29,21 @@ export default function Employee() {
               <div className='employee-info-right-top-search-employee-text'>사원*</div>
                 <div className='employee-info-right-top-search-employee-box'>
                   <div className='employee-info-right-top-search-employee-box-code-box'>
-                    <div className='employee-info-right-top-search-employee-box-code-box-text'></div>
+                    <div className='employee-info-right-top-search-employee-box-code-box-text'>2000</div>
                   </div>
                   <div className='employee-info-right-top-search-button'>검색</div>
-                  <div className='employee-info-right-top-search-employee-box-name'></div>
+                  <div className='employee-info-right-top-search-employee-box-name-box'>
+                    <div className='employee-info-right-top-search-employee-box-name-box-text'>아무개</div>
+                  </div>
                 </div>              
               </div>
               <div className='employee-info-right-top-search-employment-status'>
                 <div className='employee-info-right-top-search-employment-status-text'>재직구분</div>
-                <div className='employee-info-right-top-search-employment-status-combo-box'></div>
+                <div className='employee-info-right-top-search-employment-status-box'>
+                  <div className='employee-info-right-top-search-employment-status-box-combo-box'>
+                    <div className='employee-info-right-top-search-employment-status-box-combo-box-text'></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
