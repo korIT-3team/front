@@ -297,7 +297,6 @@
 
 .customer-name {
   display: flex;
-
   align-items: center;
 
   margin-top: 20px;
@@ -305,6 +304,10 @@
 }
 
 .customer-name-text {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
   width: 100px;
   height: 27px;
 
@@ -337,6 +340,10 @@
 }
 
 .customer-business-number-text {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
   width: 100px;
   height: 27px;
 
@@ -369,6 +376,10 @@
 }
 
 .customer-address-text {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
   width: 100px;
   height: 27px;
 
@@ -401,6 +412,10 @@
 }
 
 .customer-address-detail-text {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
   width: 100px;
   height: 27px;
 
@@ -433,6 +448,10 @@
 }
 
 .customer-tel-number-text {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
   width: 100px;
   height: 27px;
 
@@ -474,6 +493,11 @@
   background-color: rgba(52, 117, 181, 1);
 }
 
+.customer-info-bottom-button-save:hover {
+  cursor: pointer;
+  background-color: rgba(52, 117, 181, 0.7);
+}
+
 .customer-info-bottom-button-save-text {
   color: #FFFFFF;
   text-align: center;
@@ -495,6 +519,11 @@
   border: 0.8px solid rgba(0, 0, 0, 0.5);
 }
 
+.customer-info-bottom-button-cancel:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .customer-info-bottom-button-cancel-text {
   color: #000000;
   text-align: center;
@@ -502,5 +531,22 @@
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
+  line-height: normal;
+}
+
+.custom-search-button {
+  width: 40px;
+  height: 27px;
+
+  color: white;
+  
+  background: rgba(0, 0, 0, 0.30);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
   line-height: normal;
 }
