@@ -1,19 +1,36 @@
 import React from 'react'
 
-import { useDaumPostcodePopup, Address } from 'react-daum-postcode';
-
 import SystemMenu from '../SystemMenu'
+
+import { useNavigate } from 'react-router-dom';
+import { HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
 
 import './style.css'
 
 export default function CustomerInfo() {
 
   // state //
-  const daumPostcode = useDaumPostcodePopup();
+
+  // function //
+  const navigator = useNavigate();
 
   // event handler //
+  // description: 수정 및 저장 버튼 클릭 이벤트 //
+  const onSaveButtonClickHandler = () => {
+    navigator(SYSTEM_CUSTOMER_INFO);
+  }
+
+  // description: 취소버튼 클릭 이벤트 //
+  const onCancelButtonClickHandler = () => {
+    navigator(HOME_PATH);
+  }
+
+  // component //
+
+  // effect //
 
 
+  // render //
   return (
     <div id='customer-info'>
       <SystemMenu/>
@@ -29,8 +46,8 @@ export default function CustomerInfo() {
                 <div className='customer-info-search-code-text'>거래처 코드 *</div>
               </div>
               <div className='customer-info-search-code-container'>
-                <input className='code-search-input-box' />
-                <div className='custom-search-button'>버튼</div>
+                <input className='code-search-input-box' placeholder='거래처 코드 입력'/>
+                <button className='custom-search-button'>검색</button>
                 <div className='code-search-input-box-display'>
                   <div className='code-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -41,8 +58,8 @@ export default function CustomerInfo() {
                 <div className='customer-info-search-name-text'>거래처 명 *</div>
               </div>
               <div className='customer-info-search-name-container'>
-                <input className='name-search-input-box' />
-                <div className='custom-search-button'>버튼</div>
+                <input className='name-search-input-box' placeholder='거래처 명 입력' />
+                <button className='custom-search-button'>검색</button>
                 <div className='name-search-input-box-display'>
                   <div className='name-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -63,7 +80,7 @@ export default function CustomerInfo() {
           </div>
           <div className='customer-info-middle-right'>
             <div className='customer-info-middle-right-top'>
-              <div className='customer-info-middle-right-top-text'>거래처 정보</div>
+              <div className='customer-info-middle-right-top-text'>거래처 정보 등록</div>
             </div>
             <div className='customer-info-middle-right-bottom'>
               <div className='customer-info-middle-right-bottom-container'>
@@ -93,10 +110,10 @@ export default function CustomerInfo() {
         </div>
         <div className='customer-info-bottom'>
           <div className='customer-info-bottom-button-save'>
-            <div className='customer-info-bottom-button-save-text'>수정 및 저장</div>
+            <div className='customer-info-bottom-button-save-text' onClick={onSaveButtonClickHandler}>수정 및 저장</div>
           </div>
           <div className='customer-info-bottom-button-cancel'>
-            <div className='customer-info-bottom-button-cancel-text'>취소</div>
+            <div className='customer-info-bottom-button-cancel-text' onClick={onCancelButtonClickHandler}>취소</div>
           </div>
         </div>
       </div>

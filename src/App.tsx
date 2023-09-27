@@ -17,6 +17,11 @@ import { useCookies } from 'react-cookie';
 import GetLoginUserResponseDto from './interfaces/response/user/get-login-user.response.dto';
 import ResponseDto from './interfaces/response/response.dto';
 import { getSignInUserRequest } from './apis';
+import AnnualPrice from './views/Human/AnnualPrice';
+import Incentive from './views/Human/Incentive';
+import ManageDayOff from './views/Human/ManageDayOff';
+import ApplyDayOff from './views/Human/ApplyDayOff';
+import WorkTime from './views/Human/WorkTime';
 
 
 function App() {
@@ -56,11 +61,11 @@ function App() {
         <Route path={ SYSTEM_CUSTOMER_INFO } element={ <CustomerInfo/> } />
         <Route path={ SYSTEM_PRODUCT_INFO } element={ <ProductInfo/> } />
         <Route path={ HUMAN_EMPLOYEE_INFO } element={ <Employee/> } />
-        <Route path={ HUMAN_ANNUAL_PRICE } element={ <Employee/> } />
-        <Route path={ HUMAN_INCENTIVE } element={ <Employee/> } />
-        <Route path={ HUMAN_MANAGE_DAY_OFF } element={ <Employee/> } />
-        <Route path={ HUMAN_APPLY_DAY_OFF } element={ <Employee/> } />
-        <Route path={ HUMAN_WORK_TIME } element={ <Employee/> } />
+        <Route path={ HUMAN_ANNUAL_PRICE } element={ <AnnualPrice/> } />
+        <Route path={ HUMAN_INCENTIVE } element={ <Incentive/> } />
+        <Route path={ HUMAN_MANAGE_DAY_OFF } element={ <ManageDayOff/> } />
+        <Route path={ HUMAN_APPLY_DAY_OFF } element={ <ApplyDayOff/> } />
+        <Route path={ HUMAN_WORK_TIME } element={ <WorkTime/> } />
       </Route>
     </Routes>
   );
