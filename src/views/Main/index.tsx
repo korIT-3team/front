@@ -43,8 +43,7 @@ export default function Main() {
     const expires = new Date(now + expiredTime * 1000);
 
     setCookie('accessToken', token, { expires, path: HOME_PATH });
-    const accessToken = cookies.accessToken;
-    getSignInUserRequest(accessToken).then(getSignInUserResponseHandler);
+    getSignInUserRequest(token).then(getSignInUserResponseHandler);
     navigator(HOME_PATH);
   }
   const getSignInUserResponseHandler = (result: GetLoginUserResponseDto | ResponseDto) => {
@@ -65,6 +64,8 @@ export default function Main() {
       password : password
     }
     signInRequest(data).then(signInResponseHandler);
+    setEmployeeCode(0)
+    setPassword('');
   }
   // description : 사원번호 입력 이벤트 //
   const onEmployeeCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
