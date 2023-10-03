@@ -1,0 +1,82 @@
+.accounting-menu-left {
+  margin-bottom: 24px;
+
+  width: 182px;
+  height: calc(100vh - 10vh);
+
+  background-color: #f9f9f9;
+}
+
+.accounting-menu-left-top {
+  display: flex;
+
+  margin-left: 28px;
+  margin-bottom: 8px;
+}
+
+.accounting-menu-left-top-text {
+  margin-top: 24px;
+
+  width: 101px;
+  height: 20px;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.accounting-menu-left-detail {
+  display: flex;
+}
+
+.accounting-menu-left-detail-left {
+  display: flex;
+  padding-left: 41px;
+}
+
+.accounting-menu-left-detail-right {
+  display: flex;
+}
+
+.accounting-menu-left-detail-right-text {
+  display: flex;
+
+  flex-direction: column;
+
+  margin-top: 5px;
+}
+
+.invoice-check {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.invoice-check:hover {
+  cursor: pointer;
+}
+
+.inoutcome-check {
+  margin-top: 5px;
+  margin-bottom: 20px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.inoutcome-check:hover {
+  cursor: pointer;
+}

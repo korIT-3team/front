@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import './style.css'
@@ -21,6 +21,7 @@ export default function SideMenu() {
     const showSystemMenu = pathname.includes(SYSTEM_PATH);
     const showSalesMenu = pathname.includes(SALES_PATH);
     const showHumanMenu = pathname.includes(HUMAN_PATH);
+    const showAccountinMenu = pathname.includes(ACCOUNTING_PATH);
 
     //!             event handler              //
     // description : 홈 버튼 클릭 이벤트 //
@@ -38,6 +39,10 @@ export default function SideMenu() {
     // description : 인사관리 버튼 클릭 이벤트 //
     const onHumanMenuMenuButtonClickHandler = () => {
       navigator(HUMAN_EMPLOYEE_INFO);
+    }
+    // description : 회계관리 버튼 클릭 이벤트 //
+    const onAccountingMenuMenuButtonClickHandler = () => {
+      navigator(ACCOUNTING_INVOICE_PATH);
     }
     // description : 로그아웃 버튼 클릭 이벤트 //
     const onSignOutButtonClickHandler = () => {
@@ -70,8 +75,8 @@ export default function SideMenu() {
             <div className={ showSalesMenu ? 'side-menu-sales-icon-active' : 'side-menu-sales-icon'}></div>
             <div className="side-menu-sales-text">영업관리</div>
           </div>
-          <div className="side-menu-funds">
-            <div className="side-menu-funds-icon"></div>
+          <div className={ showAccountinMenu ? 'side-menu-funds-active' : 'side-menu-funds'} onClick={onAccountingMenuMenuButtonClickHandler} >
+            <div className={ showAccountinMenu ? 'side-menu-funds-icon-active' : 'side-menu-funds-icon'}></div>
             <div className="side-menu-funds-text">회계관리</div>
           </div>
           <div className="side-menu-search">
