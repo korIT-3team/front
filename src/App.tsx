@@ -11,7 +11,7 @@ import CustomerInfo from './views/System/Customer';
 import ProductInfo from './views/System/Product';
 import './App.css';
 import Employee from './views/Human/Employee';
-import { HOME_PATH, HUMAN_ANNUAL_PRICE, HUMAN_APPLY_DAY_OFF, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, HUMAN_MANAGE_DAY_OFF, HUMAN_WORK_TIME, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_PRODUCT_INFO } from './constants';
+import { ACCOUNTING_INVOICE_PATH, HOME_PATH, HUMAN_ANNUAL_PRICE, HUMAN_APPLY_DAY_OFF, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, HUMAN_MANAGE_DAY_OFF, HUMAN_WORK_TIME, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_PRODUCT_INFO } from './constants';
 import { useUserStore } from './stores';
 import { useCookies } from 'react-cookie';
 import GetLoginUserResponseDto from './interfaces/response/user/get-login-user.response.dto';
@@ -22,6 +22,7 @@ import Incentive from './views/Human/Incentive';
 import ManageDayOff from './views/Human/ManageDayOff';
 import ApplyDayOff from './views/Human/ApplyDayOff';
 import WorkTime from './views/Human/WorkTime';
+import InvoiceList from './views/Accounting/InvoiceList';
 
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
         <Route path={ HUMAN_MANAGE_DAY_OFF } element={ <ManageDayOff/> } />
         <Route path={ HUMAN_APPLY_DAY_OFF } element={ <ApplyDayOff/> } />
         <Route path={ HUMAN_WORK_TIME } element={ <WorkTime/> } />
+        <Route path={ ACCOUNTING_INVOICE_PATH } element={ <InvoiceList/> } />
       </Route>
     </Routes>
   );

@@ -16,8 +16,7 @@
   padding-bottom: 15px;
 }
 .customer-info-top-text {
-
-  color: rgba(0, 0, 0, 0.80);
+  color: rgba(0, 0, 0, 0.8);
 
   font-family: Inter;
   font-size: 14px;
@@ -31,12 +30,12 @@
   height: 0px;
 
   stroke-width: 1px;
-  stroke: #7698B7;
+  stroke: #7698b7;
 }
 .company-info-middle-text {
   margin-top: 26px;
   padding-bottom: 17px;
-  color: rgba(0, 0, 0, 0.80);
+  color: rgba(0, 0, 0, 0.8);
   text-align: left;
   font-family: Inter;
   font-size: 12px;
@@ -44,13 +43,13 @@
   font-weight: 700;
   line-height: normal;
 }
-.company-info-middle-box{
+.company-info-middle-box {
   width: 735px;
   height: 650px;
-  
+
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
-.company-info-logo-image-box{
+.company-info-logo-image-box {
   background-image: url(./asset/logo_upload_image.PNG);
   background-position: 50% 50%;
   background-size: 100% 100%;
@@ -60,68 +59,89 @@
   margin: 0 auto;
   margin-top: 21px;
 }
-.company-info-text-box{
+.company-info-logo-image-box:hover {
+  cursor: pointer;
+}
+.company-info-text-box {
   width: 100%;
 
   margin-top: 30px;
   margin-left: 5px;
 }
-.company-info-box{
+.company-info-box {
   display: flex;
   margin-right: 12px;
   margin-bottom: 13px;
 }
-.company-info-label{
+.company-info-label {
   width: 100px;
   height: 26px;
   margin-right: 12px;
 
-  color: rgba(0, 0, 0, 0.80);
+  color: rgba(0, 0, 0, 0.8);
   font-size: 12px;
   font-family: Inter;
   font-weight: 400;
-  
+
   display: flex;
   align-items: center;
   justify-content: right;
 }
-input{
-  border: 1px rgba(0, 0, 0, 0.30) solid;
+input {
+  border: 1px rgba(0, 0, 0, 0.3) solid;
 }
-.company-info-business-number{
+.company-info-business-number {
   width: 278px;
 }
-.company-info-company-name{
+.company-info-company-name {
   width: 169px;
 }
-.company-info-representative-name{
+.company-info-representative-name {
   width: 169px;
 }
-.company-info-company-post-code{
-  width: 145px;
+/* todo : 왜 icon이 고정값으로 박혀있을까? 늘려도 줄여도 이상한 결과 */
+.company-info-company-post-code-container {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
 }
-.company-info-company-address{
+.company-info-company-post-code {
+  background: none;
+  border: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0.7);
+}
+.company-info-company-post-code-icon {
+  border-radius: 24px;
+  width: 24px;
+  height: 24px;
+
+  background-image: url(./asset/postcode_icon.PNG);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 50% 50%;
+}
+.company-info-company-post-code-icon:hover {
+  cursor: pointer;
+}
+.company-info-company-address {
   width: 483px;
 }
-.company-info-company-address-detail{
+.company-info-company-address-detail {
   width: 483px;
 }
-.company-info-business_status{
+.company-info-business_status {
   width: 279px;
 }
-.company-info-business-type{
+.company-info-business-type {
   width: 279px;
 }
-.company-info-english-company-name{
+.company-info-english-company-name {
   width: 279px;
 }
-.company-info-company-homepage{
+.company-info-company-homepage {
   width: 279px;
 }
-
-
-
-
 .company-info-bottom {
   display: flex;
 }
@@ -139,9 +159,11 @@ input{
 
   background-color: rgba(52, 117, 181, 1);
 }
-
+.company-info-bottom-button-save-text:hover{
+  cursor: pointer;
+}
 .company-info-bottom-button-save-text {
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
   font-family: Inter;
   font-size: 15px;
