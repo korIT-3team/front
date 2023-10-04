@@ -1,7 +1,7 @@
 export default interface InvoiceListRequestDto {
-    departmentCode : number;
-    employeeCode : number;
-    invoiceDate : string;
+    departmentCode : number | null;
+    employeeCode : number | null;
+    invoiceDateStart : string;
+    invoiceDateEnd : string;
     invoiceType : number;
-    // todo : 얘도 타입
 }

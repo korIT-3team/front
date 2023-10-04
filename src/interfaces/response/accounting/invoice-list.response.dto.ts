@@ -7,6 +7,5 @@ export default interface InvoiceListResponseDto {
     invoiceDate : string;
     invoiceType : number;
     customerName : string;
-    price : any;
-    // todo : invoiceDate:date / price:실수  어떻게하는지 질문
+    price : number;
 }

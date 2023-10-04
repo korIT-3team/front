@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent, useRef, useEffect } from "react";
 import SystemMenu from "../SystemMenu";
 import { useDaumPostcodePopup, Address } from "react-daum-postcode";
 import "./style.css";
-import { useUserStore } from "src/stores";
+import { useCompoanyInfoStore, useUserStore } from "src/stores";
 import { useCookies } from "react-cookie";
 import { CODE, HOME_PATH } from "src/constants";
 import { useNavigate } from "react-router-dom";
@@ -10,40 +10,46 @@ import { PutCompanyInfoRequestDto } from "src/interfaces/request/system";
 import { getCompanyInfoRequest, putCompanyInfoRequest, uploadFileRequest } from "src/apis";
 import { GetompanyInfoResponseDto } from "src/interfaces/response/system";
 import ResponseDto from "src/interfaces/response/response.dto";
+import DefaultLogo from 'src/assets/logo_upload_image.PNG';
 
 // todo : 스토어로 다 빼서 세팅할지 / get에 낫널들 | 널 꼭 필요한지
 export default function Company() {
   //!         state          //
-  // 로그인한 사용자의 정보 상태
+  // description: 로그인 사용자의 정보 상태
   const { user, setUser } = useUserStore();
-  // 쿠키 상태 //
+  // description: 회사 정보 상태
+  const { logoImageUrl, logoImage,  bizNumber, companyName, repName, postCode, companyAddress, 
+    companyAddressDetail, telNumber, bizStatus,  bizType, englishName, homepage, 
+    setLogoImageUrl, setLogoImage, setBizNumber, setCompanyName, setRepName, setPostCode, setCompanyAddress, 
+    setCompanyAddressDetail,  setTelNumber, setBizStatus, setBizType, setEnglishName, setHomepage } = useCompoanyInfoStore();
+  // description: 쿠키 상태 //
   const [cookies, setCookie] = useCookies();
   // description: 다음 포스트 (우편번호검색) 팝업 상태 //
   const open = useDaumPostcodePopup();
-  // description: 회사 로고 URL 상태 ! todo : DefaultLogo 오류가나네.. custom.d.ts파일 등록? 에 대한 질문 //
-  const [logoImageUrl, setLogoImageUrl] = useState<string>('');
-  // description: 사업자등록번호 상태 //
-  const [bizNumber, setBizNumber] = useState<string>("");
-  // description: 회사명 상태 //
-  const [companyName, setCompanyName] = useState<string>("");
-  // description: 대표자명 상태 //
-  const [repName, setRepName] = useState<string>("");
-  // description: 우편번호 상태 //
-  const [postCode, setPostCode] = useState<string>("");
-  // description: 주소 상태 //
-  const [companyAddress, setCompanyAddress] = useState<string>("");
-  // description: 상세주소 상태 //
-  const [companyAddressDetail, setCompanyAddressDetail] = useState<string>("");
-  // description: 전화번호 상태 //
-  const [telNumber, setTelNumber] = useState<string>("");
-  // description: 업태 상태 //
-  const [bizStatus, setBizStatus] = useState<string>("");
-  // description: 종목 상태 //
-  const [bizType, setBizType] = useState<string>("");
-  // description: 기업영문명 상태 //
-  const [englishName, setEnglishName] = useState<string>("");
-  // description: 홈페이지주소 상태 //
-  const [homepage, setHomepage] = useState<string>("");
+  // // description: 회사 로고 URL 상태 ! todo : DefaultLogo 오류가나네.. custom.d.ts파일 등록? 에 대한 질문 //
+  // const [logoImageUrl, setLogoImageUrl] = useState<string>('');
+  // // description: 사업자등록번호 상태 //
+  // const [bizNumber, setBizNumber] = useState<string>("");
+  // // description: 회사명 상태 //
+  // const [companyName, setCompanyName] = useState<string>("");
+  // // description: 대표자명 상태 //
+  // const [repName, setRepName] = useState<string>("");
+  // // description: 우편번호 상태 //
+  // const [postCode, setPostCode] = useState<string>("");
+  // // description: 주소 상태 //
+  // const [companyAddress, setCompanyAddress] = useState<string>("");
+  // // description: 상세주소 상태 //
+  // const [companyAddressDetail, setCompanyAddressDetail] = useState<string>("");
+  // // description: 전화번호 상태 //
+  // const [telNumber, setTelNumber] = useState<string>("");
+  // // description: 업태 상태 //
+  // const [bizStatus, setBizStatus] = useState<string>("");
+  // // description: 종목 상태 //
+  // const [bizType, setBizType] = useState<string>("");
+  // // description: 기업영문명 상태 //
+  // const [englishName, setEnglishName] = useState<string>("");
+  // // description: 홈페이지주소 상태 //
+  // const [homepage, setHomepage] = useState<string>("");
   // description: useRef를 사용하여 HTML 요소를 JS 객체로 다룰수 있음 //
   const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -88,9 +94,9 @@ export default function Company() {
   }
   // description : 파일 업로드 함수
   const fileUpload = async () => {
-
+    if(!logoImage) return null;
     const data = new FormData();
-    data.append('file', logoImageUrl);
+    data.append('file', logoImage);
     const imageUrl = await uploadFileRequest(data); // Promise<string> 타입이 반환됨
 
     return imageUrl;
@@ -112,6 +118,7 @@ export default function Company() {
     //입력받은 이미지 파일을 URL 형태로 변경해주는 구문 //
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setLogoImageUrl(imageUrl);
+    setLogoImage(event.target.files[0]);
   };
   // description: 우편번호 조회버튼클릭 이벤트 //
   const onPostCodeIconClickHandler = () => {
@@ -127,10 +134,14 @@ export default function Company() {
   const onSaveButtonClickHandler = async () => {
     const token = cookies.accessToken;
     
-    const imageUrl = logoImageUrl ? logoImageUrl : await fileUpload();
-
+    // todo : 왜 blob으로 들어가지
+    // const ImageUrl = logoImage ? await fileUpload() : logoImageUrl;
+    const ImageUrl = await fileUpload();
+    console.log(logoImage);
+    console.log(logoImageUrl);
+    console.log(ImageUrl);
     const data : PutCompanyInfoRequestDto = {
-      logoImageUrl : imageUrl,
+      logoImageUrl : ImageUrl,
       bizNumber : bizNumber,
       companyName : companyName,
       repName : repName,
@@ -191,8 +202,7 @@ export default function Company() {
   // description: 유저가 바뀔때 실행 //
   let flag = false;
   useEffect(() => {
-    if(!flag){
-      flag = true;
+    if (cookies.accessToken && !user) {
       return;
     }
     if(user?.departmentCode !== CODE.SYSTEM){ // 
@@ -200,8 +210,8 @@ export default function Company() {
       navigator(HOME_PATH);
       return;
     }
-    getCompanyInfoRequest().then(getCompanyInfoResponseHandler) 
-  }, [user]);
+    getCompanyInfoRequest().then(getCompanyInfoResponseHandler);
+  }, [cookies, user]);
 
 
   //!             render            //
@@ -216,7 +226,7 @@ export default function Company() {
         <div className="company-info-middle-text">기업정보등록</div>
         <div className="company-info-middle-box">
           {/* todo : defaultlogo 수정 */}
-          <div className="company-info-logo-image-box" style={{ backgroundImage: logoImageUrl ? `url(${logoImageUrl})` : `url(https://cdn.logo.com/hotlink-ok/logo-social.png)` }} onClick={onLogoClickHandler} ></div>
+          <div className="company-info-logo-image-box" style={{ backgroundImage: logoImageUrl ? `url(${logoImageUrl})` : `url(${DefaultLogo})` }} onClick={onLogoClickHandler} ></div>
           <input type="file" style={{ display: "none" }} ref={fileInputRef} accept="image/*" onChange={onImageInputChangeHandler} />
           <div className="company-info-text-box">
             <div className="company-info-box">
@@ -244,7 +254,7 @@ export default function Company() {
             </div>
             <div className="company-info-box">
               <div className="company-info-label">상세주소</div>
-              <input className="company-info-company-address-detail" defaultValue={companyAddressDetail} onChange={onCompanyAddressDetailChangeHandler} type="text" />
+              <input className="company-info-company-address-detail" defaultValue={companyAddressDetail? companyAddressDetail : ''} onChange={onCompanyAddressDetailChangeHandler} type="text" />
             </div>
             <div className="company-info-box">
               <div className="company-info-label">전화번호</div>
@@ -260,11 +270,11 @@ export default function Company() {
             </div>
             <div className="company-info-box">
               <div className="company-info-label">기업영문명</div>
-              <input className="company-info-english-company-name" defaultValue={englishName} onChange={onEnglishNameChangeHandler} type="text"/>
+              <input className="company-info-english-company-name" defaultValue={englishName ? englishName : ''} onChange={onEnglishNameChangeHandler} type="text"/>
             </div>
             <div className="company-info-box">
               <div className="company-info-label">홈페이지주소</div>
-              <input className="company-info-company-homepage" defaultValue={homepage} onChange={onHomepageChangeHandler} type="text" />
+              <input className="company-info-company-homepage" defaultValue={homepage ? homepage : ''} onChange={onHomepageChangeHandler} type="text" />
             </div>
           </div>
         </div>

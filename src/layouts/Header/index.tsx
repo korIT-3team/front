@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useUserStore } from 'src/stores';
+import { useInvoiceListStore, useInvoiceRequestStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 
 export default function Header() {
@@ -11,6 +11,11 @@ export default function Header() {
      const [cookies, setCookie] = useCookies();
      // description : 로그인 상태 //
      const [login, setLogin] = useState<boolean>(false);
+     // description: 전표조회 조건 정보 store //
+     const {employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceType, 
+       setEmployeeCode, setDepartmentCode, setInvoiceDateStart, setInvoiceDateEnd, setInvoiceType} = useInvoiceRequestStore();
+     // description: 조회된 전표 리스트 정보 store //
+     const { invoiceList, setInvoiceList } = useInvoiceListStore();
      
      //!                    effect                   //
      // description : 로그인 유저 정보가 바뀔 때마다 실행 //
