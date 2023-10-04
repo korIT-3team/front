@@ -146,6 +146,10 @@
   font-weight: 400;
 }
 
+.product-info-search-button {
+  cursor: pointer;
+}
+
 .name-search-input-box-display {
   display: flex;
   align-items: center;
@@ -184,6 +188,23 @@
   width: 140px;
   height: 35px;
 }
+
+.product-info-search-type-combo-box-container {
+  display : flex;
+
+  align-items : center;
+
+  margin-left: 4px;
+
+  width: 232px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+}
+
+
+
+
 
 .product-info-search-type-text {
   display: flex;

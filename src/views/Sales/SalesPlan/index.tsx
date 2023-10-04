@@ -17,41 +17,70 @@ export default function SalesPlan() {
           <div className='sales-plan-register-container-top'>
             <div className='sales-plan-register-container-top-dept'>
               <div className='sales-plan-register-container-top-dept-text'>부서*</div>
-              <div className='sales-plan-register-container-top-dept-box'></div>
+              <div className='sales-plan-register-container-top-dept-box'>
+                <input className='sales-plan-register-container-top-dept-box-input' />
+                <div className='sales-plan-register-dept-search-button'>검색</div>
+                <div className='sales-plan-register-dept-search-input-box-display'>
+                  <div className='sales-plan-register-dept-search-input-box-display-text'>1000</div>
+                </div>
+              </div>
             </div>
             <div className='sales-plan-register-container-top-employee'>
               <div className='sales-plan-register-container-top-employee-text'>사원*</div>
-              <div className='sales-plan-register-container-top-employee-box'></div>
+              <div className='sales-plan-register-container-top-employee-box'>
+                <input className='sales-plan-register-container-top-employee-box-input' />
+                <div className='sales-plan-register-employee-search-button'>검색</div>
+                <div className='sales-plan-register-employee-search-input-box-display'>
+                  <div className='sales-plan-register-employee-search-input-box-display-text'>2000</div>
+                </div>
+              </div>
             </div>
             <div className='sales-plan-register-container-top-year'>
               <div className='sales-plan-register-container-top-year-text'>계획 연도*</div>
-              <div className='sales-plan-register-container-top-year-box'></div>
+              <div className='sales-plan-register-container-top-year-box'>
+                <div></div>
+                <div></div>
+              </div>
             </div>
             <div className='sales-plan-register-container-top-month'>
               <div className='sales-plan-register-container-top-month-text'>계획 월*</div>
-              <div className='sales-plan-register-container-top-month-box'></div>
+              <div className='sales-plan-register-container-top-month-box'>
+                <div></div>
+                <div></div>
+              </div>
             </div>
           </div>
           <div className='sales-plan-register-container-bottom'>
             <div className='sales-plan-register-container-bottom-quantity'>
               <div className='sales-plan-register-container-bottom-quantity-text'>계획 수량*</div>
-              <div className='sales-plan-register-container-bottom-quantity-box'></div>
+              <div className='sales-plan-register-container-bottom-quantity-box'>
+                <input />
+              </div>
             </div>
             <div className='sales-plan-register-container-bottom-exchange-type'>
               <div className='sales-plan-register-container-bottom-exchange-type-text'>환종*</div>
-              <div className='sales-plan-register-container-bottom-exchange-type-box'></div>
+              <div className='sales-plan-register-container-bottom-exchange-type-box'>
+                <div></div>
+                <div></div>
+              </div>
             </div>
             <div className='sales-plan-register-container-bottom-exchange-rate'>
               <div className='sales-plan-register-container-bottom-exchange-rate-text'>환율*</div>
-              <div className='sales-plan-register-container-bottom-exchange-rate-box'></div>
+              <div className='sales-plan-register-container-bottom-exchange-rate-box'>
+                <input />
+              </div>
             </div>
             <div className='sales-plan-register-container-bottom-price'>
               <div className='sales-plan-register-container-bottom-price-text'>예상 단가*</div>
-              <div className='sales-plan-register-container-bottom-price-box'></div>
+              <div className='sales-plan-register-container-bottom-price-box'>
+                <input />
+              </div>
             </div>
             <div className='sales-plan-register-container-bottom-total-price'>
               <div className='sales-plan-register-container-bottom-total-price-text'>예상 금액*</div>
-              <div className='sales-plan-register-container-bottom-total-price-box'></div>
+              <div className='sales-plan-register-container-bottom-total-price-box'>
+                <div></div>
+              </div>
             </div>
           </div>
         </div>
