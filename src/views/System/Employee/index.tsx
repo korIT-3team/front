@@ -1,7 +1,10 @@
 import React from 'react'
+import SystemMenu from '../SystemMenu'
 
-export default function index() {
+export default function SystemEmployee() {
   return (
-    <div>index</div>
+    <div className='system-employee-info-wrapper'>
+      <SystemMenu />
+    </div>
   )
 }

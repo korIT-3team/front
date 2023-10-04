@@ -5,7 +5,7 @@ import { PutCompanyInfoRequestDto } from 'src/interfaces/request/system';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import { GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -20,6 +20,9 @@ const GET_COMPANY_INFO_URL = () => `${API_DOMAIN}/system/company-info`;
 
 // 회계관리
 const GET_INVOICE_LIST_URL = () => `${API_DOMAIN}/accounting/invoice`;
+
+// 부서
+const GET_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
@@ -100,6 +103,20 @@ export const getInvoiceListRequest = async (data : InvoiceListRequestDto) => {
   const result = await axios.get(GET_INVOICE_LIST_URL())
   .then((response) => {
     const responsebody : InvoiceListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 부서정보 불러오기 메서드
+export const getDepartmentInfoRequest = async () => {
+  const result = await axios.get(GET_DEPARTMENT_INFO_URL())
+  .then((response) => {
+    const responsebody : GetDepartmentListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
