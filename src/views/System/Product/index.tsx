@@ -58,8 +58,13 @@ export default function ProductInfo() {
               </div>
               <div className='product-info-search-type-container'>
                 <div className='product-info-search-type-combo-box-container'>
-                  <div className='product-info-search-type-combo-box'></div>
-                  <div className='product-info-search-type-combo-box-button'></div>
+                  // todo : {/*콤보박스 수정 중 */}
+                  <select className='product-info-search-type-combo-box-text' name="invoice-type" id="invoice-type">
+                    <option value="전체">전체</option>
+                    <option value="매입">매입</option>
+                    <option value="매출">매출</option>
+                    <option value="급/상여">급/상여</option>
+                  </select>
                 </div>
                 <div className='type-search-input-box-display'>
                   <div className='type-search-input-box-display-text'>검색출력</div>

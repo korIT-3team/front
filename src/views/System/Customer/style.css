@@ -128,7 +128,7 @@
   line-height: normal;
 }
 
-.customer-info-search-button {
+.customer-code-search-button {
   margin-left: 11px;
   width: 40px;
   height: 27px;
@@ -144,6 +144,10 @@
   text-align: center;
   font-size: 12px;
   font-weight: 400;
+}
+
+.customer-code-search-button:hover {
+  cursor: pointer;
 }
 
 .code-search-input-box-display {
@@ -240,6 +244,28 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.customer-name-search-button {
+  margin-left: 11px;
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.customer-name-search-button:hover {
+  cursor: pointer;
 }
 
 .name-search-input-box-display {
