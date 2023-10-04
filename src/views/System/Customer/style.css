@@ -45,17 +45,28 @@
 }
 
 .customer-info-search-container {
-  display: flex;
-
+  margin-top: 15px;
+  margin-left: 22px;
   width: 1080px;
   height: 35px;
 
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background: #F9F9F9;
 }
 
 .customer-info-search-code {
+  width: 540px;
+  height: 35px;
+
   display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
 }
 
 .customer-info-search-code-text-container {
@@ -66,13 +77,18 @@
 
   width: 140px;
   height: 35px;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 5px 0px 0px 5px;
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .customer-info-search-code-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 140px;
+  height: 35px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
   color: rgba(0, 0, 0, 0.80);
   text-align: center;
   font-family: Inter;
@@ -83,20 +99,25 @@
 }
 
 .customer-info-search-code-container {
-  display: flex;
+  width: 400px;
+  height: 35px;
   
-  align-items: center;
-  
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
 }
 
 .code-search-input-box {
-  margin-left: 14px;
-  margin-right: 14px;
-
+  margin: 4px 0px 4px 4px;
   width: 100px;
-  height: 27px;
+  height: 25px;
 
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+  
+  display : flex;
+  align-items : center;
 
   color: rgba(0, 0, 0, 0.80);
   text-align: left;
@@ -105,6 +126,24 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.customer-info-search-button {
+  margin-left: 11px;
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .code-search-input-box-display {
@@ -133,7 +172,13 @@
 }
 
 .customer-info-search-name {
+  width: 540px;
+  height: 35px;
+
   display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
 }
 
 .customer-info-search-name-text-container {
@@ -144,12 +189,18 @@
 
   width: 140px;
   height: 35px;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .customer-info-search-name-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 140px;
+  height: 35px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+
   color: rgba(0, 0, 0, 0.80);
   text-align: center;
   font-family: Inter;
@@ -160,20 +211,27 @@
 }
 
 .customer-info-search-name-container {
-  display: flex;
+  width: 400px;
+  height: 35px;
   
-  align-items: center;
-  
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+
+  border-radius: 0 5px 5px 0;
 }
 
 .name-search-input-box {
-  margin-left: 14px;
-  margin-right: 14px;
-
+  margin: 4px 0px 4px 4px;
   width: 100px;
-  height: 27px;
+  height: 25px;
 
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+  
+  display : flex;
+  align-items : center;
 
   color: rgba(0, 0, 0, 0.80);
   text-align: left;
@@ -189,7 +247,6 @@
   align-items: center;
 
   margin-left: 14px;
-  margin-right: 14px;
 
   width: 200px;
   height: 27px;
@@ -199,7 +256,7 @@
 
 .name-search-input-box-display-text {
   margin-left: 14px;
-  
+
   color: rgba(0, 0, 0, 0.80);
   text-align: left;
   font-family: Inter;
@@ -252,6 +309,113 @@
   height: 530px;
 
   border: 1px solid #CFCFCF;
+}
+
+.customer-info-middle-left-bottom-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-info-middle-left-bottom-table-title {
+  display: flex;
+
+  width: 100%;
+  height: 35px;
+}
+
+.customer-info-middle-left-bottom-table-title-no {
+  width: 50px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-middle-left-bottom-table-title-customer-code {
+  width: 135px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-middle-left-bottom-table-title-customer-name {
+  width: 135px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-middle-left-bottom-table-body {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+.customer-info-middle-left-bottom-table-body-no {
+  width: 50px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-middle-left-bottom-table-body-customer-code {
+  width: 135px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-middle-left-bottom-table-body-customer-name {
+  width: 135px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .customer-info-middle-right {
@@ -531,22 +695,5 @@
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
-}
-
-.custom-search-button {
-  width: 40px;
-  height: 27px;
-
-  color: white;
-  
-  background: rgba(0, 0, 0, 0.30);
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
-
-  font-family: Inter;
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 400;
   line-height: normal;
 }
