@@ -4,7 +4,7 @@ export default interface DepartmentListResponseDto {
   departmentCode: number;
   departmentName: string;
   departmentStartDate: string;
-  departmentEndDate: string| null;
+  departmentEndDate: string;
   departmetTelnumber: string;
   departmentFax: string;
 }
