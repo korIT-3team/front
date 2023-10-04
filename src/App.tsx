@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Container from './layouts/Container';
 import Main from './views/Main';
 import SalesPlan from './views/Sales/SalesPlan';
@@ -27,27 +27,29 @@ import InvoiceList from './views/Accounting/InvoiceList';
 
 function App() {
   //!              state             //
-  // // description : 유저 스토어 상태 //
-  // const { user, setUser } = useUserStore();
-  // // description : Cookie 상태 //
-  // const [cookies, setCookie] = useCookies();
+  // description : 유저 스토어 상태 //
+  const { user, setUser } = useUserStore();
+  // description : Cookie 상태 //
+  const [cookies, setCookie] = useCookies();
+  // description: path 상태 //
+  const { pathname } = useLocation();
 
   //!            function             //
-  // const getSignInUserResponseHandler = (result: GetLoginUserResponseDto | ResponseDto) => {
-  //   const { code } = result;
-  //   if (code === 'NU') alert('토큰 정보가 잘못됐습니다.');
-  //   if (code === 'DE') alert('데이터베이스 에러입니다.');
-  //   if (code !== 'SU') return;
+  const getSignInUserResponseHandler = (result: GetLoginUserResponseDto | ResponseDto) => {
+    const { code } = result;
+    if (code === 'NU') alert('토큰 정보가 잘못됐습니다.');
+    if (code === 'DE') alert('데이터베이스 에러입니다.');
+    if (code !== 'SU') return;
 
-  //   setUser({...result as GetLoginUserResponseDto});
-  // }
+    setUser({...result as GetLoginUserResponseDto});
+  }
 
   // //!             effect             //
-  // useEffect(() => {
-  //   const accessToken = cookies.accessToken;
-  //   console.log(accessToken);
-  //   if (!user && accessToken) getSignInUserRequest(accessToken).then(getSignInUserResponseHandler);
-  // }, [user]);
+  useEffect(() => {
+    const accessToken = cookies.accessToken;
+    console.log(accessToken);
+    if (!user && accessToken) getSignInUserRequest(accessToken).then(getSignInUserResponseHandler);
+  }, [pathname]);
 
   //!             render             //
   return (

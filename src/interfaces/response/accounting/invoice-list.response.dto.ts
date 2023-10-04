@@ -7,6 +7,6 @@ export default interface InvoiceListResponseDto {
     invoiceDate : string;
     invoiceType : number;
     customerName : string;
-    price : any;
+    price : number;
     // todo : invoiceDate:date / price:실수  어떻게하는지 질문
 }

@@ -10,6 +10,7 @@ import { PutCompanyInfoRequestDto } from "src/interfaces/request/system";
 import { getCompanyInfoRequest, putCompanyInfoRequest, uploadFileRequest } from "src/apis";
 import { GetompanyInfoResponseDto } from "src/interfaces/response/system";
 import ResponseDto from "src/interfaces/response/response.dto";
+import DefaultLogo from 'src/assets/logo_upload_image.PNG';
 
 // todo : 스토어로 다 빼서 세팅할지 / get에 낫널들 | 널 꼭 필요한지
 export default function Company() {
@@ -129,6 +130,8 @@ export default function Company() {
     
     const imageUrl = logoImageUrl ? logoImageUrl : await fileUpload();
 
+    console.log(imageUrl);
+
     const data : PutCompanyInfoRequestDto = {
       logoImageUrl : imageUrl,
       bizNumber : bizNumber,
@@ -191,8 +194,7 @@ export default function Company() {
   // description: 유저가 바뀔때 실행 //
   let flag = false;
   useEffect(() => {
-    if(!flag){
-      flag = true;
+    if (cookies.accessToken && !user) {
       return;
     }
     if(user?.departmentCode !== CODE.SYSTEM){ // 
@@ -200,8 +202,8 @@ export default function Company() {
       navigator(HOME_PATH);
       return;
     }
-    getCompanyInfoRequest().then(getCompanyInfoResponseHandler) 
-  }, [user]);
+    getCompanyInfoRequest().then(getCompanyInfoResponseHandler);
+  }, [cookies, user]);
 
 
   //!             render            //
@@ -216,7 +218,7 @@ export default function Company() {
         <div className="company-info-middle-text">기업정보등록</div>
         <div className="company-info-middle-box">
           {/* todo : defaultlogo 수정 */}
-          <div className="company-info-logo-image-box" style={{ backgroundImage: logoImageUrl ? `url(${logoImageUrl})` : `url(https://cdn.logo.com/hotlink-ok/logo-social.png)` }} onClick={onLogoClickHandler} ></div>
+          <div className="company-info-logo-image-box" style={{ backgroundImage: logoImageUrl ? `url(${logoImageUrl})` : `url(${DefaultLogo})` }} onClick={onLogoClickHandler} ></div>
           <input type="file" style={{ display: "none" }} ref={fileInputRef} accept="image/*" onChange={onImageInputChangeHandler} />
           <div className="company-info-text-box">
             <div className="company-info-box">
