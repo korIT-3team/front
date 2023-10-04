@@ -46,7 +46,7 @@ export default function ProductInfo() {
               </div>
               <div className='product-info-search-name-container'>
                 <input className='name-search-input-box' placeholder='품명 입력' />
-                <button className='custom-search-button'>검색</button>
+                <div className='product-info-search-button'>검색</div>
                 <div className='name-search-input-box-display'>
                   <div className='name-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -57,7 +57,10 @@ export default function ProductInfo() {
                 <div className='product-info-search-type-text'>조달 구분 *</div>
               </div>
               <div className='product-info-search-type-container'>
-                <input className='type-search-input-box' />
+                <div className='product-info-search-type-combo-box-container'>
+                  <div className='product-info-search-type-combo-box'></div>
+                  <div className='product-info-search-type-combo-box-button'></div>
+                </div>
                 <div className='type-search-input-box-display'>
                   <div className='type-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -72,7 +75,18 @@ export default function ProductInfo() {
             </div>
             <div className='product-info-middle-left-bottom'>
               <div className='product-info-middle-left-bottom-container'>
-                
+                <div className='product-info-middle-left-bottom-table'>
+                  <div className='product-info-middle-left-bottom-table-title'>
+                    <div className='product-info-middle-left-bottom-table-title-no'>No</div>
+                    <div className='product-info-middle-left-bottom-table-title-product-code'>품번</div>
+                    <div className='product-info-middle-left-bottom-table-title-product-name'>품명</div>
+                  </div>
+                  <div className='product-info-middle-left-bottom-table-body'>
+                    <div className='product-info-middle-left-bottom-table-body-no'>1</div>
+                    <div className='product-info-middle-left-bottom-table-body-product-code'>1</div>
+                    <div className='product-info-middle-left-bottom-table-body-product-name'>책1</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

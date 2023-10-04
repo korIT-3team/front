@@ -2,10 +2,638 @@
   display: flex;
 }
 
-
 .sales-plan-right {
-  width: 500px;
-  height: calc(100vh - 10vh);
-
-  background-color: aquamarine;
+  width: calc(194.858vh - 24.62vh);
 }
+
+.sales-plan-top-container {
+  display: flex;
+
+  margin-left: 27px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.sales-plan-top-text {
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-divider {
+  margin-left: 22px;
+
+  width: 1100px;
+  height: 1px;
+  background-color: #7698B7;
+  display: flex;
+  align-items: center;
+}
+
+.sales-plan-register-container {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.sales-plan-register-container-top {
+  display: flex;
+
+  margin-top: 15px;
+  margin-left: 22px;
+
+  width: 1085px;
+  height: 35px;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background: #F9F9F9;
+}
+
+/* 부서 */
+.sales-plan-register-container-top-dept {
+  width: 300px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* 사원 */
+.sales-plan-register-container-top-employee {
+  width: 300px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+}
+
+/* 계획연도 */
+.sales-plan-register-container-top-year {
+  width: 240px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+}
+
+/* 계획 월 */
+.sales-plan-register-container-top-month {
+  width: 240px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  background-color: #F9F9F9;
+}
+
+
+
+
+
+.sales-plan-register-container-bottom {
+  display: flex;
+
+  margin-top: 15px;
+  margin-left: 22px;
+
+  width: 1085px;
+  height: 35px;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background: #F9F9F9;
+}
+
+/* 계획수량 */
+
+/* 환종 */
+
+/* 환율 */
+
+/* 예상단가 */
+
+/* 예상금액 */
+
+.sales-plan-register-button-container {
+  display: flex;
+
+  margin-top: 8px;
+}
+
+.sales-plan-register-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 982px;
+  margin-right: 5px;
+
+  width: 125px;
+  height: 35px;
+
+  border: 0.8px solid rgba(52, 117, 181, 1);
+
+  background-color: rgba(52, 117, 181, 1);
+}
+
+.sales-plan-register-button:hover {
+  cursor: pointer;
+  background-color: rgba(52, 117, 181, 0.7);
+}
+
+.sales-plan-register-button-text {
+  color: #FFFFFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.sales-plan-view-top {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  margin-left: 27px;
+}
+
+.sales-plan-view-top-text {
+  color: rgba(0, 0, 0, 0.80);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.sales-plan-view-container {
+  display: flex;
+}
+
+.sales-plan-view-container-box {
+  display: flex;
+
+  margin-left: 22px;
+
+  justify-content: center;
+
+  width: 1085px;
+  height: 400px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.sales-plan-view-container-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.sales-plan-view-container-table-title {
+  display: flex;
+
+  margin-top: 10px;
+
+  width: 100%;
+  height: 35px;
+}
+
+.sales-plan-view-container-table-title-no {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 60px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-product-code {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-product-name {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-unit {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-plan-quantity {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-exchange-rate-type {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-exchange-rate {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-expect-price {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-expect-total-price {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-expect-korean-price {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  background-color: #184A7D;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body {
+  display: flex;
+
+  width: 100%;
+  height: 35px;
+}
+
+.sales-plan-view-container-table-body-no {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 60px;
+  height: 35px;
+
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-product-code {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-product-name {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-unit {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-plan-quantity {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-exchange-rate-type {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-exchange-rate {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-expect-price {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-expect-total-price {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-body-expect-korean-price {
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-bottom {
+  display: flex;
+
+  margin-top: 20px;
+  margin-left: 22px;
+}
+
+.sales-plan-bottom-button-save {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 827px;
+  margin-right: 5px;
+
+  width: 125px;
+  height: 35px;
+
+  border: 0.8px solid rgba(52, 117, 181, 1);
+
+  background-color: rgba(52, 117, 181, 1);
+}
+
+.sales-plan-bottom-button-save:hover {
+  cursor: pointer;
+  background-color: rgba(52, 117, 181, 0.7);
+}
+
+.sales-plan-bottom-button-save-text {
+  color: #FFFFFF;
+  text-align: center;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.sales-plan-bottom-button-cancel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 125px;
+  height: 35px;
+
+  border: 0.8px solid rgba(0, 0, 0, 0.5);
+}
+
+.sales-plan-bottom-button-cancel:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.sales-plan-bottom-button-cancel-text {
+  color: #000000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+

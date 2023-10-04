@@ -47,7 +47,7 @@ export default function CustomerInfo() {
               </div>
               <div className='customer-info-search-code-container'>
                 <input className='code-search-input-box' placeholder='거래처 코드 입력'/>
-                <button className='custom-search-button'>검색</button>
+                <div className='customer-info-search-button'>검색</div>
                 <div className='code-search-input-box-display'>
                   <div className='code-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -59,7 +59,7 @@ export default function CustomerInfo() {
               </div>
               <div className='customer-info-search-name-container'>
                 <input className='name-search-input-box' placeholder='거래처 명 입력' />
-                <button className='custom-search-button'>검색</button>
+                <div className='customer-info-search-button'>검색</div>
                 <div className='name-search-input-box-display'>
                   <div className='name-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -74,7 +74,18 @@ export default function CustomerInfo() {
             </div>
             <div className='customer-info-middle-left-bottom'>
               <div className='customer-info-middle-left-bottom-container'>
-                
+                <div className='customer-info-middle-left-bottom-table'>
+                  <div className='customer-info-middle-left-bottom-table-title'>
+                    <div className='customer-info-middle-left-bottom-table-title-no'>No</div>
+                    <div className='customer-info-middle-left-bottom-table-title-customer-code'>거래처 코드</div>
+                    <div className='customer-info-middle-left-bottom-table-title-customer-name'>거래처 명</div>
+                  </div>
+                  <div className='customer-info-middle-left-bottom-table-body'>
+                    <div className='customer-info-middle-left-bottom-table-body-no'>1</div>
+                    <div className='customer-info-middle-left-bottom-table-body-customer-code'>2001</div>
+                    <div className='customer-info-middle-left-bottom-table-body-customer-name'>거래처 1</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
