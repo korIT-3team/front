@@ -8,5 +8,4 @@ export default interface InvoiceListResponseDto {
     invoiceType : number;
     customerName : string;
     price : number;
-    // todo : invoiceDate:date / price:실수  어떻게하는지 질문
 }

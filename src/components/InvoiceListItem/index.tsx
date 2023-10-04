@@ -1,9 +1,10 @@
 import React from 'react'
 import './style.css'
 import InvoiceListResponseDto from 'src/interfaces/response/accounting/invoice-list.response.dto'
+import { InvoiceList } from 'src/stores/invoicelist.response.store';
 
 interface Props {
-  item : InvoiceListResponseDto;
+  item : InvoiceList;
 }
 export default function InvoiceListItem({item} : Props) {
 
