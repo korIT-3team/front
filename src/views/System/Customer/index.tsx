@@ -19,10 +19,17 @@ export default function CustomerInfo() {
   const onSaveButtonClickHandler = () => {
     navigator(SYSTEM_CUSTOMER_INFO);
   }
-
-  // description: 취소버튼 클릭 이벤트 //
+  // description: 취소 버튼 클릭 이벤트 //
   const onCancelButtonClickHandler = () => {
     navigator(HOME_PATH);
+  }
+  // description: 거래처 코드 검색 버튼 클릭 이벤트 //
+  const onCustomerCodeSearchButtonClickHandler = () => {
+
+  }
+  // description: 거래처 명 검색 버튼 클릭 이벤트 //
+  const onCustomerNameSearchButtonClickHandler = () => {
+
   }
 
   // component //
@@ -47,7 +54,7 @@ export default function CustomerInfo() {
               </div>
               <div className='customer-info-search-code-container'>
                 <input className='code-search-input-box' placeholder='거래처 코드 입력'/>
-                <div className='customer-info-search-button'>검색</div>
+                <div className='customer-code-search-button' onClick={onCustomerCodeSearchButtonClickHandler} >검색</div>
                 <div className='code-search-input-box-display'>
                   <div className='code-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -59,7 +66,7 @@ export default function CustomerInfo() {
               </div>
               <div className='customer-info-search-name-container'>
                 <input className='name-search-input-box' placeholder='거래처 명 입력' />
-                <div className='customer-info-search-button'>검색</div>
+                <div className='customer-name-search-button' onClick={onCustomerNameSearchButtonClickHandler} >검색</div>
                 <div className='name-search-input-box-display'>
                   <div className='name-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -131,3 +138,4 @@ export default function CustomerInfo() {
     </div>
   )
 }
+

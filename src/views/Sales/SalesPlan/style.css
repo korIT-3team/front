@@ -65,6 +65,105 @@
   text-align: center;
 }
 
+.sales-plan-register-container-top-dept-text {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sales-plan-register-container-top-dept-box {
+  width: 240px;
+  height: 35px;
+  
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.sales-plan-register-container-top-dept-box-input {
+  display : flex;
+  align-items : center;
+
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 25px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+  
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sales-plan-register-dept-search-button {
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  margin-left: 5px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-plan-register-dept-search-button:hover {
+  cursor: pointer;
+}
+
+.sales-plan-register-dept-search-input-box-display {
+  display: flex;
+  align-items: center;
+
+  margin-left: 5px;
+  margin-right: 5px;
+
+  width: 100px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.sales-plan-register-dept-search-input-box-display-text {
+  margin-left: 10px;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 /* 사원 */
 .sales-plan-register-container-top-employee {
   width: 300px;
@@ -78,6 +177,105 @@
   border-right: 1px solid rgba(0, 0, 0, 0.30);
   border-left: 1px solid rgba(0, 0, 0, 0.30);
   background-color: #F9F9F9;
+}
+
+.sales-plan-register-container-top-employee-text {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sales-plan-register-container-top-employee-box {
+  width: 240px;
+  height: 35px;
+  
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.sales-plan-register-container-top-employee-box-input {
+  display : flex;
+  align-items : center;
+
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 25px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+  
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.sales-plan-register-employee-search-button {
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  margin-left: 5px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-plan-register-employee-search-button:hover {
+  cursor: pointer;
+}
+
+.sales-plan-register-employee-search-input-box-display {
+  display: flex;
+  align-items: center;
+
+  margin-left: 5px;
+  margin-right: 5px;
+
+  width: 100px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.sales-plan-register-employee-search-input-box-display-text {
+  margin-left: 10px;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* 계획연도 */
@@ -94,6 +292,25 @@
   background-color: #F9F9F9;
 }
 
+.sales-plan-register-container-top-year-text {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 /* 계획 월 */
 .sales-plan-register-container-top-month {
   width: 240px;
@@ -107,6 +324,24 @@
   background-color: #F9F9F9;
 }
 
+.sales-plan-register-container-top-month-text {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 110px;
+  height: 35px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
 
 
@@ -129,14 +364,83 @@
 }
 
 /* 계획수량 */
+.sales-plan-register-container-bottom-quantity {
+  display: flex;
+
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 210px;
+  height: 35px;
+
+  background-color: #F9F9F9;
+}
 
 /* 환종 */
+.sales-plan-register-container-bottom-exchange-type {
+  display: flex;
+
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 210px;
+  height: 35px;
+
+  background-color: #F9F9F9;
+}
 
 /* 환율 */
+.sales-plan-register-container-bottom-exchange-rate {
+  display: flex;
+
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 210px;
+  height: 35px;
+
+  background-color: #F9F9F9;
+}
 
 /* 예상단가 */
+.sales-plan-register-container-bottom-price {
+  display: flex;
+
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 210px;
+  height: 35px;
+
+  background-color: #F9F9F9;
+}
 
 /* 예상금액 */
+.sales-plan-register-container-bottom-total-price {
+  display: flex;
+
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 210px;
+  height: 35px;
+
+  background-color: #F9F9F9;
+}
+
+
+
+
+
+
+
+
+
 
 .sales-plan-register-button-container {
   display: flex;
