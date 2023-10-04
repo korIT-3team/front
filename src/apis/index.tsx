@@ -5,7 +5,7 @@ import { PutCompanyInfoRequestDto } from 'src/interfaces/request/system';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import { GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -116,7 +116,7 @@ export const getInvoiceListRequest = async (data : InvoiceListRequestDto) => {
 export const getDepartmentInfoRequest = async () => {
   const result = await axios.get(GET_DEPARTMENT_INFO_URL())
   .then((response) => {
-    const responsebody : GetDepartmentListResponseDto = response.data;
+    const responsebody : GetDepartmentInfoResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
