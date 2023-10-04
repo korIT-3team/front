@@ -81,6 +81,19 @@
   cursor: pointer;
 }
 
+.dept-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
 .employee-info-registration {
   margin-top: 5px;
   margin-bottom: 5px;
