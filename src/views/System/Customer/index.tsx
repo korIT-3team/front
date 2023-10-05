@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 
 import SystemMenu from '../SystemMenu'
 
@@ -10,7 +10,7 @@ import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
 import { useCustomerInfoStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
-import { putCustomerInfoRequest } from 'src/apis';
+import { getCustomerInfoRequest, putCustomerInfoRequest } from 'src/apis';
 import CustomerListResponseDto from 'src/interfaces/response/system/customer-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { GetCustomerInfoRepsonseDto } from 'src/interfaces/response/system';
@@ -117,6 +117,9 @@ export default function CustomerInfo() {
   // component //
 
   // effect //
+  useEffect(() => {
+    getCustomerInfoRequest().then(getCustomerInfoResponseHandler)
+  }, [user])
 
 
   // render //
@@ -169,10 +172,14 @@ export default function CustomerInfo() {
                     <div className='customer-info-middle-left-bottom-table-title-customer-code'>거래처 코드</div>
                     <div className='customer-info-middle-left-bottom-table-title-customer-name'>거래처 명</div>
                   </div>
-                  <div className='customer-info-middle-left-bottom-table-body'>
-                    <div className='customer-info-middle-left-bottom-table-body-no'>1</div>
-                    <div className='customer-info-middle-left-bottom-table-body-customer-code'>2001</div>
-                    <div className='customer-info-middle-left-bottom-table-body-customer-name'>거래처 1</div>
+                  <div className='customer-info-middle-left-bottom-table-body-container'>
+                    { customerList.map((item) => (
+                      <div className='customer-info-middle-left-bottom-table-body'>
+                        <div className='customer-info-middle-left-bottom-table-body-no'> {item.no} </div>
+                        <div className='customer-info-middle-left-bottom-table-body-customer-code'> {item.customerCode} </div>
+                        <div className='customer-info-middle-left-bottom-table-body-customer-name'> {item.customerName} </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

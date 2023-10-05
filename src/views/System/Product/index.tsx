@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 import SystemMenu from '../SystemMenu'
 
 import { useNavigate } from 'react-router-dom';
 import { HOME_PATH, SYSTEM_PRODUCT_INFO } from 'src/constants';
+
+import { useProductListStore, useProductRequestStore } from 'src/stores';
 
 import './style.css'
 
@@ -11,6 +13,26 @@ export default function ProductInfo() {
 
   // state //
 
+  // description: 조회 조건 정보 store //
+  const {companyCode, productCode, productName, procurementCategory, productPrice, 
+    setCompanyCode, setProductCode, setProductName, setProcurementCategory, setProductPrice} = useProductRequestStore();
+
+  // description : 전표 유형 선택 이벤트 //
+  const onProcurementCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    let type = 0;
+    if(value === '전체'){
+      type = 0;
+    }
+    else if(value === '생산'){
+      type = 1;
+    }
+    else if(value === '구매'){
+      type = 2;
+    }
+    setProcurementCategory(type);
+  }
+  
   // function //
   const navigator = useNavigate();
 
@@ -58,12 +80,10 @@ export default function ProductInfo() {
               </div>
               <div className='product-info-search-type-container'>
                 <div className='product-info-search-type-combo-box-container'>
-                  // todo : {/*콤보박스 수정 중 */}
-                  <select className='product-info-search-type-combo-box-text' name="invoice-type" id="invoice-type">
+                  <select className='product-info-search-type-combo-box-text' onChange={onProcurementCategoryChangeHandler} name="procurement-category" id="procurement-category">
                     <option value="전체">전체</option>
-                    <option value="매입">매입</option>
-                    <option value="매출">매출</option>
-                    <option value="급/상여">급/상여</option>
+                    <option value="생산">매입</option>
+                    <option value="구매">매출</option>
                   </select>
                 </div>
                 <div className='type-search-input-box-display'>
