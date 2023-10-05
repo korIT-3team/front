@@ -32,8 +32,11 @@ export const HUMAN_WORK_TIME_DELETE = ( work_date: Date, employee_code: number |
 // aacounting path
 export const ACCOUNTING_PATH = "/accounting";
 export const ACCOUNTING_INVOICE_PATH = "/accounting/invoice";
-export const ACCOUNTING_INVOICE_DETAIL_PATH = (invoice_code: number) => `/accounting/invoice/detail/${invoice_code}`;
+export const ACCOUNTING_INVOICE_DETAIL_PATH = (invoiceCode: number | string) => `/accounting/invoice/${invoiceCode}`;
 export const ACCOUNTING_IN_OUT_COME_PATH = "/accounting/in_outcome";
+
+// Navigator
+export const INVOICE_CODE_PATH_VARIABLE = ':invoiceCode';
 
 // department code
 export enum CODE {

@@ -3,5 +3,5 @@ export default interface InvoiceListRequestDto {
     employeeCode : number | null;
     invoiceDateStart : string;
     invoiceDateEnd : string;
-    invoiceType : number;
+    invoiceType : number | null;
 }

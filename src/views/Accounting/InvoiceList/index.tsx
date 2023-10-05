@@ -1,19 +1,18 @@
-import React, { useState, ChangeEvent } from 'react'
-import './style.css'
+import { ChangeEvent, useEffect } from 'react'
 import AccountingMenu from '../AccountingMenu'
 import InvoiceListItem from 'src/components/InvoiceListItem'
-import InvoiceListResponseDto from 'src/interfaces/response/accounting/invoice-list.response.dto';
 import { useInvoiceListStore, useInvoiceRequestStore } from 'src/stores';
+import { useLocation } from 'react-router-dom';
+import './style.css'
 
 export default function InvoiceList() {
     //!          state          //
+    // description : path 상태 //
+    const { pathname } = useLocation();
     // description: 조회조건 정보 store //
-    const {employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceType, 
-      setEmployeeCode, setDepartmentCode, setInvoiceDateStart, setInvoiceDateEnd, setInvoiceType} = useInvoiceRequestStore();
+    const { setEmployeeCode, setDepartmentCode, setInvoiceDateStart, setInvoiceDateEnd, setInvoiceType, resetInvoiceRequst } = useInvoiceRequestStore();
     // description: 조회된 전표 리스트 정보 store //
-    const { invoiceList, setInvoiceList } = useInvoiceListStore();
-    // description: 조회된 전표 리스트 개수 상태 //
-    const [invoiceCount, setInvoiceCount] = useState<number>(0);
+    const { invoiceList, resetInvoiceList } = useInvoiceListStore();
 
     //!             event handler              //
     // description : 작성자 코드 입력 이벤트 //
@@ -41,9 +40,9 @@ export default function InvoiceList() {
     // description : 전표 유형 선택 이벤트 //
     const onInvoiceTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
       const value = event.target.value;
-      let type = 0;
+      let type = null;
       if(value === '전체'){
-        type = 0;
+        type = null;
       }
       else if(value === '매입'){
         type = 1;
@@ -56,6 +55,14 @@ export default function InvoiceList() {
       }
       setInvoiceType(type);
     }
+
+    //!                    effect                   //
+    // description : path가 바뀔 때마다 실행 //
+    useEffect(()=>{
+          resetInvoiceRequst();
+          resetInvoiceList();
+     }, [pathname])
+
 
     //!          render          //
     return (
@@ -120,7 +127,7 @@ export default function InvoiceList() {
               </div>
               {/* 검색결과 */}
               <div className="invoicelist-search-result">
-                <div className="invoicelist-search-result-list-text">Total {invoiceCount} EA</div>
+                <div className="invoicelist-search-result-list-text">Total {invoiceList === null ? 0 : invoiceList.length} EA</div>
                 <div className="invoicelist-search-result-list-container">
                   <div className="invoicelist-search-result-list-title">
                     <div className="title-checkbox">
