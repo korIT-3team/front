@@ -5,6 +5,6 @@ export default interface DepartmentListResponseDto {
   departmentName: string;
   departmentStartDate: string;
   departmentEndDate: string;
-  departmetTelnumber: string;
+  departmentTelNumber: string;
   departmentFax: string;
 }

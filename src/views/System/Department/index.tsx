@@ -16,13 +16,16 @@ export default function Employee() {
   const { user, setUser } = useUserStore();
   // 쿠키 상태
   const [cookies, setCookie] = useCookies();
-  // 
+  // description: 조회 조건 //
+  // const { departmentList, setDepartmentList } = useDepartmentInfoStore();
   // const {departmentList, setDepartmentList} = useDepartmentInfoStore();
   // description: 부서 정보 불러오기
   const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
 
   //          function            //
   const navigator = useNavigate();
+
+  //          event handler           //
   // description: 부서 정보 불러오기 
   const getDepartmentInfoResponseHandler = (responsebody: GetDepartmentInfoResponseDto | ResponseDto) => {
     const { code } = responsebody;
@@ -76,17 +79,28 @@ export default function Employee() {
                     <div className='department-info-middle-left-bottom-table-title-dept-fax'>부서fax</div>
                   </div>
                   <div className='department-info-middle-left-bottom-table-container'>
-                    { departmentList.map((item) => (
+                    { departmentList ? (
+                        departmentList.map((item) => (
+                          <div className='department-info-middle-left-bottom-table-body'>
+                            <div className='department-info-middle-left-bottom-table-body-no'>{item.no}</div>
+                            <div className='department-info-middle-left-bottom-table-body-dept-code'>{item.departmentCode}</div>
+                            <input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text"/>
+                            <input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text"/>
+                            <input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text"/>
+                            <input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmentTelNumber} type="text"/>
+                            <input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text"/>
+                          </div>
+                    ))) : (
                       <div className='department-info-middle-left-bottom-table-body'>
-                        <div className='department-info-middle-left-bottom-table-body-no'>{item.no}</div>
-                        <div className='department-info-middle-left-bottom-table-body-dept-code'>{item.departmentCode}</div>
-                        <input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text"/>
-                        <input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text"/>
-                        <input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text"/>
-                        <input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmetTelnumber} type="text"/>
-                        <input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text"/>
-                      </div>
-                    )) }
+                      <div className='department-info-middle-left-bottom-table-body-no'></div>
+                      <div className='department-info-middle-left-bottom-table-body-dept-code'></div>
+                      <input className='department-info-middle-left-bottom-table-body-dept-name' type="text"/>
+                      <input className='department-info-middle-left-bottom-table-body-start-date' type="text"/>
+                      <input className='department-info-middle-left-bottom-table-body-end-date' type="text"/>
+                      <input className='department-info-middle-left-bottom-table-body-dept-tel' type="text"/>
+                      <input className='department-info-middle-left-bottom-table-body-dept-fax' type="text"/>
+                    </div>                      
+                    )}
                   </div>
                 </div>
               </div>

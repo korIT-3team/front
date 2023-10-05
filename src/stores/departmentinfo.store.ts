@@ -7,25 +7,23 @@ export interface DepartmentInfo {
   departmentName: string;
   departmentStartDate: string;
   departmentEndDate: string;
-  departmentTelnumber: string;
+  departmentTelNumber: string;
   departmentFax: string;
 }
 
 interface DepartmentInfoStore {
-  departmentList: DepartmentInfo[];
+  departmentList: DepartmentInfo[] | null;
+  setDepartmentList: (departmentList: DepartmentInfo[] | null) => void;
 
-  setDepartmentList: (departmentList: DepartmentInfo[]) => void;
-
-  resetDepartmentList: () => void;
+  // resetDepartmentList: () => void;
 
 }
 
 const useStore = create<DepartmentInfoStore>((set) => ({
   departmentList: [],
-
   setDepartmentList: (departmentList) => set((state) => ({...state, departmentList})),
 
-  resetDepartmentList: () => set((state) => ({ ...state, departmentList: []})),
+  // resetDepartmentList: () => set((state) => ({ ...state, departmentList: []})),
 
 }));
 
