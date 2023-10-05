@@ -16,40 +16,16 @@ import DefaultLogo from 'src/assets/logo_upload_image.PNG';
 export default function Company() {
   //!         state          //
   // description: 로그인 사용자의 정보 상태
-  const { user, setUser } = useUserStore();
+  const { user } = useUserStore();
   // description: 회사 정보 상태
   const { logoImageUrl, logoImage,  bizNumber, companyName, repName, postCode, companyAddress, 
     companyAddressDetail, telNumber, bizStatus,  bizType, englishName, homepage, 
     setLogoImageUrl, setLogoImage, setBizNumber, setCompanyName, setRepName, setPostCode, setCompanyAddress, 
     setCompanyAddressDetail,  setTelNumber, setBizStatus, setBizType, setEnglishName, setHomepage } = useCompoanyInfoStore();
   // description: 쿠키 상태 //
-  const [cookies, setCookie] = useCookies();
+  const [ cookies ] = useCookies();
   // description: 다음 포스트 (우편번호검색) 팝업 상태 //
   const open = useDaumPostcodePopup();
-  // // description: 회사 로고 URL 상태 ! todo : DefaultLogo 오류가나네.. custom.d.ts파일 등록? 에 대한 질문 //
-  // const [logoImageUrl, setLogoImageUrl] = useState<string>('');
-  // // description: 사업자등록번호 상태 //
-  // const [bizNumber, setBizNumber] = useState<string>("");
-  // // description: 회사명 상태 //
-  // const [companyName, setCompanyName] = useState<string>("");
-  // // description: 대표자명 상태 //
-  // const [repName, setRepName] = useState<string>("");
-  // // description: 우편번호 상태 //
-  // const [postCode, setPostCode] = useState<string>("");
-  // // description: 주소 상태 //
-  // const [companyAddress, setCompanyAddress] = useState<string>("");
-  // // description: 상세주소 상태 //
-  // const [companyAddressDetail, setCompanyAddressDetail] = useState<string>("");
-  // // description: 전화번호 상태 //
-  // const [telNumber, setTelNumber] = useState<string>("");
-  // // description: 업태 상태 //
-  // const [bizStatus, setBizStatus] = useState<string>("");
-  // // description: 종목 상태 //
-  // const [bizType, setBizType] = useState<string>("");
-  // // description: 기업영문명 상태 //
-  // const [englishName, setEnglishName] = useState<string>("");
-  // // description: 홈페이지주소 상태 //
-  // const [homepage, setHomepage] = useState<string>("");
   // description: useRef를 사용하여 HTML 요소를 JS 객체로 다룰수 있음 //
   const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -134,12 +110,8 @@ export default function Company() {
   const onSaveButtonClickHandler = async () => {
     const token = cookies.accessToken;
     
-    // todo : 왜 blob으로 들어가지
-    // const ImageUrl = logoImage ? await fileUpload() : logoImageUrl;
     const ImageUrl = await fileUpload();
-    console.log(logoImage);
-    console.log(logoImageUrl);
-    console.log(ImageUrl);
+
     const data : PutCompanyInfoRequestDto = {
       logoImageUrl : ImageUrl,
       bizNumber : bizNumber,
@@ -200,7 +172,6 @@ export default function Company() {
 
   //!            effect           //
   // description: 유저가 바뀔때 실행 //
-  let flag = false;
   useEffect(() => {
     if (cookies.accessToken && !user) {
       return;
@@ -281,9 +252,6 @@ export default function Company() {
         <div className="company-info-bottom">
           <div className="company-info-bottom-button-save" onClick={onSaveButtonClickHandler}>
             <div className="company-info-bottom-button-save-text">저장</div>
-          </div>
-          <div className="company-info-bottom-button-cancel">
-            <div className="company-info-bottom-button-cancel-text">취소</div>
           </div>
         </div>
       </div>

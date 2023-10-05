@@ -4,6 +4,7 @@ export interface InvoiceList {
      productCode : number;
      customerCode : number;
      workerCode : number;
+     workerDepartmentCode : number;
      productDetails : string;
      invoiceDate : string;
      invoiceType : number;
@@ -14,11 +15,13 @@ export interface InvoiceList {
 interface InvoiceListStore {
      invoiceList: InvoiceList[] | null;
      setInvoiceList: (invoiceList : InvoiceList[] | null) => void;
+     resetInvoiceList: () => void;
 }
 
 const useStore = create<InvoiceListStore>((set) => ({
      invoiceList : null,
-     setInvoiceList : (invoiceList) => set((state) => ({ ...state, invoiceList }))
+     setInvoiceList : (invoiceList) => set((state) => ({ ...state, invoiceList })),
+     resetInvoiceList: () => set((state) => ({ ...state, invoiceList : null}))
 }));
 
 export default useStore;

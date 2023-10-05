@@ -3,6 +3,7 @@ import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
 import { PutCompanyInfoRequestDto } from 'src/interfaces/request/system';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
@@ -20,6 +21,7 @@ const GET_COMPANY_INFO_URL = () => `${API_DOMAIN}/system/company-info`;
 
 // 회계관리
 const GET_INVOICE_LIST_URL = () => `${API_DOMAIN}/accounting/invoice`;
+const GET_INVOICE_DETAIL_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}`;
 
 // 부서
 const GET_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -98,9 +100,24 @@ export const uploadFileRequest = async (data : FormData) => {
   return result;
 }
 
-// 전표리스트 불러오기 메서드
+// 전표리스트 불러오기 메서드 ** request dto가 필요해서 get 대신 post를 사용
 export const getInvoiceListRequest = async (data : InvoiceListRequestDto) => {
-  const result = await axios.get(GET_INVOICE_LIST_URL())
+  const result = await axios.post(GET_INVOICE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetInvoiceListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+
+// 전표 상세 데이터 불러오기 메서드
+export const getInvoiceDetailRequest = async (invoiceCode : number) => {
+  const result = await axios.get(GET_INVOICE_DETAIL_URL(invoiceCode))
   .then((response) => {
     const responsebody : InvoiceListResponseDto = response.data;
     return responsebody;

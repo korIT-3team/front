@@ -99,7 +99,9 @@
   display: flex;
   align-items: center;
 }
-
+.header-function-search:hover{
+  cursor: pointer;
+}
 .header-function-search-icon {
   width: 35px;
   height: 35px;
@@ -124,6 +126,9 @@
 .header-function-save {
   display: flex;
   align-items: center;
+}
+.header-function-save:hover{
+  cursor: pointer;
 }
 
 .header-function-save-icon {
