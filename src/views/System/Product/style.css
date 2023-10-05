@@ -202,9 +202,15 @@
   border: 1px solid rgba(0, 0, 0, 0.30);
 }
 
-
-
-
+.product-info-search-type-combo-box-text {
+  width: 232px;
+  height: 27px;
+  border: none;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 .product-info-search-type-text {
   display: flex;

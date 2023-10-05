@@ -6,7 +6,7 @@ import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-custome
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import { GetCustomerInfoRepsonseDto, GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 
@@ -144,6 +144,20 @@ export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, to
     const responsebody : ResponseDto = error.response.data;
     const { code } = responsebody;
     return code;
+  });
+  return result;
+}
+
+// 거래처 정보 불러오기 메서드
+export const getCustomerInfoRequest = async () => {
+  const result = await axios.get(GET_CUSTOMER_INFO_URL())
+  .then((response) => {
+    const responsebody : GetCustomerInfoRepsonseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
   });
   return result;
 }
