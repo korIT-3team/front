@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import './style.css'
 import SystemMenu from '../SystemMenu'
-import { useUserStore } from 'src/stores'
+import { useDepartmentInfoStore, useUserStore } from 'src/stores'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { GetDepartmentInfoResponseDto } from 'src/interfaces/response/system';
@@ -16,6 +16,8 @@ export default function Employee() {
   const { user, setUser } = useUserStore();
   // 쿠키 상태
   const [cookies, setCookie] = useCookies();
+  // 
+  // const {departmentList, setDepartmentList} = useDepartmentInfoStore();
   // description: 부서 정보 불러오기
   const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
 
