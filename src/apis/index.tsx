@@ -2,11 +2,13 @@ import axios from 'axios';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
 import { PutCompanyInfoRequestDto } from 'src/interfaces/request/system';
+import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import { GetCustomerInfoRepsonseDto, GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -27,6 +29,10 @@ const GET_INVOICE_DETAIL_URL = (invoiceCode: number) => `${API_DOMAIN}/accountin
 const GET_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
+
+// 거래처
+const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
+const GET_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
 
 // 로그인 메서드
 export const signInRequest = async (data: SignInRequestDto) => {
@@ -134,6 +140,36 @@ export const getDepartmentInfoRequest = async () => {
   const result = await axios.get(GET_DEPARTMENT_INFO_URL())
   .then((response) => {
     const responsebody : GetDepartmentInfoResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 거래처정보등록 메서드
+export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, token : string) => {
+  const result = await axios.put(PUT_COMPANY_INFO_URL(), data, { headers : { 'Authorization' : `Bearer ${token}` } })
+  .then((response) => {
+    const responsebody : PutCustomerInfoResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
+}
+
+// 거래처 정보 불러오기 메서드
+export const getCustomerInfoRequest = async () => {
+  const result = await axios.get(GET_CUSTOMER_INFO_URL())
+  .then((response) => {
+    const responsebody : GetCustomerInfoRepsonseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
