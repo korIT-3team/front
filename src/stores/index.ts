@@ -6,6 +6,8 @@ import useCustomerInfoStore from './customerinfo.store';
 import useDepartmentInfoStore from './departmentinfo.store';
 import useProductListStore from './productlist.request.store';
 import useProductRequestStore from './productlist.request.store';
+import useCustomerListStore from './customerlist.response.store'
+import useCustomerRequestStore from './customerlist.request.store'
 
 export { useUserStore,
      useCompoanyInfoStore,
@@ -14,6 +16,8 @@ export { useUserStore,
      useCustomerInfoStore,
      useDepartmentInfoStore,
      useProductListStore,
-     useProductRequestStore
+     useProductRequestStore,
+     useCustomerListStore,
+     useCustomerRequestStore
      
 };

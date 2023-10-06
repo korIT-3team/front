@@ -7,13 +7,10 @@ import { HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
 
 import './style.css'
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
-import { useCustomerInfoStore, useUserStore } from 'src/stores';
+import { useCustomerInfoStore, useCustomerRequestStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
 import { getCustomerInfoRequest, putCustomerInfoRequest } from 'src/apis';
-import CustomerListResponseDto from 'src/interfaces/response/system/customer-list.response.dto';
-import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetCustomerInfoRepsonseDto } from 'src/interfaces/response/system';
 
 export default function CustomerInfo() {
 
@@ -22,30 +19,16 @@ export default function CustomerInfo() {
   const { user, setUser } = useUserStore();
   // description: 쿠키 상태 //
   const [cookies, setCookie] = useCookies ();
-  // description: 거래처 불러오기 //
-  const [customerList, setCustomerList] = useState<CustomerListResponseDto[]>([]);
-  // description: 거래처 정보 상태
-  const { companyCode, customerCode, customerName, businessNumber, postCode, customerAddress, customerAddressDetail, customerTelNumber, 
-    setCompanyCode, setCustomerCode, setCustomerName, setBusinessNumber, setPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber } = useCustomerInfoStore();
+  // description: 거래처 정보를 저장할 상태 //
+  const { customerName, businessNumber, postCode, customerAddress, customerAddressDetail, customerTelNumber, 
+    setCustomerName, setBusinessNumber, setPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber } = useCustomerInfoStore();
+
   // description: 다음 포스트 (우편번호검색) 팝업 상태 //
   const open = useDaumPostcodePopup();
 
   // function //
   const navigator = useNavigate();
 
-  // description: 부서 정보 불러오기 
-  const getCustomerInfoResponseHandler = (responsebody: GetCustomerInfoRepsonseDto | ResponseDto) => {
-    const { code } = responsebody;
-
-    if( code === 'NE') alert('존재하지않는 회원입니다.');
-    if( code === 'DE') alert('데이터베이스 에러');
-    if( code === 'NP') alert('권한이 없습니다.');
-    if( code !== 'SU') return;
-
-    const { customerList } = responsebody as GetCustomerInfoRepsonseDto;
-    setCustomerList(customerList);
-
-  }
 
   // description : 거래처 정보 등록 응답 함수 //
   const putCustomerInfoResponseHandler = (code : string) => {
@@ -67,8 +50,6 @@ export default function CustomerInfo() {
     const token = cookies.accessToken;
 
     const data : PutCustomerInfoRequestDto = {
-      companyCode: 0,
-      customerCode: 2001,
       customerName: customerName,
       businessNumber: businessNumber,
       postcode: postCode,
@@ -101,6 +82,14 @@ export default function CustomerInfo() {
     setCustomerAddress(address);
     setPostCode(zonecode);
   };
+  // description: 거래처 이름 변경 이벤트 //
+  const onCustomerNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setCustomerName(event.target.value);
+  }
+  // description: 사업자등록번호 변경 이벤트 //
+  const onBusinessNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setBusinessNumber(event.target.value);
+  }
   // description: 주소 변경 이벤트 //
   const onCustomerAddressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setCustomerAddress(event.target.value);
@@ -117,9 +106,6 @@ export default function CustomerInfo() {
   // component //
 
   // effect //
-  useEffect(() => {
-    getCustomerInfoRequest().then(getCustomerInfoResponseHandler)
-  }, [user])
 
 
   // render //
@@ -173,13 +159,11 @@ export default function CustomerInfo() {
                     <div className='customer-info-middle-left-bottom-table-title-customer-name'>거래처 명</div>
                   </div>
                   <div className='customer-info-middle-left-bottom-table-body-container'>
-                    { customerList.map((item) => (
                       <div className='customer-info-middle-left-bottom-table-body'>
-                        <div className='customer-info-middle-left-bottom-table-body-no'> {item.no} </div>
-                        <div className='customer-info-middle-left-bottom-table-body-customer-code'> {item.customerCode} </div>
-                        <div className='customer-info-middle-left-bottom-table-body-customer-name'> {item.customerName} </div>
+                        <div className='customer-info-middle-left-bottom-table-body-no'>  </div>
+                        <div className='customer-info-middle-left-bottom-table-body-customer-code'>  </div>
+                        <div className='customer-info-middle-left-bottom-table-body-customer-name'>  </div>
                       </div>
-                    ))}
                   </div>
                 </div>
               </div>
@@ -193,11 +177,11 @@ export default function CustomerInfo() {
               <div className='customer-info-middle-right-bottom-container'>
                 <div className='customer-name'>
                   <div className='customer-name-text'>거래처 명</div>
-                  <input className='customer-name-input' />
+                  <input className='customer-name-input' onChange={onCustomerNameChangeHandler} value={customerName} />
                 </div>
                 <div className='customer-business-number'>
                   <div className='customer-business-number-text'>사업자 등록번호</div>
-                  <input className='customer-business-number-input' />
+                  <input className='customer-business-number-input' onChange={onBusinessNumberChangeHandler} value={businessNumber} />
                 </div>
                 <div className='customer-postcode'>
                   <div className='customer-postcode-text'>우편번호</div>
@@ -208,7 +192,7 @@ export default function CustomerInfo() {
                 </div>
                 <div className='customer-address'>
                   <div className='customer-address-text'>거래처 주소</div>
-                  <input className='customer-address-input' defaultValue={customerAddress} onChange={onCustomerAddressChangeHandler} type="text" />
+                  <input className='customer-address-input' onChange={onCustomerAddressChangeHandler} value={customerAddress} />
                 </div>
                 <div className='customer-address-detail'>
                   <div className='customer-address-detail-text'>거래처 상세주소</div>
@@ -216,7 +200,7 @@ export default function CustomerInfo() {
                 </div>
                 <div className='customer-tel-number'>
                   <div className='customer-tel-number-text'>거래처 전화번호</div>
-                  <input className='customer-tel-number-input' defaultValue={customerTelNumber} onChange={onCustomerTelNumberChangeHandler} type="text" />
+                  <input className='customer-tel-number-input' onChange={onCustomerTelNumberChangeHandler} value={customerTelNumber} />
                 </div>
               </div>
             </div>
