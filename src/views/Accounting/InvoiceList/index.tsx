@@ -135,12 +135,10 @@ export default function InvoiceList() {
                     </div>
                     <div className="title-date">결의일</div>
                     <div className="title-invoice-code">전표번호</div>
-                    <div className="title-product-code">품의번호</div>
-                    <div className="title-customer-code">거래처코드</div>
-                    <div className="title-customer-name">거래처명</div>
-                    <div className="title-price">금액</div>
                     <div className="title-invoice-type">구분</div>
+                    <div className="title-price">금액</div>
                     <div className="title-invoice-content">적요</div>
+                    <div className="title-worker-code">담당자</div>
                   </div>
                   { invoiceList !== null && invoiceList.map( (item) => (<InvoiceListItem item = {item} />) ) }
                 </div>

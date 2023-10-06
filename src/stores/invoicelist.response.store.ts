@@ -1,15 +1,14 @@
 import { create } from 'zustand';
 export interface InvoiceList {
      invoiceCode : number;
-     productCode : number;
-     customerCode : number;
-     workerCode : number;
-     workerDepartmentCode : number;
-     productDetails : string;
      invoiceDate : string;
      invoiceType : number;
-     customerName : string;
+     invoiceDetailPk : number;
+     workerName : string;
+     workerCode : number;
+     workerDepartmentCode : number;
      price : number;
+     priceDetail : string;
 }
 
 interface InvoiceListStore {
