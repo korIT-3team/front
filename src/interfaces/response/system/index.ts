@@ -4,6 +4,7 @@ import GetDepartmentListResponseDto from './get-department-info.response.dto';
 import GetCustomerInfoRepsonseDto from './get-customer-info.response.dto';
 import GetProductInfoResponseDto from './get-product-info.response.dto';
 import GetDepartmentInfoResponseDto from './get-department-info.response.dto';
+import PutCustomerInfoResponseDto from './put-customer-info.response.dto';
 
 export type {
   PutCompanyInfoResponseDto,
@@ -11,5 +12,7 @@ export type {
   GetDepartmentListResponseDto,
   GetCustomerInfoRepsonseDto,
   GetProductInfoResponseDto,
-  GetDepartmentInfoResponseDto
+  GetDepartmentInfoResponseDto,
+  PutCustomerInfoResponseDto,
+  
 }
