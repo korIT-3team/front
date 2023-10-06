@@ -10,7 +10,7 @@
     line-height: normal;
 }
 .invoice-list-checkbox{
-    width: 60px;
+    width: 80px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
     border-right: 1px solid white;
 }
 .invoice-list-date{
-    width: 95px;
+    width: 130px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -26,31 +26,15 @@
     border-right: 1px solid white;
 }
 .invoice-list-invoice-code{
-    width: 95px;
+    width: 115px;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     border-right: 1px solid white;
 }
-.invoice-list-product-code{
-    width: 95px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid white;
-}
-.invoice-list-customer-code{
-    width: 95px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-right: 1px solid white;
-}
-.invoice-list-customer-name{
-    width: 170px;
+.invoice-list-worker-code{
+    width: 130px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -58,7 +42,7 @@
     border-right: 1px solid white;
 }
 .invoice-list-price{
-    width: 140px;
+    width: 180px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -66,7 +50,7 @@
     border-right: 1px solid white;
 }
 .invoice-list-invoice-type{
-    width: 90px;
+    width: 125px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -74,7 +58,7 @@
     border-right: 1px solid white;
 }
 .invoice-list-invoice-content{
-    width: 240px;
+    width: 320px;
     height: 100%;
     display: flex;
     align-items: center;

@@ -11,13 +11,12 @@ interface Props {
 export default function InvoiceListItem({item} : Props) {
 
   //!          state          //
-  // description: 속성으로 받아오는 전표 리스트 상태 //
-  const { invoiceCode, productCode, customerCode, productDetails, 
-    invoiceDate, invoiceType, customerName, price} = item;
+  // description: 전표 리스트 상태 //
+  const { invoiceCode, invoiceDate, invoiceType, workerName, price, priceDetail} = item;
 
   //!           function            //
   const navigator = useNavigate();
-  
+  var type = invoiceType === 1 ? '매입' : invoiceType === 2 ? '매출' : invoiceType === 3 ? '급/상여' : '';
 
   //!             event handler              //
   const onInvoiceItemClickHandler = () => {
@@ -32,12 +31,10 @@ export default function InvoiceListItem({item} : Props) {
       </div>
       <div className="invoice-list-date">{invoiceDate}</div>
       <div className="invoice-list-invoice-code">{invoiceCode}</div>
-      <div className="invoice-list-product-code">{productCode}</div>
-      <div className="invoice-list-customer-code">{customerCode}</div>
-      <div className="invoice-list-customer-name">{customerName}</div>
+      <div className="invoice-list-invoice-type">{type}</div>
       <div className="invoice-list-price">{price}</div>
-      <div className="invoice-list-invoice-type">{invoiceType}</div>
-      <div className="invoice-list-invoice-content">{productDetails}</div>
+      <div className="invoice-list-invoice-content">{priceDetail}</div>
+      <div className="invoice-list-worker-code">{workerName}</div>
     </div>
   )
 }
