@@ -32,9 +32,17 @@ const GET_DEPARTMENT_LIST_URL = (departmentName: string) => `${API_DOMAIN}/syste
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
-// 거래처
+// 거래처 등록
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
-const GET_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
+
+// 거래처 불러오기
+const GET_CUSTOMER_INFO_URL = (customerCode: number) => `${API_DOMAIN}/system/customer-info/${customerCode}`;
+
+// 품목 등록
+const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
+
+// 품목 불러오기
+const GET_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
 
 // 로그인 메서드
 export const signInRequest = async (data: SignInRequestDto) => {
@@ -165,7 +173,7 @@ export const getDepartmentListRequest = async (departmentName: string) => {
 // ! 거래처
 // 거래처정보등록 메서드
 export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, token : string) => {
-  const result = await axios.put(PUT_COMPANY_INFO_URL(), data, { headers : { 'Authorization' : `Bearer ${token}` } })
+  const result = await axios.put(PUT_CUSTOMER_INFO_URL(), data, { headers : { 'Authorization' : `Bearer ${token}` } })
   .then((response) => {
     const responsebody : PutCustomerInfoResponseDto = response.data;
     const { code } = responsebody;
@@ -180,8 +188,8 @@ export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, to
 }
 
 // 거래처 정보 불러오기 메서드
-export const getCustomerInfoRequest = async () => {
-  const result = await axios.get(GET_CUSTOMER_INFO_URL())
+export const getCustomerInfoRequest = async (customerCode: number) => {
+  const result = await axios.get(GET_CUSTOMER_INFO_URL(customerCode))
   .then((response) => {
     const responsebody : GetCustomerInfoRepsonseDto = response.data;
     return responsebody;

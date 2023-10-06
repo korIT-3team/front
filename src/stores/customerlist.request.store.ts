@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
-export interface CustomerInfoStore {
+export interface CustomerListRequestStore {
+  companyCode: number | null;
+  customerCode: number | null;
   customerName: string;
   businessNumber: string;
   postCode: string;
@@ -8,6 +10,8 @@ export interface CustomerInfoStore {
   customerAddressDetail: string | null;
   customerTelNumber: string;
 
+  setCompanyCode: (departmentCode: number | null) => void;
+  setCustomerCode: (customerCode: number | null) => void;
   setCustomerName: (customerName: string) => void;
   setBusinessNumber: (businessNumber: string) => void;
   setPostCode: (postCode: string) => void;
@@ -15,10 +19,13 @@ export interface CustomerInfoStore {
   setCustomerAddressDetail: (customerAddressDetail: string | null) => void;
   setCustomerTelNumber: (customerTelNumber: string) => void;
 
-  resetCustomer: () => void;
+  resetCustomerRequest: () => void;
+
 }
 
-const useStore = create<CustomerInfoStore>((set) => ({
+const useStore = create<CustomerListRequestStore>((set) => ({
+  companyCode: null,
+  customerCode: null,
   customerName: '',
   businessNumber: '',
   postCode: '',
@@ -26,14 +33,16 @@ const useStore = create<CustomerInfoStore>((set) => ({
   customerAddressDetail: '',
   customerTelNumber: '',
 
-  setCustomerName: (customerName) => set((state) => ({ ...state, customerName})),
+  setCompanyCode: (companyCode) => set((state) => ({ ...state, companyCode })),
+  setCustomerCode: (customerCode) => set((state) => ({ ...state, customerCode })),
+  setCustomerName: (customerName) => set((state) => ({ ...state, customerName })),
   setBusinessNumber: (businessNumber) => set((state) => ({ ...state, businessNumber })),
   setPostCode: (postCode) => set((state) => ({ ...state, postCode })),
   setCustomerAddress: (customerAddress) => set((state) => ({ ...state, customerAddress })),
   setCustomerAddressDetail: (customerAddressDetail) => set((state) => ({ ...state, customerAddressDetail })),
   setCustomerTelNumber: (customerTelNumber) => set((state) => ({ ...state, customerTelNumber })),
 
-  resetCustomer: () => set((state) => ({ ...state, customerName: '', businessNumber: '', postCode: '', customerAddress: '', customerAddressDetail: '', customerTelNumber: '' }))
+  resetCustomerRequest: () => set((state) => ({ ...state, companyCode:null, customerCode:null, customerName:'', businessNumber:'', postCode:'', customerAddress:'', customerAddressDetail:'', customerTelNumber:'' }))
 }));
 
 export default useStore;

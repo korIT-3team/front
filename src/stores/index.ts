@@ -8,6 +8,8 @@ import useDepartmentRequsetStore from './departmentlist.request.store';
 import useDepartmentResponseStore from './departmentlist.response.store';
 import useProductListStore from './productlist.request.store';
 import useProductRequestStore from './productlist.request.store';
+import useCustomerListStore from './customerlist.response.store'
+import useCustomerRequestStore from './customerlist.request.store'
 
 export { useUserStore,
      useCompoanyInfoStore,
@@ -18,6 +20,8 @@ export { useUserStore,
      useDepartmentRequsetStore,
      useDepartmentResponseStore,
      useProductListStore,
-     useProductRequestStore
+     useProductRequestStore,
+     useCustomerListStore,
+     useCustomerRequestStore
      
 };
