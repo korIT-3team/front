@@ -4,6 +4,8 @@ import useInvoiceListStore from './invoicelist.response.store';
 import useInvoiceRequestStore from './invoicelist.request.store';
 import useCustomerInfoStore from './customerinfo.store';
 import useDepartmentInfoStore from './departmentinfo.store';
+import useDepartmentRequsetStore from './departmentlist.request.store';
+import useDepartmentResponseStore from './departmentlist.response.store';
 import useProductListStore from './productlist.request.store';
 import useProductRequestStore from './productlist.request.store';
 
@@ -13,6 +15,8 @@ export { useUserStore,
      useInvoiceRequestStore,
      useCustomerInfoStore,
      useDepartmentInfoStore,
+     useDepartmentRequsetStore,
+     useDepartmentResponseStore,
      useProductListStore,
      useProductRequestStore
      

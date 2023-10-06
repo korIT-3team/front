@@ -1,49 +1,40 @@
-import React, {useState, useEffect} from 'react'
+import React, {ChangeEvent, useEffect} from 'react'
 import './style.css'
 import SystemMenu from '../SystemMenu'
-import { useDepartmentInfoStore, useUserStore } from 'src/stores'
+import { useDepartmentRequsetStore, useDepartmentResponseStore, useUserStore } from 'src/stores'
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GetDepartmentInfoResponseDto } from 'src/interfaces/response/system';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import DepartmentListResponseDto from 'src/interfaces/response/system/department-list.response.dto';
-import { getDepartmentInfoRequest } from 'src/apis';
+import { getDepartmentListRequest } from 'src/apis';
 
 export default function Employee() {
 
   //          state          //
-  // 로그인한 사용자의 정보 상태
+  // description: path 상태 //
+  const {pathname} = useLocation();
+  // description: 로그인한 사용자의 정보 상태 //
   const { user, setUser } = useUserStore();
-  // 쿠키 상태
-  const [cookies, setCookie] = useCookies();
   // description: 조회 조건 //
-  // const { departmentList, setDepartmentList } = useDepartmentInfoStore();
-  // const {departmentList, setDepartmentList} = useDepartmentInfoStore();
-  // description: 부서 정보 불러오기
-  const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
+  const {setDepartmentName, resetDepartmentRequest} = useDepartmentRequsetStore();
+  // description: 부서 정보 불러오기 //
+  const {departmentList, setDepartmentList, resetDepartmentList} = useDepartmentResponseStore();
+  // const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
 
   //          function            //
   const navigator = useNavigate();
 
   //          event handler           //
-  // description: 부서 정보 불러오기 
-  const getDepartmentInfoResponseHandler = (responsebody: GetDepartmentInfoResponseDto | ResponseDto) => {
-    const { code } = responsebody;
-
-    if( code === 'NE') alert('존재하지않는 회원입니다.');
-    if( code === 'DE') alert('데이터베이스 에러');
-    if( code === 'NP') alert('권한이 없습니다.');
-    if( code !== 'SU') return;
-
-    const { departmentList } = responsebody as GetDepartmentInfoResponseDto;
-    setDepartmentList(departmentList);
-
+  // description: 부서명 입력 //
+  const onDepartmentNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setDepartmentName(event.target.value);
   }
 
   //          effect            //
   useEffect(() => {
-    getDepartmentInfoRequest().then(getDepartmentInfoResponseHandler)
-  }, [user])
+    resetDepartmentList();
+    resetDepartmentRequest();
+  }, [pathname])
 
 
   //          render          // 
@@ -59,7 +50,7 @@ export default function Employee() {
             <div className='department-info-right-top-search-dept'>
               <div className='department-info-right-top-search-dept-text'>부서명</div>
             </div>
-            <input className='department-info-right-top-search-dept-box-name-box-text' type="text" />
+            <input className='department-info-right-top-search-dept-box-name-box-text' type="text" onChange={onDepartmentNameChangeHandler} />
           </div>
           <div className='department-info-middle'>
           <div className='department-info-middle-left'>
@@ -79,28 +70,18 @@ export default function Employee() {
                     <div className='department-info-middle-left-bottom-table-title-dept-fax'>부서fax</div>
                   </div>
                   <div className='department-info-middle-left-bottom-table-container'>
-                    { departmentList ? (
-                        departmentList.map((item) => (
-                          <div className='department-info-middle-left-bottom-table-body'>
-                            <div className='department-info-middle-left-bottom-table-body-no'>{item.no}</div>
-                            <div className='department-info-middle-left-bottom-table-body-dept-code'>{item.departmentCode}</div>
-                            <input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text"/>
-                            <input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text"/>
-                            <input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text"/>
-                            <input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmentTelNumber} type="text"/>
-                            <input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text"/>
-                          </div>
-                    ))) : (
-                      <div className='department-info-middle-left-bottom-table-body'>
-                      <div className='department-info-middle-left-bottom-table-body-no'></div>
-                      <div className='department-info-middle-left-bottom-table-body-dept-code'></div>
-                      <input className='department-info-middle-left-bottom-table-body-dept-name' type="text"/>
-                      <input className='department-info-middle-left-bottom-table-body-start-date' type="text"/>
-                      <input className='department-info-middle-left-bottom-table-body-end-date' type="text"/>
-                      <input className='department-info-middle-left-bottom-table-body-dept-tel' type="text"/>
-                      <input className='department-info-middle-left-bottom-table-body-dept-fax' type="text"/>
-                    </div>                      
-                    )}
+                    { departmentList !== null && 
+                      departmentList.map((item) => (
+                        <div className='department-info-middle-left-bottom-table-body'>
+                          <div className='department-info-middle-left-bottom-table-body-no'>{item.no}</div>
+                          <div className='department-info-middle-left-bottom-table-body-dept-code'>{item.departmentCode}</div>
+                          <input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text"/>
+                          <input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text"/>
+                          <input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text"/>
+                          <input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmentTelNumber} type="text"/>
+                          <input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text"/>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
