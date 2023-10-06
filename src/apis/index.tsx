@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
-import { PutCompanyInfoRequestDto } from 'src/interfaces/request/system';
+import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetCustomerInfoRepsonseDto, GetDepartmentInfoResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import { GetCustomerInfoRepsonseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
+import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -26,7 +27,8 @@ const GET_INVOICE_LIST_URL = () => `${API_DOMAIN}/accounting/invoice`;
 const GET_INVOICE_DETAIL_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}`;
 
 // 부서
-const GET_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
+const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
+const GET_DEPARTMENT_LIST_URL = (departmentName: string) => `${API_DOMAIN}/system/dept-info/${departmentName}`;
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
@@ -143,11 +145,22 @@ export const getInvoiceDetailRequest = async (invoiceCode : number) => {
   return result;
 }
 
-// 부서정보 불러오기 메서드
-export const getDepartmentInfoRequest = async () => {
-  const result = await axios.get(GET_DEPARTMENT_INFO_URL())
+// ! 부서
+// 부서정보등록 메서드
+export const putDepartmentInfoRequest = async (data: PutDepartmentInfoRequestDto, token : string) => {
+  const result = await axios.put(PUT_DEPARTMENT_INFO_URL(), data, {headers: { 'Authorization' : `Bearer ${token}` }})
   .then((response) => {
-    const responsebody : GetDepartmentInfoResponseDto = response.data;
+    const responsebody : PutDepartmentInfoResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
+}
+// 부서정보 불러오기 메서드
+export const getDepartmentListRequest = async (departmentName: string) => {
+  const result = await axios.get(GET_DEPARTMENT_LIST_URL(departmentName))
+  .then((response) => {
+    const responsebody : GetDepartmentListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
@@ -157,6 +170,7 @@ export const getDepartmentInfoRequest = async () => {
   return result;
 }
 
+// ! 거래처
 // 거래처정보등록 메서드
 export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, token : string) => {
   const result = await axios.put(PUT_CUSTOMER_INFO_URL(), data, { headers : { 'Authorization' : `Bearer ${token}` } })

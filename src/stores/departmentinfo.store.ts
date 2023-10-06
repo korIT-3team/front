@@ -1,29 +1,39 @@
-import { create } from "zustand";
-
-export interface DepartmentInfo {
-  no: number;
-  departmentCode: number;
-  companyCode: number;
-  departmentName: string;
-  departmentStartDate: string;
-  departmentEndDate: string;
-  departmentTelNumber: string;
-  departmentFax: string;
-}
+import { create } from 'zustand';
 
 interface DepartmentInfoStore {
-  departmentList: DepartmentInfo[] | null;
-  setDepartmentList: (departmentList: DepartmentInfo[] | null) => void;
+  departmentCode: number,
+  companyCode: number,
+  departmentName: string,
+  departmentStartDate: string,
+  departmentEndDate: string,
+  departmentTelNumber: string,
+  departmentFax: string
 
-  // resetDepartmentList: () => void;
-
+  setDepartmentCode: (departmentCode: number) => void;
+  setCompanyCode: (departmentCode: number) => void;
+  setDepartmentName: (departmentName: string) => void;
+  setDepartmentStartDate: (departmentStartDate: string) => void;
+  setDepartmentEndDate: (departmentEndDate: string) => void;
+  setDepartmentTelNumber: (departmentTelNumber: string) => void;
+  setDepartmentFax: (departmentFax: string) => void;
 }
 
 const useStore = create<DepartmentInfoStore>((set) => ({
-  departmentList: [],
-  setDepartmentList: (departmentList) => set((state) => ({...state, departmentList})),
+  departmentCode: 1000,
+  companyCode: 1,
+  departmentName: "",
+  departmentStartDate: "",
+  departmentEndDate: "",
+  departmentTelNumber: "",
+  departmentFax:  "",
 
-  // resetDepartmentList: () => set((state) => ({ ...state, departmentList: []})),
+  setDepartmentCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
+  setCompanyCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
+  setDepartmentName: (departmentName) => set((state) => ({ ...state, departmentName })),
+  setDepartmentStartDate: (departmentStartDate) => set((state) => ({ ...state, departmentStartDate })),
+  setDepartmentEndDate: (departmentEndDate) => set((state) => ({ ...state, departmentEndDate })),
+  setDepartmentTelNumber: (departmentTelNumber) => set((state) => ({ ...state, departmentTelNumber })),
+  setDepartmentFax: (departmentFax) => set((state) => ({ ...state, departmentFax }))
 
 }));
 
