@@ -34,7 +34,7 @@ export default function Header() {
      // description: 조회된 부서 정보 store //
      const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
      // description: 부서 정보 상태
-     const {} = useDepartmentInfoStore();
+     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate, departmentTelNumber, departmentFax } = useDepartmentInfoStore();
 //! ============================================================================================
 
 
@@ -123,9 +123,9 @@ export default function Header() {
      const onDepartmentListSaveButtonClickHandler = async () => {
           const token = cookies.accessToken;
           const data: PutDepartmentInfoRequestDto = {
-               departmentCode,
-               companyCode: 0,
-               departmentName,
+               departmentCodeInfo,
+               departmentCompanyCode: 0,
+               departmentNameInfo,
                departmentStartDate,
                departmentEndDate,
                departmentTelNumber,

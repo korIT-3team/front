@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
 interface DepartmentInfoStore {
-  departmentCode: number,
-  companyCode: number,
-  departmentName: string,
+  departmentCodeInfo: number,
+  departmentCompanyCode: number,
+  departmentNameInfo: string,
   departmentStartDate: string,
   departmentEndDate: string,
   departmentTelNumber: string,
   departmentFax: string
 
-  setDepartmentCode: (departmentCode: number) => void;
-  setCompanyCode: (departmentCode: number) => void;
-  setDepartmentName: (departmentName: string) => void;
+  setDepartmentCodeInfo: (departmentCode: number) => void;
+  setDepartmentCompanyCode: (departmentCode: number) => void;
+  setDepartmentNameInfo: (departmentName: string) => void;
   setDepartmentStartDate: (departmentStartDate: string) => void;
   setDepartmentEndDate: (departmentEndDate: string) => void;
   setDepartmentTelNumber: (departmentTelNumber: string) => void;
@@ -19,17 +19,17 @@ interface DepartmentInfoStore {
 }
 
 const useStore = create<DepartmentInfoStore>((set) => ({
-  departmentCode: 1000,
-  companyCode: 1,
-  departmentName: "",
+  departmentCodeInfo: 1000,
+  departmentCompanyCode: 1,
+  departmentNameInfo: "",
   departmentStartDate: "",
   departmentEndDate: "",
   departmentTelNumber: "",
   departmentFax:  "",
 
-  setDepartmentCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
-  setCompanyCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
-  setDepartmentName: (departmentName) => set((state) => ({ ...state, departmentName })),
+  setDepartmentCodeInfo: (departmentCodeInfo) => set((state) => ({ ...state, departmentCodeInfo })),
+  setDepartmentCompanyCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
+  setDepartmentNameInfo: (departmentNameInfo) => set((state) => ({ ...state, departmentNameInfo })),
   setDepartmentStartDate: (departmentStartDate) => set((state) => ({ ...state, departmentStartDate })),
   setDepartmentEndDate: (departmentEndDate) => set((state) => ({ ...state, departmentEndDate })),
   setDepartmentTelNumber: (departmentTelNumber) => set((state) => ({ ...state, departmentTelNumber })),
