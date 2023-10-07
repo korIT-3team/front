@@ -1,7 +1,7 @@
 export default interface PutDepartmentInfoRequestDto {
-  departmentCode: number;
-  companyCode: number;
-  departmentName: string;
+  departmentCodeInfo: number;
+  departmentCompanyCode: number;
+  departmentNameInfo: string;
   departmentStartDate: string;
   departmentEndDate: string | null;
   departmentTelNumber: string;
