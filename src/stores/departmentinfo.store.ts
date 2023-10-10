@@ -9,9 +9,9 @@ interface DepartmentInfoStore {
   departmentTelNumber: string,
   departmentFax: string
 
-  setDepartmentCodeInfo: (departmentCode: number) => void;
-  setDepartmentCompanyCode: (departmentCode: number) => void;
-  setDepartmentNameInfo: (departmentName: string) => void;
+  setDepartmentCodeInfo: (departmentCodeInfo: number) => void;
+  setDepartmentCompanyCode: (departmentCompanyCode: number) => void;
+  setDepartmentNameInfo: (departmentNameInfo: string) => void;
   setDepartmentStartDate: (departmentStartDate: string) => void;
   setDepartmentEndDate: (departmentEndDate: string) => void;
   setDepartmentTelNumber: (departmentTelNumber: string) => void;
