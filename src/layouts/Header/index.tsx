@@ -34,9 +34,9 @@ export default function Header() {
      // description: 조회된 부서 정보 store //
      const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
      // description: 부서 정보 상태
-     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate, departmentTelNumber, departmentFax } = useDepartmentInfoStore();
+     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate,
+           departmentTelNumber, departmentFax } = useDepartmentInfoStore();
 //! ============================================================================================
-
 
      //!           function            //
      const navigator = useNavigate();
@@ -117,14 +117,14 @@ export default function Header() {
 
      // description: 부서조회 이벤트 핸들러 //
      const onDepartmentListSearchButtonClickHandler = () => {
-          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler)
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }
      // description: 부서저장 이벤트 핸들러 //
      const onDepartmentListSaveButtonClickHandler = async () => {
           const token = cookies.accessToken;
           const data: PutDepartmentInfoRequestDto = {
                departmentCodeInfo,
-               departmentCompanyCode: 0,
+               departmentCompanyCode: 1,
                departmentNameInfo,
                departmentStartDate,
                departmentEndDate,
@@ -132,7 +132,7 @@ export default function Header() {
                departmentFax
           }
           putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
-          
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }
 //! ============================================================================================
 
