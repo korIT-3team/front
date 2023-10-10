@@ -1,10 +1,115 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 import SalesMenu from '../SalesMenu'
 
 import './style.css'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useProductListStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore } from 'src/stores';
+import { GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
+import ResponseDto from 'src/interfaces/response/response.dto';
 
 export default function SalesPlan() {
+
+  // state  //
+  // description: path 상태 //
+  const { pathname } = useLocation();
+  // description: SalesPlan 정보 상태 //
+  const { salesPlanCodeInfo, employeeCodeInfo, departmentCodeInfo,
+    companyCodeInfo, salesPlanDate, salesPlanProductCode,
+    planQuantity ,exchangeRateCode, exchangeRate,
+    expectPrice, expectTotalPrice, expectKoreanPrice, 
+    setSalesPlanCodeInfo ,setEmployeeCodeInfo, setDepartmentCodeInfo,
+    setCompanyCodeInfo, setSalesPlanDate, setSalesPlanProductCode,
+    setPlanQuantity, setExchangeRateCode, setExchangeRate,
+    setExpectPrice, setExpectTotalPrice, setExpectKoreanPrice } = useSalesPlanInfoStore();
+  // description: 품명 정보 상태 //
+  const { productName, setProductName } = useProductListStore();
+  // description: 조회조건 정보 store //
+  const { setDepartmentCode, setEmployeeCode, setPlanDateStart, setPlanDateEnd, resetSalesPlanListRequest } = useSalesPlanRequestStore();
+  // description: SalesPlan 정보 불러오기 //
+  const { salesPlanList, setSalesPlanList, resetSalesPlanList } = useSalesPlanResponseStore();
+
+  // function //
+  const navigator = useNavigate();
+
+  // description: SalesPlan 정보 불러오기 응답 함수 //
+  const getSalesPlanInfoResponseHandler = (responsebody: GetSalesPlanListResponseDto | ResponseDto) => {
+    const { code } = responsebody;
+
+    if( code === 'NE') alert('존재하지않는 회원입니다.');
+    if( code === 'DE') alert('데이터베이스 에러');
+    if( code === 'NP') alert('권한이 없습니다.');
+    if( code !== 'SU') return;
+
+    // const { salesPlanList } = responsebody as GetSalesPlanListResponseDto;
+    // setSalesPlanList(salesPlanList);
+  }
+
+  // event handler //
+  // description: 부서코드 입력 이벤트 //
+  const onDepartmentCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[0-9]*$/;
+    const value = event.target.value;
+    const isNumber = reg.test(value);
+    if (isNumber) setDepartmentCode(Number(value));
+  }
+
+  // description: 사원코드 입력 이벤트 //
+  const onEmployeeCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[0-9]*$/;
+    const value = event.target.value;
+    const isNumber = reg.test(value);
+    if (isNumber) setEmployeeCode(Number(value));
+  }
+
+  // description : 계획기간 START 입력 이벤트 //
+  const onPlanDateStartChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setPlanDateStart(event.target.value);
+  }
+  // description : 계획기간 END 입력 이벤트 //
+  const onPlanDateEndChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setPlanDateEnd(event.target.value);
+  }
+
+  // description: 품번 입력력 이벤트 //
+  const onProductCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[0-9]*$/;
+    const value = event.target.value;
+
+    const isNumber = reg.test(value);
+    if (isNumber) setSalesPlanProductCode(Number(value));
+  }
+  // description: 품명 입력 이벤트 //
+  const onProductNameInfoChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setProductName(event.target.value);
+  }
+
+
+
+
+
+
+  // description: 환율 타입 선택 이벤트 //
+  const onExchangeRateTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+
+    let type = null;
+
+    if (value === '선택') type = null;
+    if (value === 'USD') type = 1;
+    if (value === 'JPY') type = 2;
+    if (value === 'EUR') type = 3;
+    if (value === 'THB') type = 4;
+
+    setExchangeRateCode(type);
+
+  }
+
+  //component //
+
+  // effect //
+
+  // render //
   return (
     <div id='sales-plan-wrapper'>
       <SalesMenu/>
@@ -13,73 +118,109 @@ export default function SalesPlan() {
           <div className='sales-plan-top-text'>판매 계획 등록</div>
         </div>
         <div className='sales-plan-divider'></div>
-        <div className='sales-plan-register-container'>
+        <div className='sales-plan-search-container'>
+          <div className='sales-plan-search-container-top'>
+            <div className='sales-plan-search-container-top-dept'>
+              <div className='sales-plan-search-container-top-dept-text'>부서*</div>
+              <div className='sales-plan-search-container-top-dept-box'>
+                <input className='sales-plan-search-container-top-dept-box-input' type='text' onChange={onDepartmentCodeChangeHandler} />
+                <div className='sales-plan-search-dept-search-button'>검색</div>
+                <div className='sales-plan-search-dept-search-input-box-display'>
+                  <div className='sales-plan-search-dept-search-input-box-display-text'>1000</div>
+                </div>
+              </div>
+            </div>
+            <div className='sales-plan-search-container-top-employee'>
+              <div className='sales-plan-search-container-top-employee-text'>사원*</div>
+              <div className='sales-plan-search-container-top-employee-box'>
+                <input className='sales-plan-search-container-top-employee-box-input' type='text' onChange={onEmployeeCodeChangeHandler} />
+                <div className='sales-plan-search-employee-search-button'>검색</div>
+                <div className='sales-plan-search-employee-search-input-box-display'>
+                  <div className='sales-plan-search-employee-search-input-box-display-text'>2000</div>
+                </div>
+              </div>
+            </div>
+            {/* 계획일자 */}
+            <div className='sales-plan-search-container-top-plan-date'>
+              <div className='sales-plan-search-container-top-plan-date-text'>계획 일자*</div>
+              <div className='sales-plan-search-container-top-plan-date-container'>
+                <div className='sales-plan-search-container-top-plan-date-select-box'>
+                  <input className='sales-plan-search-container-top-plan-date-select' onChange={onPlanDateStartChangeHandler} type='date'/>
+                </div>
+                <div className="middle-text">~</div>
+                <div className='sales-plan-search-container-top-plan-date-select-box'>
+                  <input className='sales-plan-search-container-top-plan-date-select' onChange={onPlanDateEndChangeHandler} type='date'/>
+                </div>
+              </div>
+            </div>
+            {/* 계획일자 */} 
+          </div>
+          <div className='sales-plan-search-button-container'>
+            <div className='sales-plan-search-button'>
+              <div className='sales-plan-search-button-text'>조회</div>
+            </div>
+          </div>
           <div className='sales-plan-register-container-top'>
-            <div className='sales-plan-register-container-top-dept'>
-              <div className='sales-plan-register-container-top-dept-text'>부서*</div>
-              <div className='sales-plan-register-container-top-dept-box'>
-                <input className='sales-plan-register-container-top-dept-box-input' />
-                <div className='sales-plan-register-dept-search-button'>검색</div>
-                <div className='sales-plan-register-dept-search-input-box-display'>
-                  <div className='sales-plan-register-dept-search-input-box-display-text'>1000</div>
-                </div>
+            <div className='sales-plan-register-container-top-product-code'>
+              <div className='sales-plan-register-container-top-product-code-text'>품번*</div>
+              <div className='sales-plan-register-container-top-product-code-box'>
+                <input className='sales-plan-register-product-code-input' />
               </div>
             </div>
-            <div className='sales-plan-register-container-top-employee'>
-              <div className='sales-plan-register-container-top-employee-text'>사원*</div>
-              <div className='sales-plan-register-container-top-employee-box'>
-                <input className='sales-plan-register-container-top-employee-box-input' />
-                <div className='sales-plan-register-employee-search-button'>검색</div>
-                <div className='sales-plan-register-employee-search-input-box-display'>
-                  <div className='sales-plan-register-employee-search-input-box-display-text'>2000</div>
-                </div>
+            <div className='sales-plan-register-container-top-product-name'>
+              <div className='sales-plan-register-container-top-product-name-text'>품명*</div>
+              <div className='sales-plan-register-container-top-product-name-box'>
+                <input className='sales-plan-register-product-name-input' />
               </div>
             </div>
-            <div className='sales-plan-register-container-top-year'>
-              <div className='sales-plan-register-container-top-year-text'>계획 연도*</div>
-              <div className='sales-plan-register-container-top-year-box'>
-                <div></div>
-                <div></div>
+            <div className='sales-plan-register-container-top-unit'>
+              <div className='sales-plan-register-container-top-unit-text'>단위*</div>
+              <div className='sales-plan-register-container-top-unit-box'>
+                <input className='sales-plan-register-unit-input' defaultValue={'EA'} />
               </div>
             </div>
-            <div className='sales-plan-register-container-top-month'>
-              <div className='sales-plan-register-container-top-month-text'>계획 월*</div>
-              <div className='sales-plan-register-container-top-month-box'>
-                <div></div>
-                <div></div>
+            <div className='sales-plan-register-container-top-quantity'>
+              <div className='sales-plan-register-container-top-quantity-text'>계획 수량*</div>
+              <div className='sales-plan-register-container-top-quantity-box'>
+                <input className='sales-plan-register-quantity-input' />
               </div>
             </div>
           </div>
           <div className='sales-plan-register-container-bottom'>
-            <div className='sales-plan-register-container-bottom-quantity'>
-              <div className='sales-plan-register-container-bottom-quantity-text'>계획 수량*</div>
-              <div className='sales-plan-register-container-bottom-quantity-box'>
-                <input />
-              </div>
-            </div>
             <div className='sales-plan-register-container-bottom-exchange-type'>
               <div className='sales-plan-register-container-bottom-exchange-type-text'>환종*</div>
               <div className='sales-plan-register-container-bottom-exchange-type-box'>
-                <div></div>
-                <div></div>
+                <div className='sales-plan-register-container-bottom-exchange-type-combo-box'>
+                  <select className='sales-plan-register-container-bottom-exchange-typer-combo-box-text' onChange={onExchangeRateTypeChangeHandler} name="exchange-rate-code" id="exchange-rate-code" >
+                    <option value="선택">선택</option>
+                    <option value="USD">USD</option>
+                    <option value="JPY">JPY</option>
+                    <option value="EUR">EUR</option>
+                    <option value="THB">THB</option>
+                  </select>
+                </div>
               </div>
             </div>
             <div className='sales-plan-register-container-bottom-exchange-rate'>
               <div className='sales-plan-register-container-bottom-exchange-rate-text'>환율*</div>
               <div className='sales-plan-register-container-bottom-exchange-rate-box'>
-                <input />
+                <div className='sales-plan-register-container-bottom-exchange-rate-container'>
+                  <div className='exchange-rate-display'>tempNumber</div>
+                </div>
               </div>
             </div>
             <div className='sales-plan-register-container-bottom-price'>
               <div className='sales-plan-register-container-bottom-price-text'>예상 단가*</div>
               <div className='sales-plan-register-container-bottom-price-box'>
-                <input />
+                <input className='sales-plan-register-price-input' />
               </div>
             </div>
             <div className='sales-plan-register-container-bottom-total-price'>
               <div className='sales-plan-register-container-bottom-total-price-text'>예상 금액*</div>
               <div className='sales-plan-register-container-bottom-total-price-box'>
-                <div></div>
+                <div className='sales-plan-register-container-bottom-total-price-container'>
+                  <div className='total-price-display'>tempTotalPrice</div>
+                </div>
               </div>
             </div>
           </div>
@@ -107,6 +248,7 @@ export default function SalesPlan() {
                 <div className='sales-plan-view-container-table-title-expect-total-price'>예상금액</div>
                 <div className='sales-plan-view-container-table-title-expect-korean-price'>예상원화금액</div>
               </div>
+              {/* 아래 바디 리스트 뷰를 만들어서 불러오기 */}
               <div className='sales-plan-view-container-table-body'>
                 <div className='sales-plan-view-container-table-body-no'>1</div>
                 <div className='sales-plan-view-container-table-body-product-code'>4000</div>
@@ -119,6 +261,7 @@ export default function SalesPlan() {
                 <div className='sales-plan-view-container-table-body-expect-total-price'>1,000.00$</div>
                 <div className='sales-plan-view-container-table-body-expect-korean-price'>1,330,000원</div>
               </div>
+              {/* 여기까지 */}
             </div>
           </div>
         </div>
