@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
+<<<<<<< HEAD
 import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useUserStore } from 'src/stores';
+=======
+import { useCompoanyInfoStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+>>>>>>> 0bc1c4dd8c6b9828acc1dbb77e2d8f6d5cc29498
 import { useCookies } from 'react-cookie';
 import { getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -8,11 +12,11 @@ import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
-import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
-import { GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
+import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
+import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
+import { GetDepartmentListResponseDto } from 'src/interfaces/response/system';
+import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
-
 export default function Header() {
      //!              state             //
      // description : 로그인 유저 정보 상태 //
@@ -31,11 +35,12 @@ export default function Header() {
 
 //! ============================================================================================
      // description: 부서조회 조건 정보 store //
-     const { departmentName, resetDepartmentRequest } = useDepartmentRequsetStore();
+     const { departmentName,  setDepartmentName, resetDepartmentRequest } = useDepartmentRequsetStore();
      // description: 조회된 부서 정보 store //
      const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
      // description: 부서 정보 상태
-     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate, departmentTelNumber, departmentFax } = useDepartmentInfoStore();
+     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate,
+           departmentTelNumber, departmentFax } = useDepartmentInfoStore();
 //! ============================================================================================
 
 
@@ -55,6 +60,7 @@ export default function Header() {
      const isCompanyInfo = pathname.includes(SYSTEM_COMPANY_INFO);
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
+     //                       event handler                           //
      // description: 전표조회 응답 처리 함수 //
      const getInvoiceListResponseHandler = (responsebody : GetInvoiceListResponseDto | ResponseDto ) => {
 
@@ -158,24 +164,50 @@ export default function Header() {
           getInvoiceListRequest(data).then(getInvoiceListResponseHandler)
      }
 //! ============================================================================================
+     // description: 선택 부서 코드 //
+     const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
+     // description: 부서 정보 불러오기 //
+     const {departmentList} = useDepartmentResponseStore();
 
      // description: 부서조회 이벤트 핸들러 //
      const onDepartmentListSearchButtonClickHandler = () => {
-          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler)
+          setSelectedDepartmentCode(null);
+          resetDepartmentList();
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }
+     
      // description: 부서저장 이벤트 핸들러 //
      const onDepartmentListSaveButtonClickHandler = async () => {
           const token = cookies.accessToken;
-          const data: PutDepartmentInfoRequestDto = {
-               departmentCodeInfo,
-               departmentCompanyCode: 0,
-               departmentNameInfo,
-               departmentStartDate,
-               departmentEndDate,
-               departmentTelNumber,
-               departmentFax
-          }
-          putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          if (selectedDepartmentCode) {
+               if (!departmentList) return;
+               const selectedDepartment = departmentList.find((item) => item.departmentCode === selectedDepartmentCode);
+               const data: PutDepartmentInfoRequestDto = {
+                    departmentCodeInfo: selectedDepartment?.departmentCode as number,
+                    departmentCompanyCode: 1,
+                    departmentNameInfo: selectedDepartment?.departmentName as string,
+                    departmentStartDate: selectedDepartment?.departmentStartDate as string,
+                    departmentEndDate: selectedDepartment?.departmentEndDate as string,
+                    departmentTelNumber: selectedDepartment?.departmentTelNumber as string,
+                    departmentFax: selectedDepartment?.departmentFax as string
+               }
+               if (!data.departmentEndDate) data.departmentEndDate = null;
+               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          } else {
+               const data: PutDepartmentInfoRequestDto = {
+                    departmentCodeInfo,
+                    departmentCompanyCode: 1,
+                    departmentNameInfo,
+                    departmentStartDate,
+                    departmentEndDate,
+                    departmentTelNumber,
+                    departmentFax
+               }
+               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          };
+          setSelectedDepartmentCode(null);
+          setDepartmentName('');
+
           
      }
 //! ============================================================================================

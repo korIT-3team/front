@@ -152,9 +152,15 @@ export const putDepartmentInfoRequest = async (data: PutDepartmentInfoRequestDto
     const responsebody : PutDepartmentInfoResponseDto = response.data;
     const { code } = responsebody;
     return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
   });
   return result;
 }
+
 // 부서정보 불러오기 메서드
 export const getDepartmentListRequest = async (departmentName: string) => {
   const result = await axios.get(GET_DEPARTMENT_LIST_URL(departmentName))
