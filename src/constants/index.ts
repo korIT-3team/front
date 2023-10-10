@@ -1,13 +1,6 @@
 // home path
 export const HOME_PATH = "/";
 
-// salse path
-export const SALES_PATH = "/sales";
-export const SALES_PLAN_PATH = "/sales/sales-plan";
-export const ORDER_INFO_PATH = "/sales/order-info";
-export const RELEASE_INFO_PATH = "/sales/release-info";
-export const SALES_INFO_PATH = "/sales/sales-info";
-
 // system path
 export const SYSTEM_PATH = "/system";
 export const SYSTEM_COMPANY_INFO = "/system/company-info";
@@ -28,6 +21,18 @@ export const HUMAN_APPLY_DAY_OFF = "/human/apply-day-off";
 export const HUMAN_APPLY_DAY_OFF_CANCEL = ( apply_day_off_code: number | string) => `/human/apply-day-off/${apply_day_off_code}`;
 export const HUMAN_WORK_TIME = "/human/work-time";
 export const HUMAN_WORK_TIME_DELETE = ( work_date: Date, employee_code: number | string) => `/human/work-time/${work_date}/${employee_code}`;
+
+
+// salse path
+export const SALES_PATH = "/sales";
+export const SALES_PLAN_PATH = "/sales/sales-plan";
+export const SALES_PLAN_DETAIL_PATH = (salesPlanCode: number | string) => `/sales/sales-plan/${salesPlanCode}`;
+export const ORDER_INFO_PATH = "/sales/order-info";
+export const ORDER_INFO_DETAIL_PATH = (orderCode: number | string) => `/sales/order-info/${orderCode}`;
+export const RELEASE_INFO_PATH = "/sales/release-info";
+export const RELEASE_INFO_DETAIL_PATH = (releaseCode: number | string) => `/sales/release-info/${releaseCode}`;
+export const SALES_INFO_PATH = "/sales/sales-info";
+export const SALES_INFO_DETAIL_PATH = (salesCode: number | string) => `/sales/sales-info/${salesCode}`;
 
 // aacounting path
 export const ACCOUNTING_PATH = "/accounting";
