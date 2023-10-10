@@ -86,30 +86,30 @@ export default function InvoiceList() {
                   </div>
                 </div>
                 <div className='invoice-right-top-search-employee'>
-                <div className='invoice-right-top-search-employee-text'>작성자</div>
-                  <div className='invoice-right-top-search-employee-box'>
-                    <div className='invoice-right-top-search-employee-box-code-box'>
-                      <input className='invoice-right-top-search-employee-box-code-box-text' type="text" onChange={onEmployeeCodeChangeHandler}/>
-                    </div>
-                    <div className='invoice-right-top-search-button'>검색</div>
-                    <div className='invoice-right-top-search-employee-box-name-box'>
-                      <div className='invoice-right-top-search-employee-box-name-box-text'>사원명</div>
-                    </div>
-                  </div>              
-                </div>
-                <div className='invoice-right-top-search-employment-status'>
-                  <div className='invoice-right-top-search-employment-status-text'>전표유형</div>
-                  <div className='invoice-right-top-search-employment-status-box'>
-                    <div className='invoice-right-top-search-employment-status-box-combo-box'>
-                      <select className='invoice-right-top-search-employment-status-box-combo-box-text' onChange={onInvoiceTypeChangeHandler} name="invoice-type" id="invoice-type">
-                        <option value="전체">전체</option>
-                        <option value="매입">매입</option>
-                        <option value="매출">매출</option>
-                        <option value="급/상여">급/상여</option>
-                    </select>
+                  <div className='invoice-right-top-search-employee-text'>작성자</div>
+                    <div className='invoice-right-top-search-employee-box'>
+                      <div className='invoice-right-top-search-employee-box-code-box'>
+                        <input className='invoice-right-top-search-employee-box-code-box-text' type="text" onChange={onEmployeeCodeChangeHandler}/>
+                      </div>
+                      <div className='invoice-right-top-search-button'>검색</div>
+                      <div className='invoice-right-top-search-employee-box-name-box'>
+                        <div className='invoice-right-top-search-employee-box-name-box-text'>사원명</div>
+                      </div>
+                    </div>              
+                  </div>
+                  <div className='invoice-right-top-search-employment-status'>
+                    <div className='invoice-right-top-search-employment-status-text'>전표유형</div>
+                    <div className='invoice-right-top-search-employment-status-box'>
+                      <div className='invoice-right-top-search-employment-status-box-combo-box'>
+                        <select className='invoice-right-top-search-employment-status-box-combo-box-text' onChange={onInvoiceTypeChangeHandler} name="invoice-type" id="invoice-type">
+                          <option value="전체">전체</option>
+                          <option value="매입">매입</option>
+                          <option value="매출">매출</option>
+                          <option value="급/상여">급/상여</option>
+                      </select>
+                      </div>
                     </div>
                   </div>
-                </div>
               </div>
               <div className='invoice-right-top-search-condition-bottom'>
                 <div className='invoice-right-top-search-dept'>
