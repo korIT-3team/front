@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 import './style.css'
 import SystemMenu from '../SystemMenu'
 import { useDepartmentRequsetStore, useDepartmentResponseStore, useUserStore } from 'src/stores'
@@ -21,10 +21,27 @@ export default function Employee() {
   const {departmentList, setDepartmentList, resetDepartmentList} = useDepartmentResponseStore();
   // const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
 
+  // description: 기존 부서 선택 상태 //
+  const [deptInfoList, setDeptInfoList] = useState<boolean>(false);
+  // description: 새로 부서 선책 상태 //
+  const [newDeptInfo, setNewDeptInfo] = useState<boolean>(true);
+
   //          function            //
   const navigator = useNavigate();
 
   //          event handler           //
+  // description: 부서정보 수정을 위한 클릭 //
+  const onDepartmentInfoListDoubleClickHandler = () => {
+    setDeptInfoList(true);
+    setNewDeptInfo(false);
+  }
+  
+  // description: 새로운 부서정보 입력을 위한 클릭 //
+  const onNewDepartmentInfoDoubleClickHandler = () => {
+    setDeptInfoList(false);
+    setNewDeptInfo(true);
+  }
+
   // description: 부서명 입력 //
   const onDepartmentNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setDepartmentName(event.target.value);
@@ -70,18 +87,27 @@ export default function Employee() {
                     <div className='department-info-middle-left-bottom-table-title-dept-fax'>부서fax</div>
                   </div>
                   <div className='department-info-middle-left-bottom-table-container'>
-                    { departmentList !== null && 
+                    { departmentList !== null &&
                       departmentList.map((item) => (
-                        <div className='department-info-middle-left-bottom-table-body'>
-                          <div className='department-info-middle-left-bottom-table-body-no'>{item.no}</div>
-                          <div className='department-info-middle-left-bottom-table-body-dept-code'>{item.departmentCode}</div>
-                          <input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text"/>
-                          <input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text"/>
-                          <input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text"/>
-                          <input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmentTelNumber} type="text"/>
-                          <input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text"/>
+                        <div className='department-info-middle-left-bottom-table-body' >
+                          <div className='department-info-middle-left-bottom-table-body-no' onDoubleClick={onDepartmentInfoListDoubleClickHandler}>{item.no}</div>
+                          <div className='department-info-middle-left-bottom-table-body-dept-code'  onDoubleClick={onDepartmentInfoListDoubleClickHandler}>{item.departmentCode}</div>
+                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text" />) : (<input className='department-info-middle-left-bottom-table-body-dept-name' defaultValue={item.departmentName} type="text" disabled />) }
+                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" />) : (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" disabled />) }
+                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text" />) : (<input className='department-info-middle-left-bottom-table-body-end-date' defaultValue={item.departmentEndDate} type="text" disabled />) }
+                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmentTelNumber} type="text" />) : (<input className='department-info-middle-left-bottom-table-body-dept-tel' defaultValue={item.departmentTelNumber} type="text" disabled />) }
+                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text" />) : (<input className='department-info-middle-left-bottom-table-body-dept-fax' defaultValue={item.departmentFax} type="text" disabled />) }
                         </div>
                       ))}
+                    <div className='department-info-middle-left-bottom-table-body-new' onDoubleClick={onNewDepartmentInfoDoubleClickHandler}>
+                      <div className='department-info-middle-left-bottom-table-body-new-no' ></div>
+                      <div className='department-info-middle-left-bottom-table-body-new-dept-code'></div>
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-name' type="text" />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-name' type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-start-date' type="text" />) : (<input className='department-info-middle-left-bottom-table-body-new-start-date' type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-end-date' type="text" />) : (<input className='department-info-middle-left-bottom-table-body-new-end-date' type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-tel' type="text" />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-tel' type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-fax' type="text" />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-fax' type="text" disabled />) }
+                    </div>
                   </div>
                 </div>
               </div>
