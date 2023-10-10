@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-<<<<<<< HEAD
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useUserStore } from 'src/stores';
-=======
-import { useCompoanyInfoStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
->>>>>>> 0bc1c4dd8c6b9828acc1dbb77e2d8f6d5cc29498
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -12,9 +8,9 @@ import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
-import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
-import { GetDepartmentListResponseDto } from 'src/interfaces/response/system';
+import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
+import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
+import { GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 export default function Header() {
