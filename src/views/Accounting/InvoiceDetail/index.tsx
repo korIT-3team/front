@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import AccountingMenu from '../AccountingMenu'
 import './style.css'
-import { /*useInvoiceDetailOrderInfoStore,*/ useInvoiceListStore } from 'src/stores'
+
+import { useInvoiceListStore } from 'src/stores'
 import { useParams } from 'react-router-dom'
 import { getInvoiceDetailIncentiveRequest, getInvoiceDetailOrderRequest, getInvoiceDetailSalesRequest } from 'src/apis'
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto'
@@ -10,8 +11,12 @@ import ResponseDto from 'src/interfaces/response/response.dto'
 
 export default function InvoiceDetail() {
   //!          state          //
+  // description : 전표 번호 //
   const{ invoiceCode } = useParams();
+  // description : 전표 유형 구분 상태(매입,매출,급상여) //
   const[ invoiceType, setInvoiceType ] = useState<string>('');
+  // description : 급/상여 구분 상태(급여,상여) //
+  const[ incentiveCategory, setIncentiveCategory ] = useState<string>('');
   // description : 전표 스토어 //
   const { invoiceList, resetInvoiceList } = useInvoiceListStore();       
   // description : 수주전표 상태 //
@@ -58,6 +63,8 @@ export default function InvoiceDetail() {
 
     const incentiveInvoice =  responsebody as GetInvoiceDetailIncentiveResponseDto;
     setIncentiveInvoice(incentiveInvoice);
+    // todo ? : 이 부분 또한 확장성 고민
+    setIncentiveCategory(incentiveInvoice.incentiveCategory == 1 ? '급여' : '상여');
   }
 
   //!         event Handler          //
@@ -79,11 +86,9 @@ export default function InvoiceDetail() {
       getInvoiceDetailOrderRequest(found.invoiceCode, data).then(getOrderInfoResponseHandler);
     }
     else if(found.invoiceType == 2){
-      // 매출 리퀘스트
       getInvoiceDetailSalesRequest(found.invoiceCode, data).then(getSalesInfoResponseHandler);
     }
     else if(found.invoiceType == 3){
-      // 급/상여 리퀘스트
       getInvoiceDetailIncentiveRequest(found.invoiceCode, data).then(getIncentiveResponseHandler);
     }
   }, [])
@@ -248,7 +253,7 @@ export default function InvoiceDetail() {
             <div className='invoice-detail-search-employee-text'>구분</div>
             <div className='invoice-detail-search-employee-box'>
               <div className='invoice-detail-search-employee-box-code-box'>
-                <input className='invoice-detail-search-employee-box-code-box-text' value={incentiveInvoice?.incentiveCategory} type="text" />
+                <input className='invoice-detail-search-employee-box-code-box-text' value={incentiveCategory} type="text" />
               </div>
             </div>              
           </div>

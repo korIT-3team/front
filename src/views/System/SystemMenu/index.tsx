@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import './style.css'
 import { SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO } from 'src/constants';
 import { useSelectedDepartmentStore } from 'src/stores';
+import path from 'path';
 
 export default function SystemMenu() {
 
@@ -16,6 +17,7 @@ export default function SystemMenu() {
   const navigator = useNavigate();
   const clickDeptInfoMenu = pathname.includes(SYSTEM_DEPT_INFO);
   const clickSystemEmployeeInfoMenu = pathname.includes(SYSTEM_EMPLOYEE_INFO);
+  const clickSystemCompanyInfoMenu = pathname.includes(SYSTEM_COMPANY_INFO);
 
   // event handler //
   const onCompanyInfoButtonClickHandler = () => {
@@ -48,7 +50,7 @@ export default function SystemMenu() {
           </div>
           <div className='system-menu-left-detail-right'>
             <div className='system-menu-left-detail-right-text'>
-              <div className='company-info-registration' onClick={onCompanyInfoButtonClickHandler}>회사등록</div>
+              <div className={clickSystemCompanyInfoMenu? 'company-info-registration-active' : 'company-info-registration' } onClick={onCompanyInfoButtonClickHandler}>회사등록</div>
               <div className= {clickDeptInfoMenu ? 'dept-info-registration-active' : 'dept-info-registration'} onClick={onDeptInfoButtonClickHandler}>부서등록</div>
               <div className={clickSystemEmployeeInfoMenu ? 'employee-info-registration-active' : 'employee-info-registration'} onClick={onEmployeeInfoButtonClickHandler}>사원등록</div>
               <div className='customer-info-registration' onClick={onCustomerInfoButtonClickHandler}>거래처등록</div>

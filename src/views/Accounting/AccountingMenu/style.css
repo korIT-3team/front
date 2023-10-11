@@ -60,6 +60,18 @@
   font-weight: 400;
   line-height: normal;
 }
+.invoice-check-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
 
 .invoice-check:hover {
   cursor: pointer;
@@ -75,6 +87,18 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.inoutcome-check-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
 }
 
 .inoutcome-check:hover {
