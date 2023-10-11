@@ -2,37 +2,55 @@ import React, { ChangeEvent, useState, useEffect } from 'react'
 
 import SystemMenu from '../SystemMenu'
 
-import { useNavigate } from 'react-router-dom';
-import { HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { CODE, HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
 
 import './style.css'
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
-import { useCustomerInfoStore, useCustomerRequestStore, useUserStore } from 'src/stores';
+import { useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
-import { getCustomerInfoRequest, putCustomerInfoRequest } from 'src/apis';
+import { getCustomerListRequest, putCustomerInfoRequest } from 'src/apis';
+import { GetCustomerListResponseDto } from 'src/interfaces/response/system';
+import ResponseDto from 'src/interfaces/response/response.dto';
 
 export default function CustomerInfo() {
 
   // state //
+  // description: path 상태 //
+  const {pathname} = useLocation();
   // description: 로그인 사용자의 정보 상태
   const { user, setUser } = useUserStore();
   // description: 쿠키 상태 //
   const [cookies, setCookie] = useCookies ();
-  // description: 거래처 정보를 저장할 상태 //
-  const { customerName, businessNumber, postCode, customerAddress, customerAddressDetail, customerTelNumber, 
-    setCustomerName, setBusinessNumber, setPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber } = useCustomerInfoStore();
-
+  // description: 거래처 정보 상태 //
+  const {customerCodeInfo, customerNameInfo, customerBusinessNumber, customerPostCode, customerAddress, customerAddressDetail, customerTelNumber, 
+    setCustomerCodeInfo, setCustomerNameInfo, setCustomerBusinessNumber, setCustomerPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber} = useCustomerInfoStore();
+  // description: 조회 조건 //
+  const {setCustomerCode, setCustomerName, resetCustomerRequest} = useCustomerRequestStore();
+  // description: 거래처 정보 불러오기 //
+  const {customerList, setCustomerList, resetCustomerList} = useCustomerResponseStore();
   // description: 다음 포스트 (우편번호검색) 팝업 상태 //
   const open = useDaumPostcodePopup();
 
   // function //
   const navigator = useNavigate();
 
+  // description: 거래처 정보 불러오기 응답 함수 //
+  const getCustomerInfoResponseHandler = (responsebody: GetCustomerListResponseDto | ResponseDto) => {
+    const { code } = responsebody;
 
-  // description : 거래처 정보 등록 응답 함수 //
-  const putCustomerInfoResponseHandler = (code : string) => {
-    
+    if( code === 'NE') alert('존재하지않는 회원입니다.');
+    if( code === 'DE') alert('데이터베이스 에러');
+    if( code === 'NP') alert('권한이 없습니다.');
+    if( code !== 'SU') return;
+
+    const { customerList } = responsebody as GetCustomerListResponseDto;
+    setCustomerList(customerList);
+  }
+  // description: 거래처 정보 등록 응답 함수 //
+  const putCustomerInfoResponseHandler = (code: string) => {
+
     if( code === 'NE') alert('존재하지않는 회원입니다.');
     if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
     if( code === 'DE') alert('데이터베이스 에러');
@@ -40,36 +58,31 @@ export default function CustomerInfo() {
     if( code !== 'SU') return;
 
     if(!user) return;
-    alert('거래처 등록 완료');
+    alert("거래처 정보 등록 완료!");
     navigator(HOME_PATH);
   }
 
   // event handler //
-  // description: 저장 버튼 클릭 이벤트 //
-  const onSaveButtonClickHandler = async () => {
-    const token = cookies.accessToken;
-
-    const data : PutCustomerInfoRequestDto = {
-      customerName: customerName,
-      businessNumber: businessNumber,
-      postcode: postCode,
-      customerAddress: customerAddress,
-      customerAddressDetail: customerAddressDetail,
-      customerTelNumber: customerTelNumber
-    };
-    putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
-  }
   // description: 취소 버튼 클릭 이벤트 //
   const onCancelButtonClickHandler = () => {
     navigator(HOME_PATH);
   }
-  // description: 거래처 코드 검색 버튼 클릭 이벤트 //
-  const onCustomerCodeSearchButtonClickHandler = () => {
+  // description: 거래처 코드 입력 이벤트 //
+  const onCustomerCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[0-9]*$/;
+    const value = event.target.value;
 
+    const isNumber = reg.test(value);
+    if (isNumber) setCustomerCode(Number(value));
   }
-  // description: 거래처 명 검색 버튼 클릭 이벤트 //
-  const onCustomerNameSearchButtonClickHandler = () => {
 
+  // description: 거래처 명 입력 이벤트 //
+  const onCustomerNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]*$/ // 알파벳, 숫자, 한글만 허용하는 정규식, 특수문자 제외 
+    const value = event.target.value;
+
+    const isValid = reg.test(value);
+    if (isValid) setCustomerName(value);
   }
 
   // description: 우편번호 조회버튼클릭 이벤트 //
@@ -80,15 +93,15 @@ export default function CustomerInfo() {
     const address = data.address;
     const zonecode = data.zonecode;
     setCustomerAddress(address);
-    setPostCode(zonecode);
+    setCustomerPostCode(zonecode);
   };
   // description: 거래처 이름 변경 이벤트 //
-  const onCustomerNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setCustomerName(event.target.value);
+  const onCustomerNameInfoChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setCustomerNameInfo(event.target.value);
   }
   // description: 사업자등록번호 변경 이벤트 //
   const onBusinessNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setBusinessNumber(event.target.value);
+    setCustomerBusinessNumber(event.target.value);
   }
   // description: 주소 변경 이벤트 //
   const onCustomerAddressChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -102,6 +115,23 @@ export default function CustomerInfo() {
   const onCustomerTelNumberChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setCustomerTelNumber(event.target.value);
   };
+
+  // description: 저장 버튼 클릭 이벤트 //
+  const onCustomerSaveButtonClickHandler = async () => {
+  
+    const token = cookies.accessToken;
+
+    const data: PutCustomerInfoRequestDto = {
+      customerNameInfo: customerNameInfo,
+      customerBusinessNumber: customerBusinessNumber,
+      customerPostCode: customerPostCode,
+      customerAddress: customerAddress,
+      customerAddressDetail: customerAddressDetail,
+      customerTelNumber: customerTelNumber,
+    };
+
+    putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler)
+  }
 
   // component //
 
@@ -124,8 +154,8 @@ export default function CustomerInfo() {
                 <div className='customer-info-search-code-text'>거래처 코드 *</div>
               </div>
               <div className='customer-info-search-code-container'>
-                <input className='code-search-input-box' placeholder='거래처 코드 입력'/>
-                <div className='customer-code-search-button' onClick={onCustomerCodeSearchButtonClickHandler} >검색</div>
+                <input className='code-search-input-box' placeholder='거래처 코드 입력' type='text' onChange={onCustomerCodeChangeHandler} />
+                <div className='customer-code-search-button' >검색</div>
                 <div className='code-search-input-box-display'>
                   <div className='code-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -136,8 +166,8 @@ export default function CustomerInfo() {
                 <div className='customer-info-search-name-text'>거래처 명 *</div>
               </div>
               <div className='customer-info-search-name-container'>
-                <input className='name-search-input-box' placeholder='거래처 명 입력' />
-                <div className='customer-name-search-button' onClick={onCustomerNameSearchButtonClickHandler} >검색</div>
+                <input className='name-search-input-box' placeholder='거래처 명 입력' type='text' onChange={onCustomerNameChangeHandler} />
+                <div className='customer-name-search-button' >검색</div>
                 <div className='name-search-input-box-display'>
                   <div className='name-search-input-box-display-text'>검색출력</div>
                 </div>
@@ -177,16 +207,16 @@ export default function CustomerInfo() {
               <div className='customer-info-middle-right-bottom-container'>
                 <div className='customer-name'>
                   <div className='customer-name-text'>거래처 명</div>
-                  <input className='customer-name-input' onChange={onCustomerNameChangeHandler} value={customerName} />
+                  <input className='customer-name-input' onChange={onCustomerNameInfoChangeHandler} value={customerNameInfo} />
                 </div>
                 <div className='customer-business-number'>
                   <div className='customer-business-number-text'>사업자 등록번호</div>
-                  <input className='customer-business-number-input' onChange={onBusinessNumberChangeHandler} value={businessNumber} />
+                  <input className='customer-business-number-input' onChange={onBusinessNumberChangeHandler} value={customerBusinessNumber} />
                 </div>
                 <div className='customer-postcode'>
                   <div className='customer-postcode-text'>우편번호</div>
                   <div className='customer-postcode-container'>
-                    <input className='customer-postcode-input' type="text" defaultValue={postCode} />
+                    <input className='customer-postcode-input' type="text" defaultValue={customerPostCode} />
                     <div className="customer-postcode-icon" onClick={onPostCodeIconClickHandler}></div>
                   </div>
                 </div>
@@ -207,8 +237,8 @@ export default function CustomerInfo() {
           </div>
         </div>
         <div className='customer-info-bottom'>
-          <div className='customer-info-bottom-button-save'>
-            <div className='customer-info-bottom-button-save-text' onClick={onSaveButtonClickHandler}>수정 및 저장</div>
+          <div className='customer-info-bottom-button-save' onClick={onCustomerSaveButtonClickHandler}>
+            <div className='customer-info-bottom-button-save-text' >수정 및 저장</div>
           </div>
           <div className='customer-info-bottom-button-cancel'>
             <div className='customer-info-bottom-button-cancel-text' onClick={onCancelButtonClickHandler}>취소</div>

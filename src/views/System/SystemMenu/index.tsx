@@ -3,10 +3,15 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import './style.css'
 import { SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO } from 'src/constants';
+import { useSelectedDepartmentStore } from 'src/stores';
 
 export default function SystemMenu() {
 
   const { pathname } = useLocation();
+  // statet //
+  // description: 선택 부서 코드 //
+  const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
+
   // function //
   const navigator = useNavigate();
   const clickDeptInfoMenu = pathname.includes(SYSTEM_DEPT_INFO);
@@ -17,6 +22,7 @@ export default function SystemMenu() {
     navigator(SYSTEM_COMPANY_INFO);
   }
   const onDeptInfoButtonClickHandler = () => {
+    setSelectedDepartmentCode(null);
     navigator(SYSTEM_DEPT_INFO);
   }
   const onEmployeeInfoButtonClickHandler = () => {

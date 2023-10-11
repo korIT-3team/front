@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
+import { getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
-import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
-import { GetDepartmentListResponseDto } from 'src/interfaces/response/system';
-
+import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
+import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
+import { GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
+import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
+import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 export default function Header() {
      //!              state             //
      // description : 로그인 유저 정보 상태 //
@@ -30,11 +31,22 @@ export default function Header() {
 
 //! ============================================================================================
      // description: 부서조회 조건 정보 store //
-     const { departmentName, resetDepartmentRequest } = useDepartmentRequsetStore();
+     const { departmentName,  setDepartmentName, resetDepartmentRequest } = useDepartmentRequsetStore();
      // description: 조회된 부서 정보 store //
      const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
      // description: 부서 정보 상태
-     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate, departmentTelNumber, departmentFax } = useDepartmentInfoStore();
+     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate,
+           departmentTelNumber, departmentFax } = useDepartmentInfoStore();
+//! ============================================================================================
+
+
+//! ============================================================================================
+     // description: 거래처 조회 조건 정보 store //
+     const { customerCode, customerName, resetCustomerRequest } = useCustomerRequestStore();
+     // description: 조회된 거래처 정보 store //
+     const { setCustomerList, resetCustomerList } = useCustomerResponseStore();
+     // description: 거래처 정보 상태
+     const { customerNameInfo, customerBusinessNumber, customerPostCode, customerAddress, customerAddressDetail, customerTelNumber } = useCustomerInfoStore();
 //! ============================================================================================
 
 
@@ -43,6 +55,8 @@ export default function Header() {
      const isInvoiceList = pathname.includes(ACCOUNTING_INVOICE_PATH);
      const isCompanyInfo = pathname.includes(SYSTEM_COMPANY_INFO);
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
+     const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
+     //                       event handler                           //
      // description: 전표조회 응답 처리 함수 //
      const getInvoiceListResponseHandler = (responsebody : GetInvoiceListResponseDto | ResponseDto ) => {
 
@@ -102,6 +116,38 @@ export default function Header() {
           navigator(HOME_PATH);
      }
 
+//! ============================================================================================
+
+     // description: 거래처 정보 조회 응답 함수 //
+     const getCustomerListResponseHandler = (responsebody: GetCustomerListResponseDto | ResponseDto ) => {
+
+          const {code} = responsebody;
+          if( code === 'NE') alert('존재하지않는 회원입니다.');
+          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'DE') alert('데이터베이스 에러');
+          if( code === 'NP') alert('권한이 없습니다.');
+          if( code !== 'SU') return;
+
+          const { customerList } = responsebody as GetCustomerListResponseDto;
+          setCustomerList(customerList);
+     }
+     // description: 거래처 정보 등록 응답 함수 //
+     const putCustomerInfoResponseHandler = (code: string) => {
+               
+          if( code === 'NE') alert('존재하지않는 회원입니다.');
+          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'DE') alert('데이터베이스 에러');
+          if( code === 'NP') alert('권한이 없습니다.');
+          if( code !== 'SU') return;
+     
+          if(!user) return;
+          alert('거래처 정보등록 완료');
+          navigator(SYSTEM_CUSTOMER_INFO);
+     }   
+
+
+//! ============================================================================================
+
      //!             event handler              //
      // description: 전표조회 이벤트 핸들러 //
      const onInvoiceListSearchButtonClickHandler = () => {
@@ -115,24 +161,50 @@ export default function Header() {
           getInvoiceListRequest(data).then(getInvoiceListResponseHandler)
      }
 //! ============================================================================================
+     // description: 선택 부서 코드 //
+     const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
+     // description: 부서 정보 불러오기 //
+     const {departmentList} = useDepartmentResponseStore();
 
      // description: 부서조회 이벤트 핸들러 //
      const onDepartmentListSearchButtonClickHandler = () => {
-          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler)
+          setSelectedDepartmentCode(null);
+          resetDepartmentList();
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }
+     
      // description: 부서저장 이벤트 핸들러 //
      const onDepartmentListSaveButtonClickHandler = async () => {
           const token = cookies.accessToken;
-          const data: PutDepartmentInfoRequestDto = {
-               departmentCodeInfo,
-               departmentCompanyCode: 0,
-               departmentNameInfo,
-               departmentStartDate,
-               departmentEndDate,
-               departmentTelNumber,
-               departmentFax
-          }
-          putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          if (selectedDepartmentCode) {
+               if (!departmentList) return;
+               const selectedDepartment = departmentList.find((item) => item.departmentCode === selectedDepartmentCode);
+               const data: PutDepartmentInfoRequestDto = {
+                    departmentCodeInfo: selectedDepartment?.departmentCode as number,
+                    departmentCompanyCode: 1,
+                    departmentNameInfo: selectedDepartment?.departmentName as string,
+                    departmentStartDate: selectedDepartment?.departmentStartDate as string,
+                    departmentEndDate: selectedDepartment?.departmentEndDate as string,
+                    departmentTelNumber: selectedDepartment?.departmentTelNumber as string,
+                    departmentFax: selectedDepartment?.departmentFax as string
+               }
+               if (!data.departmentEndDate) data.departmentEndDate = null;
+               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          } else {
+               const data: PutDepartmentInfoRequestDto = {
+                    departmentCodeInfo,
+                    departmentCompanyCode: 1,
+                    departmentNameInfo,
+                    departmentStartDate,
+                    departmentEndDate,
+                    departmentTelNumber,
+                    departmentFax
+               }
+               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          };
+          setSelectedDepartmentCode(null);
+          setDepartmentName('');
+
           
      }
 //! ============================================================================================
@@ -163,6 +235,28 @@ export default function Header() {
           putCompanyInfoRequest(data, token).then(putCompanyInfoResponseHandler);
      }
 
+//! ============================================================================================
+
+     // description: 거래처 조회 이벤트 핸들러 //
+     const onCustomerListSearchButtonClickHandler = () => {
+          getCustomerListRequest(customerCode).then(getCustomerListResponseHandler)
+     }
+
+     // description: 거래처 저장 이벤트 핸들러 //
+     const onCustomerListSaveButtonClickHandler = async () => {
+          const token = cookies.accessToken;
+          const data: PutCustomerInfoRequestDto = {
+               customerNameInfo,
+               customerBusinessNumber,
+               customerPostCode,
+               customerAddress,
+               customerAddressDetail,
+               customerTelNumber
+          }
+          putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
+     }
+//! ============================================================================================
+
 
      //!                    effect                   //
      
@@ -188,14 +282,16 @@ export default function Header() {
                     {/* 모든 버튼마다 PATH 별 조건을 달아줘야 하는가? */}
                     <div className="header-function-search" onClick={
                               isInvoiceList ? onInvoiceListSearchButtonClickHandler : (
-                              isDepartmentList ? onDepartmentListSearchButtonClickHandler : () => {}
+                              isDepartmentList ? onDepartmentListSearchButtonClickHandler : 
+                              isCustomerList ? onCustomerListSearchButtonClickHandler : () => {}
                               )}>
                          <div className="header-function-search-icon"></div>
                          <div className="header-function-search-text">조회</div>
                     </div>
                     <div className="header-function-save" onClick={
                               isCompanyInfo ? onCompanyInfoSaveButtonClickHandler : (
-                              isDepartmentList ? onDepartmentListSaveButtonClickHandler : () => {} 
+                              isDepartmentList ? onDepartmentListSaveButtonClickHandler :
+                              isCustomerList ? onCustomerListSaveButtonClickHandler : () => {} 
                               )}>
                          <div className="header-function-save-icon"></div>
                          <div className="header-function-save-text">저장</div>

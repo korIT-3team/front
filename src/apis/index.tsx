@@ -3,12 +3,13 @@ import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
+import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
 import { GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetCustomerInfoRepsonseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
@@ -36,11 +37,9 @@ const GET_DEPARTMENT_LIST_URL = (departmentName: string) => `${API_DOMAIN}/syste
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
-// 거래처 등록
+// 거래처
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
-
-// 거래처 불러오기
-const GET_CUSTOMER_INFO_URL = (customerCode: number) => `${API_DOMAIN}/system/customer-info/${customerCode}`;
+const GET_CUSTOMER_LIST_URL = (customerCode: number | null) => `${API_DOMAIN}/system/customer-info/${customerCode}`;
 
 // 품목 등록
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
@@ -198,9 +197,15 @@ export const putDepartmentInfoRequest = async (data: PutDepartmentInfoRequestDto
     const responsebody : PutDepartmentInfoResponseDto = response.data;
     const { code } = responsebody;
     return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
   });
   return result;
 }
+
 // 부서정보 불러오기 메서드
 export const getDepartmentListRequest = async (departmentName: string) => {
   const result = await axios.get(GET_DEPARTMENT_LIST_URL(departmentName))
@@ -216,6 +221,7 @@ export const getDepartmentListRequest = async (departmentName: string) => {
 }
 
 // ! 거래처
+
 // 거래처정보등록 메서드
 export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, token : string) => {
   const result = await axios.put(PUT_CUSTOMER_INFO_URL(), data, { headers : { 'Authorization' : `Bearer ${token}` } })
@@ -232,11 +238,11 @@ export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, to
   return result;
 }
 
-// 거래처 정보 불러오기 메서드
-export const getCustomerInfoRequest = async (customerCode: number) => {
-  const result = await axios.get(GET_CUSTOMER_INFO_URL(customerCode))
+// 거래처 리스트 불러오기 메서드
+export const getCustomerListRequest = async (customerCode: number | null) => {
+  const result = await axios.get(GET_CUSTOMER_LIST_URL(customerCode))
   .then((response) => {
-    const responsebody : GetCustomerInfoRepsonseDto = response.data;
+    const responsebody : GetCustomerListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
@@ -245,3 +251,4 @@ export const getCustomerInfoRequest = async (customerCode: number) => {
   });
   return result;
 }
+
