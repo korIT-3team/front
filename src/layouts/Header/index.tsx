@@ -65,6 +65,7 @@ export default function Header() {
           if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
           if( code === 'DE') alert('데이터베이스 에러');
           if( code === 'NP') alert('권한이 없습니다.');
+          if( code === 'NI') alert('존재하지않는 전표입니다.');
           if( code !== 'SU') return;
       
           const { invoiceList } = responsebody as GetInvoiceListResponseDto;

@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
+import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
-import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+import { GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
@@ -26,6 +27,9 @@ const GET_COMPANY_INFO_URL = () => `${API_DOMAIN}/system/company-info`;
 // 회계관리
 const GET_INVOICE_LIST_URL = () => `${API_DOMAIN}/accounting/invoice`;
 const GET_INVOICE_DETAIL_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}`;
+const GET_INVOICE_DETAIL_ORDER_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}/order-info`;
+const GET_INVOICE_DETAIL_SALES_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}/sales-info`;
+const GET_INVOICE_DETAIL_INCENTIVE_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}/incentive`;
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -143,6 +147,47 @@ export const getInvoiceDetailRequest = async (invoiceCode : number) => {
   });
   return result;
 }
+
+// 전표(수주) 상세 데이터 불러오기 메서드
+export const getInvoiceDetailOrderRequest = async (invoiceCode : number, data : InvoiceDetailRequestDto) => {
+  const result = await axios.post(GET_INVOICE_DETAIL_ORDER_URL(invoiceCode), data)
+  .then((response) => {
+    const responsebody : GetInvoiceDetailOrderResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 전표(매출) 상세 데이터 불러오기 메서드
+export const getInvoiceDetailSalesRequest = async (invoiceCode : number, data : InvoiceDetailRequestDto) => {
+  const result = await axios.post(GET_INVOICE_DETAIL_SALES_URL(invoiceCode), data)
+  .then((response) => {
+    const responsebody : GetInvoiceDetailSalesResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 전표(급/상여) 상세 데이터 불러오기 메서드
+export const getInvoiceDetailIncentiveRequest = async (invoiceCode : number, data : InvoiceDetailRequestDto) => {
+  const result = await axios.post(GET_INVOICE_DETAIL_INCENTIVE_URL(invoiceCode), data)
+  .then((response) => {
+    const responsebody : GetInvoiceDetailIncentiveResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
 
 // ! 부서
 // 부서정보등록 메서드
