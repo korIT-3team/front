@@ -43,6 +43,7 @@ export default function Main() {
     const expires = new Date(now + expiredTime * 1000);
 
     setCookie('accessToken', token, { expires, path: HOME_PATH });
+    console.log(token);
     getSignInUserRequest(token).then(getSignInUserResponseHandler);
     navigator(HOME_PATH);
   }

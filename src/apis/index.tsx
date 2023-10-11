@@ -10,6 +10,7 @@ import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-in
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
+import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
@@ -33,6 +34,7 @@ const GET_INVOICE_DETAIL_INCENTIVE_URL = (invoiceCode: number) => `${API_DOMAIN}
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
+const DELETE_DEPARTMENT_INFO_URL = (deleteDepartmentCode: number) => `${API_DOMAIN}/system/dept-info/${deleteDepartmentCode}`;
 const GET_DEPARTMENT_LIST_URL = (departmentName: string) => `${API_DOMAIN}/system/dept-info/${departmentName}`;
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
@@ -202,6 +204,20 @@ export const putDepartmentInfoRequest = async (data: PutDepartmentInfoRequestDto
     const responsebody : ResponseDto = error.response.data;
     const { code } = responsebody;
     return code;
+  });
+  return result;
+}
+
+// 부서정보삭제 메서드
+export const deleteDepartmentInfoRequest = async (deleteDepartmentCode: number, token : string) => {
+  const result = await axios.delete(DELETE_DEPARTMENT_INFO_URL(deleteDepartmentCode), {headers: { 'Authorization' : `Bearer ${token}`}})
+  .then((response) => {
+    const responsebody : DeleteDepartmentInfoResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
   });
   return result;
 }
