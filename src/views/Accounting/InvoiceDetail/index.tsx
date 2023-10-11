@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import AccountingMenu from '../AccountingMenu'
 import './style.css'
-import { useInvoiceDetailOrderInfoStore, useInvoiceListStore } from 'src/stores'
+import { /*useInvoiceDetailOrderInfoStore,*/ useInvoiceListStore } from 'src/stores'
 import { useParams } from 'react-router-dom'
 import { getInvoiceDetailIncentiveRequest, getInvoiceDetailOrderRequest, getInvoiceDetailSalesRequest } from 'src/apis'
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto'
