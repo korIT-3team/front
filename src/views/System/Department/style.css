@@ -290,8 +290,7 @@
 }
 
 .department-info-middle-left-bottom-table-body-dept-name {
-  /* width: 200px; */
-  width: 196px;
+  width: 200px;
   height: 31px;
 
   display: flex;
