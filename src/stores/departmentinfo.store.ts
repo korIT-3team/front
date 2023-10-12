@@ -16,6 +16,8 @@ interface DepartmentInfoStore {
   setDepartmentEndDate: (departmentEndDate: string) => void;
   setDepartmentTelNumber: (departmentTelNumber: string) => void;
   setDepartmentFax: (departmentFax: string) => void;
+
+  resetDepartmentInfo: () => void;
 }
 
 const useStore = create<DepartmentInfoStore>((set) => ({
@@ -28,13 +30,13 @@ const useStore = create<DepartmentInfoStore>((set) => ({
   departmentFax:  "",
 
   setDepartmentCodeInfo: (departmentCodeInfo) => set((state) => ({ ...state, departmentCodeInfo })),
-  setDepartmentCompanyCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
+  setDepartmentCompanyCode: (departmentCompanyCode) => set((state) => ({ ...state, departmentCompanyCode })),
   setDepartmentNameInfo: (departmentNameInfo) => set((state) => ({ ...state, departmentNameInfo })),
   setDepartmentStartDate: (departmentStartDate) => set((state) => ({ ...state, departmentStartDate })),
   setDepartmentEndDate: (departmentEndDate) => set((state) => ({ ...state, departmentEndDate })),
   setDepartmentTelNumber: (departmentTelNumber) => set((state) => ({ ...state, departmentTelNumber })),
-  setDepartmentFax: (departmentFax) => set((state) => ({ ...state, departmentFax }))
+  setDepartmentFax: (departmentFax) => set((state) => ({ ...state, departmentFax })),
 
+  resetDepartmentInfo: () => set((state) => ({ ...state, departmentCodeInfo: 0, departmentCompanyCode: 1, departmentNameInfo: '', departmentStartDate: '', departmentEndDate: '', departmentTelNumber: '', departmentFax: '' })),
 }));
-
 export default useStore;

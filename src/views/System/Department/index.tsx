@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import './style.css'
 import SystemMenu from '../SystemMenu'
-import { useDeleteDepartmentInfoStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useSelectedDepartmentStore, useUserStore } from 'src/stores'
+import { useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useSelectedDepartmentStore, useUserStore } from 'src/stores'
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GetDepartmentInfoResponseDto } from 'src/interfaces/response/system';
@@ -18,10 +18,9 @@ export default function Employee() {
   const { user, setUser } = useUserStore();
   // description: 부서조회 조건 //
   const {setDepartmentName, resetDepartmentRequest} = useDepartmentRequestStore();
-  // description: 삭제할 부서 정보 //
-  const {setDeleteDepartmentCode, resetDeleteDepartmentRequest} = useDeleteDepartmentInfoStore();
   // description: 부서 정보 상태 //
   const {setDepartmentNameInfo, setDepartmentStartDate, setDepartmentEndDate, setDepartmentTelNumber, setDepartmentFax} = useDepartmentInfoStore();
+  const {departmentNameInfo, departmentStartDate, departmentEndDate, departmentTelNumber, departmentFax} = useDepartmentInfoStore();
   // description: 부서List 정보 불러오기 //
   const {departmentList, setDepartmentList, resetDepartmentList} = useDepartmentResponseStore();
   // const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
@@ -54,22 +53,7 @@ export default function Employee() {
     setDepartmentName(event.target.value);
   }
 
-  // description: 삭제할 부서 클릭 //
-  const onDeleteDepartmentClickHandler = () => {
-    // setDeleteDepartmentCode();
-  }
-
   //!       존재하는 부서       //
-  // description: 부서명 변경 이벤트 처리 //
-  const onExistDepartmentNameChangeEvent = (event: ChangeEvent<HTMLInputElement>, departmentInfo: DepartmentInfo) => {
-
-    if (!departmentList) return;
-    const value = event.target.value;
-    const newDepartmentInfo: DepartmentInfo = { ...departmentInfo, departmentName: value };
-    const newDepartmentList: DepartmentInfo[] = departmentList.map(item => item.departmentCode === newDepartmentInfo.departmentCode ? newDepartmentInfo : item);
-    setDepartmentList(newDepartmentList);
-
-  }
   // description: 부서 시작일 변경 이벤트 처리 //
   const onExistDepartmentStartDateChangeEvent = (event: ChangeEvent<HTMLInputElement>, departmentInfo: DepartmentInfo) => {
     
@@ -183,12 +167,11 @@ export default function Employee() {
                     <div className='department-info-middle-left-bottom-table-body-new' onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}>
                       <div className='department-info-middle-left-bottom-table-body-new-no' ></div>
                       <div className='department-info-middle-left-bottom-table-body-new-dept-code'></div>
-                        <input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" onChange={onDepartmentNameChangeEvent} />
-                        {/* { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" onChange={onDepartmentNameChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" disabled />) } */}
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" onChange={onDepartmentStartDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" onChange={onDepartmentEndDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" onChange={onDepartmentTelNumberChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" onChange={onDepartmentFaxChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" disabled />) }
+                        <input className='department-info-middle-left-bottom-table-body-new-dept-name' value={departmentNameInfo}  type="text" onChange={onDepartmentNameChangeEvent} />
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-start-date' value={departmentStartDate}  type="text" onChange={onDepartmentStartDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-end-date'   value={departmentEndDate}    type="text" onChange={onDepartmentEndDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'   value={departmentTelNumber}  type="text" onChange={onDepartmentTelNumberChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'   value={departmentFax}        type="text" onChange={onDepartmentFaxChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" disabled />) }
                     </div>
                   </div>
                 </div>

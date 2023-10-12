@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useDeleteDepartmentInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -66,16 +66,13 @@ export default function Header() {
      // description: 부서정보
      
      //   state     //
-     // description: 삭제 할 부서코드 store //
-     // const { deleteDepartmentCode } = useParams();
-     const { deleteDepartmentCode, setDeleteDepartmentCode, resetDeleteDepartmentRequest} = useDeleteDepartmentInfoStore();
      // description: 부서조회 조건 정보 store //
      const { departmentName,  setDepartmentName, resetDepartmentRequest } = useDepartmentRequestStore();
      // description: 조회된 부서 정보 store //
      const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
      // description: 부서 정보 상태
      const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate,
-           departmentTelNumber, departmentFax } = useDepartmentInfoStore();
+           departmentTelNumber, departmentFax, resetDepartmentInfo } = useDepartmentInfoStore();
      // description: 선택 부서 코드 //
      const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
 
@@ -91,6 +88,15 @@ export default function Header() {
           
           if(!user) return;
           alert('부서정보등록 완료');
+          
+          // 전체 조회
+          setSelectedDepartmentCode(null);
+          setDepartmentName('');
+          resetDepartmentRequest();
+          resetDepartmentInfo();
+          resetDepartmentList();          
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
+
           navigator(SYSTEM_DEPT_INFO);
      }
      // description: 부서정보 삭제 응답 함수 //
@@ -150,24 +156,22 @@ export default function Header() {
                     departmentTelNumber,
                     departmentFax
                }
-               console.log(data.departmentCodeInfo);
                if (!data.departmentEndDate) data.departmentEndDate = null;
                putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
           };
-          setSelectedDepartmentCode(null);
-          setDepartmentName('');
-
-          
      }
      // description: 부서정보삭제 이벤트 핸들러 //
      const onDeleteDepartmentInfoButtonClickHandler = () => {
-          if (!deleteDepartmentCode) return;
+          if (!selectedDepartmentCode) return;
           const token = cookies.accessToken;
-          deleteDepartmentInfoRequest(deleteDepartmentCode, token).then(deleteDepartmentInfoResponseHandler);
+          deleteDepartmentInfoRequest(selectedDepartmentCode, token).then(deleteDepartmentInfoResponseHandler);
+          resetDepartmentInfo();
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }
      // description: 부서조회 이벤트 핸들러 //
      const onDepartmentListSearchButtonClickHandler = () => {
           setSelectedDepartmentCode(null);
+          resetDepartmentInfo();
           resetDepartmentList();
           getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }          
