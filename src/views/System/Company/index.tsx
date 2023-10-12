@@ -12,7 +12,6 @@ import { GetompanyInfoResponseDto } from "src/interfaces/response/system";
 import ResponseDto from "src/interfaces/response/response.dto";
 import DefaultLogo from 'src/assets/logo_upload_image.PNG';
 
-// todo : 스토어로 다 빼서 세팅할지 / get에 낫널들 | 널 꼭 필요한지
 export default function Company() {
   //!         state          //
   // description: 로그인 사용자의 정보 상태
@@ -82,7 +81,6 @@ export default function Company() {
   //!         event Handler          //
   // description: 로고업로드 클릭 핸들러 //
   const onLogoClickHandler = () => {
-    // todo : 권한문제는 완성되면 풀기 if (user?.departmentCode !== CODE.SYSTEM) return;
     if (!fileInputRef.current) return;
     fileInputRef.current.click();
   };
@@ -196,7 +194,6 @@ export default function Company() {
         <div className="divider"></div>
         <div className="company-info-middle-text">기업정보등록</div>
         <div className="company-info-middle-box">
-          {/* todo : defaultlogo 수정 */}
           <div className="company-info-logo-image-box" style={{ backgroundImage: logoImageUrl ? `url(${logoImageUrl})` : `url(${DefaultLogo})` }} onClick={onLogoClickHandler} ></div>
           <input type="file" style={{ display: "none" }} ref={fileInputRef} accept="image/*" onChange={onImageInputChangeHandler} />
           <div className="company-info-text-box">

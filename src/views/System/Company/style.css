@@ -99,7 +99,6 @@ input {
 .company-info-representative-name {
   width: 169px;
 }
-/* todo : 왜 icon이 고정값으로 박혀있을까? 늘려도 줄여도 이상한 결과 */
 .company-info-company-post-code-container {
   width: 140px;
   border: 1px solid rgba(0, 0, 0, 0.3);
