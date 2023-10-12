@@ -1,3 +1,5 @@
+export const telNumberPattern = /^[0-9]{10,11}$/;
+
 // home path
 export const HOME_PATH = "/";
 

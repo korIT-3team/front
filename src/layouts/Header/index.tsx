@@ -8,7 +8,7 @@ import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfa
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, telNumberPattern } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
@@ -84,8 +84,11 @@ export default function Header() {
      // description: 부서정보
      
      //   state     //
+     // description: 전화번호 패턴오류 검사 //
+     const [telNumberError, setTelNumberError] = useState<boolean>(false);
+     
      // description: 부서조회 조건 정보 store //
-     const { departmentName,  setDepartmentName, resetDepartmentRequest } = useDepartmentRequestStore();
+     const { departmentName, resetDepartmentRequest } = useDepartmentRequestStore();
      // description: 조회된 부서 정보 store //
      const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
      // description: 부서 정보 상태
@@ -109,8 +112,6 @@ export default function Header() {
           
           // 전체 조회
           setSelectedDepartmentCode(null);
-          setDepartmentName('');
-          resetDepartmentRequest();
           resetDepartmentInfo();
           resetDepartmentList();          
           getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
@@ -127,6 +128,12 @@ export default function Header() {
           if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
           if(code === 'DE') alert('데이터베이스 에러');
           if(code !== 'SU') return;
+
+          // 전체 조회
+          setSelectedDepartmentCode(null);
+          resetDepartmentInfo();
+          resetDepartmentList();          
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);          
           
           alert('부서 삭제에 성공했습니다.');
      }
@@ -149,6 +156,10 @@ export default function Header() {
      
      // description: 부서저장 이벤트 핸들러 //
      const onDepartmentListSaveButtonClickHandler = async () => {
+          
+          const telNumberFlag = !telNumberPattern.test(telNumber);
+          setTelNumberError(telNumberFlag);
+
           const token = cookies.accessToken;
           if (selectedDepartmentCode) {
                if (!departmentList) return;
@@ -183,8 +194,6 @@ export default function Header() {
           if (!selectedDepartmentCode) return;
           const token = cookies.accessToken;
           deleteDepartmentInfoRequest(selectedDepartmentCode, token).then(deleteDepartmentInfoResponseHandler);
-          resetDepartmentInfo();
-          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }
      // description: 부서조회 이벤트 핸들러 //
      const onDepartmentListSearchButtonClickHandler = () => {

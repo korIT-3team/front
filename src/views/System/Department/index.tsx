@@ -12,6 +12,9 @@ import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 export default function Employee() {
 
   //          state          //
+  // description: 전화번호 패턴오류 검사 //
+  const [telNumberError, setTelNumberError] = useState<boolean>(false);  
+  
   // description: path 상태 //
   const {pathname} = useLocation();
   // description: 로그인한 사용자의 정보 상태 //
@@ -168,10 +171,10 @@ export default function Employee() {
                       <div className='department-info-middle-left-bottom-table-body-new-no' ></div>
                       <div className='department-info-middle-left-bottom-table-body-new-dept-code'></div>
                         <input className='department-info-middle-left-bottom-table-body-new-dept-name' value={departmentNameInfo}  type="text" onChange={onDepartmentNameChangeEvent} />
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-start-date' value={departmentStartDate}  type="text" onChange={onDepartmentStartDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-end-date'   value={departmentEndDate}    type="text" onChange={onDepartmentEndDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'   value={departmentTelNumber}  type="text" onChange={onDepartmentTelNumberChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'   value={departmentFax}        type="text" onChange={onDepartmentFaxChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" disabled />) }
+                        <input className='department-info-middle-left-bottom-table-body-new-start-date' value={departmentStartDate}  type="text" onChange={onDepartmentStartDateChangeEvent} />
+                        <input className='department-info-middle-left-bottom-table-body-new-end-date'   value={departmentEndDate}    type="text" onChange={onDepartmentEndDateChangeEvent} />
+                        <input className='department-info-middle-left-bottom-table-body-new-dept-tel'   value={departmentTelNumber}  type="text" onChange={onDepartmentTelNumberChangeEvent} />
+                        <input className='department-info-middle-left-bottom-table-body-new-dept-fax'   value={departmentFax}        type="text" onChange={onDepartmentFaxChangeEvent} />
                     </div>
                   </div>
                 </div>
