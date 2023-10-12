@@ -1,0 +1,86 @@
+.inoutcome-list-item{
+     width: 1080px;
+     height: 30px;
+     background: white;
+     display: flex;
+     color: rgba(0, 0, 0, 0.80);
+     font-size: 12px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     margin-left: 5px;
+ }
+ .inoutcome-list-number{
+     width: 32px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .inoutcome-list-date{
+     width: 105px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .inoutcome-list-code{
+     width: 68px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .inoutcome-list-customer{
+     width: 114px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .inoutcome-list-content{
+     width: 267px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .inoutcome-list-type{
+     width: 101px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .inoutcome-list-income{
+     width: 130px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ 
+ .inoutcome-list-outcome{
+     width: 130px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ 
+ .inoutcome-list-balance{
+     width: 132px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }

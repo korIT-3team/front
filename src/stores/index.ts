@@ -14,6 +14,8 @@ import useSalesPlanRequestStore from './salesplanlist.request.store'
 import useSalesPlanResponseStore from './salesplanlist.response.store'
 import useSalesPlanInfoStore from './salesplaninfo.store'
 import useSelectedDepartmentStore from './selecteddepartment.store';
+import useInOutComeRequestStore from './inoutcome.request.store';
+import useInOutComeListStore from './inoutcomelist.response.store';
 import useSelectedCustomerStore from './selectedcustomer.store';
 
 
@@ -34,5 +36,7 @@ export {
      useCustomerInfoStore,
      useCustomerRequestStore,
      useSelectedDepartmentStore,
+     useInOutComeRequestStore,
+     useInOutComeListStore,
      useSelectedCustomerStore
 };
