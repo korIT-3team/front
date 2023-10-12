@@ -45,7 +45,7 @@ export const INVOICE_CODE_PATH_VARIABLE = ':invoiceCode';
 
 // department code
 export enum CODE {
-  SYSTEM = 9999,
+  SYSTEM = 999,
   HUMAN = 1000,
   SALES = 1001,
   FUNDS = 1002,

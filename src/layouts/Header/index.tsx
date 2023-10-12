@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDeleteDepartmentInfoStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDeleteDepartmentInfoStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
-import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
-import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getInOutComeListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
+import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
+import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
@@ -21,13 +21,17 @@ export default function Header() {
      const { pathname } = useLocation();
      // description : Cookie 상태 //
      const [ cookies ] = useCookies();
-     // description: 전표조회 조건 정보 store //
+     // description: 전표 조회조건 store //
      const { employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceType, resetInvoiceRequst } = useInvoiceRequestStore();
-     // description: 조회된 전표 리스트 정보 store //
+     // description: 전표 리스트 store //
      const { setInvoiceList, resetInvoiceList } = useInvoiceListStore();
      // description: 회사 정보 상태
      const { logoImage,  bizNumber, companyName, repName, postCode, companyAddress, 
           companyAddressDetail, telNumber, bizStatus,  bizType, englishName, homepage } = useCompoanyInfoStore();
+     // description: 매입매출장 조회조건 store //
+     const { fundDateStart, fundDateEnd, inOutComeCustomerCode, inOutComeSalesPlanCode } = useInOutComeRequestStore();
+     // description: 매입매출장 리스트 store //
+     const { setInOutComeList } = useInOutComeListStore();
 
 //! ============================================================================================
      // description: 거래처 조회 조건 정보 store //
@@ -42,6 +46,7 @@ export default function Header() {
      //!           function            //
      const navigator = useNavigate();
      const isInvoiceList = pathname.includes(ACCOUNTING_INVOICE_PATH);
+     const isInOutComeList = pathname.includes(ACCOUNTING_IN_OUT_COME_PATH);
      const isCompanyInfo = pathname.includes(SYSTEM_COMPANY_INFO);
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
@@ -60,6 +65,18 @@ export default function Header() {
       
           const { invoiceList } = responsebody as GetInvoiceListResponseDto;
           setInvoiceList(invoiceList);
+     }
+
+     const getInOutComeListResponseHandler = (responsebody : GetInOutComeListResponseDto | ResponseDto) => {
+          const { code } = responsebody;
+          if( code === 'NE') alert('존재하지않는 회원입니다.');
+          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'DE') alert('데이터베이스 에러');
+          if( code === 'NP') alert('권한이 없습니다.');
+          if( code !== 'SU') return;
+      
+          const { inOutComeList } = responsebody as GetInOutComeListResponseDto;
+          setInOutComeList(inOutComeList);
      }
 //! ============================================================================================
      //                       component                          //
@@ -258,6 +275,15 @@ export default function Header() {
           };
           putCompanyInfoRequest(data, token).then(putCompanyInfoResponseHandler);
      }
+     const onInOutComeListSearchButtonClickHandler = () => {
+          const data: InOutComeListRequestDto = {
+               customerCode : inOutComeCustomerCode,
+               salesPlanCode : inOutComeSalesPlanCode,
+               fundDateStart,
+               fundDateEnd,
+          }
+          getInOutComeListRequest(data).then(getInOutComeListResponseHandler)
+     }
 
 //! ============================================================================================
 
@@ -305,10 +331,11 @@ export default function Header() {
                     </div>
                     {/* 모든 버튼마다 PATH 별 조건을 달아줘야 하는가? */}
                     <div className="header-function-search" onClick={
-                              isInvoiceList ? onInvoiceListSearchButtonClickHandler : (
+                              isInvoiceList ? onInvoiceListSearchButtonClickHandler : 
                               isDepartmentList ? onDepartmentListSearchButtonClickHandler : 
-                              isCustomerList ? onCustomerListSearchButtonClickHandler : () => {}
-                              )}>
+                              isCustomerList ? onCustomerListSearchButtonClickHandler :
+                              isInOutComeList ? onInOutComeListSearchButtonClickHandler : () => {}
+                              }>
                          <div className="header-function-search-icon"></div>
                          <div className="header-function-search-text">조회</div>
                     </div>
