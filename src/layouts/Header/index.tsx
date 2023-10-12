@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDeleteDepartmentInfoStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useDeleteDepartmentInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -31,7 +31,7 @@ export default function Header() {
 
 //! ============================================================================================
      // description: 거래처 조회 조건 정보 store //
-     const { customerCode, customerName, resetCustomerRequest } = useCustomerRequestStore();
+     const { customerCode, customerName, setCustomerCode, setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
      // description: 조회된 거래처 정보 store //
      const { setCustomerList, resetCustomerList } = useCustomerResponseStore();
      // description: 거래처 정보 상태
@@ -213,7 +213,7 @@ export default function Header() {
           if( code !== 'SU') return;
      
           if(!user) return;
-          alert('거래처 정보등록 완료');
+          alert('거래처 정보 등록 완료');
           navigator(SYSTEM_CUSTOMER_INFO);
      }   
 
@@ -261,23 +261,39 @@ export default function Header() {
 
 //! ============================================================================================
 
+     // description: 선택 거래처 정보 //
+     const { selectedCustomerCode, selectedCustomerName, setSelectedCustomerCode, setSelectedCustomerName } = useSelectedCustomerStore();
+     // description: 거래처 정보 불러오기 //
+     const { customerList } = useCustomerResponseStore()
+
      // description: 거래처 조회 이벤트 핸들러 //
      const onCustomerListSearchButtonClickHandler = () => {
-          getCustomerListRequest(customerCode).then(getCustomerListResponseHandler)
+          setSelectedCustomerCode(null);
+          setSelectedCustomerName("");
+          resetCustomerList();
+          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
      }
 
      // description: 거래처 저장 이벤트 핸들러 //
      const onCustomerListSaveButtonClickHandler = async () => {
           const token = cookies.accessToken;
-          const data: PutCustomerInfoRequestDto = {
-               customerNameInfo,
-               customerBusinessNumber,
-               customerPostCode,
-               customerAddress,
-               customerAddressDetail,
-               customerTelNumber
-          }
-          putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
+          if (selectedCustomerCode && selectedCustomerName) {
+               if (!customerList) return;
+               const selectedCustomer = customerList.find((item) => (item.customerCode === selectedCustomerCode && item.customerName === selectedCustomerName));
+               const data: PutCustomerInfoRequestDto = {
+                    customerNameInfo: selectedCustomer?.customerName as string,
+                    customerBusinessNumber: selectedCustomer?.businessNumber as string,
+                    customerPostCode: selectedCustomer?.customerPostCode as string,
+                    customerAddress: selectedCustomer?.customerAddress as string,
+                    customerAddressDetail: selectedCustomer?.customerAddressDetail as string,
+                    customerTelNumber: selectedCustomer?.customerTelNumber as string,
+               }
+               putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
+          };
+          setSelectedCustomerCode(null);
+          setSelectedCustomerName("");
+          setCustomerCode(null);
+          setCustomerName("");
      }
 //! ============================================================================================
 

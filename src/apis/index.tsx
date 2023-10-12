@@ -41,7 +41,7 @@ const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
 // 거래처
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
-const GET_CUSTOMER_LIST_URL = (customerCode: number | null) => `${API_DOMAIN}/system/customer-info/${customerCode}`;
+const GET_CUSTOMER_LIST_URL = (customerCode: number | null, customerName: string | null) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
 
 // 품목 등록
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
@@ -255,8 +255,8 @@ export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, to
 }
 
 // 거래처 리스트 불러오기 메서드
-export const getCustomerListRequest = async (customerCode: number | null) => {
-  const result = await axios.get(GET_CUSTOMER_LIST_URL(customerCode))
+export const getCustomerListRequest = async (customerCode: number | null, customerName: string | null) => {
+  const result = await axios.get(GET_CUSTOMER_LIST_URL(customerCode, customerName))
   .then((response) => {
     const responsebody : GetCustomerListResponseDto = response.data;
     return responsebody;

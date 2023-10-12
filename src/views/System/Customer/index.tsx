@@ -7,7 +7,7 @@ import { CODE, HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
 
 import './style.css'
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
-import { useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useUserStore } from 'src/stores';
+import { useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useSelectedCustomerStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
 import { getCustomerListRequest, putCustomerInfoRequest } from 'src/apis';
@@ -30,6 +30,9 @@ export default function CustomerInfo() {
   const {setCustomerCode, setCustomerName, resetCustomerRequest} = useCustomerRequestStore();
   // description: 거래처 정보 불러오기 //
   const {customerList, setCustomerList, resetCustomerList} = useCustomerResponseStore();
+  // description: 선택 거래처 정보 //
+  const { selectedCustomerCode, setSelectedCustomerCode } = useSelectedCustomerStore();
+  const { selectedCustomerName, setSelectedCustomerName } = useSelectedCustomerStore();
   // description: 다음 포스트 (우편번호검색) 팝업 상태 //
   const open = useDaumPostcodePopup();
 
@@ -136,6 +139,10 @@ export default function CustomerInfo() {
   // component //
 
   // effect //
+  useEffect(() => {
+    resetCustomerList();
+    resetCustomerRequest();
+  }, [pathname])
 
 
   // render //
