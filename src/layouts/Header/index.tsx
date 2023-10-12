@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequsetStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useDeleteDepartmentInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ACCOUNTING_INVOICE_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
-import { GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
+import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 export default function Header() {
@@ -30,17 +30,6 @@ export default function Header() {
           companyAddressDetail, telNumber, bizStatus,  bizType, englishName, homepage } = useCompoanyInfoStore();
 
 //! ============================================================================================
-     // description: 부서조회 조건 정보 store //
-     const { departmentName,  setDepartmentName, resetDepartmentRequest } = useDepartmentRequsetStore();
-     // description: 조회된 부서 정보 store //
-     const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
-     // description: 부서 정보 상태
-     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate,
-           departmentTelNumber, departmentFax } = useDepartmentInfoStore();
-//! ============================================================================================
-
-
-//! ============================================================================================
      // description: 거래처 조회 조건 정보 store //
      const { customerCode, customerName, setCustomerCode, setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
      // description: 조회된 거래처 정보 store //
@@ -56,6 +45,7 @@ export default function Header() {
      const isCompanyInfo = pathname.includes(SYSTEM_COMPANY_INFO);
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
+     
      //                       event handler                           //
      // description: 전표조회 응답 처리 함수 //
      const getInvoiceListResponseHandler = (responsebody : GetInvoiceListResponseDto | ResponseDto ) => {
@@ -65,39 +55,122 @@ export default function Header() {
           if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
           if( code === 'DE') alert('데이터베이스 에러');
           if( code === 'NP') alert('권한이 없습니다.');
+          if( code === 'NI') alert('존재하지않는 전표입니다.');
           if( code !== 'SU') return;
       
           const { invoiceList } = responsebody as GetInvoiceListResponseDto;
           setInvoiceList(invoiceList);
      }
 //! ============================================================================================
+     //                       component                          //
+     // description: 부서정보
+     
+     //   state     //
+     // description: 삭제 할 부서코드 store //
+     // const { deleteDepartmentCode } = useParams();
+     const { deleteDepartmentCode, setDeleteDepartmentCode, resetDeleteDepartmentRequest} = useDeleteDepartmentInfoStore();
+     // description: 부서조회 조건 정보 store //
+     const { departmentName,  setDepartmentName, resetDepartmentRequest } = useDepartmentRequestStore();
+     // description: 조회된 부서 정보 store //
+     const { setDepartmentList, resetDepartmentList } = useDepartmentResponseStore();
+     // description: 부서 정보 상태
+     const { departmentCodeInfo , departmentCompanyCode, departmentNameInfo, departmentStartDate, departmentEndDate,
+           departmentTelNumber, departmentFax } = useDepartmentInfoStore();
+     // description: 선택 부서 코드 //
+     const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
 
-     // description: 부서정보 조회 응답 함수 //
-     const getDepartmentListResponseHandler = (responsebody: GetDepartmentListResponseDto | ResponseDto ) => {
-
-          const {code} = responsebody;
-          if( code === 'NE') alert('존재하지않는 회원입니다.');
-          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
-          if( code === 'DE') alert('데이터베이스 에러');
-          if( code === 'NP') alert('권한이 없습니다.');
-          if( code !== 'SU') return;
-
-          const { departmentList } = responsebody as GetDepartmentListResponseDto;
-          setDepartmentList(departmentList);
-     }   
+     //   event handler  //
      // description: 부서정보 등록 응답 함수 //
      const putDepartmentInfoResponseHandler = (code: string) => {
-               
-          if( code === 'NE') alert('존재하지않는 회원입니다.');
-          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
-          if( code === 'DE') alert('데이터베이스 에러');
-          if( code === 'NP') alert('권한이 없습니다.');
-          if( code !== 'SU') return;
-     
+          
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code !== 'SU') return;
+          
           if(!user) return;
           alert('부서정보등록 완료');
           navigator(SYSTEM_DEPT_INFO);
      }
+     // description: 부서정보 삭제 응답 함수 //
+     const deleteDepartmentInfoResponseHandler = (responsebody: DeleteDepartmentInfoResponseDto | ResponseDto) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'ND') alert('존재하지않는 부서입니다.');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code !== 'SU') return;
+          
+          alert('부서 삭제에 성공했습니다.');
+     }
+     // description: 부서정보 조회 응답 함수 //
+     const getDepartmentListResponseHandler = (responsebody: GetDepartmentListResponseDto | ResponseDto ) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code !== 'SU') return;
+
+          const { departmentList } = responsebody as GetDepartmentListResponseDto;
+          setDepartmentList(departmentList);
+     }   
+
+     // description: 부서 정보 불러오기 //
+     const {departmentList} = useDepartmentResponseStore();
+     
+     // description: 부서저장 이벤트 핸들러 //
+     const onDepartmentListSaveButtonClickHandler = async () => {
+          const token = cookies.accessToken;
+          if (selectedDepartmentCode) {
+               if (!departmentList) return;
+               const selectedDepartment = departmentList.find((item) => item.departmentCode === selectedDepartmentCode);
+               const data: PutDepartmentInfoRequestDto = {
+                    departmentCodeInfo: selectedDepartment?.departmentCode as number,
+                    departmentCompanyCode: 1,
+                    departmentNameInfo: selectedDepartment?.departmentName as string,
+                    departmentStartDate: selectedDepartment?.departmentStartDate as string,
+                    departmentEndDate: selectedDepartment?.departmentEndDate as string,
+                    departmentTelNumber: selectedDepartment?.departmentTelNumber as string,
+                    departmentFax: selectedDepartment?.departmentFax as string
+               }
+               if (!data.departmentEndDate) data.departmentEndDate = null;
+               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          } else {
+               const data: PutDepartmentInfoRequestDto = {
+                    departmentCodeInfo,
+                    departmentCompanyCode: 1,
+                    departmentNameInfo,
+                    departmentStartDate,
+                    departmentEndDate,
+                    departmentTelNumber,
+                    departmentFax
+               }
+               console.log(data.departmentCodeInfo);
+               if (!data.departmentEndDate) data.departmentEndDate = null;
+               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
+          };
+          setSelectedDepartmentCode(null);
+          setDepartmentName('');
+
+          
+     }
+     // description: 부서정보삭제 이벤트 핸들러 //
+     const onDeleteDepartmentInfoButtonClickHandler = () => {
+          if (!deleteDepartmentCode) return;
+          const token = cookies.accessToken;
+          deleteDepartmentInfoRequest(deleteDepartmentCode, token).then(deleteDepartmentInfoResponseHandler);
+     }
+     // description: 부서조회 이벤트 핸들러 //
+     const onDepartmentListSearchButtonClickHandler = () => {
+          setSelectedDepartmentCode(null);
+          resetDepartmentList();
+          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
+     }          
 
 //! ============================================================================================
 
@@ -159,54 +232,6 @@ export default function Header() {
           }
           getInvoiceListRequest(data).then(getInvoiceListResponseHandler)
      }
-//! ============================================================================================
-     // description: 선택 부서 코드 //
-     const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
-     // description: 부서 정보 불러오기 //
-     const {departmentList} = useDepartmentResponseStore();
-
-     // description: 부서조회 이벤트 핸들러 //
-     const onDepartmentListSearchButtonClickHandler = () => {
-          setSelectedDepartmentCode(null);
-          resetDepartmentList();
-          getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
-     }
-     
-     // description: 부서저장 이벤트 핸들러 //
-     const onDepartmentListSaveButtonClickHandler = async () => {
-          const token = cookies.accessToken;
-          if (selectedDepartmentCode) {
-               if (!departmentList) return;
-               const selectedDepartment = departmentList.find((item) => item.departmentCode === selectedDepartmentCode);
-               const data: PutDepartmentInfoRequestDto = {
-                    departmentCodeInfo: selectedDepartment?.departmentCode as number,
-                    departmentCompanyCode: 1,
-                    departmentNameInfo: selectedDepartment?.departmentName as string,
-                    departmentStartDate: selectedDepartment?.departmentStartDate as string,
-                    departmentEndDate: selectedDepartment?.departmentEndDate as string,
-                    departmentTelNumber: selectedDepartment?.departmentTelNumber as string,
-                    departmentFax: selectedDepartment?.departmentFax as string
-               }
-               if (!data.departmentEndDate) data.departmentEndDate = null;
-               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
-          } else {
-               const data: PutDepartmentInfoRequestDto = {
-                    departmentCodeInfo,
-                    departmentCompanyCode: 1,
-                    departmentNameInfo,
-                    departmentStartDate,
-                    departmentEndDate,
-                    departmentTelNumber,
-                    departmentFax
-               }
-               putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
-          };
-          setSelectedDepartmentCode(null);
-          setDepartmentName('');
-
-          
-     }
-//! ============================================================================================
 
      // description: 회사정보등록 이벤트 핸들러 //
      const onCompanyInfoSaveButtonClickHandler = async () => {
@@ -315,7 +340,9 @@ export default function Header() {
                          <div className="header-function-print-icon"></div>
                          <div className="header-function-print-text">인쇄</div>
                     </div>
-                    <div className="header-function-delete">
+                    <div className="header-function-delete" onClick={
+                              isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler : () => {}
+                              }>
                          <div className="header-function-delete-icon"></div>
                          <div className="header-function-delete-text">삭제</div>
                     </div>

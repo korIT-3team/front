@@ -19,7 +19,7 @@ interface DepartmentInfoStore {
 }
 
 const useStore = create<DepartmentInfoStore>((set) => ({
-  departmentCodeInfo: 1000,
+  departmentCodeInfo: 0,
   departmentCompanyCode: 1,
   departmentNameInfo: "",
   departmentStartDate: "",

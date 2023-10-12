@@ -3,7 +3,8 @@ import useCompoanyInfoStore from './companyinfo.store';
 import useInvoiceListStore from './invoicelist.response.store';
 import useInvoiceRequestStore from './invoicelist.request.store';
 import useDepartmentInfoStore from './departmentinfo.store';
-import useDepartmentRequsetStore from './departmentlist.request.store';
+import useDeleteDepartmentInfoStore from './deletedepartment.request.store'
+import useDepartmentRequestStore from './departmentlist.request.store';
 import useDepartmentResponseStore from './departmentlist.response.store';
 import useProductListStore from './productlist.request.store';
 import useProductRequestStore from './productlist.request.store';
@@ -23,7 +24,8 @@ export {
      useInvoiceListStore,
      useInvoiceRequestStore,
      useDepartmentInfoStore,
-     useDepartmentRequsetStore,
+     useDeleteDepartmentInfoStore,
+     useDepartmentRequestStore,
      useDepartmentResponseStore,
      useProductListStore,
      useProductRequestStore,

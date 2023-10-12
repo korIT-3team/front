@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useEffect, useState} from 'react'
 import './style.css'
 import SystemMenu from '../SystemMenu'
-import { useDepartmentRequsetStore, useDepartmentResponseStore, useSelectedDepartmentStore, useUserStore } from 'src/stores'
+import { useDeleteDepartmentInfoStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useSelectedDepartmentStore, useUserStore } from 'src/stores'
 import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GetDepartmentInfoResponseDto } from 'src/interfaces/response/system';
@@ -16,14 +16,17 @@ export default function Employee() {
   const {pathname} = useLocation();
   // description: 로그인한 사용자의 정보 상태 //
   const { user, setUser } = useUserStore();
-  // description: 조회 조건 //
-  const {setDepartmentName, resetDepartmentRequest} = useDepartmentRequsetStore();
-  // description: 부서 정보 불러오기 //
+  // description: 부서조회 조건 //
+  const {setDepartmentName, resetDepartmentRequest} = useDepartmentRequestStore();
+  // description: 삭제할 부서 정보 //
+  const {setDeleteDepartmentCode, resetDeleteDepartmentRequest} = useDeleteDepartmentInfoStore();
+  // description: 부서 정보 상태 //
+  const {setDepartmentNameInfo, setDepartmentStartDate, setDepartmentEndDate, setDepartmentTelNumber, setDepartmentFax} = useDepartmentInfoStore();
+  // description: 부서List 정보 불러오기 //
   const {departmentList, setDepartmentList, resetDepartmentList} = useDepartmentResponseStore();
   // const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
   // description: 선택 부서 코드 //
   const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
-
   // description: 기존 부서 선택 상태 //
   const [deptInfoList, setDeptInfoList] = useState<boolean>(false);
   // description: 새로 부서 선책 상태 //
@@ -35,13 +38,13 @@ export default function Employee() {
 
   //          event handler           //
   // description: 부서정보 수정을 위한 클릭 //
-  const onDepartmentInfoListDoubleClickHandler = () => {
+  const onDepartmentInfoListClickHandler = () => {
     setDeptInfoList(true);
     setNewDeptInfo(false);
   }
   
   // description: 새로운 부서정보 입력을 위한 클릭 //
-  const onNewDepartmentInfoDoubleClickHandler = () => {
+  const onNewDepartmentInfoClickHandler = () => {
     setDeptInfoList(false);
     setNewDeptInfo(true);
   }
@@ -51,7 +54,12 @@ export default function Employee() {
     setDepartmentName(event.target.value);
   }
 
-  //!       존재하는 부서명       //
+  // description: 삭제할 부서 클릭 //
+  const onDeleteDepartmentClickHandler = () => {
+    // setDeleteDepartmentCode();
+  }
+
+  //!       존재하는 부서       //
   // description: 부서명 변경 이벤트 처리 //
   const onExistDepartmentNameChangeEvent = (event: ChangeEvent<HTMLInputElement>, departmentInfo: DepartmentInfo) => {
 
@@ -98,6 +106,27 @@ export default function Employee() {
     const newDepartmentList: DepartmentInfo[] = departmentList.map(item => item.departmentCode === newDepartmentInfo.departmentCode ? newDepartmentInfo : item);
     setDepartmentList(newDepartmentList);
   }
+  //!       신규 부서       //
+  // description: 부서명 변경 이벤트 처리 //
+  const onDepartmentNameChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
+    setDepartmentNameInfo(event.target.value);
+  }
+  // description: 부서 시작일 변경 이벤트 처리 //
+  const onDepartmentStartDateChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
+    setDepartmentStartDate(event.target.value);
+  }
+  // description: 부서 종료일 변경 이벤트 처리 //
+  const onDepartmentEndDateChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
+    setDepartmentEndDate(event.target.value);
+  }
+  // description: 부서 전화번호 변경 이벤트 처리 //
+  const onDepartmentTelNumberChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
+    setDepartmentTelNumber(event.target.value);
+  }
+  // description: 부서 Fax 변경 이벤트 처리 //
+  const onDepartmentFaxChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
+    setDepartmentFax(event.target.value);
+  }
 
   //          effect            //
   useEffect(() => {
@@ -142,23 +171,24 @@ export default function Employee() {
                     { departmentList !== null &&
                       departmentList.map((item) => (
                         <div className='department-info-middle-left-bottom-table-body' >
-                          <div className='department-info-middle-left-bottom-table-body-no'         onDoubleClick={onDepartmentInfoListDoubleClickHandler}>{item.no}</div>
-                          <div className='department-info-middle-left-bottom-table-body-dept-code'  onDoubleClick={onDepartmentInfoListDoubleClickHandler}>{item.departmentCode}</div>
-                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-name'  defaultValue={item.departmentName}      type="text" onChange={event => onExistDepartmentNameChangeEvent(event, item)}       onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-name'  defaultValue={item.departmentName}      type="text" disabled />) }
+                          <div className='department-info-middle-left-bottom-table-body-no'         onClick={onDepartmentInfoListClickHandler}>{item.no}</div>
+                          <div className='department-info-middle-left-bottom-table-body-dept-code'  onClick={onDepartmentInfoListClickHandler}>{item.departmentCode}</div>
+                          <div className='department-info-middle-left-bottom-table-body-dept-name'  onClick={onDepartmentInfoListClickHandler}>{item.departmentName}</div>
                           { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" onChange={event => onExistDepartmentStartDateChangeEvent(event, item)}  onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" disabled />) }
                           { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-end-date'   defaultValue={item.departmentEndDate}   type="text" onChange={event => onExistDepartmentEndDateChangeEvent(event, item)}    onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-end-date'   defaultValue={item.departmentEndDate}   type="text" disabled />) }
                           { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-tel'   defaultValue={item.departmentTelNumber} type="text" onChange={event => onExistDepartmentTelNumberChangeEvent(event, item)}  onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-tel'   defaultValue={item.departmentTelNumber} type="text" disabled />) }
                           { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-fax'   defaultValue={item.departmentFax}       type="text" onChange={event => onExistDepartmentFaxChangeEvent(event, item)}        onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-fax'   defaultValue={item.departmentFax}       type="text" disabled />) }
                         </div>
                       ))}
-                    <div className='department-info-middle-left-bottom-table-body-new' onDoubleClick={onNewDepartmentInfoDoubleClickHandler} onFocus={() => setSelectedDepartmentCode(null)}>
+                    <div className='department-info-middle-left-bottom-table-body-new' onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}>
                       <div className='department-info-middle-left-bottom-table-body-new-no' ></div>
                       <div className='department-info-middle-left-bottom-table-body-new-dept-code'></div>
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" /*onChange={event => onDepartmentNameChangeEvent()}      *//>) : (<input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" /*onChange={event => onDepartmentStartDateChangeEvent()} *//>) : (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" /*onChange={event => onDepartmentEndDateChangeEvent()}   *//>) : (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" /*onChange={event => onDepartmentTelNumberChangeEvent()} *//>) : (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" disabled />) }
-                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" /*onChange={event => onDepartmentFaxChangeEvent()}       *//>) : (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" disabled />) }
+                        <input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" onChange={onDepartmentNameChangeEvent} />
+                        {/* { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" onChange={onDepartmentNameChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-name'   type="text" disabled />) } */}
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" onChange={onDepartmentStartDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-start-date'  type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" onChange={onDepartmentEndDateChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-end-date'    type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" onChange={onDepartmentTelNumberChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-tel'    type="text" disabled />) }
+                        { newDeptInfo ? (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" onChange={onDepartmentFaxChangeEvent} />) : (<input className='department-info-middle-left-bottom-table-body-new-dept-fax'    type="text" disabled />) }
                     </div>
                   </div>
                 </div>
