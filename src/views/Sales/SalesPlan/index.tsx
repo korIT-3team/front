@@ -32,19 +32,6 @@ export default function SalesPlan() {
   // function //
   const navigator = useNavigate();
 
-  // description: SalesPlan 정보 불러오기 응답 함수 //
-  const getSalesPlanInfoResponseHandler = (responsebody: GetSalesPlanListResponseDto | ResponseDto) => {
-    const { code } = responsebody;
-
-    if( code === 'NE') alert('존재하지않는 회원입니다.');
-    if( code === 'DE') alert('데이터베이스 에러');
-    if( code === 'NP') alert('권한이 없습니다.');
-    if( code !== 'SU') return;
-
-    // const { salesPlanList } = responsebody as GetSalesPlanListResponseDto;
-    // setSalesPlanList(salesPlanList);
-  }
-
   // event handler //
   // description: 부서코드 입력 이벤트 //
   const onDepartmentCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {

@@ -371,8 +371,8 @@ export default function Header() {
                if (!customerList) return;
                const selectedCustomer = customerList.find((item) => (item.customerCode === selectedCustomerCode && item.customerName === selectedCustomerName));
                const data: PutCustomerInfoRequestDto = {
-                    customerNameInfo: selectedCustomer?.customerName as string,
-                    customerBusinessNumber: selectedCustomer?.businessNumber as string,
+                    customerName: selectedCustomer?.customerName as string,
+                    customerBusinessNumber: selectedCustomer?.customerBusinessNumber as string,
                     customerPostCode: selectedCustomer?.customerPostCode as string,
                     customerAddress: selectedCustomer?.customerAddress as string,
                     customerAddressDetail: selectedCustomer?.customerAddressDetail as string,

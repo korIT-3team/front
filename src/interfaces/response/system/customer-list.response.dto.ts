@@ -3,7 +3,7 @@ export default interface CustomerListResponseDto {
   companyCode: number;
   customerCode: number;
   customerName: string;
-  businessNumber: string;
+  customerBusinessNumber: string;
   customerPostCode: string;
   customerAddress: string;
   customerAddressDetail: string;

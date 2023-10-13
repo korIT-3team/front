@@ -2,6 +2,7 @@ import axios from 'axios';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
+import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfaces/request/sales';
 import { FundsListRequestDto } from 'src/interfaces/request/searchView';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
@@ -10,6 +11,7 @@ import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetI
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
+import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
 import { GetFundsListResponseDto } from 'src/interfaces/response/searchView';
 import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
@@ -48,6 +50,11 @@ const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 // 거래처
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
 const GET_CUSTOMER_LIST_URL = (customerCode: number | null, customerName: string | null) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
+
+// 판매계획
+const GET_SALES_PLAN_LIST_URL = () => `${API_DOMAIN}/sales/sales-plan`;
+const GET_SALES_PLAN_DETAIL_RUL = (salesPlanCode: number) => `${API_DOMAIN}/sales/sales-plan/${salesPlanCode}`
+const PUT_SALES_PLAN_INFO_RUL = () => `${API_DOMAIN}/sales/sales-plan`;
 
 // 품목 등록
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
@@ -300,3 +307,46 @@ export const getCustomerListRequest = async (customerCode: number | null, custom
   return result;
 }
 
+// 판매계획 리스트 불러오기 메서드
+export const getSalesPlanListRequest = async (data: SalesPlanListRequestDto) => {
+  const result = await axios.post(GET_SALES_PLAN_LIST_URL(), data)
+  .then((response) => {
+    const responsebody: GetSalesPlanListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody: ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 판매계획 상세 리스트 불러오기 메서드
+export const getSalesPlanDetailRequest = async (salesPlanCode: number) => {
+  const result = await axios.get(GET_SALES_PLAN_DETAIL_RUL(salesPlanCode))
+  .then((response) => {
+    const responsebody: SalesPlanListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody: ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 판매계획 등록 메서드
+export const putSalesPlanInfoRequest = async (data: PutSalesPlanInfoRequestDto, token: string) => {
+  const result = await axios.put(PUT_SALES_PLAN_INFO_RUL(), data, {headers: { 'Authorization' : `Bearer ${token}` }})
+  .then((response) => {
+    const responsebody: PutSalesPlanInfoResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody: ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  return result;
+}
