@@ -1,9 +1,10 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import './style.css'
+import path from 'path';
 
 
 export default function SideMenu() {
@@ -22,6 +23,7 @@ export default function SideMenu() {
     const showSalesMenu = pathname.includes(SALES_PATH);
     const showHumanMenu = pathname.includes(HUMAN_PATH);
     const showAccountinMenu = pathname.includes(ACCOUNTING_PATH);
+    const showSearchViewMenu = pathname.includes(SEARCHVIEW_PATH);
 
     //!             event handler              //
     // description : 홈 버튼 클릭 이벤트 //
@@ -44,6 +46,11 @@ export default function SideMenu() {
     const onAccountingMenuMenuButtonClickHandler = () => {
       navigator(ACCOUNTING_INVOICE_PATH);
     }
+    // description : 조회 버튼 클릭 이벤트 //
+    const onSearchViewMenuMenuButtonClickHandler = () => {
+      navigator(SEARCHVIEW_FUNDS_LIST_PATH);
+    }
+
     // description : 로그아웃 버튼 클릭 이벤트 //
     const onSignOutButtonClickHandler = () => {
       if(!user) return;
@@ -79,8 +86,8 @@ export default function SideMenu() {
             <div className={ showAccountinMenu ? 'side-menu-funds-icon-active' : 'side-menu-funds-icon'}></div>
             <div className="side-menu-funds-text">회계관리</div>
           </div>
-          <div className="side-menu-search">
-            <div className="side-menu-search-icon"></div>
+          <div className={ showSearchViewMenu ?  'side-menu-search-active' :  'side-menu-search'} onClick={onSearchViewMenuMenuButtonClickHandler}>
+            <div className={ showSearchViewMenu ? 'side-menu-search-icon-active' : 'side-menu-search-icon'}></div>
             <div className="side-menu-search-text">조회</div>
           </div>
         </div>

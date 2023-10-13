@@ -2,6 +2,7 @@ import axios from 'axios';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
+import { FundsListRequestDto } from 'src/interfaces/request/searchView';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
@@ -9,6 +10,7 @@ import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetI
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
+import { GetFundsListResponseDto } from 'src/interfaces/response/searchView';
 import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
@@ -32,6 +34,9 @@ const GET_INVOICE_DETAIL_ORDER_URL = (invoiceCode: number) => `${API_DOMAIN}/acc
 const GET_INVOICE_DETAIL_SALES_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}/sales-info`;
 const GET_INVOICE_DETAIL_INCENTIVE_URL = (invoiceCode: number) => `${API_DOMAIN}/accounting/invoice/${invoiceCode}/incentive`;
 const GET_INOUTCOME_LIST_URL = () => `${API_DOMAIN}/accounting/inout-come`;
+
+// 조회
+const GET_FUNDS_LIST_URL = () => `${API_DOMAIN}/searchView/check-funds`;
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -195,6 +200,19 @@ export const getInOutComeListRequest = async (data : InOutComeListRequestDto) =>
   const result = await axios.post(GET_INOUTCOME_LIST_URL(), data)
   .then((response) => {
     const responsebody : GetInOutComeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 매입매출 리스트 조회 메서드
+export const getFundsListRequest = async (data : FundsListRequestDto) => {
+  const result = await axios.post(GET_FUNDS_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetFundsListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
