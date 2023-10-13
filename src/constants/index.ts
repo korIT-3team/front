@@ -1,4 +1,5 @@
-export const telNumberPattern = /^[0-9]{10,11}$/;
+export const telNumberPattern = /^\d{3}-\d{3,4}-\d{4}$/;
+export const faxPattern = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
 // home path
 export const HOME_PATH = "/";
@@ -38,9 +39,16 @@ export const SALES_INFO_DETAIL_PATH = (salesCode: number | string) => `/sales/sa
 
 // aacounting path
 export const ACCOUNTING_PATH = "/accounting";
-export const ACCOUNTING_INVOICE_PATH = "/accounting/invoice";
-export const ACCOUNTING_INVOICE_DETAIL_PATH = (invoiceCode: number | string) => `/accounting/invoice/${invoiceCode}`;
-export const ACCOUNTING_IN_OUT_COME_PATH = "/accounting/in_outcome";
+export const INVOICE_PATH = "invoice";
+export const INOUT_COME_PATH = "in_outcome";
+export const ACCOUNTING_INVOICE_PATH = `${ACCOUNTING_PATH}/${INVOICE_PATH}`;
+export const ACCOUNTING_INVOICE_DETAIL_PATH = (invoiceCode: number | string) => `${ACCOUNTING_INVOICE_PATH}/${invoiceCode}`;
+export const ACCOUNTING_IN_OUT_COME_PATH = `${ACCOUNTING_PATH}/${INOUT_COME_PATH}`;
+
+// searchView path
+export const SEARCHVIEW_PATH = "/searchView";
+export const SEARCHVIEW_FUNDS_PATH = "check-funds";
+export const SEARCHVIEW_FUNDS_LIST_PATH = `${SEARCHVIEW_PATH}/${SEARCHVIEW_FUNDS_PATH}`;
 
 // Navigator
 export const INVOICE_CODE_PATH_VARIABLE = ':invoiceCode';

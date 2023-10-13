@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getInOutComeListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getFundsListRequest, getInOutComeListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, faxPattern, telNumberPattern } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
+import { FundsListRequestDto } from 'src/interfaces/request/searchView';
+import { GetFundsListResponseDto } from 'src/interfaces/response/searchView';
 
 export default function Header() {
      //!              state             //
@@ -33,6 +35,11 @@ export default function Header() {
      const { fundDateStart, fundDateEnd, inOutComeCustomerCode, inOutComeSalesPlanCode } = useInOutComeRequestStore();
      // description: 매입매출장 리스트 store //
      const { setInOutComeList } = useInOutComeListStore();
+     // description: 사내자금현황 조회조건 store //
+     const { fundslistDateStart, fundslistDateEnd } = useFundslistsRequestStore();
+     // description: 사내자금현황 리스트 store //
+     const { setFundsList } = useFundsListStore();
+     
 
 //! ============================================================================================
      // description: 거래처 조회 조건 정보 store //
@@ -51,9 +58,10 @@ export default function Header() {
      const isCompanyInfo = pathname.includes(SYSTEM_COMPANY_INFO);
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
+     const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
      
      //                       event handler                           //
-     // description: 전표조회 응답 처리 함수 //
+     // description: 전표 리스트 조회 응답 처리 함수 //
      const getInvoiceListResponseHandler = (responsebody : GetInvoiceListResponseDto | ResponseDto ) => {
 
           const { code } = responsebody;
@@ -67,7 +75,7 @@ export default function Header() {
           const { invoiceList } = responsebody as GetInvoiceListResponseDto;
           setInvoiceList(invoiceList);
      }
-
+     // description: 매입매출장 리스트 조회 응답 처리 함수 //
      const getInOutComeListResponseHandler = (responsebody : GetInOutComeListResponseDto | ResponseDto) => {
           const { code } = responsebody;
           if( code === 'NE') alert('존재하지않는 회원입니다.');
@@ -79,14 +87,23 @@ export default function Header() {
           const { inOutComeList } = responsebody as GetInOutComeListResponseDto;
           setInOutComeList(inOutComeList);
      }
+     // description: 사내자금현황 리스트 조회 응답 처리 함수 //
+     const getFundsListResponseHandler = (responsebody : GetFundsListResponseDto | ResponseDto) => {
+          const { code } = responsebody;
+          if( code === 'NE') alert('존재하지않는 회원입니다.');
+          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'DE') alert('데이터베이스 에러');
+          if( code === 'NP') alert('권한이 없습니다.');
+          if( code !== 'SU') return;
+      
+          const { fundsList } = responsebody as GetFundsListResponseDto;
+          setFundsList(fundsList);
+     }
 //! ============================================================================================
      //                       component                          //
      // description: 부서정보
      
      //   state     //
-     // description: 전화번호 패턴오류 검사 //
-     const [telNumberError, setTelNumberError] = useState<boolean>(false);
-     
      // description: 부서조회 조건 정보 store //
      const { departmentName, resetDepartmentRequest } = useDepartmentRequestStore();
      // description: 조회된 부서 정보 store //
@@ -101,10 +118,15 @@ export default function Header() {
      // description: 부서정보 등록 응답 함수 //
      const putDepartmentInfoResponseHandler = (code: string) => {
           
+          // description: BACK 오류
           if(code === 'NE') alert('존재하지않는 회원입니다.');
           if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
           if(code === 'DE') alert('데이터베이스 에러');
           if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'ED') alert('중복되는 부서명입니다.');
+          if(code === 'ET') alert('중복되는 전화번호입니다.');
+          if(code === 'EF') alert('중복되는 팩스번호입니다.');
+
           if(code !== 'SU') return;
           
           if(!user) return;
@@ -157,9 +179,6 @@ export default function Header() {
      // description: 부서저장 이벤트 핸들러 //
      const onDepartmentListSaveButtonClickHandler = async () => {
           
-          const telNumberFlag = !telNumberPattern.test(telNumber);
-          setTelNumberError(telNumberFlag);
-
           const token = cookies.accessToken;
           if (selectedDepartmentCode) {
                if (!departmentList) return;
@@ -174,6 +193,23 @@ export default function Header() {
                     departmentFax: selectedDepartment?.departmentFax as string
                }
                if (!data.departmentEndDate) data.departmentEndDate = null;
+               // description: 필수값 검사
+               if (!data.departmentNameInfo || !data.departmentStartDate || !data.departmentTelNumber || !data.departmentFax ) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               // description: 전화번호 패턴 검사
+               const telNumberFlag = !telNumberPattern.test(data.departmentTelNumber);
+               if (telNumberFlag){
+                    alert("전화번호 패턴을 확인해주세요.");
+                    return;
+               }
+               // description: Fax 패턴 검사
+               const faxFlag = !faxPattern.test(data.departmentFax);
+               if (faxFlag){
+                    alert("Fax 패턴을 확인해주세요.");
+                    return;
+               }
                putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
           } else {
                const data: PutDepartmentInfoRequestDto = {
@@ -186,6 +222,10 @@ export default function Header() {
                     departmentFax
                }
                if (!data.departmentEndDate) data.departmentEndDate = null;
+               if (!data.departmentNameInfo || !data.departmentStartDate || !data.departmentTelNumber || !data.departmentFax ) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
                putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
           };
      }
@@ -251,7 +291,7 @@ export default function Header() {
 
 //! ============================================================================================
 
-     //!             event handler              //
+     //             event handler              //
      // description: 전표조회 이벤트 핸들러 //
      const onInvoiceListSearchButtonClickHandler = () => {
           const data: InvoiceListRequestDto = {
@@ -289,6 +329,7 @@ export default function Header() {
           };
           putCompanyInfoRequest(data, token).then(putCompanyInfoResponseHandler);
      }
+     // description: 매입매출장 조회 클릭 핸들러 //
      const onInOutComeListSearchButtonClickHandler = () => {
           const data: InOutComeListRequestDto = {
                customerCode : inOutComeCustomerCode,
@@ -298,6 +339,15 @@ export default function Header() {
           }
           getInOutComeListRequest(data).then(getInOutComeListResponseHandler)
      }
+     // description: 사내자금현황 조회 클릭 핸들러 //
+     const onFundsListSearchButtonClickHandler = () => {
+          const data: FundsListRequestDto = {
+               fundDateStart : fundslistDateStart,
+               fundDateEnd : fundslistDateEnd,
+          }
+          getFundsListRequest(data).then(getFundsListResponseHandler)
+     }
+
 
 //! ============================================================================================
 
@@ -364,7 +414,8 @@ export default function Header() {
                               isInvoiceList ? onInvoiceListSearchButtonClickHandler : 
                               isDepartmentList ? onDepartmentListSearchButtonClickHandler : 
                               isCustomerList ? onCustomerListSearchButtonClickHandler :
-                              isInOutComeList ? onInOutComeListSearchButtonClickHandler : () => {}
+                              isInOutComeList ? onInOutComeListSearchButtonClickHandler : 
+                              isFundsList ? onFundsListSearchButtonClickHandler : () => {}
                               }>
                          <div className="header-function-search-icon"></div>
                          <div className="header-function-search-text">조회</div>
