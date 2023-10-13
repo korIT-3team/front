@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 
 import SalesMenu from '../SalesMenu'
 
@@ -84,12 +84,15 @@ export default function SalesPlan() {
     setProductName(event.target.value);
   }
 
+  // description: 계획수량 입력 이벤트 //
+  const onPlanQuantityInfoChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[0-9]*$/;
+    const value = event.target.value;
+    const isNumber = reg.test(value);
+    if (isNumber) setPlanQuantity(Number(value));
+  }
 
-
-
-
-
-  // description: 환율 타입 선택 이벤트 //
+  // description: 환종 선택 이벤트 //
   const onExchangeRateTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
 
@@ -102,12 +105,33 @@ export default function SalesPlan() {
     if (value === 'THB') type = 4;
 
     setExchangeRateCode(type);
+  }
 
+  // description: 환율 표시 이벤트 //
+  const onExchangeRateDisplayChangeHandler = (event: ChangeEvent<HTMLDivElement>) => {
+
+  }
+
+  // description: 예상 단가 입력 이벤트 //
+  const onExpectPriceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const reg = /^[+-]?([0-9]*[.])?[0-9]+$/;
+    const value = event.target.value;
+    const isNumber = reg.test(value);
+    if (isNumber) setExpectPrice(Number(value));
+  }
+
+  // description: 예상 금액 표기 이벤트 //
+  const onExpectTotalPriceDisplayChangeHandler = (event: ChangeEvent<HTMLDivElement>) => {
+    
   }
 
   //component //
 
   // effect //
+  useEffect(() => {
+    resetSalesPlanList();
+    resetSalesPlanListRequest();
+  }, [pathname])
 
   // render //
   return (
@@ -164,13 +188,13 @@ export default function SalesPlan() {
             <div className='sales-plan-register-container-top-product-code'>
               <div className='sales-plan-register-container-top-product-code-text'>품번*</div>
               <div className='sales-plan-register-container-top-product-code-box'>
-                <input className='sales-plan-register-product-code-input' />
+                <input className='sales-plan-register-product-code-input' type='text' onChange={onProductCodeChangeHandler} />
               </div>
             </div>
             <div className='sales-plan-register-container-top-product-name'>
               <div className='sales-plan-register-container-top-product-name-text'>품명*</div>
               <div className='sales-plan-register-container-top-product-name-box'>
-                <input className='sales-plan-register-product-name-input' />
+                <input className='sales-plan-register-product-name-input' type='text' onChange={onProductNameInfoChangeHandler} />
               </div>
             </div>
             <div className='sales-plan-register-container-top-unit'>
@@ -182,7 +206,7 @@ export default function SalesPlan() {
             <div className='sales-plan-register-container-top-quantity'>
               <div className='sales-plan-register-container-top-quantity-text'>계획 수량*</div>
               <div className='sales-plan-register-container-top-quantity-box'>
-                <input className='sales-plan-register-quantity-input' />
+                <input className='sales-plan-register-quantity-input' type='text' onChange={onPlanQuantityInfoChangeHandler} />
               </div>
             </div>
           </div>
@@ -212,7 +236,7 @@ export default function SalesPlan() {
             <div className='sales-plan-register-container-bottom-price'>
               <div className='sales-plan-register-container-bottom-price-text'>예상 단가*</div>
               <div className='sales-plan-register-container-bottom-price-box'>
-                <input className='sales-plan-register-price-input' />
+                <input className='sales-plan-register-price-input' type='text' onChange={onExpectPriceChangeHandler} />
               </div>
             </div>
             <div className='sales-plan-register-container-bottom-total-price'>

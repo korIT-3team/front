@@ -161,7 +161,7 @@ export default function CustomerInfo() {
                 <div className='customer-info-search-code-text'>거래처 코드 *</div>
               </div>
               <div className='customer-info-search-code-container'>
-                <input className='code-search-input-box' placeholder='거래처 코드 입력' type='text' onChange={onCustomerCodeChangeHandler} />
+                <input className='code-search-input-box' placeholder='거래처 코드 입력' onChange={onCustomerCodeChangeHandler} />
                 <div className='customer-code-search-button' >검색</div>
                 <div className='code-search-input-box-display'>
                   <div className='code-search-input-box-display-text'>검색출력</div>
