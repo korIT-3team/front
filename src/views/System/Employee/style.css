@@ -1,0 +1,603 @@
+#system-employee-info-wrapper {
+  display: flex;
+}
+
+.system-employee-info-right {
+  width: calc(194.858vh - 24.62vh);
+}
+
+.system-employee-info-right-body-top-title-text {
+  margin-left: 27px;
+  margin-top: 30px;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-right-body-top-title-divider {
+  margin-left: 22px;
+  margin-top: 15px;
+  width: 1100px;
+  height: 1px;
+  background-color: #7698B7;
+  display: flex;
+  align-items: center;  
+}
+
+.system-employee-info-right-body-top-search-container {
+  margin-top: 15px;
+  margin-left: 22px;
+  width: 260px;
+  height: 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background: #F9F9F9;  
+}
+
+.system-employee-info-right-body-top-search-employee {
+  width: 120px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.system-employee-info-right-body-top-search-employee-text {
+  width: 118px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.system-employee-info-right-top-search-employee-box-name-box-text {
+  width: calc(260px - 120px - 4px);
+  height: 31px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  border: none;
+}
+
+.system-employee-info-middle {
+  display: flex;
+
+  padding-top: 30px;
+  padding-bottom: 18px;
+}
+
+.system-employee-info-middle-left {
+  margin-left: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.system-employee-info-middle-left-top {
+  margin-left: 20px;
+}
+
+.system-employee-info-middle-left-top-text {
+  padding-bottom: 17px;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;  
+}
+
+.system-employee-info-middle-left-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1100px;
+  height: 550px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.system-employee-info-middle-left-bottom-container {
+  width: 1080px;
+  height: 530px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.system-employee-info-middle-left-bottom-table-title {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.system-employee-info-middle-left-bottom-table-title-no {
+  width: 35px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-employee-code {
+  width: 89px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-employee-name {
+  width: 99px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-gender {
+  width: 70px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-department-name {
+  width: 119px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-join_date {
+  width: 95px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-resignation_date {
+  width: 95px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-password {
+  width: 150px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-registration_number {
+  width: 200px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-title-employment_type {
+  width: 119px;
+  height: 35px;
+
+  background-color: #184A7D;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/*! 사원 조회 */
+.system-emplyee-info-middle-left-bottom-table-body-list {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-no {
+  width: 36px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-employee-code {
+  width: 90px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-employee-name {
+  width: 100px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-gender {
+  width: 71px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-department-name {
+  width: 120px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-join_date {
+  width: 91px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-resignation_date {
+  width: 91px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-password {
+  width: 146px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-registration_number {
+  width: 196px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-list-employment_type {
+  width: 119px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new {
+  width: 100%;
+  height: 35px;
+  display: flex;  
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-no {
+  width: 36px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-employee-code {
+  width: 90px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-employee-name {
+  width: 95px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-gender {
+  width: 71px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-department-name {
+  width: 120px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-join_date {
+  width: 91px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-resignation_date {
+  width: 91px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-password {
+  width: 146px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-registration_number {
+  width: 196px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.system-employee-info-middle-left-bottom-table-body-new-employment_type {
+  width: 119px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}

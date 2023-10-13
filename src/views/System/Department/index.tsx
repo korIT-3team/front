@@ -9,7 +9,7 @@ import ResponseDto from 'src/interfaces/response/response.dto';
 import { getDepartmentListRequest } from 'src/apis';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 
-export default function Employee() {
+export default function Department() {
 
   //          state          //
   // description: path 상태 //
@@ -135,51 +135,50 @@ export default function Employee() {
             <input className='department-info-right-top-search-dept-box-name-box-text' type="text" onChange={onDepartmentNameChangeHandler} />
           </div>
           <div className='department-info-middle'>
-          <div className='department-info-middle-left'>
-            <div className='department-info-middle-left-top'>
-              <div className='department-info-middle-left-top-text'>부서정보등록</div>
-            </div>
-            <div className='department-info-middle-left-bottom'>
-              <div className='department-info-middle-left-bottom-container'>
-                <div className='department-info-middle-left-bottom-table'>
-                  <div className='department-info-middle-left-bottom-table-title'>
-                    <div className='department-info-middle-left-bottom-table-title-no'>No</div>
-                    <div className='department-info-middle-left-bottom-table-title-dept-code'>부서코드</div>
-                    <div className='department-info-middle-left-bottom-table-title-dept-name'>부서명</div>
-                    <div className='department-info-middle-left-bottom-table-title-start-date'>시작일</div>
-                    <div className='department-info-middle-left-bottom-table-title-end-date'>종료일</div>
-                    <div className='department-info-middle-left-bottom-table-title-dept-tel'>부서전화번호</div>
-                    <div className='department-info-middle-left-bottom-table-title-dept-fax'>부서fax</div>
-                  </div>
-                  <div className='department-info-middle-left-bottom-table-container'>
-                    { departmentList !== null &&
-                      departmentList.map((item) => (
-                        <div className='department-info-middle-left-bottom-table-body' >
-                          <div className='department-info-middle-left-bottom-table-body-no'         onClick={onDepartmentInfoListClickHandler}>{item.no}</div>
-                          <div className='department-info-middle-left-bottom-table-body-dept-code'  onClick={onDepartmentInfoListClickHandler}>{item.departmentCode}</div>
-                          <div className='department-info-middle-left-bottom-table-body-dept-name'  onClick={onDepartmentInfoListClickHandler}>{item.departmentName}</div>
-                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" onChange={event => onExistDepartmentStartDateChangeEvent(event, item)}  onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" disabled />) }
-                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-end-date'   defaultValue={item.departmentEndDate}   type="text" onChange={event => onExistDepartmentEndDateChangeEvent(event, item)}    onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-end-date'   defaultValue={item.departmentEndDate}   type="text" disabled />) }
-                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-tel'   defaultValue={item.departmentTelNumber} type="text" onChange={event => onExistDepartmentTelNumberChangeEvent(event, item)}  onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-tel'   defaultValue={item.departmentTelNumber} type="text" disabled />) }
-                          { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-fax'   defaultValue={item.departmentFax}       type="text" onChange={event => onExistDepartmentFaxChangeEvent(event, item)}        onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-fax'   defaultValue={item.departmentFax}       type="text" disabled />) }
-                        </div>
-                      ))}
-                    <div className='department-info-middle-left-bottom-table-body-new' onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}>
-                      <div className='department-info-middle-left-bottom-table-body-new-no' ></div>
-                      <div className='department-info-middle-left-bottom-table-body-new-dept-code'></div>
-                        <input className='department-info-middle-left-bottom-table-body-new-dept-name' value={departmentNameInfo}  type="text" onChange={onDepartmentNameChangeEvent} />
-                        <input className='department-info-middle-left-bottom-table-body-new-start-date' value={departmentStartDate}  type="text" onChange={onDepartmentStartDateChangeEvent} />
-                        <input className='department-info-middle-left-bottom-table-body-new-end-date'   value={departmentEndDate}    type="text" onChange={onDepartmentEndDateChangeEvent} />
-                        <input className='department-info-middle-left-bottom-table-body-new-dept-tel'   value={departmentTelNumber}  type="text" onChange={onDepartmentTelNumberChangeEvent} />
-                        <input className='department-info-middle-left-bottom-table-body-new-dept-fax'   value={departmentFax}        type="text" onChange={onDepartmentFaxChangeEvent} />
+            <div className='department-info-middle-left'>
+              <div className='department-info-middle-left-top'>
+                <div className='department-info-middle-left-top-text'>부서정보등록</div>
+              </div>
+              <div className='department-info-middle-left-bottom'>
+                <div className='department-info-middle-left-bottom-container'>
+                  <div className='department-info-middle-left-bottom-table'>
+                    <div className='department-info-middle-left-bottom-table-title'>
+                      <div className='department-info-middle-left-bottom-table-title-no'>No</div>
+                      <div className='department-info-middle-left-bottom-table-title-dept-code'>부서코드</div>
+                      <div className='department-info-middle-left-bottom-table-title-dept-name'>부서명</div>
+                      <div className='department-info-middle-left-bottom-table-title-start-date'>시작일</div>
+                      <div className='department-info-middle-left-bottom-table-title-end-date'>종료일</div>
+                      <div className='department-info-middle-left-bottom-table-title-dept-tel'>부서전화번호</div>
+                      <div className='department-info-middle-left-bottom-table-title-dept-fax'>부서fax</div>
+                    </div>
+                    <div className='department-info-middle-left-bottom-table-container'>
+                      { departmentList !== null &&
+                        departmentList.map((item) => (
+                          <div className='department-info-middle-left-bottom-table-body' >
+                            <div className='department-info-middle-left-bottom-table-body-no'         onClick={onDepartmentInfoListClickHandler}>{item.no}</div>
+                            <div className='department-info-middle-left-bottom-table-body-dept-code'  onClick={onDepartmentInfoListClickHandler}>{item.departmentCode}</div>
+                            <div className='department-info-middle-left-bottom-table-body-dept-name'  onClick={onDepartmentInfoListClickHandler}>{item.departmentName}</div>
+                            { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" onChange={event => onExistDepartmentStartDateChangeEvent(event, item)}  onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-start-date' defaultValue={item.departmentStartDate} type="text" disabled />) }
+                            { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-end-date'   defaultValue={item.departmentEndDate}   type="text" onChange={event => onExistDepartmentEndDateChangeEvent(event, item)}    onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-end-date'   defaultValue={item.departmentEndDate}   type="text" disabled />) }
+                            { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-tel'   defaultValue={item.departmentTelNumber} type="text" onChange={event => onExistDepartmentTelNumberChangeEvent(event, item)}  onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-tel'   defaultValue={item.departmentTelNumber} type="text" disabled />) }
+                            { deptInfoList ? (<input className='department-info-middle-left-bottom-table-body-dept-fax'   defaultValue={item.departmentFax}       type="text" onChange={event => onExistDepartmentFaxChangeEvent(event, item)}        onFocus={() => setSelectedDepartmentCode(item.departmentCode)} />) : (<input className='department-info-middle-left-bottom-table-body-dept-fax'   defaultValue={item.departmentFax}       type="text" disabled />) }
+                          </div>
+                        ))}
+                      <div className='department-info-middle-left-bottom-table-body-new' onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}>
+                        <div className='department-info-middle-left-bottom-table-body-new-no' ></div>
+                        <div className='department-info-middle-left-bottom-table-body-new-dept-code'></div>
+                          <input className='department-info-middle-left-bottom-table-body-new-dept-name' value={departmentNameInfo}  type="text" onChange={onDepartmentNameChangeEvent} />
+                          <input className='department-info-middle-left-bottom-table-body-new-start-date' value={departmentStartDate}  type="text" onChange={onDepartmentStartDateChangeEvent} />
+                          <input className='department-info-middle-left-bottom-table-body-new-end-date'   value={departmentEndDate}    type="text" onChange={onDepartmentEndDateChangeEvent} />
+                          <input className='department-info-middle-left-bottom-table-body-new-dept-tel'   value={departmentTelNumber}  type="text" onChange={onDepartmentTelNumberChangeEvent} />
+                          <input className='department-info-middle-left-bottom-table-body-new-dept-fax'   value={departmentFax}        type="text" onChange={onDepartmentFaxChangeEvent} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-          <div className='department-info-right-bottom'></div>
         </div>
       </div>
   )
