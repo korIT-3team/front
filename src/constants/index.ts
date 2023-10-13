@@ -1,4 +1,5 @@
-export const telNumberPattern = /^[0-9]{10,11}$/;
+export const telNumberPattern = /^\d{3}-\d{3,4}-\d{4}$/;
+export const faxPattern = /^\d{2,3}-\d{3,4}-\d{4}$/;
 
 // home path
 export const HOME_PATH = "/";

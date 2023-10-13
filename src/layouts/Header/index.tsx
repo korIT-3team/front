@@ -8,7 +8,7 @@ import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfa
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, faxPattern, telNumberPattern } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
@@ -104,9 +104,6 @@ export default function Header() {
      // description: 부서정보
      
      //   state     //
-     // description: 전화번호 패턴오류 검사 //
-     const [telNumberError, setTelNumberError] = useState<boolean>(false);
-     
      // description: 부서조회 조건 정보 store //
      const { departmentName, resetDepartmentRequest } = useDepartmentRequestStore();
      // description: 조회된 부서 정보 store //
@@ -121,10 +118,15 @@ export default function Header() {
      // description: 부서정보 등록 응답 함수 //
      const putDepartmentInfoResponseHandler = (code: string) => {
           
+          // description: BACK 오류
           if(code === 'NE') alert('존재하지않는 회원입니다.');
           if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
           if(code === 'DE') alert('데이터베이스 에러');
           if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'ED') alert('중복되는 부서명입니다.');
+          if(code === 'ET') alert('중복되는 전화번호입니다.');
+          if(code === 'EF') alert('중복되는 팩스번호입니다.');
+
           if(code !== 'SU') return;
           
           if(!user) return;
@@ -177,9 +179,6 @@ export default function Header() {
      // description: 부서저장 이벤트 핸들러 //
      const onDepartmentListSaveButtonClickHandler = async () => {
           
-          const telNumberFlag = !telNumberPattern.test(telNumber);
-          setTelNumberError(telNumberFlag);
-
           const token = cookies.accessToken;
           if (selectedDepartmentCode) {
                if (!departmentList) return;
@@ -194,6 +193,23 @@ export default function Header() {
                     departmentFax: selectedDepartment?.departmentFax as string
                }
                if (!data.departmentEndDate) data.departmentEndDate = null;
+               // description: 필수값 검사
+               if (!data.departmentNameInfo || !data.departmentStartDate || !data.departmentTelNumber || !data.departmentFax ) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               // description: 전화번호 패턴 검사
+               const telNumberFlag = !telNumberPattern.test(data.departmentTelNumber);
+               if (telNumberFlag){
+                    alert("전화번호 패턴을 확인해주세요.");
+                    return;
+               }
+               // description: Fax 패턴 검사
+               const faxFlag = !faxPattern.test(data.departmentFax);
+               if (faxFlag){
+                    alert("Fax 패턴을 확인해주세요.");
+                    return;
+               }
                putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
           } else {
                const data: PutDepartmentInfoRequestDto = {
@@ -206,6 +222,10 @@ export default function Header() {
                     departmentFax
                }
                if (!data.departmentEndDate) data.departmentEndDate = null;
+               if (!data.departmentNameInfo || !data.departmentStartDate || !data.departmentTelNumber || !data.departmentFax ) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
                putDepartmentInfoRequest(data, token).then(putDepartmentInfoResponseHandler);
           };
      }
@@ -271,7 +291,7 @@ export default function Header() {
 
 //! ============================================================================================
 
-     //!             event handler              //
+     //             event handler              //
      // description: 전표조회 이벤트 핸들러 //
      const onInvoiceListSearchButtonClickHandler = () => {
           const data: InvoiceListRequestDto = {

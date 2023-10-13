@@ -272,7 +272,7 @@ export const getDepartmentListRequest = async (departmentName: string) => {
 
 // 거래처정보등록 메서드
 export const putCustomerInfoRequest = async (data: PutCustomerInfoRequestDto, token : string) => {
-  const result = await axios.put(PUT_CUSTOMER_INFO_URL(), data, { headers : { 'Authorization' : `Bearer ${token}` } })
+  const result = await axios.put(PUT_CUSTOMER_INFO_URL(), data, { headers : { 'Authorization' : `Bear=er ${token}` } })
   .then((response) => {
     const responsebody : PutCustomerInfoResponseDto = response.data;
     const { code } = responsebody;
