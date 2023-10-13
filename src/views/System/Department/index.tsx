@@ -12,9 +12,6 @@ import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 export default function Employee() {
 
   //          state          //
-  // description: 전화번호 패턴오류 검사 //
-  const [telNumberError, setTelNumberError] = useState<boolean>(false);  
-  
   // description: path 상태 //
   const {pathname} = useLocation();
   // description: 로그인한 사용자의 정보 상태 //
