@@ -298,7 +298,25 @@
   width: 81px;
   height: 85px;
 }
+.side-menu-search-active{
+  background-color: #f9f9f9;
+  display: flex;
 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 81px;
+  height: 85px;
+}
+.side-menu-search-icon-active {
+  width: 40px;
+  height: 40px;
+
+  background-image: url(./assets/search_left_color.png);
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+}
 .side-menu-search:hover {
   cursor: pointer;
   background-color: #f9f9f9;

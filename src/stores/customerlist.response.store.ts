@@ -5,7 +5,7 @@ export interface CustomerInfo {
   companyCode: number;
   customerCode: number;
   customerName: string;
-  businessNumber: string;
+  customerBusinessNumber: string;
   customerPostCode: string;
   customerAddress: string;
   customerAddressDetail: string | null;

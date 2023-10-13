@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export interface inOutComeRequestStore {
+export interface InOutComeRequestStore {
      inOutComeCustomerCode : number | null;
      inOutComeSalesPlanCode : number | null;
      fundDateStart : string;
@@ -14,7 +14,7 @@ export interface inOutComeRequestStore {
      resetInOutComeRequst: () => void;
 }
 
-const useStore = create<inOutComeRequestStore>((set) => ({
+const useStore = create<InOutComeRequestStore>((set) => ({
      inOutComeCustomerCode : null,
      inOutComeSalesPlanCode : null,
      fundDateStart : '',
