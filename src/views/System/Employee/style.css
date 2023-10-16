@@ -617,7 +617,11 @@
 
 .system-employee-info-middle-right-user-define-top-right {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.system-employee-info-middle-right-user-define-top-right-text {
   color: rgba(0, 0, 0, 0.80);
   text-align: left;
   font-family: Inter;
@@ -625,7 +629,16 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;  
+}
 
+.system-employee-info-middle-right-user-define-top-right-code {
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;  
 }
 
 
