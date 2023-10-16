@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState, useEffect } from 'react'
 import SystemMenu from '../SystemMenu'
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { CODE, HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
+import { HOME_PATH, SYSTEM_CUSTOMER_INFO } from 'src/constants';
 
 import './style.css'
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';

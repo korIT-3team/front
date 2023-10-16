@@ -4,7 +4,7 @@ import { useDaumPostcodePopup, Address } from "react-daum-postcode";
 import "./style.css";
 import { useCompoanyInfoStore, useUserStore } from "src/stores";
 import { useCookies } from "react-cookie";
-import { CODE, HOME_PATH } from "src/constants";
+import { DEPARTMENT_CODE, HOME_PATH } from "src/constants";
 import { useNavigate } from "react-router-dom";
 import { PutCompanyInfoRequestDto } from "src/interfaces/request/system";
 import { getCompanyInfoRequest, putCompanyInfoRequest, uploadFileRequest } from "src/apis";
@@ -174,7 +174,7 @@ export default function Company() {
     if (cookies.accessToken && !user) {
       return;
     }
-    if(user?.departmentCode !== CODE.SYSTEM){ // 
+    if(user?.departmentCode !== DEPARTMENT_CODE.SYSTEM){ // 
       alert('권한이 없습니다.');
       navigator(HOME_PATH);
       return;
