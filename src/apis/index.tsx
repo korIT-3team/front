@@ -17,6 +17,7 @@ import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartment
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
+import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -44,6 +45,11 @@ const GET_FUNDS_LIST_URL = () => `${API_DOMAIN}/searchView/check-funds`;
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
 const DELETE_DEPARTMENT_INFO_URL = (deleteDepartmentCode: number) => `${API_DOMAIN}/system/dept-info/${deleteDepartmentCode}`;
 const GET_DEPARTMENT_LIST_URL = (departmentName: string) => `${API_DOMAIN}/system/dept-info/${departmentName}`;
+
+// 사원
+const PUT_SYSTEM_EMPLOYEE_INFO_URL = () => `${API_DOMAIN}/system/employee-info`;
+const DELETE_SYSTEM_EMPLOYEE_INFO_URL = (deleteSystemEmployeeCode: number) => `${API_DOMAIN}/system/employee-info/${deleteSystemEmployeeCode}`;
+const GET_SYSTEM_EMPLOYEE_LIST_URL = (systemEmployeeName: string) => `${API_DOMAIN}/system/employee-info/${systemEmployeeName}`;
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
@@ -266,6 +272,20 @@ export const getDepartmentListRequest = async (departmentName: string) => {
   const result = await axios.get(GET_DEPARTMENT_LIST_URL(departmentName))
   .then((response) => {
     const responsebody : GetDepartmentListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 사원정보 불러오기 메서드
+export const getSystemEmployeeListRequest = async (systemEmployeeName: string) => {
+  const result = await axios.get(GET_SYSTEM_EMPLOYEE_LIST_URL(systemEmployeeName))
+  .then((response) => {
+    const responsebody : GetSystemEmployeeListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
