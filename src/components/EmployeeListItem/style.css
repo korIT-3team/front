@@ -1,0 +1,78 @@
+.employee-list-item{
+     width: 789px;
+     height: 30px;
+     background: white;
+     display: flex;
+     color: rgba(0, 0, 0, 0.80);
+     font-size: 12px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     margin-left: 5px;
+ }
+ .employee-list-number{
+     width: 35px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .employee-list-code{
+     width: 102px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .employee-list-name{
+     width: 100px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .employee-list-gender{
+     width: 56px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .employee-list-department{
+     width: 118px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .employee-list-position{
+     width: 84px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ 
+ .employee-list-email{
+     width: 178px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ 
+ .employee-list-employement{
+     width: 115px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }

@@ -48,15 +48,58 @@ export const ACCOUNTING_IN_OUT_COME_PATH = `${ACCOUNTING_PATH}/${INOUT_COME_PATH
 // searchView path
 export const SEARCHVIEW_PATH = "/searchView";
 export const SEARCHVIEW_FUNDS_PATH = "check-funds";
+export const SEARCHVIEW_EMPLOYEE_PATH = "employee-list";
 export const SEARCHVIEW_FUNDS_LIST_PATH = `${SEARCHVIEW_PATH}/${SEARCHVIEW_FUNDS_PATH}`;
+export const SEARCHVIEW_EMPLOYEE_LIST_PATH = `${SEARCHVIEW_PATH}/${SEARCHVIEW_EMPLOYEE_PATH}`;
 
 // Navigator
 export const INVOICE_CODE_PATH_VARIABLE = ':invoiceCode';
 
 // department code
-export enum CODE {
+export enum DEPARTMENT_CODE {
   SYSTEM = 999,
   HUMAN = 1000,
   SALES = 1001,
   FUNDS = 1002,
 }
+// 직위코드
+export enum POSITION_CODE {
+  SAWON = 1,
+  DAELEE = 2,
+  GWAJANG = 3,
+  CHAJANG = 4,
+  BOOJANG = 5,
+}
+// 직위명
+export enum POSITION_NAME {
+  SAWON = '사원',
+  DAELEE = '대리',
+  GWAJANG = '과장',
+  CHAJANG = '차장',
+  BOOJANG = '부장',
+}
+// 재직코드
+export enum EMPLOYEMENT_CODE {
+  CURRENT = 1,
+  OUT = 2,
+  REST = 3,
+}
+// 재직구분
+export enum EMPLOYEMENT_NAME {
+  CURRENT = '재직',
+  OUT = '퇴사',
+  REST = '휴직',
+}
+// 성별코드
+export enum GENDER_CODE {
+  MALE = 1,
+  FEMALE = 2,
+  SYSTEM = 3,
+}
+// 성별구분
+export enum GENDER_NAME {
+  MALE = '남자',
+  FEMALE = '여자',
+  SYSTEM = 'SYSTEM',
+}
+

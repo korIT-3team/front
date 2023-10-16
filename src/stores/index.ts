@@ -21,6 +21,8 @@ import useFundslistsRequestStore from './fundslist.request.store';
 import useFundsListStore from './fundslist.response.store';
 import useSystemEmployeeRequestStore from './systemEmployee/systemEmployeeList.request.store';
 import useSystemEmployeeResponseStore from './systemEmployee/systemEmployeeList.response.store';
+import useEmployeeListViewStore from './employeelistview.response.store';
+import useEmployeeListViewRequestStore from './employeelistview.request.store';
 
 export { 
      useUserStore,
@@ -45,5 +47,8 @@ export {
      useFundslistsRequestStore,
      useFundsListStore,
      useSystemEmployeeRequestStore,
-     useSystemEmployeeResponseStore
+     useSystemEmployeeResponseStore,
+     useEmployeeListViewRequestStore,
+     useEmployeeListViewStore,
+
 };

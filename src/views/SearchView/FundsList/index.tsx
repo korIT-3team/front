@@ -24,6 +24,13 @@ export default function FundsList() {
           setFundslistDateEnd(event.target.value);
      }
 
+     //!                    effect                   //
+     // description : path가 바뀔 때마다 실행 //
+     useEffect(()=>{
+          resetFundslistsRequst();
+          resetFundsList();
+     }, [pathname])
+
      return (
      <div id='inoutcome-wrapper'>
           <SearchViewMenu />

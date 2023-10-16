@@ -11,7 +11,7 @@ import CustomerInfo from './views/System/Customer';
 import ProductInfo from './views/System/Product';
 import './App.css';
 import Employee from './views/Human/Employee';
-import { ACCOUNTING_INVOICE_DETAIL_PATH, ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, HOME_PATH, HUMAN_ANNUAL_PRICE, HUMAN_APPLY_DAY_OFF, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, HUMAN_MANAGE_DAY_OFF, HUMAN_WORK_TIME, INVOICE_CODE_PATH_VARIABLE, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO } from './constants';
+import { ACCOUNTING_INVOICE_DETAIL_PATH, ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, HOME_PATH, HUMAN_ANNUAL_PRICE, HUMAN_APPLY_DAY_OFF, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, HUMAN_MANAGE_DAY_OFF, HUMAN_WORK_TIME, INVOICE_CODE_PATH_VARIABLE, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, SEARCHVIEW_EMPLOYEE_LIST_PATH } from './constants';
 import { useUserStore } from './stores';
 import { useCookies } from 'react-cookie';
 import GetLoginUserResponseDto from './interfaces/response/user/get-login-user.response.dto';
@@ -28,6 +28,7 @@ import SystemEmployee from './views/System/Employee';
 import InvoiceDetail from './views/Accounting/InvoiceDetail';
 import InOutComeList from './views/Accounting/InOutComeList';
 import FundsList from './views/SearchView/FundsList';
+import EmplyoeeListVeiw from './views/SearchView/EmployeeListVeiw';
 
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
         <Route path={ ACCOUNTING_INVOICE_DETAIL_PATH(INVOICE_CODE_PATH_VARIABLE) } element={ <InvoiceDetail/> } />
         <Route path={ ACCOUNTING_IN_OUT_COME_PATH } element={ <InOutComeList/> } />
         <Route path={ SEARCHVIEW_FUNDS_LIST_PATH } element={ <FundsList/> } />
+        <Route path={ SEARCHVIEW_EMPLOYEE_LIST_PATH } element={ <EmplyoeeListVeiw/> } />
 
       </Route>
     </Routes>

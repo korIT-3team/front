@@ -2,21 +2,28 @@ import React from 'react'
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import './style.css'
-import { SEARCHVIEW_FUNDS_LIST_PATH } from 'src/constants';
+import { SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH } from 'src/constants';
 
 export default function SearchViewMenu() {
 
-  // function //
+  //!        function         //
   const navigator = useNavigate();
   const { pathname } = useLocation();
 
   const clickFundsListMenu = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
+  const clickEmployeeListMenu = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH);
 
-  // event handler //
+  //!        event handler         //
+  // description: 사내자금현황조회 클릭 핸들러 //
   const onFundsListMenuClickHandler = () => {
     navigator(SEARCHVIEW_FUNDS_LIST_PATH);
   }
+  // description: 사원목록 조회 클릭 핸들러 //
+  const onEmployeeListMenuClickHandler = () => {
+    navigator(SEARCHVIEW_EMPLOYEE_LIST_PATH);
+  }
 
+  //!         render        //
   // render //
   return (
     <div id='accounting-menu'>
@@ -31,7 +38,7 @@ export default function SearchViewMenu() {
           <div className='accounting-menu-left-detail-right'>
             <div className='accounting-menu-left-detail-right-text'>
               <div className={clickFundsListMenu? 'invoice-check-active' : 'invoice-check' } onClick={onFundsListMenuClickHandler}>사내자금현황</div>
-              <div className='invoice-check' >사원목록</div>
+              <div className={clickEmployeeListMenu? 'invoice-check-active' : 'invoice-check' } onClick={onEmployeeListMenuClickHandler}>사원목록</div>
               <div className='invoice-check' >근태현황</div>
               <div className='inoutcome-check' >급여정보</div>
             </div>
