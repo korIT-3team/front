@@ -14,8 +14,6 @@ export default function Department() {
   //          state          //
   // description: path 상태 //
   const {pathname} = useLocation();
-  // description: 로그인한 사용자의 정보 상태 //
-  const { user, setUser } = useUserStore();
   // description: 부서조회 조건 //
   const {setDepartmentName, resetDepartmentRequest} = useDepartmentRequestStore();
   // description: 부서 정보 상태 //
@@ -23,7 +21,6 @@ export default function Department() {
   const {departmentNameInfo, departmentStartDate, departmentEndDate, departmentTelNumber, departmentFax} = useDepartmentInfoStore();
   // description: 부서List 정보 불러오기 //
   const {departmentList, setDepartmentList, resetDepartmentList} = useDepartmentResponseStore();
-  // const [departmentList, setDepartmentList] = useState<DepartmentListResponseDto[]>([]);
   // description: 선택 부서 코드 //
   const {selectedDepartmentCode, setSelectedDepartmentCode} = useSelectedDepartmentStore();
   // description: 기존 부서 선택 상태 //
@@ -33,7 +30,6 @@ export default function Department() {
 
  
   //          function            //
-  const navigator = useNavigate();
 
   //          event handler           //
   // description: 부서정보 수정을 위한 클릭 //

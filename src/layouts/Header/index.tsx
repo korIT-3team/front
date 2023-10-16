@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getFundsListRequest, getInOutComeListRequest, getInvoiceListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getFundsListRequest, getInOutComeListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, faxPattern, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, faxPattern, telNumberPattern } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import { FundsListRequestDto } from 'src/interfaces/request/searchView';
 import { GetFundsListResponseDto } from 'src/interfaces/response/searchView';
+import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 
 export default function Header() {
      //!              state             //
@@ -57,6 +58,7 @@ export default function Header() {
      const isInOutComeList = pathname.includes(ACCOUNTING_IN_OUT_COME_PATH);
      const isCompanyInfo = pathname.includes(SYSTEM_COMPANY_INFO);
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
+     const isSystemEmployeeList = pathname.includes(SYSTEM_EMPLOYEE_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
      
@@ -124,8 +126,8 @@ export default function Header() {
           if(code === 'DE') alert('데이터베이스 에러');
           if(code === 'NP') alert('권한이 없습니다.');
           if(code === 'ED') alert('중복되는 부서명입니다.');
-          if(code === 'ET') alert('중복되는 전화번호입니다.');
-          if(code === 'EF') alert('중복되는 팩스번호입니다.');
+          if(code === 'EDT') alert('중복되는 전화번호입니다.');
+          if(code === 'EDF') alert('중복되는 팩스번호입니다.');
 
           if(code !== 'SU') return;
           
@@ -243,6 +245,36 @@ export default function Header() {
           getDepartmentListRequest(departmentName).then(getDepartmentListResponseHandler);
      }          
 
+     //                       component                          //
+     // description: 사원 정보
+
+     //   state     //
+     // description: 사원조회 조건 정보 store //
+     const { systemEmployeeName, resetSystemEmployeeRequest } = useSystemEmployeeRequestStore();
+     // description: 조회된 사원 정보 store //
+     const { setSystemEmployeeList, resetSystemEmployeeList } = useSystemEmployeeResponseStore();
+
+     //   event handler  //
+     // description: 사원정보 조회 응답 함수 //
+     const getSystemEmployeeListResponseHandler = (responsebody: GetSystemEmployeeListResponseDto | ResponseDto ) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code !== 'SU') return;
+
+          const { systemEmployeeList } = responsebody as GetSystemEmployeeListResponseDto;
+          setSystemEmployeeList(systemEmployeeList);
+     }  
+
+     // description: 사원조회 이벤트 핸들러 //
+     const onSystemEmployeeListSearchButtonClickHandler = () => {
+          // resetSystemEmployeeInfo();
+          resetSystemEmployeeList();
+          getSystemEmployeeListRequest(systemEmployeeName).then(getSystemEmployeeListResponseHandler)
+     }  
 //! ============================================================================================
 
      // description : 회사 정보 등록 응답 함수 //
@@ -413,6 +445,7 @@ export default function Header() {
                     <div className="header-function-search" onClick={
                               isInvoiceList ? onInvoiceListSearchButtonClickHandler : 
                               isDepartmentList ? onDepartmentListSearchButtonClickHandler : 
+                              isSystemEmployeeList ? onSystemEmployeeListSearchButtonClickHandler :
                               isCustomerList ? onCustomerListSearchButtonClickHandler :
                               isInOutComeList ? onInOutComeListSearchButtonClickHandler : 
                               isFundsList ? onFundsListSearchButtonClickHandler : () => {}
