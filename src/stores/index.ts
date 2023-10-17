@@ -26,6 +26,8 @@ import useEmployeeListViewRequestStore from './employeelistview.request.store';
 import useSystemEmpUserDefineRequestStore from './systemEmployee/systemEmpUserDefine.request.store';
 import useSystemEmpUserDefineResponseStore from './systemEmployee/systemEmpUserDefine.response.store'
 import useSelectedEmployeeInfoStore from './systemEmployee/selectedEmployeeInfo.store'
+import useSystemEmployeeInfoStore from './systemEmployee/systemEmployeeInfo.store'
+
 
 export { 
      useUserStore,
@@ -55,5 +57,6 @@ export {
      useEmployeeListViewStore,
      useSystemEmpUserDefineRequestStore,
      useSystemEmpUserDefineResponseStore,
-     useSelectedEmployeeInfoStore
+     useSelectedEmployeeInfoStore,
+     useSystemEmployeeInfoStore,
 };
