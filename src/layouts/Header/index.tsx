@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -271,6 +271,16 @@ export default function Header() {
      const { systemEmployeeName, resetSystemEmployeeRequest } = useSystemEmployeeRequestStore();
      // description: 조회된 사원 정보 store //
      const { setSystemEmployeeList, resetSystemEmployeeList } = useSystemEmployeeResponseStore();
+     // description: 사용자정의 창 상태
+     const {userDefineOpen, setUserDefineOpen} = useSelectedEmployeeInfoStore();
+     // description: 사원 - 선택된 사용자 정보 //
+     const { selectedEmployeeCode, setSelectedEmployeeCode } = useSelectedEmployeeInfoStore();
+     // description: 사원 - 선택된 사용자정의코드 //
+     const { selectedUserDefineCode, setSelectedUserDefineCode }  = useSelectedEmployeeInfoStore();
+     // description: 사원 - 선택된 사용자정의코드 detailName //
+     const { selectedUserDefineDetailName, setSelectedUserDefineDetailName } = useSelectedEmployeeInfoStore();
+     // description: 사원 - 선택된 사용자정의코드 detailCode //
+     const { selectedUserDefineDetailCode, setSelectedUserDefineDetailCode } = useSelectedEmployeeInfoStore();
 
      //   event handler  //
      // description: 사원정보 조회 응답 함수 //
@@ -289,10 +299,17 @@ export default function Header() {
 
      // description: 사원조회 이벤트 핸들러 //
      const onSystemEmployeeListSearchButtonClickHandler = () => {
+          setUserDefineOpen(false)
+          setSelectedEmployeeCode(0);
+          setSelectedUserDefineCode(0);
+          setSelectedUserDefineDetailName("");
+          setSelectedUserDefineDetailCode(0);
           // resetSystemEmployeeInfo();
           resetSystemEmployeeList();
           getSystemEmployeeListRequest(systemEmployeeName).then(getSystemEmployeeListResponseHandler)
      }  
+
+
 
 //! ============================================================================================
 
