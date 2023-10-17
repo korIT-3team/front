@@ -3,7 +3,7 @@ import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/r
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
 import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfaces/request/sales';
-import { EmployeeListViewRequestDto, FundsListRequestDto } from 'src/interfaces/request/searchView';
+import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
@@ -12,7 +12,7 @@ import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-in
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
-import { GetEmployeeListViewResponseDto, GetFundsListResponseDto } from 'src/interfaces/response/searchView';
+import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
 import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto } from 'src/interfaces/response/system';
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
@@ -42,6 +42,7 @@ const GET_INOUTCOME_LIST_URL = () => `${API_DOMAIN}/accounting/inout-come`;
 // 조회
 const GET_FUNDS_LIST_URL = () => `${API_DOMAIN}/searchView/check-funds`;
 const GET_EMPLOYEE_LIST_VIEW_URL = () => `${API_DOMAIN}/searchView/employee-list`;
+const GET_INCENTIVE_VIEW_LIST_URL = () => `${API_DOMAIN}/searchView/incentive-list`;
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -242,6 +243,20 @@ export const getEmployeeListViewRequest = async (data : EmployeeListViewRequestD
   const result = await axios.post(GET_EMPLOYEE_LIST_VIEW_URL(), data)
   .then((response) => {
     const responsebody : GetEmployeeListViewResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 급/상여정보조회 메서드
+export const getIncentiveViewListRequest = async (data : IncentiveViewListRequestDto) => {
+  const result = await axios.post(GET_INCENTIVE_VIEW_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetIncentiveViewListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
