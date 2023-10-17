@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
+<<<<<<< HEAD
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+=======
 import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+>>>>>>> 17424f10727b31a42843b520a4b1941c5800c1aa
 import { useCookies } from 'react-cookie';
 import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -288,8 +292,10 @@ export default function Header() {
      const { systemEmployeeName, resetSystemEmployeeRequest } = useSystemEmployeeRequestStore();
      // description: 조회된 사원 정보 store //
      const { setSystemEmployeeList, resetSystemEmployeeList } = useSystemEmployeeResponseStore();
-     // description: 사용자정의 창 상태
-     const {userDefineOpen, setUserDefineOpen} = useSelectedEmployeeInfoStore();
+     // description: 사원 - 사용자정의 창 상태
+     const { systemEmpUserDefineOpen, setSystemEmpUserDefineOpen } = useSelectedEmployeeInfoStore();
+     // description: 사원 - 부서 창 상태
+     const { systemEmpDepartmentOpen, setSystemEmpDepartmentOpen } = useSelectedEmployeeInfoStore();
      // description: 사원 - 선택된 사용자 정보 //
      const { selectedEmployeeCode, setSelectedEmployeeCode } = useSelectedEmployeeInfoStore();
      // description: 사원 - 선택된 사용자정의코드 //
@@ -298,6 +304,8 @@ export default function Header() {
      const { selectedUserDefineDetailName, setSelectedUserDefineDetailName } = useSelectedEmployeeInfoStore();
      // description: 사원 - 선택된 사용자정의코드 detailCode //
      const { selectedUserDefineDetailCode, setSelectedUserDefineDetailCode } = useSelectedEmployeeInfoStore();
+     // description: 사원 - 신규입력 초기화 //
+     const {resetSystemEmployeeInfo} = useSystemEmployeeInfoStore();
 
      //   event handler  //
      // description: 사원정보 조회 응답 함수 //
@@ -316,16 +324,16 @@ export default function Header() {
 
      // description: 사원조회 이벤트 핸들러 //
      const onSystemEmployeeListSearchButtonClickHandler = () => {
-          setUserDefineOpen(false)
+          setSystemEmpUserDefineOpen(false);
+          setSystemEmpDepartmentOpen(false)
           setSelectedEmployeeCode(0);
           setSelectedUserDefineCode(0);
           setSelectedUserDefineDetailName("");
           setSelectedUserDefineDetailCode(0);
-          // resetSystemEmployeeInfo();
+          resetSystemEmployeeInfo();
           resetSystemEmployeeList();
           getSystemEmployeeListRequest(systemEmployeeName).then(getSystemEmployeeListResponseHandler)
      }  
-
 
 
 //! ============================================================================================
