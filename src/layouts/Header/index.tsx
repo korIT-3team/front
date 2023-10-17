@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
+<<<<<<< HEAD
 import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+=======
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+>>>>>>> 17424f10727b31a42843b520a4b1941c5800c1aa
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, uploadFileRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, faxPattern, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, faxPattern, telNumberPattern } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
-import { EmployeeListViewRequestDto, FundsListRequestDto } from 'src/interfaces/request/searchView';
-import { GetEmployeeListViewResponseDto, GetFundsListResponseDto } from 'src/interfaces/response/searchView';
+import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
+import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetsystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 
@@ -45,6 +49,10 @@ export default function Header() {
      const { employeeListViewDepartmentCode, employeeListViewEmployeeCode, employeeListViewEmploymentCode } = useEmployeeListViewRequestStore();
      // description: 사원목록 리스트 store //
      const { setEmployeeListView } = useEmployeeListViewStore();
+     // description: 사원목록 조회조건 store //
+     const { incentiveViewListEmployeeCode, incentiveViewListCategory, incentiveviewlistDateStart, incentiveviewlistDateEnd } = useIncentiveViewListRequestStore();
+     // description: 사원목록 리스트 store //
+     const { setIncentiveViewList } = useIncentiveViewListStore();
      
 
 //! ============================================================================================
@@ -66,7 +74,8 @@ export default function Header() {
      const isSystemEmployeeList = pathname.includes(SYSTEM_EMPLOYEE_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
-     const isEmployeeViewList = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH); // todo : 조건식 이상해서 검사
+     const isEmployeeViewList = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH);
+     const isIncentiveViewList = pathname.includes(SEARCHVIEW_INCENTIVE_LIST_PATH);
      
      //                       event handler                           //
      // description: 전표 리스트 조회 응답 처리 함수 //
@@ -74,7 +83,7 @@ export default function Header() {
 
           const { code } = responsebody;
           if( code === 'NE') alert('존재하지않는 회원입니다.');
-          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'NRC') alert('필수 데이터를 입력하지 않았습니다.');
           if( code === 'DE') alert('데이터베이스 에러');
           if( code === 'NP') alert('권한이 없습니다.');
           if( code === 'NI') alert('존재하지않는 전표입니다.');
@@ -87,7 +96,7 @@ export default function Header() {
      const getInOutComeListResponseHandler = (responsebody : GetInOutComeListResponseDto | ResponseDto) => {
           const { code } = responsebody;
           if( code === 'NE') alert('존재하지않는 회원입니다.');
-          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'NRC') alert('필수 데이터를 입력하지 않았습니다.');
           if( code === 'DE') alert('데이터베이스 에러');
           if( code === 'NP') alert('권한이 없습니다.');
           if( code !== 'SU') return;
@@ -99,7 +108,7 @@ export default function Header() {
      const getFundsListResponseHandler = (responsebody : GetFundsListResponseDto | ResponseDto) => {
           const { code } = responsebody;
           if( code === 'NE') alert('존재하지않는 회원입니다.');
-          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'NRC') alert('필수 데이터를 입력하지 않았습니다.');
           if( code === 'DE') alert('데이터베이스 에러');
           if( code === 'NP') alert('권한이 없습니다.');
           if( code !== 'SU') return;
@@ -117,6 +126,18 @@ export default function Header() {
       
           const { employeeViewList } = responsebody as GetEmployeeListViewResponseDto;
           setEmployeeListView(employeeViewList);
+     }
+     // description: 급/상여정보조회 응답 처리 함수 //
+     const getIncentiveViewListResponseHandler = (responsebody : GetIncentiveViewListResponseDto | ResponseDto) => {
+          const { code } = responsebody;
+          if( code === 'NE') alert('존재하지않는 회원입니다.');
+          if( code === 'NRC') alert('필수 데이터를 입력하지 않았습니다.');
+          if( code === 'DE') alert('데이터베이스 에러');
+          if( code === 'NP') alert('권한이 없습니다.');
+          if( code !== 'SU') return;
+      
+          const { incentiveViewList } = responsebody as GetIncentiveViewListResponseDto;
+          setIncentiveViewList(incentiveViewList);
      }
 
 //! ============================================================================================
@@ -428,7 +449,16 @@ export default function Header() {
           }
           getEmployeeListViewRequest(data).then(getEmployeeViewListResponseHandler)
      }
-
+     // description: 급/상여정보조회 클릭 핸들러 //
+     const onIncentiveViewListSearchButtonClickHandler = () => {
+          const data: IncentiveViewListRequestDto = {
+               employeeCode : incentiveViewListEmployeeCode,
+               incentiveCategory : incentiveViewListCategory,
+               paymentDateStart : incentiveviewlistDateStart,
+               paymentDateEnd : incentiveviewlistDateEnd,
+          }
+          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler)
+     }
 //! ============================================================================================
 
      // description: 선택 거래처 정보 //
@@ -497,7 +527,8 @@ export default function Header() {
                               isCustomerList ? onCustomerListSearchButtonClickHandler :
                               isInOutComeList ? onInOutComeListSearchButtonClickHandler : 
                               isFundsList ? onFundsListSearchButtonClickHandler :
-                              isEmployeeViewList ? onEmployeeViewListSearchButtonClickHandler : () => {}
+                              isEmployeeViewList ? onEmployeeViewListSearchButtonClickHandler :
+                              isIncentiveViewList ? onIncentiveViewListSearchButtonClickHandler : () => {}
                               }>
                          <div className="header-function-search-icon"></div>
                          <div className="header-function-search-text">조회</div>

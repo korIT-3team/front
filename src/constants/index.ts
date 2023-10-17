@@ -49,8 +49,11 @@ export const ACCOUNTING_IN_OUT_COME_PATH = `${ACCOUNTING_PATH}/${INOUT_COME_PATH
 export const SEARCHVIEW_PATH = "/searchView";
 export const SEARCHVIEW_FUNDS_PATH = "check-funds";
 export const SEARCHVIEW_EMPLOYEE_PATH = "employee-list";
+export const SEARCHVIEW_INCENTIVE_PATH = "incentive-list";
+
 export const SEARCHVIEW_FUNDS_LIST_PATH = `${SEARCHVIEW_PATH}/${SEARCHVIEW_FUNDS_PATH}`;
 export const SEARCHVIEW_EMPLOYEE_LIST_PATH = `${SEARCHVIEW_PATH}/${SEARCHVIEW_EMPLOYEE_PATH}`;
+export const SEARCHVIEW_INCENTIVE_LIST_PATH = `${SEARCHVIEW_PATH}/${SEARCHVIEW_INCENTIVE_PATH}`;
 
 // Navigator
 export const INVOICE_CODE_PATH_VARIABLE = ':invoiceCode';
@@ -103,3 +106,8 @@ export enum GENDER_NAME {
   SYSTEM = 'SYSTEM',
 }
 
+// 급상여 구분
+export enum INCENTIVE_CATEGORY {
+  SALARY = '급여',
+  BONUS = '상여',
+}
