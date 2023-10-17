@@ -1,0 +1,60 @@
+.incentive-list-item{
+     width: 789px;
+     height: 30px;
+     background: white;
+     display: flex;
+     color: rgba(0, 0, 0, 0.80);
+     font-size: 12px;
+     font-style: normal;
+     font-weight: 400;
+     line-height: normal;
+     margin-left: 5px;
+ }
+ .incentive-list-number{
+     width: 35px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .incentive-list-name{
+     width: 113px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .incentive-list-category{
+     width: 99px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .incentive-list-date{
+     width: 139px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .incentive-list-price{
+     width: 163px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }
+ .incentive-list-content{
+     width: 240px;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-right: 1px solid white;
+ }

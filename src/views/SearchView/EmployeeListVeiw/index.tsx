@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 import './style.css'
 import SearchViewMenu from '../SearchViewMenu'
 import { useLocation } from 'react-router-dom';
@@ -29,7 +29,7 @@ export default function EmplyoeeListVeiw() {
       const reg = /^[0-9]*$/;
       const value = event.target.value;
       const isNumber = reg.test(value);
-      if (isNumber) setEmployeeListViewEmployeeCode(Number(value));
+      if (isNumber) setEmployeeListViewEmployeeCode(Number(value)); // todo : 왜 썼다지우면 0이 들어갈까?
     }
     // description : 재직구분 선택 이벤트 //
     const onEmploymentTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -50,6 +50,14 @@ export default function EmplyoeeListVeiw() {
       setEmployeeListViewEmploymentCode(type);
     }
 
+    //!                    effect                   //
+    // description : path가 바뀔 때마다 실행 //
+    useEffect(()=>{
+      resetEmployeeViewListRequst();
+      resetEmployeeListView();
+    }, [pathname])
+    
+    //!         render        //
     return (
         <div id='emplyoeeListVeiw-wrapper'>
               <SearchViewMenu />
@@ -86,7 +94,7 @@ export default function EmplyoeeListVeiw() {
                   <div className='invoice-right-top-search-employment-status-text'>재직구분</div>
                   <div className='invoice-right-top-search-employment-status-box'>
                     <div className='invoice-right-top-search-employment-status-box-combo-box'>
-                      <select className='invoice-right-top-search-employment-status-box-combo-box-text' onSelect={onEmploymentTypeChangeHandler} name="invoice-type" id="invoice-type">
+                      <select className='invoice-right-top-search-employment-status-box-combo-box-text' onChange={onEmploymentTypeChangeHandler} name="invoice-type" id="invoice-type">
                         <option value="전체">전체</option>
                         <option value={EMPLOYEMENT_NAME.CURRENT}>{EMPLOYEMENT_NAME.CURRENT}</option>
                         <option value={EMPLOYEMENT_NAME.OUT}>{EMPLOYEMENT_NAME.OUT}</option>
@@ -100,7 +108,7 @@ export default function EmplyoeeListVeiw() {
               {/* 검색결과 */}
               {/* 사원코드 사원명 성별 부서명 직책 이메일 재직구분 */}
               <div className="employeelist-search-result">
-                  <div className="employeelist-search-result-list-text">Total  EA</div>
+                  <div className="employeelist-search-result-list-text">Total {employeeListView === null ? 0 : employeeListView.length}  EA</div>
                   <div className="employeelist-search-result-list-container">
                   <div className="employeelist-search-result-list-title">
                         <div className="employee-title-number"></div>
