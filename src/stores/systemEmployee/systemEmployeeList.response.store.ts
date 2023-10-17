@@ -19,7 +19,7 @@ export interface SystemEmployeeInfo {
 interface SystemEmployeeInfoStore {
   systemEmployeeList: SystemEmployeeInfo[] | null;
   setSystemEmployeeList: (systemEmployeeList: SystemEmployeeInfo[] | null) => void;
-
+  
   resetSystemEmployeeList: () => void;
 
 }

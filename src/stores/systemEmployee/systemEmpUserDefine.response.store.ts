@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export interface SystemEmpUserDefineInfo {
+  no: number;
   systemUserDefineCode: number;
   systemUserDefineName: string;
   systemUserDefineDetailCode: number;

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import SystemMenu from '../SystemMenu'
 import { useLocation } from 'react-router-dom';
-import { useSelectedSystemEmpUserDefineStore, useSystemEmpUserDefineRequestStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore } from 'src/stores';
+import { useSelectedEmployeeInfoStore, useSystemEmpUserDefineRequestStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore } from 'src/stores';
 import GetsystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { getsystemEmpUserDefineListRequest } from 'src/apis';
@@ -12,20 +12,24 @@ export default function SystemEmployee() {
   //          state           //
   // description: path 상태
   const {pathname} = useLocation();
-  // description: 사용자정의 창 상태
-  const [userDefineOpen, setUserDefineOpen] = useState<boolean>(false);
   // description: 사원조회 조건
   const { setSystemEmployeeName, resetSystemEmployeeRequest } = useSystemEmployeeRequestStore();
   // description: 사원List 정보 불러오기
   const { systemEmployeeList, setSystemEmployeeList, resetSystemEmployeeList } = useSystemEmployeeResponseStore();
   // description: 암호화 상태 //
   const [ password, setPassword ] = useState<boolean>(true);
-  
-  // description: 선택 사용자정의 코드 //
-  // const { selectedSystemEmpUserDefine, setSelectedSystemEmpUserDefine } = useSelectedSystemEmpUserDefineStore();
-  const { systemEmpUserDefineCode, setSystemEmpUserDefineCode, resetSystemEmpUserDefineCode } = useSystemEmpUserDefineRequestStore();
-  // description: 사원 -  조회된 코드도움 정보 store //
+  // description: 사원 -  조회된  사용자정의코드 정보 store //
   const { systemEmpUserDefineList, setsystemEmpUserDefineList, resetsystemEmpUserDefineList } = useSystemEmpUserDefineResponseStore();  
+  // description: 사용자정의 창 상태
+  const {userDefineOpen, setUserDefineOpen} = useSelectedEmployeeInfoStore();
+  // description: 사원 - 선택된 사용자 정보 //
+  const { selectedEmployeeCode, setSelectedEmployeeCode } = useSelectedEmployeeInfoStore();
+  // description: 사원 - 선택된 사용자정의코드 //
+  const { selectedUserDefineCode, setSelectedUserDefineCode }  = useSelectedEmployeeInfoStore();
+  // description: 사원 - 선택된 사용자정의코드 detailName //
+  const { selectedUserDefineDetailName, setSelectedUserDefineDetailName } = useSelectedEmployeeInfoStore();
+  // description: 사원 - 선택된 사용자정의코드 detailCode //
+  const { selectedUserDefineDetailCode, setSelectedUserDefineDetailCode } = useSelectedEmployeeInfoStore();
   
   //          function            //
 
@@ -38,6 +42,10 @@ export default function SystemEmployee() {
   // description: 닫기 클릭
   const onCloseButtonClickHandler = () => {
     setUserDefineOpen(false);
+    setSelectedEmployeeCode(0);
+    setSelectedUserDefineCode(0);
+    setSelectedUserDefineDetailCode(0);
+    setSelectedUserDefineDetailName("");
   }
   // description: 암호 type => text
   const onPasswordToTextOnClickHandler = () => {
@@ -62,12 +70,22 @@ export default function SystemEmployee() {
     resetsystemEmpUserDefineList();    
     setsystemEmpUserDefineList(systemEmpUserDefineList);
   }
+
+  // description: 사원 - 코드도움 detail 선택 //
+  const onUserDefineDetailDoubleClickHandler = (UserDefineDetailCode: number, UserDefineDetailName: String ) => {
+    setUserDefineOpen(false);
+    setSelectedUserDefineDetailCode(UserDefineDetailCode);
+    setSelectedUserDefineDetailName(UserDefineDetailName);
+  }
+
   
   // description: 사용자정의코드 더블클릭
-  const onUserDefineDoubleClickHandler = (UserDefineNumber: number) => {
-    setSystemEmpUserDefineCode(UserDefineNumber);
-    // setSelectedSystemEmpUserDefine(UserDefineNumber);
-    getsystemEmpUserDefineListRequest(systemEmpUserDefineCode).then(getSystemEmpUserDefineDetialResponseHandler)    
+  const onUserDefineDoubleClickHandler = (UserDefineNumber: number, EmployeeCode: number) => {
+    setSelectedEmployeeCode(EmployeeCode);
+    setSelectedUserDefineCode(UserDefineNumber);
+    setSelectedUserDefineDetailCode(0);
+    setSelectedUserDefineDetailName("");
+    getsystemEmpUserDefineListRequest(UserDefineNumber).then(getSystemEmpUserDefineDetialResponseHandler)    
   } 
 
   //          effect            //
@@ -124,16 +142,16 @@ export default function SystemEmployee() {
                               <div className='system-employee-info-middle-left-bottom-table-body-list-no'>{item.no}</div>
                               <div className='system-employee-info-middle-left-bottom-table-body-list-employee-code'>{item.employeeCode}</div>
                               <div className='system-employee-info-middle-left-bottom-table-body-list-employee-name'>{item.employeeName}</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender' onDoubleClick={() => onUserDefineDoubleClickHandler(9011)} >{item.gender}</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender-code' hidden>{item.genderCode}</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender' onDoubleClick={() => onUserDefineDoubleClickHandler(9011, item.employeeCode)} >{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailName != "" && selectedUserDefineCode == 9011) ? selectedUserDefineDetailName : item.gender }</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender-code' hidden>{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailCode != 0 && selectedUserDefineCode == 9011) ? selectedUserDefineDetailCode : item.genderCode }</div>
                               <div className='system-employee-info-middle-left-bottom-table-body-list-department-name' onDoubleClick={() => onUserDefineDoubleClickHandler} >{item.departmentName}</div>
                               <div className='system-employee-info-middle-left-bottom-table-body-list-department-code' hidden>{item.departmentCode}</div>
                               <input className='system-employee-info-middle-left-bottom-table-body-list-join-date' defaultValue={item.joinDate} />
                               <input className='system-employee-info-middle-left-bottom-table-body-list-resignation-date' defaultValue={item.resignationDate} />
                               <input className='system-employee-info-middle-left-bottom-table-body-list-password' defaultValue={item.password}  type='password' />
                               <input className='system-employee-info-middle-left-bottom-table-body-list-registration-number' defaultValue={item.registrationNumber} />
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type' onDoubleClick={() => onUserDefineDoubleClickHandler(9003)}>{item.employmentType}</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type-code' hidden>{item.employmentTypeCode}</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type' onDoubleClick={() => onUserDefineDoubleClickHandler(9003, item.employeeCode)}>{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailName != "" && selectedUserDefineCode == 9003) ? selectedUserDefineDetailName : item.employmentType }</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type-code' hidden>{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailCode != 0 && selectedUserDefineCode == 9003) ? selectedUserDefineDetailCode : item.employmentTypeCode }</div>
                             </div>
                       ))}
                       <div className='system-employee-info-middle-left-bottom-table-body-new'>
@@ -158,14 +176,12 @@ export default function SystemEmployee() {
             </div>
             {
               userDefineOpen &&
-                // systemEmpUserDefineList !== null &&
-                // systemEmpUserDefineList.map((item) => (
                   <div className='system-employee-info-middle-right'>
                     <div className='system-employee-info-middle-right-user-define'>
                       <div className='system-employee-info-middle-right-user-define-top'>
                         <div className='system-employee-info-middle-right-user-define-top-right'>
-                          <div className='system-employee-info-middle-right-user-define-top-right-text'></div>
-                          <div className='system-employee-info-middle-right-user-define-top-right-code'></div>
+                          <div className='system-employee-info-middle-right-user-define-top-right-text'>{systemEmpUserDefineList !== null && systemEmpUserDefineList[0].systemUserDefineName}</div>
+                          <div className='system-employee-info-middle-right-user-define-top-right-code'>( {systemEmpUserDefineList !== null && systemEmpUserDefineList[0].systemUserDefineCode} )</div>
                         </div>
                         <div className='system-employee-info-middle-right-user-define-top-left'>
                           <div className='system-employee-info-middle-right-user-define-top-left-text' onClick={onCloseButtonClickHandler}>닫기</div>
@@ -173,7 +189,6 @@ export default function SystemEmployee() {
                         </div>
                       </div>
                       <div className='system-employee-info-middle-right-user-define-container'>
-                        {/* {systemEmpUserDefineList !== null && systemEmpUserDefineList[0].systemUserDefineName} */}
                         <div className='system-employee-info-middle-right-user-define-list'>
                           <div className='system-employee-info-middle-right-user-define-list-title'>
                             <div className='system-employee-info-middle-right-user-define-list-title-detail-no'>No</div>
@@ -184,9 +199,9 @@ export default function SystemEmployee() {
                             systemEmpUserDefineList !== null &&
                             systemEmpUserDefineList.map((item) => (
                               <div className='system-employee-info-middle-right-user-define-list-body'>
-                                <div className='system-employee-info-middle-right-user-define-list-body-detail-no'></div>
+                                <div className='system-employee-info-middle-right-user-define-list-body-detail-no'>{item.no}</div>
                                 <div className='system-employee-info-middle-right-user-define-list-body-detail-code'>{item.systemUserDefineDetailCode}</div>
-                                <div className='system-employee-info-middle-right-user-define-list-body-detail-name'>{item.systemUserDefineDetailName}</div>                      
+                                <div className='system-employee-info-middle-right-user-define-list-body-detail-name' onDoubleClick={() => { onUserDefineDetailDoubleClickHandler(item.systemUserDefineDetailCode, item.systemUserDefineDetailName);} } >{item.systemUserDefineDetailName}</div>                      
                               </div>
                             ))
                           }
