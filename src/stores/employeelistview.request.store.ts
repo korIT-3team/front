@@ -5,11 +5,11 @@ import { create } from 'zustand';
 export interface EmployeeListViewRequestStore {
      employeeListViewDepartmentCode : number | null;
      employeeListViewEmployeeCode : number | null;
-     employeeListViewEmploymentCode : number | null;
+     employeeListViewEmploymentCode : string | null;
 
      setEmployeeListViewDepartmentCode: (employeeListViewDepartmentCode: number | null) => void;
      setEmployeeListViewEmployeeCode: (employeeListViewEmployeeCode: number | null) => void;
-     setEmployeeListViewEmploymentCode: (employeeListViewEmploymentCode: number | null) => void;
+     setEmployeeListViewEmploymentCode: (employeeListViewEmploymentCode: string | null) => void;
 
      resetEmployeeViewListRequst: () => void;
 }

@@ -8,5 +8,6 @@ export default interface InOutComeResponseDto extends ResponseDto{
      price : number;
      priceDetail : string;
      taxType : number;
+     taxTypeName : string;
      fundBalance : number;
 }

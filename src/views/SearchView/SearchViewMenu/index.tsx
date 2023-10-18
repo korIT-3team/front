@@ -44,7 +44,6 @@ export default function SearchViewMenu() {
             <div className='accounting-menu-left-detail-right-text'>
               <div className={clickFundsListMenu? 'invoice-check-active' : 'invoice-check' } onClick={onFundsListMenuClickHandler}>사내자금현황</div>
               <div className={clickEmployeeListMenu? 'invoice-check-active' : 'invoice-check' } onClick={onEmployeeListMenuClickHandler}>사원목록</div>
-              <div className='invoice-check' >근태현황</div>
               <div className={clickIncentiveListMenu? 'inoutcome-check-active' : 'inoutcome-check' } onClick={onIncentiveListMenuClickHandler}>급여정보</div>
             </div>
           </div>

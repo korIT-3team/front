@@ -26,7 +26,7 @@ export default function IncentiveViewList() {
      const onPaymentDateEndChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
           setIncentiveViewListDateEnd(event.target.value);
      }
-     // description : 재직구분 선택 이벤트 //
+     // description : 급/상여 구분 선택 이벤트 //
      const onIncentiveCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
           const value = event.target.value;
           let type = null;
@@ -76,7 +76,7 @@ export default function IncentiveViewList() {
                               </div>
                          </div>
                          <div className='invoice-right-top-search-employment-status'>
-                              <div className='invoice-right-top-search-employment-status-text'>급/상여구분</div>
+                              <div className='incentive-right-top-search-employment-status-text'>급/상여구분</div>
                               <div className='invoice-right-top-search-employment-status-box'>
                                    <div className='invoice-right-top-search-employment-status-box-combo-box'>
                                    <select className='invoice-right-top-search-employment-status-box-combo-box-text' onChange={onIncentiveCategoryChangeHandler} name="invoice-type" id="invoice-type">

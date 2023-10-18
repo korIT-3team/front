@@ -8,5 +8,6 @@ export default interface FundsResponseDto extends ResponseDto{
      price : number;
      priceDetail : string;
      taxType : number;
+     taxTypeName : string;
      fundBalance : number;
 }

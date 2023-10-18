@@ -27,7 +27,7 @@ export default function Header() {
      // description : Cookie 상태 //
      const [ cookies ] = useCookies();
      // description: 전표 조회조건 store //
-     const { employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceType, resetInvoiceRequst } = useInvoiceRequestStore();
+     const { employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceTypeName, resetInvoiceRequst } = useInvoiceRequestStore();
      // description: 전표 리스트 store //
      const { setInvoiceList, resetInvoiceList } = useInvoiceListStore();
      // description: 회사 정보 상태
@@ -388,7 +388,7 @@ export default function Header() {
                employeeCode,
                invoiceDateStart,
                invoiceDateEnd,
-               invoiceType,
+               invoiceTypeName,
           }
           getInvoiceListRequest(data).then(getInvoiceListResponseHandler)
      }
@@ -441,7 +441,7 @@ export default function Header() {
           const data: EmployeeListViewRequestDto = {
                departmentCode : employeeListViewDepartmentCode,
                employeeCode : employeeListViewEmployeeCode,
-               employmentCode : employeeListViewEmploymentCode,
+               employmentType : employeeListViewEmploymentCode,
           }
           getEmployeeListViewRequest(data).then(getEmployeeViewListResponseHandler)
      }

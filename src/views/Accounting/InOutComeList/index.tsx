@@ -29,14 +29,14 @@ export default function InOutComeList() {
           const reg = /^[0-9]*$/;
           const value = event.target.value;
           const isNumber = reg.test(value);
-          if (isNumber) setInOutComeCustomerCode(Number(value));
+          if (isNumber) setInOutComeCustomerCode(value == '' ? null : Number(value));
      }
      // description : 판매계획코드 입력 이벤트 //
      const onSalesPlanCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
           const reg = /^[0-9]*$/;
           const value = event.target.value;
           const isNumber = reg.test(value);
-          if (isNumber) setInOutComeSalesPlanCode(Number(value));
+          if (isNumber) setInOutComeSalesPlanCode(value == '' ? null : Number(value));
      }
      
      //!                effect               //
@@ -96,10 +96,10 @@ export default function InOutComeList() {
               
               {/* 검색결과 */}
               {/* 거래일자 코드 거래처 적요 과세유형 수입 지출 잔액 */}
-              <div className="invoicelist-search-result">
-                <div className="invoicelist-search-result-list-text">Total {inOutComeList === null ? 0 : inOutComeList.length} EA</div>
-                <div className="invoicelist-search-result-list-container">
-                  <div className="invoicelist-search-result-list-title">
+              <div className="inoutcomelist-search-result">
+                <div className="inoutcomelist-search-result-list-text">Total {inOutComeList === null ? 0 : inOutComeList.length} EA</div>
+                <div className="inoutcomelist-search-result-list-container">
+                  <div className="inoutcomelist-search-result-list-title">
                     <div className="inoutcome-title-number"></div>
                     <div className="inoutcome-title-date">거래일자</div>
                     <div className="inoutcome-title-invoice-code">코드</div>

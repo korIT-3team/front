@@ -32,7 +32,7 @@ export default function FundsList() {
      }, [pathname])
 
      return (
-     <div id='inoutcome-wrapper'>
+     <div id='fundslist-wrapper'>
           <SearchViewMenu />
           <div className='funds-right'>
             <div className='funds-right-top'>
@@ -59,14 +59,14 @@ export default function FundsList() {
                 <div className="fundslist-search-result-list-text">Total {fundsList === null ? 0 : fundsList.length} EA</div>
                 <div className="fundslist-search-result-list-container">
                   <div className="fundslist-search-result-list-title">
-                    <div className="inoutcome-title-number"></div>
-                    <div className="inoutcome-title-date">결의일자</div>
-                    <div className="inoutcome-title-funds-customer">거래처</div>
-                    <div className="inoutcome-title-funds-content">적요</div>
-                    <div className="inoutcome-title-funds-type">구분</div>
-                    <div className="inoutcome-title-inoutcome-income">수입</div>
-                    <div className="inoutcome-title-inoutcome-outcome">지출</div>
-                    <div className="inoutcome-title-inoutcome-balance">잔액</div>
+                    <div className="fundslist-title-number"></div>
+                    <div className="fundslist-title-date">결의일자</div>
+                    <div className="fundslist-title-funds-customer">거래처</div>
+                    <div className="fundslist-title-funds-content">적요</div>
+                    <div className="fundslist-title-funds-type">구분</div>
+                    <div className="fundslist-title-income">수입</div>
+                    <div className="fundslist-title-outcome">지출</div>
+                    <div className="fundslist-title-balance">잔액</div>
                   </div>
                   { fundsList !== null && fundsList.map( (item) => (<FundsListItem item = {item} />) ) }
                 </div>
