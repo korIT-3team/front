@@ -39,7 +39,7 @@
   flex-direction: column;
 }
 
-.order-info-register-container-top {
+.order-info-register-container-box {
   display: flex;
 
   margin-top: 15px;
@@ -56,30 +56,892 @@
 }
 
 /* 부서 */
+.order-info-dept {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.order-info-dept-text {
+  width: 100px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-dept-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-dept-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-dept-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-dept-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-dept-search-button:hover {
+  cursor: pointer;
+}
+
+.order-info-dept-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-dept-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 /* 사원 */
+.order-info-employee {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.order-info-employee-text {
+  width: 100px;
+  height: 35px;
+
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-employee-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-employee-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-employee-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-employee-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-employee-search-button:hover {
+  cursor: pointer;
+}
+
+.order-info-employee-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-employee-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 /* 거래처 코드 */
-
-.order-info-register-container-bottom {
+.order-info-customer {
   display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
 
+  width: 360px;
+  height: 35px;
+}
+
+.order-info-customer-text {
+  width: 100px;
+  height: 35px;
+  
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-customer-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-customer-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-customer-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-customer-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-customer-search-button:hover {
+  cursor: pointer;
+}
+
+.order-info-customer-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-customer-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------ */
+
+.order-info-register-container-box-second {
   margin-top: 15px;
 
   width: 1085px;
   height: 35px;
-
-  justify-content: center;
+  
+  display: flex;
   align-items: center;
-
+  
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.30);
+
   background: #F9F9F9;
 }
 
 /* 주문 일자 */
+.order-info-date {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.order-info-date-text {
+  width: 100px;
+  height: 35px;
+  
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  border-radius: 6px 0px 0px 6px;
+  background: #F9F9F9;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-date-container {
+  width: 260px;
+  height: 35px;
+  
+  display : flex;
+  align-items : center;
+
+  background-color: #FFF;
+  padding-inline-start: 4px;
+}
+
+.order-info-date-select-box {
+  width: 150px;
+  height: 27px;
+  
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+  
+  display : flex;
+  align-items : center;
+  justify-content: center;
+}
+
+.order-info-date-select {
+  width: 150px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
 
 /* 담당자 */
+.order-info-manager {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.order-info-manager-text {
+  width: 100px;
+  height: 35px;
+  
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-manager-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+}
+
+.order-info-manager-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-manager-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-manager-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-manager-search-button:hover {
+  cursor: pointer;
+}
+
+.order-info-manager-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-manager-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------ */
+
+/* 품번 */
+.order-info-product-code {
+  width: 350px;
+  height: 35px;
+  
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.order-info-product-code-text {
+  width: 80px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-product-code-box {
+  width: 270px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-product-code-box-code-box {
+  margin: 4px 0px 4px 4px;
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-product-code-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+  
+  display : flex;
+  border: none;
+  outline: none;
+  
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-product-code-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-product-code-search-button:hover {
+  cursor: pointer;
+}
+
+.order-info-product-code-box-name-box {
+  margin: 4px 4px 4px 11px;
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-product-code-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 품명 */
+.order-info-product-name {
+  width: 350px;
+  height: 35px;
+  
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.order-info-product-name-text {
+  width: 80px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-product-name-box {
+  width: 270px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-product-name-box-code-box {
+  margin: 4px 0px 4px 4px;
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-product-name-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+  
+  display : flex;
+  border: none;
+  outline: none;
+  
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-product-name-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-product-name-search-button:hover {
+  cursor: pointer;
+}
+
+.order-info-product-name-box-name-box {
+  margin: 4px 4px 4px 11px;
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.order-info-product-name-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 주문수량 */
+.order-info-order-quantity {
+  width: 190px;
+  height: 35px;
+  
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.order-info-order-quantity-text {
+  width: 80px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-order-quantity-box {
+  width: 110px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-order-quantity-input {
+  margin: 4px 0px 4px 4px;
+  width: 90px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+/* 단가 */
+.order-info-price {
+  width: 190px;
+  height: 35px;
+  
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.order-info-price-text {
+  width: 80px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.order-info-price-box {
+  width: 110px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.order-info-price-input {
+  margin: 4px 0px 4px 4px;
+  width: 90px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+/* ------------------------------------------------------------ */
 
 .order-info-register-button-container {
   display: flex;
