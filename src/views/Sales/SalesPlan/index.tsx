@@ -158,18 +158,9 @@ export default function SalesPlan() {
                 <div className='sales-plan-search-container-top-plan-date-select-box'>
                   <input className='sales-plan-search-container-top-plan-date-select' onChange={onPlanDateStartChangeHandler} type='date'/>
                 </div>
-                <div className="middle-text">~</div>
-                <div className='sales-plan-search-container-top-plan-date-select-box'>
-                  <input className='sales-plan-search-container-top-plan-date-select' onChange={onPlanDateEndChangeHandler} type='date'/>
-                </div>
               </div>
             </div>
             {/* 계획일자 */} 
-          </div>
-          <div className='sales-plan-search-button-container'>
-            <div className='sales-plan-search-button'>
-              <div className='sales-plan-search-button-text'>조회</div>
-            </div>
           </div>
           <div className='sales-plan-register-container-top'>
             <div className='sales-plan-register-container-top-product-code'>

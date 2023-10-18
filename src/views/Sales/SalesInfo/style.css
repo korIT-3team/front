@@ -1,0 +1,416 @@
+#sales-info-wrapper {
+  display: flex;
+}
+
+.sales-info-right {
+  width: calc(194.858vh - 24.62vh);
+
+  margin-left: 22px;
+}
+
+.sales-info-top-container {
+  display: flex;
+
+  margin-left: 5px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.sales-info-top-text {
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-info-divider {
+  display: flex;
+  align-items: center;
+
+  width: 1100px;
+  height: 1px;
+
+  background-color: #7698B7;
+}
+
+/* ---------------------------------------------------------- */
+
+.sales-info-register-container {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.sales-info-register-container-box {
+  display: flex;
+
+  margin-top: 15px;
+
+  width: 1085px;
+  height: 35px;
+
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background: #F9F9F9;
+}
+
+/* ---------------------------------------------------------- */
+
+
+/* 부서 */
+.sales-info-dept {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.sales-info-dept-text {
+  width: 100px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-dept-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.sales-info-dept-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.sales-info-dept-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-dept-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-dept-search-button:hover {
+  cursor: pointer;
+}
+
+.sales-info-dept-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.sales-info-dept-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 사원 */
+.sales-info-employee {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.sales-info-employee-text {
+  width: 100px;
+  height: 35px;
+
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-employee-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.sales-info-employee-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.sales-info-employee-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-employee-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-employee-search-button:hover {
+  cursor: pointer;
+}
+
+.sales-info-employee-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.sales-info-employee-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 거래처 코드 */
+.sales-info-customer {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+  width: 360px;
+  height: 35px;
+}
+
+.sales-info-customer-text {
+  width: 100px;
+  height: 35px;
+  
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-customer-box {
+  width: 260px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.sales-info-customer-box-code-box {
+  margin: 4px 0px 4px 4px;
+
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  display : flex;
+  align-items : center;
+}
+
+.sales-info-customer-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  border: none;
+  outline: none;
+
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-customer-search-button {
+  margin-left: 11px;
+
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-info-customer-search-button:hover {
+  cursor: pointer;
+}
+
+.sales-info-customer-box-name-box {
+  margin: 4px 4px 4px 11px;
+
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+
+  display : flex;
+  align-items : center;
+}
+
+.sales-info-customer-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------ */
+
