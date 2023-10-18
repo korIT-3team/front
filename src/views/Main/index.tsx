@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { getSignInUserRequest, signInRequest } from 'src/apis';
@@ -29,7 +29,6 @@ export default function Main() {
   //!              function            //
   // description : 페이지 이동을 위한 네비게이트 함수 //
   const navigator = useNavigate();
-
   // description : 로그인 응답 처리 함수 //
   const signInResponseHandler = (result: SignInResponseDto | ResponseDto) => {
     const { code } = result;
@@ -58,6 +57,11 @@ export default function Main() {
   }
 
   //!             event handler              //
+  // description : 비밀번호 input 키 다운 이벤트
+  const onPasswordKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if(event.key !== 'Enter')return;
+    onSignInButtonClickHandler();
+  }
   // description : 로그인 버튼 클릭 이벤트 //
   const onSignInButtonClickHandler = async () => {
     const data: SignInRequestDto = {
@@ -93,7 +97,7 @@ export default function Main() {
       { user ? ( <div> {user.employeeName} 님 환영합니다.</div> ) : 
         (<div className='main-login-box'>
           사원번호 <input type="text" placeholder='사원번호를 입력해주세요' value={employeeCode} onChange={onEmployeeCodeChangeHandler} />
-          비밀번호 <input type="password" value={password} onChange={onPasswordChangeHandler}/>
+          비밀번호 <input type="password" value={password} onChange={onPasswordChangeHandler} onKeyDown={onPasswordKeyDownHandler}/>
           <button onClick={onSignInButtonClickHandler}>로그인</button>
         </div>) 
       }

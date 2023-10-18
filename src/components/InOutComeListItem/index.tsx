@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.css'
 import { InOutComeList } from 'src/stores/inoutcomelist.response.store';
+import { TAX_TYPE } from 'src/constants';
 
 interface Props {
      item : InOutComeList;
@@ -9,10 +10,7 @@ interface Props {
 export default function InOutComeListItem({item} : Props) {
      //!          state          //
      // description: 리스트 상태 //
-     const { fundingCode, fundDate, salesPlanCode, customerName, price, priceDetail, taxType, fundBalance } = item;
-
-     //!           function            //
-     var type = taxType === 1 ? '매입세액' : taxType === 2 ? '매출과세' : '';
+     const { fundingCode, fundDate, salesPlanCode, customerName, price, priceDetail, taxTypeName, fundBalance } = item;
 
      //!          render          //
      return (
@@ -22,9 +20,9 @@ export default function InOutComeListItem({item} : Props) {
                <div className="inoutcome-list-code">{salesPlanCode}</div>
                <div className="inoutcome-list-customer">{customerName}</div>
                <div className="inoutcome-list-content">{priceDetail}</div>
-               <div className="inoutcome-list-type">{type}</div>
-               <div className="inoutcome-list-income">{taxType === 2 && price}</div>
-               <div className="inoutcome-list-outcome">{taxType === 1 && price}</div>
+               <div className="inoutcome-list-type">{taxTypeName}</div>
+               <div className="inoutcome-list-income">{taxTypeName === TAX_TYPE.SALE && price}</div>
+               <div className="inoutcome-list-outcome">{taxTypeName === TAX_TYPE.ORDER && price}</div>
                <div className="inoutcome-list-balance">{fundBalance}</div>
           </div>
      )

@@ -2,11 +2,9 @@ import { create } from 'zustand';
 export interface InvoiceList {
      invoiceCode : number;
      invoiceDate : string;
-     invoiceType : number;
+     invoiceTypeName : string;
      invoiceDetailPk : number;
      workerName : string;
-     workerCode : number;
-     workerDepartmentCode : number;
      price : number;
      priceDetail : string;
 }
