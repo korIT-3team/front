@@ -59,12 +59,8 @@ export {
      useEmployeeListViewStore,
      useSystemEmpUserDefineRequestStore,
      useSystemEmpUserDefineResponseStore,
-<<<<<<< HEAD
-     useSelectedEmployeeInfoStore,
      useSystemEmployeeInfoStore,
-=======
      useIncentiveViewListRequestStore,
      useIncentiveViewListStore,
      useSelectedEmployeeInfoStore
->>>>>>> 17424f10727b31a42843b520a4b1941c5800c1aa
 };
