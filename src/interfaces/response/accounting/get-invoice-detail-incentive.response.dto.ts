@@ -2,7 +2,7 @@ import ResponseDto from "../response.dto";
 
 export default interface GetInvoiceDetailIncentiveResponseDto extends ResponseDto {
      incentiveCode : number;
-     incentiveCategory : number;
+     incentiveCategoryName : string;
      paymentDate : string;
      employeeName : string;
      incentivePrice : number;

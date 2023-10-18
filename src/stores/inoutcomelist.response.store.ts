@@ -7,6 +7,7 @@ export interface InOutComeList {
      price : number;
      priceDetail : string;
      taxType : number;
+     taxTypeName : string;
      fundBalance : number;
 }
 
