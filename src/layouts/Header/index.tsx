@@ -477,7 +477,8 @@ export default function Header() {
                if (!customerList) return;
                const selectedCustomer = customerList.find((item) => (item.customerCode === selectedCustomerCode && item.customerName === selectedCustomerName));
                const data: PutCustomerInfoRequestDto = {
-                    customerName: selectedCustomer?.customerName as string,
+                    customerCodeInfo: selectedCustomer?.customerCode as number,
+                    customerNameInfo: selectedCustomer?.customerName as string,
                     customerBusinessNumber: selectedCustomer?.customerBusinessNumber as string,
                     customerPostCode: selectedCustomer?.customerPostCode as string,
                     customerAddress: selectedCustomer?.customerAddress as string,
@@ -486,9 +487,9 @@ export default function Header() {
                }
                putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
           };
-          setSelectedCustomerCode(null);
+          setSelectedCustomerCode(0);
           setSelectedCustomerName("");
-          setCustomerCode(null);
+          setCustomerCode(0);
           setCustomerName("");
      }
 //! ============================================================================================

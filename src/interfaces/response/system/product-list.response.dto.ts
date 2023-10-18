@@ -1,5 +1,5 @@
 export default interface ProductListResponseDto {
-  companyCode: number;
+  no: number;
   productCode: number;
   productName: string;
   procurementCategory: number;

@@ -16,10 +16,12 @@ interface CustomerInfoStore {
   setCustomerAddress: (customerAddress: string) => void;
   setCustomerAddressDetail: (customerAddressDetail: string | null) => void;
   setCustomerTelNumber: (customerTelNumber: string) => void;
+
+  resetCustomerInfo: () => void;
 }
 
 const useStore = create<CustomerInfoStore>((set) => ({
-  customerCodeInfo: null,
+  customerCodeInfo: 0,
   customerNameInfo: "",
   customerBusinessNumber: "",
   customerPostCode: "",
@@ -34,6 +36,8 @@ const useStore = create<CustomerInfoStore>((set) => ({
   setCustomerAddress: (customerAddress) => set((state) => ({ ...state, customerAddress })),
   setCustomerAddressDetail: (customerAddressDetail) => set((state) => ({ ...state, customerAddressDetail })),
   setCustomerTelNumber: (customerTelNumber) => set((state) => ({ ...state, customerTelNumber })),
+
+  resetCustomerInfo: () => set((state) => ({ ...state, customerCodeInfo:0, customerNameInfo:"", customerBusinessNumber:"", customerPostCode:"", customerAddress:"", customerAddressDetail:"", customerTelNumber:"" }))
 
 }));
 

@@ -5,7 +5,7 @@ import SystemMenu from '../SystemMenu'
 import { useNavigate } from 'react-router-dom';
 import { HOME_PATH, SYSTEM_PRODUCT_INFO } from 'src/constants';
 
-import { useProductListStore, useProductRequestStore } from 'src/stores';
+import { useProductInfoStore, useProductRequestStore } from 'src/stores';
 
 import './style.css'
 
@@ -14,8 +14,7 @@ export default function ProductInfo() {
   // state //
 
   // description: 조회 조건 정보 store //
-  const {companyCode, productCode, productName, procurementCategory, productPrice, 
-    setCompanyCode, setProductCode, setProductName, setProcurementCategory, setProductPrice} = useProductRequestStore();
+  const {productName, procurementCategory, setProductName, setProcurementCategory} = useProductRequestStore();
 
   // description : 전표 유형 선택 이벤트 //
   const onProcurementCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {

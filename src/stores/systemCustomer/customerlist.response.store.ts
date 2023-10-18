@@ -2,7 +2,6 @@ import { create } from "zustand";
 
 export interface CustomerInfo {
   no: number;
-  companyCode: number;
   customerCode: number;
   customerName: string;
   customerBusinessNumber: string;
