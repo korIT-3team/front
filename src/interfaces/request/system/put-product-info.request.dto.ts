@@ -1,6 +1,6 @@
 export default interface PutProductInfoRequestDto {
-  productName: string;
+  productCodeInfo: number;
+  productNameInfo: string;
   procurementCategory: number;
   productPrice: number;
-
 }

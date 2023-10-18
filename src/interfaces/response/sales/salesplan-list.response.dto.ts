@@ -1,16 +1,11 @@
 export default interface SalesPlanListResponseDto {
   no: number;
-  salesPlanCode: number;
-  employeeCode: number;
-  departmentCode: number;
-  companyCode: number;
-  planDate: string;
   productCode: number;
-  productName: string;
+  porductName: string;
+  unit: string;
   planQuantity: number;
-  exchangeRateCode: number;
+  exchangeRateType: number;
   exchangeRate: number;
   expectPrice: number;
   expectTotalPrice: number;
-  expectKoreanPrice: number;
 }

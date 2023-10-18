@@ -10,7 +10,6 @@ export interface SalesPlanInfo {
   exchangeRate: number;
   expectPrice: number;
   expectTotalPrice: number;
-  planDate: string;
 }
 
 interface SalesPlanInfoStore {

@@ -1,4 +1,4 @@
 export default interface CustomerListRequestDto {
-  customerCode: number | null;
+  customerCode: number;
   customerName: string;
 }
