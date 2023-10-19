@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import SearchViewMenu from '../SearchViewMenu'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useIncentiveViewListRequestStore, useIncentiveViewListStore, useUserStore } from 'src/stores';
 import IncentiveViewListItem from 'src/components/IncentiveListItem';
-import { INCENTIVE_CATEGORY } from 'src/constants';
+import { HOME_PATH, INCENTIVE_CATEGORY } from 'src/constants';
 import IncentiveTypeResponseDto from 'src/interfaces/response/searchView/incentive-type.response.dto';
 import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
@@ -25,6 +25,7 @@ export default function IncentiveViewList() {
 
 
     //!               function              //
+    const navigator = useNavigate();
     // description: 급상여구분 조회 응답 함수 //
     const getIncentiveTypeListResponseHandler = (responsebody: GetIncentiveTypeListResponseDto | ResponseDto ) => {
 
@@ -39,7 +40,7 @@ export default function IncentiveViewList() {
    }   
 
 
-    //!             event handler              //
+     //!             event handler              //
      // description : 지급기간 Start 입력 이벤트 //
      const onPaymentDateStartChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
           setIncentiveViewListDateStart(event.target.value);
@@ -70,6 +71,7 @@ export default function IncentiveViewList() {
           resetIncentiveViewList();
           if(!user){
                alert('로그인이 필요합니다.');
+               navigator(HOME_PATH);
                return;
           }
           setIncentiveViewListEmployeeCode(user?.employeeCode);

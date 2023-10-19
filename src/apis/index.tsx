@@ -22,6 +22,8 @@ import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/syste
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
+import GetEmployeeCodeListRequestDto from 'src/interfaces/request/common/get-employee-code-list.request.dto';
+import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -45,6 +47,9 @@ const GET_INOUTCOME_LIST_URL = () => `${API_DOMAIN}/accounting/inout-come`;
 const GET_FUNDS_LIST_URL = () => `${API_DOMAIN}/searchView/check-funds`;
 const GET_EMPLOYEE_LIST_VIEW_URL = () => `${API_DOMAIN}/searchView/employee-list`;
 const GET_INCENTIVE_VIEW_LIST_URL = () => `${API_DOMAIN}/searchView/incentive-list`;
+
+// 검색
+const GET_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code`;
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -293,12 +298,24 @@ export const getEmployeeListViewRequest = async (data : EmployeeListViewRequestD
   });
   return result;
 }
-
 // 급/상여정보조회 메서드
 export const getIncentiveViewListRequest = async (data : IncentiveViewListRequestDto) => {
   const result = await axios.post(GET_INCENTIVE_VIEW_LIST_URL(), data)
   .then((response) => {
     const responsebody : GetIncentiveViewListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 검색 : 사원목록조회 메서드
+export const getEmployeeCodeListRequest = async (data : GetEmployeeCodeListRequestDto) => {
+  const result = await axios.post(GET_CODE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetSearchCodeListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {

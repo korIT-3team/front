@@ -5,20 +5,27 @@ import { useInvoiceListStore, useInvoiceRequestStore } from 'src/stores';
 import { useLocation } from 'react-router-dom';
 import './style.css'
 import InvoiceTypeResponseDto from 'src/interfaces/response/accounting/invoice-type.response.dto';
-import { getInvoiceTypeRequest } from 'src/apis';
+import { getEmployeeCodeListRequest, getInvoiceTypeRequest } from 'src/apis';
 import { GetInvoiceTypeListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
+import CodeSearchListItem from 'src/components/CodeSearchListItem';
+import SearchCodeResponseDto from 'src/interfaces/response/common/search-code.response.dto';
+import GetEmployeeCodeListRequestDto from 'src/interfaces/request/common/get-employee-code-list.request.dto';
+import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 
 export default function InvoiceList() {
     //!          state          //
     // description : path 상태 //
     const { pathname } = useLocation();
     // description: 조회조건 정보 store //
-    const { setEmployeeCode, setDepartmentCode, setInvoiceDateStart, setInvoiceDateEnd, setInvoiceTypeName, resetInvoiceRequst } = useInvoiceRequestStore();
+    const { employeeCode ,setEmployeeCode, setDepartmentCode, setInvoiceDateStart, setInvoiceDateEnd, setInvoiceTypeName, resetInvoiceRequst } = useInvoiceRequestStore();
     // description: 조회된 전표 리스트 정보 store //
     const { invoiceList, resetInvoiceList } = useInvoiceListStore();
     // description: 조회조건 : 전표유형 리스트 정보 store //
     const [ invoiceTypeList, setInvoiceTypeList ] = useState<InvoiceTypeResponseDto[]>([]);
+    const [ open, setOpen ] = useState<boolean>(false);
+    const [ label, setLabel ] =useState<string>('');
+    const [ searchCodeList, setSearchCodeList ] = useState<SearchCodeResponseDto[]>([]);
 
 
     //!               function              //
@@ -33,6 +40,17 @@ export default function InvoiceList() {
 
       const { invoiceTypeList } = responsebody as GetInvoiceTypeListResponseDto;
       setInvoiceTypeList(invoiceTypeList);
+    }   
+    const getEmployeeCodeListResponseHandelr = (responsebody: GetSearchCodeListResponseDto | ResponseDto ) => {
+
+      const {code} = responsebody;
+      if( code === 'NE') alert('존재하지않는 회원입니다.');
+      if( code === 'DE') alert('데이터베이스 에러');
+      if( code === 'NP') alert('권한이 없습니다.');
+      if( code !== 'SU') return;
+
+      const { searchCodeList } = responsebody as GetSearchCodeListResponseDto;
+      setSearchCodeList(searchCodeList);
     }   
 
     //!             event handler              //
@@ -62,6 +80,19 @@ export default function InvoiceList() {
     const onInvoiceTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
       setInvoiceTypeName(event.target.value);
     }
+    const onEmployeeSearchOpenButtonClickHandler = () => {
+      setOpen(true);
+      setLabel('사원조회결과');
+      // todo! : 각 클릭핸들러는 만들고 리퀘스트랑 리스폰스핸들러도 각자 만들어지지만, 그 데이터리스트를 받는 dto는 하나만 있고 그걸 넘겨주면된다.
+      //! 각 검색마다 연결해주기.
+      const data: GetEmployeeCodeListRequestDto = {
+        employeeCode : employeeCode,
+   }
+      getEmployeeCodeListRequest(data).then(getEmployeeCodeListResponseHandelr);
+    }
+    const onCloseButtonClickHandler = () => {
+      setOpen(false);
+    }
 
     //!                    effect                   //
     // description : 뷰에 들어올 때 한번만 실행 //
@@ -74,14 +105,14 @@ export default function InvoiceList() {
       // description : 전표유형 콤보박스 리스트 호출
       getInvoiceTypeRequest().then(getInvoiceTypeListResponseHandler);
     }, [])
+
     // description : path가 바뀔 때마다 실행 //
     useEffect(()=>{
           resetInvoiceRequst();
           // resetInvoiceList();
           
      }, [pathname])
-
-
+    
     //!          render          //
     return (
         <div id='invoice-wrapper'>
@@ -97,7 +128,7 @@ export default function InvoiceList() {
                     <div className='invoice-right-top-search-dept-box-code-box'>
                       <input className='invoice-right-top-search-dept-box-code-box-text' type="text" onChange={onDepartmentCodeChangeHandler} />
                     </div>
-                    <div className='invoice-right-top-search-button'>검색</div>
+                    <div className='invoice-right-top-search-button' >검색</div>
                     <div className='invoice-right-top-search-dept-box-name-box'>
                       <div className='invoice-right-top-search-dept-box-name-box-text'>부서명</div>
                     </div>
@@ -109,7 +140,7 @@ export default function InvoiceList() {
                       <div className='invoice-right-top-search-employee-box-code-box'>
                         <input className='invoice-right-top-search-employee-box-code-box-text' type="text" onChange={onEmployeeCodeChangeHandler}/>
                       </div>
-                      <div className='invoice-right-top-search-button'>검색</div>
+                      <div className='invoice-right-top-search-button' onClick={onEmployeeSearchOpenButtonClickHandler}>검색</div>
                       <div className='invoice-right-top-search-employee-box-name-box'>
                         <div className='invoice-right-top-search-employee-box-name-box-text'>사원명</div>
                       </div>
@@ -142,20 +173,24 @@ export default function InvoiceList() {
                 </div>
               </div>
               {/* 검색결과 */}
-              <div className="invoicelist-search-result">
-                <div className="invoicelist-search-result-list-text">Total {invoiceList === null ? 0 : invoiceList.length} EA</div>
-                <div className="invoicelist-search-result-list-container">
-                  <div className="invoicelist-search-result-list-title">
-                    <div className="title-number"> </div>
-                    <div className="title-date">결의일</div>
-                    <div className="title-invoice-code">전표번호</div>
-                    <div className="title-invoice-type">구분</div>
-                    <div className="title-price">금액</div>
-                    <div className="title-invoice-content">적요</div>
-                    <div className="title-worker-code">담당자</div>
+              <div id='bottom-wrapper'>
+                <div className="invoicelist-search-result">
+                  <div className="invoicelist-search-result-list-text">Total {invoiceList === null ? 0 : invoiceList.length} EA</div>
+                  <div className="invoicelist-search-result-list-container">
+                    <div className="invoicelist-search-result-list-title">
+                      <div className="title-number"> </div>
+                      <div className="title-date">결의일</div>
+                      <div className="title-invoice-code">전표번호</div>
+                      <div className="title-invoice-type">구분</div>
+                      <div className="title-price">금액</div>
+                      <div className="title-invoice-content">적요</div>
+                      <div className="title-worker-code">담당자</div>
+                    </div>
+                    { invoiceList !== null && invoiceList.map( (item) => (<InvoiceListItem item = {item} />) ) }
                   </div>
-                  { invoiceList !== null && invoiceList.map( (item) => (<InvoiceListItem item = {item} />) ) }
                 </div>
+
+                {open && <CodeSearchListItem label={label} dtoList={searchCodeList} onCloseButtonClick={onCloseButtonClickHandler} />}
               </div>
             </div>
           </div>
