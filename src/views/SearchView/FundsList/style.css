@@ -1,4 +1,4 @@
-#inoutcome-wrapper {
+#fundslist-wrapper {
      display: flex;
 }
 .funds-right {
@@ -405,7 +405,7 @@ display: flex;
      font-weight: 700;
      line-height: normal;
 }
-.inoutcome-title-number{
+.fundslist-title-number{
      width: 35px;
      height: 100%;
      display: flex;
@@ -413,7 +413,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-date{
+.fundslist-title-date{
      width: 105px;
      height: 100%;
      display: flex;
@@ -421,7 +421,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-funds-customer{
+.fundslist-title-funds-customer{
      width: 100px;
      height: 100%;
      display: flex;
@@ -429,7 +429,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-funds-content{
+.fundslist-title-funds-content{
      width: 287px;
      height: 100%;
      display: flex;
@@ -437,7 +437,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-funds-type{
+.fundslist-title-funds-type{
      width: 94px;
      height: 100%;
      display: flex;
@@ -445,7 +445,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-inoutcome-income{
+.fundslist-title-income{
      width: 130px;
      height: 100%;
      display: flex;
@@ -453,7 +453,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-inoutcome-outcome{
+.fundslist-title-outcome{
      width: 130px;
      height: 100%;
      display: flex;
@@ -461,7 +461,7 @@ display: flex;
      justify-content: center;
      border-right: 1px solid white;
 }
-.inoutcome-title-inoutcome-balance{
+.fundslist-title-balance{
      width: 201px;
      height: 100%;
      display: flex;

@@ -2,12 +2,9 @@ export default interface PutSalesPlanInfoRequestDto {
   
     salesPlanCodeInfo: number;
     projectNameInfo: string;
-    employeeCodeInfo: number;
-    departmentCodeInfo: number;
-    salesPlanCompanyCode: number;
-    planDate: string;
-    productCode: number;
-    productName: string;
+    salesPlanProductCode: number;
+    salesPlanProductName: string;
+    salesPlanUnit: string;
     planQuantity: number;
     exchangeRateCode: number;
     exchangeRate: number;

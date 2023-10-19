@@ -125,7 +125,8 @@ export default function CustomerInfo() {
     const token = cookies.accessToken;
 
     const data: PutCustomerInfoRequestDto = {
-      customerName: customerNameInfo,
+      customerCodeInfo: 0,
+      customerNameInfo: customerNameInfo,
       customerBusinessNumber: customerBusinessNumber,
       customerPostCode: customerPostCode,
       customerAddress: customerAddress,

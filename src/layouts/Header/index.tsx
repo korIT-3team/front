@@ -28,7 +28,7 @@ export default function Header() {
      // description : Cookie 상태 //
      const [ cookies ] = useCookies();
      // description: 전표 조회조건 store //
-     const { employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceType, resetInvoiceRequst } = useInvoiceRequestStore();
+     const { employeeCode, departmentCode, invoiceDateStart, invoiceDateEnd, invoiceTypeName, resetInvoiceRequst } = useInvoiceRequestStore();
      // description: 전표 리스트 store //
      const { setInvoiceList, resetInvoiceList } = useInvoiceListStore();
      // description: 회사 정보 상태
@@ -475,7 +475,7 @@ export default function Header() {
                employeeCode,
                invoiceDateStart,
                invoiceDateEnd,
-               invoiceType,
+               invoiceTypeName,
           }
           getInvoiceListRequest(data).then(getInvoiceListResponseHandler)
      }
@@ -528,7 +528,7 @@ export default function Header() {
           const data: EmployeeListViewRequestDto = {
                departmentCode : employeeListViewDepartmentCode,
                employeeCode : employeeListViewEmployeeCode,
-               employmentCode : employeeListViewEmploymentCode,
+               employmentType : employeeListViewEmploymentCode,
           }
           getEmployeeListViewRequest(data).then(getEmployeeViewListResponseHandler)
      }
@@ -536,7 +536,7 @@ export default function Header() {
      const onIncentiveViewListSearchButtonClickHandler = () => {
           const data: IncentiveViewListRequestDto = {
                employeeCode : incentiveViewListEmployeeCode,
-               incentiveCategory : incentiveViewListCategory,
+               incentiveCategoryName : incentiveViewListCategory,
                paymentDateStart : incentiveviewlistDateStart,
                paymentDateEnd : incentiveviewlistDateEnd,
           }
@@ -564,7 +564,8 @@ export default function Header() {
                if (!customerList) return;
                const selectedCustomer = customerList.find((item) => (item.customerCode === selectedCustomerCode && item.customerName === selectedCustomerName));
                const data: PutCustomerInfoRequestDto = {
-                    customerName: selectedCustomer?.customerName as string,
+                    customerCodeInfo: selectedCustomer?.customerCode as number,
+                    customerNameInfo: selectedCustomer?.customerName as string,
                     customerBusinessNumber: selectedCustomer?.customerBusinessNumber as string,
                     customerPostCode: selectedCustomer?.customerPostCode as string,
                     customerAddress: selectedCustomer?.customerAddress as string,
@@ -573,9 +574,9 @@ export default function Header() {
                }
                putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
           };
-          setSelectedCustomerCode(null);
+          setSelectedCustomerCode(0);
           setSelectedCustomerName("");
-          setCustomerCode(null);
+          setCustomerCode(0);
           setCustomerName("");
      }
 //! ============================================================================================

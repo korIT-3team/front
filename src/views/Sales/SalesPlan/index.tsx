@@ -4,7 +4,7 @@ import SalesMenu from '../SalesMenu'
 
 import './style.css'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useProductListStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore } from 'src/stores';
+import { useProductInfoStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore } from 'src/stores';
 import { GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
 import ResponseDto from 'src/interfaces/response/response.dto';
 
@@ -15,17 +15,17 @@ export default function SalesPlan() {
   const { pathname } = useLocation();
   // description: SalesPlan 정보 상태 //
   const { salesPlanCodeInfo, employeeCodeInfo, departmentCodeInfo,
-    companyCodeInfo, salesPlanDate, salesPlanProductCode,
+    salesPlanDate, salesPlanProductCode,
     planQuantity ,exchangeRateCode, exchangeRate,
     expectPrice, expectTotalPrice, expectKoreanPrice, 
     setSalesPlanCodeInfo ,setEmployeeCodeInfo, setDepartmentCodeInfo,
-    setCompanyCodeInfo, setSalesPlanDate, setSalesPlanProductCode,
+    setSalesPlanDate, setSalesPlanProductCode,
     setPlanQuantity, setExchangeRateCode, setExchangeRate,
     setExpectPrice, setExpectTotalPrice, setExpectKoreanPrice } = useSalesPlanInfoStore();
   // description: 품명 정보 상태 //
-  const { productName, setProductName } = useProductListStore();
+  const { productName, setProductName } = useProductInfoStore();
   // description: 조회조건 정보 store //
-  const { setDepartmentCode, setEmployeeCode, setPlanDateStart, setPlanDateEnd, resetSalesPlanListRequest } = useSalesPlanRequestStore();
+  const { setSalesPlanCode, setProjectName, resetSalesPlanRequest } = useSalesPlanRequestStore();
   // description: SalesPlan 정보 불러오기 //
   const { salesPlanList, setSalesPlanList, resetSalesPlanList } = useSalesPlanResponseStore();
 
@@ -38,7 +38,7 @@ export default function SalesPlan() {
     const reg = /^[0-9]*$/;
     const value = event.target.value;
     const isNumber = reg.test(value);
-    if (isNumber) setDepartmentCode(Number(value));
+    if (isNumber) setDepartmentCodeInfo(Number(value));
   }
 
   // description: 사원코드 입력 이벤트 //
@@ -46,16 +46,7 @@ export default function SalesPlan() {
     const reg = /^[0-9]*$/;
     const value = event.target.value;
     const isNumber = reg.test(value);
-    if (isNumber) setEmployeeCode(Number(value));
-  }
-
-  // description : 계획기간 START 입력 이벤트 //
-  const onPlanDateStartChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPlanDateStart(event.target.value);
-  }
-  // description : 계획기간 END 입력 이벤트 //
-  const onPlanDateEndChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setPlanDateEnd(event.target.value);
+    if (isNumber) setEmployeeCodeInfo(Number(value));
   }
 
   // description: 품번 입력력 이벤트 //
@@ -83,9 +74,9 @@ export default function SalesPlan() {
   const onExchangeRateTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
 
-    let type = null;
+    let type = 0;
 
-    if (value === '선택') type = null;
+    if (value === '선택') type = 0;
     if (value === 'USD') type = 1;
     if (value === 'JPY') type = 2;
     if (value === 'EUR') type = 3;
@@ -117,7 +108,7 @@ export default function SalesPlan() {
   // effect //
   useEffect(() => {
     resetSalesPlanList();
-    resetSalesPlanListRequest();
+    resetSalesPlanRequest();
   }, [pathname])
 
   // render //
@@ -156,20 +147,11 @@ export default function SalesPlan() {
               <div className='sales-plan-search-container-top-plan-date-text'>계획 일자*</div>
               <div className='sales-plan-search-container-top-plan-date-container'>
                 <div className='sales-plan-search-container-top-plan-date-select-box'>
-                  <input className='sales-plan-search-container-top-plan-date-select' onChange={onPlanDateStartChangeHandler} type='date'/>
-                </div>
-                <div className="middle-text">~</div>
-                <div className='sales-plan-search-container-top-plan-date-select-box'>
-                  <input className='sales-plan-search-container-top-plan-date-select' onChange={onPlanDateEndChangeHandler} type='date'/>
+                  <input className='sales-plan-search-container-top-plan-date-select' />
                 </div>
               </div>
             </div>
             {/* 계획일자 */} 
-          </div>
-          <div className='sales-plan-search-button-container'>
-            <div className='sales-plan-search-button'>
-              <div className='sales-plan-search-button-text'>조회</div>
-            </div>
           </div>
           <div className='sales-plan-register-container-top'>
             <div className='sales-plan-register-container-top-product-code'>

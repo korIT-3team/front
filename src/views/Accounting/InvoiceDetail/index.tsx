@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react'
 import AccountingMenu from '../AccountingMenu'
 import './style.css'
 import { useInvoiceListStore } from 'src/stores'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getInvoiceDetailIncentiveRequest, getInvoiceDetailOrderRequest, getInvoiceDetailSalesRequest } from 'src/apis'
 import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto'
 import { GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto } from 'src/interfaces/response/accounting'
 import ResponseDto from 'src/interfaces/response/response.dto'
+import { ACCOUNTING_INVOICE_PATH, INVOICE_TYPE } from 'src/constants'
 
 export default function InvoiceDetail() {
   //!          state          //
@@ -14,8 +15,6 @@ export default function InvoiceDetail() {
   const{ invoiceCode } = useParams();
   // description : 전표 유형 구분 상태(매입,매출,급상여) //
   const[ invoiceType, setInvoiceType ] = useState<string>('');
-  // description : 급/상여 구분 상태(급여,상여) //
-  const[ incentiveCategory, setIncentiveCategory ] = useState<string>('');
   // description : 전표 스토어 //
   const { invoiceList, resetInvoiceList } = useInvoiceListStore();       
   // description : 수주전표 상태 //
@@ -27,6 +26,7 @@ export default function InvoiceDetail() {
 
 
   //!           function            //
+  const navigator = useNavigate();
   // description : 전표(수주) 불러오기 응답 처리 함수 //
   const getOrderInfoResponseHandler = (responsebody : GetInvoiceDetailOrderResponseDto | ResponseDto) => {
     const { code } = responsebody;
@@ -45,7 +45,10 @@ export default function InvoiceDetail() {
     if( code === 'NE') alert('존재하지않는 회원입니다.');
     if( code === 'DE') alert('데이터베이스 에러');
     if( code === 'NP') alert('권한이 없습니다.');
-    if( code === 'NI') alert('존재하지않는 전표입니다.');
+    if( code === 'NI'){
+      alert('존재하지않는 전표입니다.');
+      navigator(ACCOUNTING_INVOICE_PATH);
+    } 
     if( code !== 'SU') return;
 
     const salesInvoice =  responsebody as GetInvoiceDetailSalesResponseDto;
@@ -57,13 +60,15 @@ export default function InvoiceDetail() {
     if( code === 'NE') alert('존재하지않는 회원입니다.');
     if( code === 'DE') alert('데이터베이스 에러');
     if( code === 'NP') alert('권한이 없습니다.');
-    if( code === 'NI') alert('존재하지않는 전표입니다.');
+    if( code === 'NI'){
+      alert('존재하지않는 전표입니다.');
+      navigator(ACCOUNTING_INVOICE_PATH);
+      return;
+    } 
     if( code !== 'SU') return;
 
     const incentiveInvoice =  responsebody as GetInvoiceDetailIncentiveResponseDto;
     setIncentiveInvoice(incentiveInvoice);
-    // todo ? : 이 부분 또한 확장성 고민
-    setIncentiveCategory(incentiveInvoice.incentiveCategory == 1 ? '급여' : '상여');
   }
 
   //!         event Handler          //
@@ -74,20 +79,17 @@ export default function InvoiceDetail() {
     // description : invoice code 로 클릭된 전표 가져오기
     const found = invoiceList?.find(item => item.invoiceCode == Number(invoiceCode) );
     if(!found) return;
-
-    // todo ? : 이 부분 일부러 userdefineCode 테이블로 확장성을 고려해서 짰는데, 상수로 박아버리면 의미가없으니 수정해야하는데 방법 고민
-    setInvoiceType(found.invoiceType == 1? '매입' : found.invoiceType == 2? '매출' : found.invoiceType == 3? '급/상여' : '');
     const data: InvoiceDetailRequestDto = {
       primaryKey : found.invoiceDetailPk,
     }
-
-    if(found.invoiceType == 1){
+    setInvoiceType(found.invoiceTypeName);
+    if(found.invoiceTypeName == INVOICE_TYPE.ORDER){
       getInvoiceDetailOrderRequest(found.invoiceCode, data).then(getOrderInfoResponseHandler);
     }
-    else if(found.invoiceType == 2){
+    else if(found.invoiceTypeName == INVOICE_TYPE.SALE){
       getInvoiceDetailSalesRequest(found.invoiceCode, data).then(getSalesInfoResponseHandler);
     }
-    else if(found.invoiceType == 3){
+    else if(found.invoiceTypeName == INVOICE_TYPE.INCENTIVE){
       getInvoiceDetailIncentiveRequest(found.invoiceCode, data).then(getIncentiveResponseHandler);
     }
   }, [])
@@ -107,10 +109,10 @@ export default function InvoiceDetail() {
             </div>
           </div>
           <div className='invoice-detail-search-employee'>
-            <div className='invoice-detail-search-employee-text'>판매계획코드</div>
+            <div className='invoice-detail-search-employee-text'>프로젝트</div>
             <div className='invoice-detail-search-employee-box'>
               <div className='invoice-detail-search-employee-box-code-box'>
-                <input className='invoice-detail-search-employee-box-code-box-text' value={orderInvoice?.salesPlanCode} type="text" />
+                <input className='invoice-detail-search-employee-box-code-box-text' value={orderInvoice?.projectName} type="text" />
               </div>
             </div>              
           </div>
@@ -138,7 +140,7 @@ export default function InvoiceDetail() {
             <div className='invoice-detail-search-dept-text'>수주금액</div>
             <div className='invoice-detail-search-dept-box'>
               <div className='invoice-detail-search-dept-box-code-box'>
-                <input className='invoice-detail-search-dept-box-code-box-text' value={orderInvoice?.orderPrice} type="text" />
+                <input className='invoice-detail-search-dept-box-code-box-text' value={orderInvoice?.orderPrice + ' 원'} type="text" />
               </div>
             </div>
           </div>
@@ -178,10 +180,10 @@ export default function InvoiceDetail() {
             </div>
           </div>
           <div className='invoice-detail-search-employee'>
-            <div className='invoice-detail-search-employee-text'>판매계획코드</div>
+            <div className='invoice-detail-search-employee-text'>프로젝트</div>
             <div className='invoice-detail-search-employee-box'>
               <div className='invoice-detail-search-employee-box-code-box'>
-                <input className='invoice-detail-search-employee-box-code-box-text' value={salesInvoice?.salesPlanCode} type="text" />
+                <input className='invoice-detail-search-employee-box-code-box-text' value={salesInvoice?.projectName} type="text" />
               </div>
             </div>              
           </div>
@@ -209,7 +211,7 @@ export default function InvoiceDetail() {
             <div className='invoice-detail-search-dept-text'>매출금액</div>
             <div className='invoice-detail-search-dept-box'>
               <div className='invoice-detail-search-dept-box-code-box'>
-                <input className='invoice-detail-search-dept-box-code-box-text' value={salesInvoice?.salesPrice} type="text" />
+                <input className='invoice-detail-search-dept-box-code-box-text' value={salesInvoice?.salesPrice + ' 원'} type="text" />
               </div>
             </div>
           </div>
@@ -252,7 +254,7 @@ export default function InvoiceDetail() {
             <div className='invoice-detail-search-employee-text'>구분</div>
             <div className='invoice-detail-search-employee-box'>
               <div className='invoice-detail-search-employee-box-code-box'>
-                <input className='invoice-detail-search-employee-box-code-box-text' value={incentiveCategory} type="text" />
+                <input className='invoice-detail-search-employee-box-code-box-text' value={incentiveInvoice?.incentiveCategoryName} type="text" />
               </div>
             </div>              
           </div>
@@ -279,7 +281,7 @@ export default function InvoiceDetail() {
           <div className='invoice-detail-last-line-text'>금액</div>
           <div className='invoice-detail-last-line-box'>
             <div className='invoice-detail-last-line-box-code-box'>
-              <input className='invoice-detail-last-line-box-code-box-text' value={incentiveInvoice?.incentivePrice} type="text" />
+              <input className='invoice-detail-last-line-box-code-box-text' value={incentiveInvoice?.incentivePrice + ' 원'} type="text" />
             </div>
           </div>
         </div>
@@ -323,9 +325,9 @@ export default function InvoiceDetail() {
               </div>              
             </div>
           </div>
-          { invoiceType == '매입' && (<OrderInfoCard/>) }
-          { invoiceType == '매출' && (<SalesInfoCard/>) }
-          { invoiceType == '급/상여' && (<IncentiveInfoCard/>) }
+          { invoiceType == INVOICE_TYPE.ORDER && (<OrderInfoCard/>) }
+          { invoiceType == INVOICE_TYPE.SALE && (<SalesInfoCard/>) }
+          { invoiceType == INVOICE_TYPE.INCENTIVE && (<IncentiveInfoCard/>) }
         </div>
       </div>
     </div>

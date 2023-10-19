@@ -1,5 +1,6 @@
 export default interface PutCustomerInfoRequestDto {
-  customerName: string;
+  customerCodeInfo: number;
+  customerNameInfo: string;
   customerBusinessNumber: string;
   customerPostCode: string;
   customerAddress: string;

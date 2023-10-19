@@ -4,11 +4,11 @@ interface SalesPlanInfoStore {
   salesPlanCodeInfo: number;
   employeeCodeInfo: number;
   departmentCodeInfo: number;
-  companyCodeInfo: number;
+  projectName: string;
   salesPlanDate: string;
   salesPlanProductCode: number;
   planQuantity: number;
-  exchangeRateCode: number | null;
+  exchangeRateCode: number;
   exchangeRate: number;
   expectPrice: number;
   expectTotalPrice: number;
@@ -17,36 +17,37 @@ interface SalesPlanInfoStore {
   setSalesPlanCodeInfo: (salesPlanCode: number) => void;
   setEmployeeCodeInfo: (employeeCode: number) => void;
   setDepartmentCodeInfo: (departmentCode: number) => void;
-  setCompanyCodeInfo: (companyCode: number) => void;
+  setProjectName: (projectName: string) => void;
   setSalesPlanDate: (salesPlanDate: string) => void;
   setSalesPlanProductCode: (productCode: number) => void;
   setPlanQuantity: (planQuantity: number) => void;
-  setExchangeRateCode: (exchangeRateCode: number | null) => void;
+  setExchangeRateCode: (exchangeRateCode: number) => void;
   setExchangeRate: (exchangeRate: number) => void;
   setExpectPrice: (expectPrice: number) => void;
   setExpectTotalPrice: (expectTotalPrice: number) => void;
   setExpectKoreanPrice: (expectKoreanPrice: number) => void;
 
+  resetSalesPlanInfo: () => void;  
 }
 
 const useStore = create<SalesPlanInfoStore>((set) => ({
-  salesPlanCodeInfo: 1,
-  employeeCodeInfo: 3000,
-  departmentCodeInfo: 1000,
-  companyCodeInfo: 1,
+  salesPlanCodeInfo: 0,
+  employeeCodeInfo: 0,
+  departmentCodeInfo: 0,
+  projectName: "",
   salesPlanDate: "",
-  salesPlanProductCode: 2000,
-  planQuantity: 1,
-  exchangeRateCode: null,
-  exchangeRate: 1,
-  expectPrice: 20000,
-  expectTotalPrice: 20000,
-  expectKoreanPrice: 20000,
+  salesPlanProductCode: 0,
+  planQuantity: 0,
+  exchangeRateCode: 0,
+  exchangeRate: 0,
+  expectPrice: 0,
+  expectTotalPrice: 0,
+  expectKoreanPrice: 0,
 
   setSalesPlanCodeInfo: (salesPlanCodeInfo) => set((state) => ({ ...state, salesPlanCodeInfo })),
   setEmployeeCodeInfo: (employeeCodeInfo) => set((state) => ({ ...state, employeeCodeInfo })),
   setDepartmentCodeInfo: (departmentCodeInfo) => set((state) => ({ ...state, departmentCodeInfo })),
-  setCompanyCodeInfo: (companyCodeInfo) => set((state) => ({ ...state, companyCodeInfo })),
+  setProjectName: (projectName) => set((state) => ({ ...state, projectName })),  
   setSalesPlanDate: (salesPlanDate) => set((state) => ({ ...state, salesPlanDate })),
   setSalesPlanProductCode: (salesPlanProductCode) => set((state) => ({ ...state, salesPlanProductCode })),
   setPlanQuantity: (planQuantity) => set((state) => ({ ...state, planQuantity })),
@@ -56,6 +57,9 @@ const useStore = create<SalesPlanInfoStore>((set) => ({
   setExpectTotalPrice: (expectTotalPrice) => set((state) => ({ ...state, expectTotalPrice })),
   setExpectKoreanPrice: (expectKoreanPrice) => set((state) => ({ ...state, expectKoreanPrice })),
 
+  resetSalesPlanInfo: () => set((state) => ({ ...state, salesPlanCodeInfo: 0, employeeCodeInfo: 0, departmentCodeInfo: 0, projectName: "",
+                                            salesPlanDate: "", salesPlanProductCode: 0, planQuantity: 0, exchangeRateCode: 0, exchangeRate: 0,
+                                            expectPrice: 0, expectTotalPrice: 0, expectKoreanPrice: 0 }))
 }));
 
 export default useStore;

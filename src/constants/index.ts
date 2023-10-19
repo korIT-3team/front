@@ -66,47 +66,18 @@ export enum DEPARTMENT_CODE {
   SALES = 1001,
   FUNDS = 1002,
 }
-// 직위코드
-export enum POSITION_CODE {
-  SAWON = 1,
-  DAELEE = 2,
-  GWAJANG = 3,
-  CHAJANG = 4,
-  BOOJANG = 5,
+// 전표유형
+export enum INVOICE_TYPE {
+  ORDER = '매입',
+  SALE = '매출',
+  INCENTIVE = '급/상여',
 }
-// 직위명
-export enum POSITION_NAME {
-  SAWON = '사원',
-  DAELEE = '대리',
-  GWAJANG = '과장',
-  CHAJANG = '차장',
-  BOOJANG = '부장',
+// 과세유형
+export enum TAX_TYPE {
+  ORDER = '매입세액',
+  SALE = '매출과세',
+  INCENTIVE = '급/상여',
 }
-// 재직코드
-export enum EMPLOYEMENT_CODE {
-  CURRENT = 1,
-  OUT = 2,
-  REST = 3,
-}
-// 재직구분
-export enum EMPLOYEMENT_NAME {
-  CURRENT = '재직',
-  OUT = '퇴사',
-  REST = '휴직',
-}
-// 성별코드
-export enum GENDER_CODE {
-  MALE = 1,
-  FEMALE = 2,
-  SYSTEM = 3,
-}
-// 성별구분
-export enum GENDER_NAME {
-  MALE = '남자',
-  FEMALE = '여자',
-  SYSTEM = 'SYSTEM',
-}
-
 // 급상여 구분
 export enum INCENTIVE_CATEGORY {
   SALARY = '급여',
