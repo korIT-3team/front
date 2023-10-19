@@ -10,7 +10,7 @@ interface SelectedCustomerStore {
 
 const useStore = create<SelectedCustomerStore>((set) => ({
   selectedCustomerCode: null,
-  selectedCustomerName: "",
+  selectedCustomerName: null,
 
   setSelectedCustomerCode: (selectedCustomerCode) => set((state) => ({ ...state, selectedCustomerCode })),
   setSelectedCustomerName: (selectedCustomerName) => set((state) => ({ ...state, selectedCustomerName })),

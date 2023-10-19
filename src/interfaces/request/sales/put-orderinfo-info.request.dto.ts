@@ -1,5 +1,6 @@
 export default interface PutOrderInfoInfoRequestDto {
   orderCodeInfo: number;
+  orderInfoSalesPlanCode: number;
   orderInfoDate: string;
   orderInfoCustomerCode: number;
   orderInfoManager: string;

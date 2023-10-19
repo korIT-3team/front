@@ -18,6 +18,8 @@ export default function SystemMenu() {
   const clickDeptInfoMenu = pathname.includes(SYSTEM_DEPT_INFO);
   const clickSystemEmployeeInfoMenu = pathname.includes(SYSTEM_EMPLOYEE_INFO);
   const clickSystemCompanyInfoMenu = pathname.includes(SYSTEM_COMPANY_INFO);
+  const clictCustomerInfoMenu = pathname.includes(SYSTEM_CUSTOMER_INFO);
+  const clickProductInfoMenu = pathname.includes(SYSTEM_PRODUCT_INFO);
 
   // event handler //
   const onCompanyInfoButtonClickHandler = () => {
@@ -53,8 +55,8 @@ export default function SystemMenu() {
               <div className={clickSystemCompanyInfoMenu? 'company-info-registration-active' : 'company-info-registration' } onClick={onCompanyInfoButtonClickHandler}>회사등록</div>
               <div className= {clickDeptInfoMenu ? 'dept-info-registration-active' : 'dept-info-registration'} onClick={onDeptInfoButtonClickHandler}>부서등록</div>
               <div className={clickSystemEmployeeInfoMenu ? 'employee-info-registration-active' : 'employee-info-registration'} onClick={onEmployeeInfoButtonClickHandler}>사원등록</div>
-              <div className='customer-info-registration' onClick={onCustomerInfoButtonClickHandler}>거래처등록</div>
-              <div className='product-info-registration' onClick={onProductInfoButtonClickHandler}>품목등록</div>
+              <div className={clictCustomerInfoMenu ? 'customer-info-registration-active' : 'customer-info-registration'} onClick={onCustomerInfoButtonClickHandler}>거래처등록</div>
+              <div className={clickProductInfoMenu ? 'product-info-registration-active' : 'product-info-registration'} onClick={onProductInfoButtonClickHandler}>품목등록</div>
             </div>
           </div>
         </div>

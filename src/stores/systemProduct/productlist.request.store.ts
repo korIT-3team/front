@@ -1,21 +1,21 @@
 import { create } from "zustand";
 
 export interface ProductListRequestStore {
-  productName: string;
-  procurementCategory: number;
+  productNameInfo: string;
+  procurementCategoryInfo: number;
 
-  setProductName: (productName: string) => void;
-  setProcurementCategory: (procurementCategory: number) => void;
+  setProductNameInfo: (productName: string) => void;
+  setProcurementCategoryInfo: (procurementCategory: number) => void;
   
   resetProductRequest: () => void;
 }
 
 const useStore = create<ProductListRequestStore>((set) => ({
-  productName: "",
-  procurementCategory: 0,
+  productNameInfo: "",
+  procurementCategoryInfo: 0,
   
-  setProductName: (productName) => set((state) => ({ ...state, productName })),
-  setProcurementCategory: (procurementCategory) => set((state) => ({ ...state, procurementCategory })),
+  setProductNameInfo: (productNameInfo) => set((state) => ({ ...state, productNameInfo })),
+  setProcurementCategoryInfo: (procurementCategoryInfo) => set((state) => ({ ...state, procurementCategoryInfo })),
 
   resetProductRequest: () => set((state) => ({ ...state, productName:"", procurementCategory:0 }))
 }));

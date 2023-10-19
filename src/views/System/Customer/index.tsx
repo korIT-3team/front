@@ -19,10 +19,13 @@ export default function CustomerInfo() {
   // state //
   // description: path 상태 //
   const {pathname} = useLocation();
+  // description: 암호화 상태 //
+  const [ passwordState, setPasswordState ] = useState<boolean>(true);
   // description: 로그인 사용자의 정보 상태
   const { user, setUser } = useUserStore();
   // description: 쿠키 상태 //
   const [cookies, setCookie] = useCookies ();
+  
   // description: 거래처 정보 상태 //
   const {customerCodeInfo, customerNameInfo, customerBusinessNumber, customerPostCode, customerAddress, customerAddressDetail, customerTelNumber, 
     setCustomerCodeInfo, setCustomerNameInfo, setCustomerBusinessNumber, setCustomerPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber} = useCustomerInfoStore();
