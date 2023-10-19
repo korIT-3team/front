@@ -21,6 +21,7 @@ import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/syste
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
+import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -186,8 +187,19 @@ export const getEmploymentTypeRequest = async () => {
   });
   return result;
 }
-// todo : 급상여 구분 ㄱㄱ
-
+// 급상여 구분 리스트 불러오기
+export const getIncentiveTypeRequest = async () => {
+  const result = await axios.get(GET_INCENTIVE_VIEW_LIST_URL())
+  .then((response) => {
+    const responsebody : GetIncentiveTypeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 
 // 전표 상세 데이터 불러오기 메서드
 export const getInvoiceDetailRequest = async (invoiceCode : number) => {

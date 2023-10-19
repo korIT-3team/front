@@ -21,8 +21,8 @@ export default function InOutComeListItem({item} : Props) {
                <div className="inoutcome-list-customer">{customerName}</div>
                <div className="inoutcome-list-content">{priceDetail}</div>
                <div className="inoutcome-list-type">{taxTypeName}</div>
-               <div className="inoutcome-list-income">{taxTypeName === TAX_TYPE.SALE && price}</div>
-               <div className="inoutcome-list-outcome">{taxTypeName === TAX_TYPE.ORDER && price}</div>
+               <div className="inoutcome-list-income">{taxTypeName == TAX_TYPE.SALE && price}</div>
+               <div className="inoutcome-list-outcome">{taxTypeName == TAX_TYPE.ORDER && price}</div>
                <div className="inoutcome-list-balance">{fundBalance}</div>
           </div>
      )

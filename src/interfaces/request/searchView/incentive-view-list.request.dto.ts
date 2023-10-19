@@ -1,6 +1,6 @@
 export default interface IncentiveViewListRequestDto {
      employeeCode : number;
-     incentiveCategory : number | null;
+     incentiveCategoryName : string | null;
      paymentDateStart : string;
      paymentDateEnd : string;
  }

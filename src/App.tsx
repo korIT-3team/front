@@ -44,9 +44,9 @@ function App() {
   //!            function             //
   const getSignInUserResponseHandler = (result: GetLoginUserResponseDto | ResponseDto) => {
     const { code } = result;
-    if (code === 'NU') alert('토큰 정보가 잘못됐습니다.');
-    if (code === 'DE') alert('데이터베이스 에러입니다.');
-    if (code !== 'SU') return;
+    if (code == 'NU') alert('토큰 정보가 잘못됐습니다.');
+    if (code == 'DE') alert('데이터베이스 에러입니다.');
+    if (code != 'SU') return;
 
     setUser({...result as GetLoginUserResponseDto});
   }

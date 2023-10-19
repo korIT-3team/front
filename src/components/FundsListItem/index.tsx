@@ -20,8 +20,8 @@ export default function FundsListItem({item} : Props) {
                <div className="funds-list-customer">{customerName}</div>
                <div className="funds-list-content">{priceDetail}</div>
                <div className="funds-list-type">{taxTypeName}</div>
-               <div className="funds-list-income">{taxTypeName === TAX_TYPE.SALE && price}</div>
-               <div className="funds-list-outcome">{taxTypeName === TAX_TYPE.ORDER || taxTypeName === TAX_TYPE.INCENTIVE ? price : ''}</div>
+               <div className="funds-list-income">{taxTypeName == TAX_TYPE.SALE && price}</div>
+               <div className="funds-list-outcome">{taxTypeName == TAX_TYPE.ORDER || taxTypeName == TAX_TYPE.INCENTIVE ? price : ''}</div>
                <div className="funds-list-balance">{fundBalance}</div>
           </div>
      )
