@@ -449,7 +449,7 @@ export default function Header() {
      const onIncentiveViewListSearchButtonClickHandler = () => {
           const data: IncentiveViewListRequestDto = {
                employeeCode : incentiveViewListEmployeeCode,
-               incentiveCategory : incentiveViewListCategory,
+               incentiveCategoryName : incentiveViewListCategory,
                paymentDateStart : incentiveviewlistDateStart,
                paymentDateEnd : incentiveviewlistDateEnd,
           }
