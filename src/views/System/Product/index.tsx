@@ -1,36 +1,37 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import SystemMenu from '../SystemMenu'
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { HOME_PATH, SYSTEM_PRODUCT_INFO } from 'src/constants';
 
-import { useProductInfoStore, useProductRequestStore } from 'src/stores';
+import { useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedProductStore } from 'src/stores';
 
 import './style.css'
 
 export default function ProductInfo() {
 
   // state //
+  // description: path 상태 //
+  const { pathname } = useLocation();
+  // description: 암호화 상태 //
+  const [ passwordState, setPasswordState ] = useState<boolean>(true);
 
   // description: 조회 조건 정보 store //
-  const {productName, procurementCategory, setProductName, setProcurementCategory} = useProductRequestStore();
+  const { setProductNameInfo, setProcurementCategoryInfo, resetProductRequest } = useProductRequestStore();
+  
+  // description: Product List 정보 불러오기
+  const { productList, setProductList, resetProductList } = useProductResponseStore();
+  
+  // description: 품명 선택 //
+  const { selectedProductName, setSelectedProductName } = useSelectedProductStore();
+  // description: 조달구분 선택 //
+  const { selectedProcurementCategory, setSelectedProcurementCategory } = useSelectedProductStore();
+  
+  // description: Product 정보 //
+  const { productCode, productName, procurementCategory, productPrice } = useProductInfoStore();
+  const { setProductCode, setProductName, setProcurementCategory, setProductPrice } = useProductInfoStore();
 
-  // description : 전표 유형 선택 이벤트 //
-  const onProcurementCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    let type = 0;
-    if(value === '전체'){
-      type = 0;
-    }
-    else if(value === '생산'){
-      type = 1;
-    }
-    else if(value === '구매'){
-      type = 2;
-    }
-    setProcurementCategory(type);
-  }
   
   // function //
   const navigator = useNavigate();
@@ -46,9 +47,62 @@ export default function ProductInfo() {
     navigator(HOME_PATH);
   }
 
+  // description: 품명 조회 입력 이벤트
+  const onProductNameInfoChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setProductNameInfo(event.target.value);
+  }
+ 
+  // description: 품명 입력 이벤트
+  const onProductNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setProductName(event.target.value);
+  }
+
+  // description: 조달구분 조회 선택 이벤트 //
+  const onProcurementCategoryInfoChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    let type = 0;
+    if(value === '전체'){
+      type = 0;
+    }
+    else if(value === '생산'){
+      type = 1;
+    }
+    else if(value === '구매'){
+      type = 2;
+    }
+    setProcurementCategoryInfo(type);
+  }
+
+  // description: 조달구분 선택 이벤트 //
+  const onProcurementCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    let type = 0;
+    if(value === '전체'){
+      type = 0;
+    }
+    else if(value === '생산'){
+      type = 1;
+    }
+    else if(value === '구매'){
+      type = 2;
+    }
+    setProcurementCategory(type);
+  }
+
+  // description: 단가 입력 이벤트 //
+  const onPriceChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setProductPrice(event.target.valueAsNumber);
+  }
+
+  
+
   // component //
 
   // effect //
+  useEffect(() => {
+    resetProductList();
+    resetProductRequest();
+  }, [pathname])
 
   // render //
   return (
@@ -66,7 +120,7 @@ export default function ProductInfo() {
                 <div className='product-info-search-name-text'>품명 *</div>
               </div>
               <div className='product-info-search-name-container'>
-                <input className='name-search-input-box' placeholder='품명 입력' />
+                <input className='name-search-input-box' placeholder='품명 입력' onChange={onProductNameInfoChangeHandler} />
                 <div className='product-info-search-button'>검색</div>
                 <div className='name-search-input-box-display'>
                   <div className='name-search-input-box-display-text'>검색출력</div>
@@ -79,7 +133,7 @@ export default function ProductInfo() {
               </div>
               <div className='product-info-search-type-container'>
                 <div className='product-info-search-type-combo-box-container'>
-                  <select className='product-info-search-type-combo-box-text' onChange={onProcurementCategoryChangeHandler} name="procurement-category" id="procurement-category">
+                  <select className='product-info-search-type-combo-box-text' onChange={onProcurementCategoryInfoChangeHandler} name="procurement-category" id="procurement-category">
                     <option value="전체">전체</option>
                     <option value="생산">매입</option>
                     <option value="구매">매출</option>
@@ -122,15 +176,19 @@ export default function ProductInfo() {
               <div className='product-info-middle-right-bottom-container'>
                 <div className='product-name'>
                   <div className='product-name-text'>품명</div>
-                  <input className='product-name-input' />
+                  <input className='product-name-input' type='text' onChange={onProductNameChangeHandler} />
                 </div>
                 <div className='product-type'>
                   <div className='product-type-text'>조달구분</div>
-                  <input className='product-type-input' />
+                  <select className='product-type-combo-box-text' onChange={onProcurementCategoryChangeHandler} name="procurement-category" id="procurement-category">
+                    <option value="전체">전체</option>
+                    <option value="생산">매입</option>
+                    <option value="구매">매출</option>
+                  </select>
                 </div>
                 <div className='product-price'>
                   <div className='product-price-text'>단가</div>
-                  <input className='product-price-input' />
+                  <input className='product-price-input' onChange={onPriceChangeHandler} />
                 </div>
               </div>
             </div>

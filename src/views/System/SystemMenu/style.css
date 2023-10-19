@@ -134,9 +134,23 @@
   line-height: normal;
 }
 
+.customer-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+}
+
 .customer-info-registration:hover {
   cursor: pointer;
 }
+
 .product-info-registration {
   margin-top: 5px;
   margin-bottom: 20px;
@@ -147,6 +161,19 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.product-info-registration-active {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  font-family: Inter;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
 }
 
 .product-info-registration:hover {
