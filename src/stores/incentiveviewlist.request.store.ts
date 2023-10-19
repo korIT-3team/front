@@ -6,12 +6,12 @@ export interface IncentiveViewListRequestStore {
      incentiveViewListEmployeeCode : number;
      incentiveviewlistDateStart : string;
      incentiveviewlistDateEnd : string;
-     incentiveViewListCategory : number | null;
+     incentiveViewListCategory : string | null;
 
      setIncentiveViewListEmployeeCode: (incentiveViewListEmployeeCode: number) => void;
      setIncentiveViewListDateStart: (incentiveviewlistDateStart: string) => void;
      setIncentiveViewListDateEnd: (incentiveviewlistDateEnd: string) => void;
-     setIncentiveViewListCategory: (incentiveViewListEmployeeCode: number | null) => void;
+     setIncentiveViewListCategory: (incentiveViewListEmployeeCode: string | null) => void;
 
      resetIncentiveViewListRequst: () => void;
 }

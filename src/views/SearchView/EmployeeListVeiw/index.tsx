@@ -22,7 +22,7 @@ export default function EmplyoeeListVeiw() {
     const [ employmentTypeList, setEmploymentTypeList ] = useState<EmploymentTypeResponseDto[]>([]);
 
     //!               function              //
-    // description: 전표유형 조회 응답 함수 //
+    // description: 재직구분 조회 응답 함수 //
     const getEmploymentTypeListResponseHandler = (responsebody: GetEmploymentTypeListResponseDto | ResponseDto ) => {
 
       const {code} = responsebody;

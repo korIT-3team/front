@@ -7,7 +7,13 @@ import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListReque
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
+<<<<<<< HEAD
+import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
+import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
+=======
 import { GetInvoiceTypeListResponseDto, GetInvoiceListResponseDto, GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+>>>>>>> 8494a42e3e9b4f9965debbaf2c96591010796b77
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
@@ -17,10 +23,18 @@ import GetEmploymentTypeListResponseDto from 'src/interfaces/response/searchView
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
+import PutSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/put-system-employee-info.response.dto';
 import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-department-list.response.dto';
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
+<<<<<<< HEAD
+import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
+=======
+import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
+import GetEmployeeCodeListRequestDto from 'src/interfaces/request/common/get-employee-code-list.request.dto';
+import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
+>>>>>>> 8494a42e3e9b4f9965debbaf2c96591010796b77
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -44,6 +58,9 @@ const GET_INOUTCOME_LIST_URL = () => `${API_DOMAIN}/accounting/inout-come`;
 const GET_FUNDS_LIST_URL = () => `${API_DOMAIN}/searchView/check-funds`;
 const GET_EMPLOYEE_LIST_VIEW_URL = () => `${API_DOMAIN}/searchView/employee-list`;
 const GET_INCENTIVE_VIEW_LIST_URL = () => `${API_DOMAIN}/searchView/incentive-list`;
+
+// 검색
+const GET_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code`;
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -186,8 +203,19 @@ export const getEmploymentTypeRequest = async () => {
   });
   return result;
 }
-// todo : 급상여 구분 ㄱㄱ
-
+// 급상여 구분 리스트 불러오기
+export const getIncentiveTypeRequest = async () => {
+  const result = await axios.get(GET_INCENTIVE_VIEW_LIST_URL())
+  .then((response) => {
+    const responsebody : GetIncentiveTypeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 
 // 전표 상세 데이터 불러오기 메서드
 export const getInvoiceDetailRequest = async (invoiceCode : number) => {
@@ -281,12 +309,24 @@ export const getEmployeeListViewRequest = async (data : EmployeeListViewRequestD
   });
   return result;
 }
-
 // 급/상여정보조회 메서드
 export const getIncentiveViewListRequest = async (data : IncentiveViewListRequestDto) => {
   const result = await axios.post(GET_INCENTIVE_VIEW_LIST_URL(), data)
   .then((response) => {
     const responsebody : GetIncentiveViewListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 검색 : 사원목록조회 메서드
+export const getEmployeeCodeListRequest = async (data : GetEmployeeCodeListRequestDto) => {
+  const result = await axios.post(GET_CODE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetSearchCodeListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
@@ -341,6 +381,37 @@ export const getDepartmentListRequest = async (departmentName: string) => {
   return result;
 }
 
+//! 사원
+// 사원정보등록 메서드
+export const putSystemEmployeeInfoRequest = async (data: PutSystemEmployeeInfoRequestDto, token : string) => {
+
+  const result = await axios.put(PUT_SYSTEM_EMPLOYEE_INFO_URL(), data, {headers: { 'Authorization' : `Bearer ${token}` }})
+  .then((response) => {
+    const responsebody : PutSystemEmployeeInfoResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
+}
+
+// 사원정보삭제 메서드
+export const deleteSystemEmployeeInfoRequest = async (deleteSystemEmployeeCode: number, token : string) => {
+  const result = await axios.delete(DELETE_SYSTEM_EMPLOYEE_INFO_URL(deleteSystemEmployeeCode), {headers: { 'Authorization' : `Bearer ${token}`}})
+  .then((response) => {
+    const responsebody : DeleteSystemEmployeeInfoResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 // 사원정보 불러오기 메서드
 export const getSystemEmployeeListRequest = async (systemEmployeeName: string) => {
   const result = await axios.get(GET_SYSTEM_EMPLOYEE_LIST_URL(systemEmployeeName))
