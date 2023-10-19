@@ -7,6 +7,7 @@ import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListReque
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
+import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
 import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
@@ -17,10 +18,12 @@ import { GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartment
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
+import PutSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/put-system-employee-info.response.dto';
 import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-department-list.response.dto';
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
+import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -313,6 +316,37 @@ export const getDepartmentListRequest = async (departmentName: string) => {
   return result;
 }
 
+//! 사원
+// 사원정보등록 메서드
+export const putSystemEmployeeInfoRequest = async (data: PutSystemEmployeeInfoRequestDto, token : string) => {
+
+  const result = await axios.put(PUT_SYSTEM_EMPLOYEE_INFO_URL(), data, {headers: { 'Authorization' : `Bearer ${token}` }})
+  .then((response) => {
+    const responsebody : PutSystemEmployeeInfoResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
+}
+
+// 사원정보삭제 메서드
+export const deleteSystemEmployeeInfoRequest = async (deleteSystemEmployeeCode: number, token : string) => {
+  const result = await axios.delete(DELETE_SYSTEM_EMPLOYEE_INFO_URL(deleteSystemEmployeeCode), {headers: { 'Authorization' : `Bearer ${token}`}})
+  .then((response) => {
+    const responsebody : DeleteSystemEmployeeInfoResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 // 사원정보 불러오기 메서드
 export const getSystemEmployeeListRequest = async (systemEmployeeName: string) => {
   const result = await axios.get(GET_SYSTEM_EMPLOYEE_LIST_URL(systemEmployeeName))
