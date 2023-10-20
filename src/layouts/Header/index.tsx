@@ -514,8 +514,8 @@ export default function Header() {
      // description: 전표조회 이벤트 핸들러 //
      const onInvoiceListSearchButtonClickHandler = () => {
           const data: InvoiceListRequestDto = {
-               departmentCode,
-               employeeCode,
+               workerDepartmentCode : departmentCode,
+               workerCode : employeeCode,
                invoiceDateStart,
                invoiceDateEnd,
                invoiceTypeName,

@@ -8,6 +8,7 @@ import PutCustomerInfoRequestDto from './put-customer-info.request.dto';
 
 import ProductListRequestDto from './product-list.request.dto';
 import PutProductInfoRequestDto from './put-product-info.request.dto';
+import PutSystemEmployeeInfoRequestDto from './put-system-employee-info.request.dto';
 
 export type {
   PutCompanyInfoRequestDto,
@@ -19,4 +20,5 @@ export type {
 
   CustomerListRequestDto,
   PutCustomerInfoRequestDto,
+  PutSystemEmployeeInfoRequestDto
 }

@@ -34,7 +34,7 @@ export default function SearchViewMenu() {
     <div id='accounting-menu'>
       <div className='accounting-menu-left'>
         <div className='accounting-menu-left-top'>
-          <div className='accounting-menu-left-top-text'>회계관리</div>
+          <div className='accounting-menu-left-top-text'>조회</div>
         </div>
         <div className='accounting-menu-left-detail'>
           <div className='accounting-menu-left-detail-left'>
