@@ -1,6 +1,6 @@
 export default interface InvoiceListRequestDto {
-    departmentCode : number | null;
-    employeeCode : number | null;
+    workerDepartmentCode : number | null;
+    workerCode : number | null;
     invoiceDateStart : string;
     invoiceDateEnd : string;
     invoiceTypeName : string | null;

@@ -68,7 +68,9 @@ export default function FundsList() {
                     <div className="fundslist-title-outcome">지출</div>
                     <div className="fundslist-title-balance">잔액</div>
                   </div>
-                  { fundsList !== null && fundsList.map( (item) => (<FundsListItem item = {item} />) ) }
+                    {
+                    !fundsList || fundsList.length==0  ? (<div className='nothing-data-form'>조회된 데이터가 없습니다.</div>) : (<div> { fundsList !== null && fundsList.map( (item) => (<FundsListItem item = {item} />) ) }</div> )
+                    }
                 </div>
               </div>
             </div>

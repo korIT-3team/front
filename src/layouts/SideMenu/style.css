@@ -62,6 +62,9 @@
   width: 81px;
   height: 85px;
 }
+.side-menu-system-manage-hide{
+  display: none;
+}
 .side-menu-system-manage-active{
   background-color: #f9f9f9;
   display: flex;
