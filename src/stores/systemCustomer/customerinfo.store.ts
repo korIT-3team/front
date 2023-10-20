@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface CustomerInfoStore {
-  customerCodeInfo: number | null;
+  customerCodeInfo: number;
   customerNameInfo: string,
   customerBusinessNumber: string,
   customerPostCode: string,
@@ -9,7 +9,7 @@ interface CustomerInfoStore {
   customerAddressDetail: string | null;
   customerTelNumber: string;
 
-  setCustomerCodeInfo: (customerCodeInfo: number | null) => void;
+  setCustomerCodeInfo: (customerCodeInfo: number) => void;
   setCustomerNameInfo: (customerName: string) => void;
   setCustomerBusinessNumber: (customerBusinessNumber: string) => void;
   setCustomerPostCode: (customerPostCode: string) => void;

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import './style.css';
 import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedProductStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
-import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto } from 'src/interfaces/request/system';
-import { DeleteDepartmentInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto } from 'src/interfaces/response/system';
+import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
+import { DeleteCustomerInfoResponseDto, DeleteDepartmentInfoResponseDto, DeleteProductInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto } from 'src/interfaces/response/system';
 import { DepartmentInfo } from 'src/stores/departmentlist.response.store';
 import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
@@ -52,14 +52,11 @@ export default function Header() {
      const { setIncentiveViewList } = useIncentiveViewListStore();
      
 
+     
 //! ============================================================================================
-     // description: 거래처 조회 조건 정보 store //
-     // const { customer, Code, customerName, setCustomerCode, setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
-     // description: 조회된 거래처 정보 store //
-     const { setCustomerList, resetCustomerList } = useCustomerResponseStore();
-     // description: 거래처 정보 상태
-     const { customerNameInfo, customerBusinessNumber, customerPostCode, customerAddress, customerAddressDetail, customerTelNumber } = useCustomerInfoStore();
-//! ============================================================================================
+     
+     //                       component                          //
+
      // description: product 조회 조건 정보 store //
      const { productNameInfo, procurementCategoryInfo, resetProductRequest } = useProductRequestStore()
      // description: 조회된 product 정보 store //
@@ -72,6 +69,66 @@ export default function Header() {
                setSelectedProductName, setSelectedProcurementCategory } = useSelectedProductStore();
 
      //   event handler  //
+
+
+     // description: product 정보 조회 응답 함수 //
+     const getProductListResponseHandler = (responsebody: GetProductListResponseDto | ResponseDto) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code !== 'SU') return;
+
+          const { productList } = responsebody as GetProductListResponseDto;
+          setProductList(productList);
+
+     }
+
+     // description: product 정보 불러오기 //
+     const { productList } = useProductResponseStore();
+
+     // description: product 저장 이벤트 핸들러 //
+     const onProductListSaveButtonClickHandler = async () => {
+
+          const token = cookies.accessToken;
+          if (selectedProductName || selectedProcurementCategory) {
+               if (!productList) return;
+               const selectedProduct = productList.find((item) => item.productName === selectedProductName || item.procurementCategory === selectedProcurementCategory);
+               const data: PutProductInfoRequestDto = {
+                    productCodeInfo: selectedProduct?.productCode as number,
+                    productNameInfo: selectedProduct?.productName as string,
+                    procurementCategory: selectedProduct?.procurementCategory as number,
+                    productPrice: selectedProduct?.productPrice as number
+               }
+
+               // description: 필수값 검사
+               if (!data.productNameInfo || !data.procurementCategory || !data.productPrice) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+
+               putProductInfoRequest(data, token).then(putProductInfoResponseHandler);
+          
+          } else {
+               const data: PutProductInfoRequestDto = {
+                    productCodeInfo: 0,
+                    productNameInfo,
+                    procurementCategory,
+                    productPrice,
+               }
+               
+               if (!data.productNameInfo || !data.procurementCategory || !data.productPrice) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               putProductInfoRequest(data, token).then(putProductInfoResponseHandler);
+          };
+
+     }
+
+
      // description: product 정보 등록 응답 함수 //
      const putProductInfoResponseHandler = (code: string) => {
           
@@ -80,9 +137,6 @@ export default function Header() {
           if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
           if(code === 'DE') alert('데이터베이스 에러');
           if(code === 'NP') alert('권한이 없습니다.');
-          if(code === 'ED') alert('중복되는 부서명입니다.');
-          if(code === 'EDT') alert('중복되는 전화번호입니다.');
-          if(code === 'EDF') alert('중복되는 팩스번호입니다.');
 
           if(code !== 'SU') return;
           
@@ -94,10 +148,46 @@ export default function Header() {
           setSelectedProcurementCategory(null);
           resetProductInfo();
           resetProductList();
-          // getProductListRequest(productNameInfo, procurementCategoryInfo).then(getProductListResponseHandler);
+          getProductListRequest(productNameInfo, procurementCategoryInfo).then(getProductListResponseHandler);
 
           navigator(SYSTEM_PRODUCT_INFO);
      
+     }
+     // description: product정보삭제 응답 함수 //
+     const deleteProductInfoResponseHandler = (responsebody: DeleteProductInfoResponseDto | ResponseDto) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'NEP') alert('존재하지않는 품목입니다.');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code !== 'SU') return;
+
+          // 전체 조회
+          setSelectedProductName(null);
+          resetProductInfo();
+          resetProductList();
+          getProductListRequest(productNameInfo, procurementCategoryInfo).then(getProductListResponseHandler);
+     
+          alert('품목 삭제에 성공했습니다.');
+     }
+
+
+
+     // description: product정보삭제 이벤트 핸들러 //
+     const onDeleteProductInfoButtonClickHandler = () => {
+          if (!selectedProductName) return;
+          const token = cookies.accessToken;
+          deleteProductInfoRequest(selectedProductName, token).then(deleteProductInfoResponseHandler)
+     }
+     // description: product 조회 이벤트 핸들러 //
+     const onProductListSearchButtonClickHandler = () => {
+          setSelectedProductName(null);
+          setSelectedProcurementCategory(null);
+          resetProductInfo();
+          resetProductList();
+          getProductListRequest(productNameInfo, procurementCategoryInfo).then(getProductListResponseHandler);
      }
 
 
@@ -113,6 +203,7 @@ export default function Header() {
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
      const isSystemEmployeeList = pathname.includes(SYSTEM_EMPLOYEE_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
+     const isProductList = pathname.includes(SYSTEM_PRODUCT_INFO);
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
      const isEmployeeViewList = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH);
      const isIncentiveViewList = pathname.includes(SEARCHVIEW_INCENTIVE_LIST_PATH);
@@ -480,6 +571,20 @@ export default function Header() {
 
 //! ============================================================================================
 
+     //                       component                          //
+
+     // state //
+     // description: 거래처 조회 조건 정보 store //
+     const { customerCode, customerName, setCustomerCode, setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
+     // description: 조회된 거래처 정보 store //
+     const { setCustomerList, resetCustomerList } = useCustomerResponseStore();
+     // description: 거래처 정보 상태
+     const { customerNameInfo, customerBusinessNumber, customerPostCode,
+           customerAddress, customerAddressDetail, customerTelNumber, resetCustomerInfo } = useCustomerInfoStore();
+     // description: 선택 거래처 코드 //
+     const { selectedCustomerCode, setSelectedCustomerCode } = useSelectedCustomerStore();
+
+     // event handler //
      // description: 거래처 정보 조회 응답 함수 //
      const getCustomerListResponseHandler = (responsebody: GetCustomerListResponseDto | ResponseDto ) => {
 
@@ -493,19 +598,123 @@ export default function Header() {
           const { customerList } = responsebody as GetCustomerListResponseDto;
           setCustomerList(customerList);
      }
+
      // description: 거래처 정보 등록 응답 함수 //
      const putCustomerInfoResponseHandler = (code: string) => {
-               
-          if( code === 'NE') alert('존재하지않는 회원입니다.');
-          if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
-          if( code === 'DE') alert('데이터베이스 에러');
-          if( code === 'NP') alert('권한이 없습니다.');
-          if( code !== 'SU') return;
-     
+          
+          // description: BACK 오류
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'ECN') alert('중복되는 거래처명입니다.');
+
+          if(code !== 'SU') return;
+          
           if(!user) return;
-          alert('거래처 정보 등록 완료');
+          alert('거래처정보등록 완료');
+
+          // 전체 조회
+          setSelectedCustomerCode(null);
+          resetCustomerInfo();
+          resetCustomerList();
+          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
+
           navigator(SYSTEM_CUSTOMER_INFO);
-     }   
+
+     }
+
+     // description: 거래처 정보 삭제 응답 함수 //
+     const deleteCustomerInfoResponseHandler = (responsebody: DeleteCustomerInfoResponseDto | ResponseDto) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'NEC') alert('존재하지않는 거래처입니다.');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code !== 'SU') return;
+
+          // 전체 조회
+          setSelectedCustomerCode(null);
+          resetCustomerInfo();
+          resetCustomerList();
+          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
+
+          alert('거래처 삭제에 성공했습니다.');
+     }
+
+     // description: 거래처 정보 불러오기 //
+     const { customerList } = useCustomerResponseStore();
+
+     // description: 거래처 저장 이벤트 핸들러 //
+     const onCustomerListSaveButtonClickHandler = async () => {
+
+          const token = cookies.accessToken;
+          if (selectedCustomerCode) {
+               if (!customerList) return;
+               const selectedCustomer = customerList.find((item) => item.customerCode === selectedCustomerCode);
+               const data: PutCustomerInfoRequestDto = {
+                    customerCodeInfo: selectedCustomer?.customerCode as number,
+                    customerNameInfo: selectedCustomer?.customerName as string,
+                    customerBusinessNumber: selectedCustomer?.customerBusinessNumber as string,
+                    customerPostCode: selectedCustomer?.customerPostCode as string,
+                    customerAddress: selectedCustomer?.customerAddress as string,
+                    customerAddressDetail: selectedCustomer?.customerAddressDetail as string,
+                    customerTelNumber: selectedCustomer?.customerTelNumber as string,
+               }
+               // description: 필수값 검사
+               if (!data.customerCodeInfo || !data.customerNameInfo || !data.customerBusinessNumber || !data.customerPostCode || !data.customerAddress || !data.customerAddressDetail || !data.customerTelNumber) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               // description: 전화번호 패턴 검사
+               const telNumberFlag = !telNumberPattern.test(data.customerTelNumber);
+               if (telNumberFlag){
+                    alert("전화번호 패턴을 확인해주세요.");
+                    return;
+               }
+               // description: 사업자등록번호 패턴 검사
+               const registrationNumberFlag = !registrationNumberPattern.test(data.customerBusinessNumber);
+               if (registrationNumberFlag){
+                    alert("사업자등록번호 패턴을 확인해주세요.");
+                    return;
+               }
+               putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
+
+          } else {
+               const data: PutCustomerInfoRequestDto = {
+                    customerCodeInfo: 0,
+                    customerNameInfo,
+                    customerBusinessNumber,
+                    customerPostCode,
+                    customerAddress,
+                    customerAddressDetail,
+                    customerTelNumber,
+               }
+               if (!data.customerCodeInfo || !data.customerNameInfo || !data.customerBusinessNumber || !data.customerPostCode || !data.customerAddress || !data.customerAddressDetail || !data.customerTelNumber) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
+
+          };
+     }
+     
+     // description: 거래처조회 이벤트 핸들러 //
+     const onCustomerListSearchButtonClickHandler = () => {
+          setSelectedCustomerCode(null);
+          resetCustomerInfo();
+          resetCustomerList();
+          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
+     }
+
+     // description: 거래처정보삭제 이벤트 핸들러 //
+     const onDeleteCustomerInfoButtonClickHandler = () => {
+          if (!selectedCustomerCode) return;
+          const token = cookies.accessToken;
+          deleteCustomerInfoRequest(selectedCustomerCode, token).then(deleteCustomerInfoResponseHandler);
+     }
 
 
 //! ============================================================================================
@@ -587,43 +796,7 @@ export default function Header() {
      }
 //! ============================================================================================
 
-     // description: 선택 거래처 정보 //
-     const { selectedCustomerCode, selectedCustomerName, setSelectedCustomerCode, setSelectedCustomerName } = useSelectedCustomerStore();
-     // description: 거래처 정보 불러오기 //
-     const { customerList } = useCustomerResponseStore()
-
-     // // description: 거래처 조회 이벤트 핸들러 //
-     // const onCustomerListSearchButtonClickHandler = () => {
-     //      setSelectedCustomerCode(null);
-     //      setSelectedCustomerName("");
-     //      resetCustomerList();
-     //      getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
-     // }
-
-     // description: 거래처 저장 이벤트 핸들러 //
-     const onCustomerListSaveButtonClickHandler = async () => {
-          const token = cookies.accessToken;
-          if (selectedCustomerCode && selectedCustomerName) {
-               if (!customerList) return;
-               const selectedCustomer = customerList.find((item) => (item.customerCode === selectedCustomerCode && item.customerName === selectedCustomerName));
-               const data: PutCustomerInfoRequestDto = {
-                    customerCodeInfo: selectedCustomer?.customerCode as number,
-                    customerNameInfo: selectedCustomer?.customerName as string,
-                    customerBusinessNumber: selectedCustomer?.customerBusinessNumber as string,
-                    customerPostCode: selectedCustomer?.customerPostCode as string,
-                    customerAddress: selectedCustomer?.customerAddress as string,
-                    customerAddressDetail: selectedCustomer?.customerAddressDetail as string,
-                    customerTelNumber: selectedCustomer?.customerTelNumber as string,
-               }
-               putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler);
-          };
-          setSelectedCustomerCode(0);
-          setSelectedCustomerName("");
-          // setCustomerCode(0);
-          // setCustomerName("");
-     }
-//! ============================================================================================
-
+     
 
      //!                    effect                   //
      
@@ -651,7 +824,8 @@ export default function Header() {
                               isInvoiceList ? onInvoiceListSearchButtonClickHandler : 
                               isDepartmentList ? onDepartmentListSearchButtonClickHandler : 
                               isSystemEmployeeList ? onSystemEmployeeListSearchButtonClickHandler :
-                              // isCustomerList ? onCustomerListSearchButtonClickHandler :
+                              isCustomerList ? onCustomerListSearchButtonClickHandler :
+                              isProductList ? onProductListSearchButtonClickHandler :
                               isInOutComeList ? onInOutComeListSearchButtonClickHandler : 
                               isFundsList ? onFundsListSearchButtonClickHandler :
                               isEmployeeViewList ? onEmployeeViewListSearchButtonClickHandler :
@@ -664,7 +838,8 @@ export default function Header() {
                               isCompanyInfo ? onCompanyInfoSaveButtonClickHandler : (
                               isDepartmentList ? onDepartmentListSaveButtonClickHandler :
                               isSystemEmployeeList ? onSystemEmployeeListSaveButtonClickHandler :
-                              isCustomerList ? onCustomerListSaveButtonClickHandler : () => {} 
+                              isCustomerList ? onCustomerListSaveButtonClickHandler : 
+                              isProductList ? onProductListSaveButtonClickHandler : () => {} 
                               )}>
                          <div className="header-function-save-icon"></div>
                          <div className="header-function-save-text">저장</div>
@@ -674,7 +849,9 @@ export default function Header() {
                          <div className="header-function-print-text">인쇄</div>
                     </div>
                     <div className="header-function-delete" onClick={
-                              isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler : () => {}
+                              isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler :
+                              isCustomerList ? onDeleteCustomerInfoButtonClickHandler : 
+                              isProductList ? onDeleteProductInfoButtonClickHandler : () => {}
                               }>
                          <div className="header-function-delete-icon"></div>
                          <div className="header-function-delete-text">삭제</div>

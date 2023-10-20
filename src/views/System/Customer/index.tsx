@@ -9,70 +9,55 @@ import './style.css'
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
 import { useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useSelectedCustomerStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
-import { getCustomerListRequest, putCustomerInfoRequest } from 'src/apis';
-import { GetCustomerListResponseDto } from 'src/interfaces/response/system';
-import ResponseDto from 'src/interfaces/response/response.dto';
+import { PutCustomerInfoRequestDto } from 'src/interfaces/request/system';
 
 export default function CustomerInfo() {
 
   // state //
   // description: path 상태 //
   const {pathname} = useLocation();
-  // description: 암호화 상태 //
-  const [ passwordState, setPasswordState ] = useState<boolean>(true);
-  // description: 로그인 사용자의 정보 상태
-  const { user, setUser } = useUserStore();
   // description: 쿠키 상태 //
   const [cookies, setCookie] = useCookies ();
-  
+  // description: 조회 조건 //
+  const {setCustomerCode, setCustomerName, resetCustomerRequest} = useCustomerRequestStore();
   // description: 거래처 정보 상태 //
   const {customerCodeInfo, customerNameInfo, customerBusinessNumber, customerPostCode, customerAddress, customerAddressDetail, customerTelNumber, 
     setCustomerCodeInfo, setCustomerNameInfo, setCustomerBusinessNumber, setCustomerPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber} = useCustomerInfoStore();
-  // description: 조회 조건 //
-  const {setCustomerCode, setCustomerName, resetCustomerRequest} = useCustomerRequestStore();
-  // description: 거래처 정보 불러오기 //
+  // description: 거래처List 정보 불러오기 //
   const {customerList, setCustomerList, resetCustomerList} = useCustomerResponseStore();
-  // description: 선택 거래처 정보 //
+  // description: 선택 거래처 코드 //
   const { selectedCustomerCode, setSelectedCustomerCode } = useSelectedCustomerStore();
-  const { selectedCustomerName, setSelectedCustomerName } = useSelectedCustomerStore();
   // description: 다음 포스트 (우편번호검색) 팝업 상태 //
   const open = useDaumPostcodePopup();
 
   // function //
   const navigator = useNavigate();
 
-  // description: 거래처 정보 불러오기 응답 함수 //
-  const getCustomerInfoResponseHandler = (responsebody: GetCustomerListResponseDto | ResponseDto) => {
-    const { code } = responsebody;
-
-    if( code === 'NE') alert('존재하지않는 회원입니다.');
-    if( code === 'DE') alert('데이터베이스 에러');
-    if( code === 'NP') alert('권한이 없습니다.');
-    if( code !== 'SU') return;
-
-    const { customerList } = responsebody as GetCustomerListResponseDto;
-    setCustomerList(customerList);
-  }
-  // description: 거래처 정보 등록 응답 함수 //
-  const putCustomerInfoResponseHandler = (code: string) => {
-
-    if( code === 'NE') alert('존재하지않는 회원입니다.');
-    if( code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
-    if( code === 'DE') alert('데이터베이스 에러');
-    if( code === 'NP') alert('권한이 없습니다.');
-    if( code !== 'SU') return;
-
-    if(!user) return;
-    alert("거래처 정보 등록 완료!");
-    navigator(HOME_PATH);
-  }
-
   // event handler //
+  
   // description: 취소 버튼 클릭 이벤트 //
   const onCancelButtonClickHandler = () => {
     navigator(HOME_PATH);
   }
+
+  // description: 저장 버튼 클릭 이벤트 //
+  const onSaveButtonClickHandler = async () => {
+
+    const token = cookies.accessToken;
+
+    const data: PutCustomerInfoRequestDto = {
+      customerCodeInfo: customerCodeInfo,
+      customerNameInfo: customerNameInfo,
+      customerBusinessNumber: customerBusinessNumber,
+      customerPostCode: customerPostCode,
+      customerAddress: customerAddress,
+      customerAddressDetail: customerAddressDetail,
+      customerTelNumber: customerTelNumber,
+    }
+  }
+
+// ----------------------------------------------------------------------
+
   // description: 거래처 코드 입력 이벤트 //
   const onCustomerCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const reg = /^[0-9]*$/;
@@ -122,23 +107,6 @@ export default function CustomerInfo() {
     setCustomerTelNumber(event.target.value);
   };
 
-  // description: 저장 버튼 클릭 이벤트 //
-  const onCustomerSaveButtonClickHandler = async () => {
-  
-    const token = cookies.accessToken;
-
-    const data: PutCustomerInfoRequestDto = {
-      customerCodeInfo: 0,
-      customerNameInfo: customerNameInfo,
-      customerBusinessNumber: customerBusinessNumber,
-      customerPostCode: customerPostCode,
-      customerAddress: customerAddress,
-      customerAddressDetail: customerAddressDetail,
-      customerTelNumber: customerTelNumber,
-    };
-
-    putCustomerInfoRequest(data, token).then(putCustomerInfoResponseHandler)
-  }
 
   // component //
 
@@ -248,7 +216,7 @@ export default function CustomerInfo() {
           </div>
         </div>
         <div className='customer-info-bottom'>
-          <div className='customer-info-bottom-button-save' onClick={onCustomerSaveButtonClickHandler}>
+          <div className='customer-info-bottom-button-save' >
             <div className='customer-info-bottom-button-save-text' >수정 및 저장</div>
           </div>
           <div className='customer-info-bottom-button-cancel'>
