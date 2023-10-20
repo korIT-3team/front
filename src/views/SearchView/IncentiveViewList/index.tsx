@@ -124,7 +124,9 @@ export default function IncentiveViewList() {
                          <div className="incentivelist-title-price">금액</div>
                          <div className="incentivelist-title-content">상세</div>
                     </div>
-                    { incentiveViewList !== null && incentiveViewList.map( (item) => (<IncentiveViewListItem item = {item} />) ) }
+                    {
+                    !incentiveViewList || incentiveViewList.length==0  ? (<div className='nothing-data-form'>조회된 데이터가 없습니다.</div>) : (<div> { incentiveViewList !== null && incentiveViewList.map( (item) => (<IncentiveViewListItem item = {item} />) ) }</div> )
+                    }
                     </div>
                </div>
                </div>

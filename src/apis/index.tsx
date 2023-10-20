@@ -1,32 +1,33 @@
 import axios from 'axios';
-import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
-import InvoiceDetailRequestDto from 'src/interfaces/request/accounting/invoice-detail.request.dto';
+import { InOutComeListRequestDto, InvoiceListRequestDto, InvoiceDetailRequestDto } from 'src/interfaces/request/accounting';
 import { SignInRequestDto } from 'src/interfaces/request/auth';
+import { SignInResponseDto } from 'src/interfaces/response/auth';
+import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfaces/request/sales';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
-import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
-import CustomerListRequestDto from 'src/interfaces/request/system/customer-list.request.dto';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
-import { GetInvoiceTypeListResponseDto, GetInvoiceListResponseDto, GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
-import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
-import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
-import { DeleteCustomerInfoResponseDto, DeleteProductInfoResponseDto, GetCustomerListResponseDto, GetDepartmentInfoResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto, PutProductInfoResponseDto } from 'src/interfaces/response/system';
 import GetEmploymentTypeListResponseDto from 'src/interfaces/response/searchView/get-Employment-type-list.response.dto';
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
+import { PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
+import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
+import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
+import { DeleteProductInfoResponseDto, DeleteCustomerInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto, PutProductInfoResponseDto } from 'src/interfaces/response/system';
+//! todo : index.ts 추가 필요 ----
 import PutSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/put-system-employee-info.response.dto';
 import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-department-list.response.dto';
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
-import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
 import GetEmployeeCodeListRequestDto from 'src/interfaces/request/common/get-employee-code-list.request.dto';
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
 import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
+import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetProjectCodeListRequestDto } from 'src/interfaces/request/common';
+//! ----
+import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -52,7 +53,10 @@ const GET_EMPLOYEE_LIST_VIEW_URL = () => `${API_DOMAIN}/searchView/employee-list
 const GET_INCENTIVE_VIEW_LIST_URL = () => `${API_DOMAIN}/searchView/incentive-list`;
 
 // 검색
-const GET_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code`;
+const GET_EMPLOYEE_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code/employee`;
+const GET_DEPARTMENT_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code/department`;
+const GET_CUSTOMER_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code/customer`;
+const GET_SALES_PLAN_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code/sales-plan`;
 
 // 부서
 const PUT_DEPARTMENT_INFO_URL = () => `${API_DOMAIN}/system/dept-info`;
@@ -314,9 +318,9 @@ export const getIncentiveViewListRequest = async (data : IncentiveViewListReques
   });
   return result;
 }
-// 검색 : 사원목록조회 메서드
+// 검색 : 사원코드도움 메서드
 export const getEmployeeCodeListRequest = async (data : GetEmployeeCodeListRequestDto) => {
-  const result = await axios.post(GET_CODE_LIST_URL(), data)
+  const result = await axios.post(GET_EMPLOYEE_CODE_LIST_URL(), data)
   .then((response) => {
     const responsebody : GetSearchCodeListResponseDto = response.data;
     return responsebody;
@@ -327,6 +331,46 @@ export const getEmployeeCodeListRequest = async (data : GetEmployeeCodeListReque
   });
   return result;
 }
+// 검색 : 부서코드도움 메서드
+export const getDepartmentCodeListRequest = async (data : GetDepartmentCodeListRequestDto) => {
+  const result = await axios.post(GET_DEPARTMENT_CODE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetSearchCodeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 검색 : 거래처코드도움 메서드
+export const getCustomerCodeListRequest = async (data : GetCustomerCodeListRequestDto) => {
+  const result = await axios.post(GET_CUSTOMER_CODE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetSearchCodeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 검색 : 판매계획코드도움 메서드
+export const getProjectCodeListRequest = async (data : GetProjectCodeListRequestDto) => {
+  const result = await axios.post(GET_SALES_PLAN_CODE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetSearchCodeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
 
 // ! 부서
 // 부서정보등록 메서드

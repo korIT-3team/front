@@ -174,7 +174,7 @@ export default function Company() {
     if (cookies.accessToken && !user) {
       return;
     }
-    if(user?.departmentCode !== DEPARTMENT_CODE.SYSTEM){ // 
+    if(user?.departmentCode !== DEPARTMENT_CODE.SYSTEM){
       alert('권한이 없습니다.');
       navigator(HOME_PATH);
       return;

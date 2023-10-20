@@ -117,11 +117,13 @@ align-items : center;
 
 .invoice-right-top-search-dept-box-name-box-text {
 margin: 4px 0px 4px 9px;
-width: 50px;
+width: 60px;
 height: 15px;
 
 display : flex;
 align-items : center;
+border: none;
+outline: none;
 
 color: rgba(0, 0, 0, 0.80);
 text-align: center;
@@ -172,57 +174,58 @@ background-color: #FFF;
 }
 
 .invoice-right-top-search-employee-box-code-box {
-margin: 4px 0px 4px 4px;
-width: 70px;
-height: 27px;
+    margin: 4px 0px 4px 4px;
+    width: 70px;
+    height: 27px;
 
-border: 1px solid rgba(0, 0, 0, 0.30);
-background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    background-color: #FFF;
 
 
-display : flex;
-align-items : center;
+    display : flex;
+    align-items : center;
 }
 
 .invoice-right-top-search-employee-box-code-box-text {
-margin: 4px 0px 4px 9px;
-width: 50px;
-height: 15px;
+    margin: 4px 0px 4px 9px;
+    width: 50px;
+    height: 15px;
 
-display : flex;
-border: none;
-outline: none;
+    display : flex;
+    border: none;
+    outline: none;
 
-color: rgba(0, 0, 0, 0.80);
-font-size: 12px;
-font-weight: 400;
+    color: rgba(0, 0, 0, 0.80);
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .invoice-right-top-search-employee-box-name-box {
-margin: 4px 4px 4px 11px;
-width: 102px;
-height: 27px;
+    margin: 4px 4px 4px 11px;
+    width: 102px;
+    height: 27px;
 
-border: 1px solid rgba(0, 0, 0, 0.30);
-background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.30);
+    background-color: #FFF;
 
-
-display : flex;
-align-items : center;
+    display : flex;
+    align-items : center;
 }
 
 .invoice-right-top-search-employee-box-name-box-text {
-margin: 4px 0px 4px 9px;
-width: 50px;
-height: 15px;
-
-display : flex;
-align-items : center;
-
-color: rgba(0, 0, 0, 0.80);
-text-align: center;
-font-size: 12px;
-font-weight: 400;
+    margin: 4px 0px 4px 9px;
+    width: 60px;
+    height: 15px;
+    
+    display : flex;
+    align-items : center;
+    border: none;
+    outline: none;
+    
+    color: rgba(0, 0, 0, 0.80);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 /* 재직구분 */

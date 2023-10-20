@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_PATH, DEPARTMENT_CODE, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_PATH, SALES_PATH, SALES_PLAN_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_PATH, SYSTEM_COMPANY_INFO, SYSTEM_PATH } from 'src/constants';
 import { useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import './style.css'
@@ -19,7 +19,8 @@ export default function SideMenu() {
     
     //!              function            //
     const navigator = useNavigate();
-    const showSystemMenu = pathname.includes(SYSTEM_PATH);
+    const hasSystem = user?.departmentCode === DEPARTMENT_CODE.SYSTEM;
+    const showSystemMenu = pathname.includes(SYSTEM_PATH); 
     const showSalesMenu = pathname.includes(SALES_PATH);
     const showHumanMenu = pathname.includes(HUMAN_PATH);
     const showAccountinMenu = pathname.includes(ACCOUNTING_PATH);
@@ -70,7 +71,7 @@ export default function SideMenu() {
             <div className="side-menu-home-icon"></div>
             <div className="side-menu-home-text">HOME</div>
           </div>
-          <div className={ showSystemMenu ? 'side-menu-system-manage-active' : 'side-menu-system-manage'} onClick={onSystemMenuMenuButtonClickHandler}>
+          <div className={ hasSystem ? ( showSystemMenu ? 'side-menu-system-manage-active' : 'side-menu-system-manage') : 'side-menu-system-manage-hide' } onClick={onSystemMenuMenuButtonClickHandler}>
             <div className={ showSystemMenu ? 'side-menu-system-manage-icon-active' : 'side-menu-system-manage-icon'}></div>
             <div className="side-menu-system-manage-text">시스템관리</div>
           </div>

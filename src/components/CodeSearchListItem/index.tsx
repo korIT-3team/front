@@ -5,10 +5,11 @@ import SearchCodeResponseDto from 'src/interfaces/response/common/search-code.re
 interface Props{
      label : string;
      onCloseButtonClick : () => void;
+     onDataItemClickHandler : (item : SearchCodeResponseDto) => void;
      dtoList: SearchCodeResponseDto[];
 }
 
-export default function CodeSearchListItem({label, dtoList, onCloseButtonClick} : Props) {
+export default function CodeSearchListItem({label, dtoList, onCloseButtonClick, onDataItemClickHandler} : Props) {
      //!          state          //
      
      //!          function          //
@@ -16,16 +17,12 @@ export default function CodeSearchListItem({label, dtoList, onCloseButtonClick} 
      const isEmployeeSearch = label.includes('사원');
      const isCustomerSearch = label.includes('거래처');
      const isProjectSearch = label.includes('프로젝트');
-
-     //!             event handler              //
-     
-
      
      //!         render : 데이터가 담기는 아이템        //
      const DataItem = ( item : SearchCodeResponseDto) => {
           return (
                <>
-                    <div className='code-item-info-middle-right-user-define-list-body'>
+                    <div className='code-item-info-middle-right-user-define-list-body' onClick={ () => onDataItemClickHandler(item) }>
                          <div className='code-item-info-middle-right-user-define-list-body-detail-no'>{item.no}</div>
                          <div className='code-item-info-middle-right-user-define-list-body-detail-code'>{item.detailCode}</div>
                          <div className='code-item-info-middle-right-user-define-list-body-detail-name'>{item.name}</div>                      
