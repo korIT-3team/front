@@ -5,7 +5,6 @@ export default interface PutSystemEmployeeInfoRequestDto {
   empDepartmentCode: number;
   joinDate: string;
   resignationDate: string | null;
-  password: string;
   registrationNumber: string;
   employmentTypeCode: number;
 }

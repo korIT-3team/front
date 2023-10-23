@@ -166,7 +166,7 @@
 }
 
 .system-employee-info-middle-left-bottom-table-title-employee-name {
-  width: 99px;
+  width: 149px;
   height: 35px;
 
   background-color: #184A7D;
@@ -198,7 +198,7 @@
 }
 
 .system-employee-info-middle-left-bottom-table-title-department-name {
-  width: 119px;
+  width: 219px;
   height: 35px;
 
   background-color: #184A7D;
@@ -231,22 +231,6 @@
 
 .system-employee-info-middle-left-bottom-table-title-resignation-date {
   width: 95px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.system-employee-info-middle-left-bottom-table-title-password {
-  width: 150px;
   height: 35px;
 
   background-color: #184A7D;
@@ -329,7 +313,7 @@
 }
 
 .system-employee-info-middle-left-bottom-table-body-list-employee-name {
-  width: 100px;
+  width: 150px;
   height: 35px;
 
   display: flex;
@@ -358,7 +342,7 @@
 }
 
 .system-employee-info-middle-left-bottom-table-body-list-department-name {
-  width: 120px;
+  width: 220px;
   height: 35px;
 
   display: flex;
@@ -393,20 +377,6 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.system-employee-info-middle-left-bottom-table-body-list-password {
-  width: 147px;
-  height: 31px;
-
-  display: flex;flex-direction: column;
   justify-content: center;
 
   color: rgba(44, 43, 43, 0.70);
@@ -482,7 +452,7 @@
 }
 
 .system-employee-info-middle-left-bottom-table-body-new-employee-name {
-  width: 96px;
+  width: 146px;
   height: 31px;
 
   display: flex;
@@ -512,7 +482,7 @@
 }
 
 .system-employee-info-middle-left-bottom-table-body-new-department-name {
-  width: 120px;
+  width: 220px;
   height: 35px;
 
   display: flex;
@@ -543,21 +513,6 @@
 
 .system-employee-info-middle-left-bottom-table-body-new-resignation-date {
   width: 92px;
-  height: 31px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.system-employee-info-middle-left-bottom-table-body-new-password {
-  width: 147px;
   height: 31px;
 
   display: flex;

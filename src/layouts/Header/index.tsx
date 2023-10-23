@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.css';
 import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedProductStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
@@ -15,6 +15,7 @@ import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListReque
 import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
+import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
 
 export default function Header() {
      //!              state             //
@@ -411,30 +412,35 @@ export default function Header() {
      }          
 
      //                       component                          //
-     // description: 사원 정보
+     // description: 사원 정보 //
 
      //   state     //
      // description: 사원조회 조건 정보 store //
      const { systemEmployeeName, resetSystemEmployeeRequest } = useSystemEmployeeRequestStore();
      // description: 조회된 사원 정보 store //
      const { setSystemEmployeeList, resetSystemEmployeeList } = useSystemEmployeeResponseStore();
-     // description: 사원 - 사용자정의 창 상태
+     // description: 사원 - 사용자정의 창 상태 //
      const { systemEmpUserDefineOpen, setSystemEmpUserDefineOpen } = useSelectedEmployeeInfoStore();
-     // description: 사원 - 부서 창 상태
+     // description: 사원 - 부서 창 상태 //
      const { systemEmpDepartmentOpen, setSystemEmpDepartmentOpen } = useSelectedEmployeeInfoStore();
+     // description: 사원 - 선택된 부서 정보 //
+     const { selectedEmpDepartmentCode, setSelectedEmpDepartmentCode } = useSelectedEmployeeInfoStore();
+     const { selectedEmpDepartmentName, setSelectedEmpDepartmentName } = useSelectedEmployeeInfoStore();
      // description: 사원 - 선택된 사용자 정보 //
      const { selectedEmployeeCode, setSelectedEmployeeCode } = useSelectedEmployeeInfoStore();
      // description: 사원 - 선택된 사용자정의코드 //
      const { selectedUserDefineCode, setSelectedUserDefineCode }  = useSelectedEmployeeInfoStore();
-     // description: 사원 - 선택된 사용자정의코드 detailName //
-     const { selectedUserDefineDetailName, setSelectedUserDefineDetailName } = useSelectedEmployeeInfoStore();
-     // description: 사원 - 선택된 사용자정의코드 detailCode //
-     const { selectedUserDefineDetailCode, setSelectedUserDefineDetailCode } = useSelectedEmployeeInfoStore();
+     // description: 성별 상태 //
+     const { selectedGenderName, setSelectedGenderName } = useSelectedEmployeeInfoStore();
+     const { selectedGenderCode, setSelectedGenderCode } = useSelectedEmployeeInfoStore();     
+     // description: 재직구분 상태 //
+     const { selectedEmploymentType, setSelectedEmploymentTypeName } = useSelectedEmployeeInfoStore();
+     const { selectedEmploymentTypeCode, setSelectedEmploymentTypeCode } = useSelectedEmployeeInfoStore();
      // description: 사원 - 신규입력 초기화 //
      const {resetSystemEmployeeInfo} = useSystemEmployeeInfoStore();  
      // description: 사원 정보 상태
      const { sysEmployeeCode, employeeName, gender, genderCode, empDepartmentName, empDepartmentCode, joinDate, resignationDate,
-               password, registrationNumber, employmentType, employmentTypeCode } = useSystemEmployeeInfoStore();     
+               registrationNumber, employmentType, employmentTypeCode } = useSystemEmployeeInfoStore();     
 
      //   event handler  //
      // description: 사원 정보 불러오기 //
@@ -476,13 +482,12 @@ export default function Header() {
                const data: PutSystemEmployeeInfoRequestDto = {
                     sysEmployeeCode: selectedEmployee?.employeeCode as number,
                     employeeName: selectedEmployee?.employeeName as string,
-                    genderCode: selectedEmployee?.genderCode as number,
-                    empDepartmentCode: selectedEmployee?.departmentCode as number,
+                    genderCode: (selectedGenderCode == 0) ? selectedEmployee?.genderCode as number : selectedGenderCode as number,
+                    empDepartmentCode: (selectedEmpDepartmentCode == 0)? selectedEmployee?.departmentCode as number : selectedEmpDepartmentCode as number,
                     joinDate: selectedEmployee?.joinDate as string,
                     resignationDate: selectedEmployee?.resignationDate as string,
-                    password: selectedEmployee?.password as string,
                     registrationNumber: selectedEmployee?.registrationNumber as string,
-                    employmentTypeCode: selectedEmployee?.employmentTypeCode as number
+                    employmentTypeCode: (selectedEmploymentTypeCode == 0) ? selectedEmployee?.employmentTypeCode as number : selectedEmploymentTypeCode as number
                }
 
                if (!data.resignationDate) data.resignationDate = null;
@@ -507,12 +512,11 @@ export default function Header() {
                     empDepartmentCode, 
                     joinDate, 
                     resignationDate,
-                    password,
                     registrationNumber, 
                     employmentTypeCode
                }
                if (!data.resignationDate) data.resignationDate = null;
-               if (!data.employeeName || !data.empDepartmentCode || !data.genderCode || !data.joinDate || !data.password || !data.registrationNumber || !data.employmentTypeCode ) {
+               if (!data.employeeName || !data.empDepartmentCode || !data.genderCode || !data.joinDate || !data.registrationNumber || !data.employmentTypeCode ) {
                     alert("필수값을 입력하세요.");
                     return;
                }
@@ -520,6 +524,32 @@ export default function Header() {
           };
      }
 
+     // description: 사원정보 삭제 응답 함수 //
+     const deleteSystemEmployeeInfoResponseHandler = (responsebody: DeleteSystemEmployeeInfoResponseDto | ResponseDto) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code !== 'SU') return;
+
+          // 전체 조회
+          setSelectedEmployeeCode(null);
+          setSystemEmpUserDefineOpen(false);
+          setSystemEmpDepartmentOpen(false);
+          resetSystemEmployeeInfo();
+          resetSystemEmployeeList();          
+          getSystemEmployeeListRequest(employeeName).then(getSystemEmployeeListResponseHandler);          
+          
+          alert('사원 삭제에 성공했습니다.');
+     }     
+     // description: 사원정보 삭제 이벤트 핸들러 //
+     const onDeleteEmployeeInfoButtonClickHandler = () => {
+          if (!selectedEmployeeCode) return;
+          const token = cookies.accessToken;
+          deleteSystemEmployeeInfoRequest(selectedEmployeeCode, token).then(deleteSystemEmployeeInfoResponseHandler);
+     }
      // description: 사원정보 조회 응답 함수 //
      const getSystemEmployeeListResponseHandler = (responsebody: GetSystemEmployeeListResponseDto | ResponseDto ) => {
 
@@ -540,8 +570,12 @@ export default function Header() {
           setSystemEmpDepartmentOpen(false)
           setSelectedEmployeeCode(0);
           setSelectedUserDefineCode(0);
-          setSelectedUserDefineDetailName("");
-          setSelectedUserDefineDetailCode(0);
+          setSelectedEmpDepartmentCode(0);
+          setSelectedEmpDepartmentName("");
+          setSelectedGenderCode(0);
+          setSelectedGenderName("");
+          setSelectedEmploymentTypeCode(0);
+          setSelectedEmploymentTypeName("");
           resetSystemEmployeeInfo();
           resetSystemEmployeeList();
           getSystemEmployeeListRequest(systemEmployeeName).then(getSystemEmployeeListResponseHandler)
@@ -847,6 +881,7 @@ export default function Header() {
                     </div>
                     <div className="header-function-delete" onClick={
                               isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler :
+                              isSystemEmployeeList ? onDeleteEmployeeInfoButtonClickHandler :
                               isCustomerList ? onDeleteCustomerInfoButtonClickHandler : 
                               isProductList ? onDeleteProductInfoButtonClickHandler : () => {}
                               }>
