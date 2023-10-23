@@ -6,7 +6,7 @@ import { getDepartmentCodeListRequest, getEmployeeCodeListRequest, getEmployment
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import SearchCodeResponseDto from 'src/interfaces/response/common/search-code.response.dto';
-import { useHumanRequestStore } from 'src/stores';
+import { useHumanRequestStore, useHumanResponseStore } from 'src/stores';
 import CodeSearchListItem from 'src/components/CodeSearchListItem';
 import { useLocation } from 'react-router-dom';
 import { HumanEmploymentTypeResponseDto } from 'src/interfaces/response/human';
@@ -18,7 +18,7 @@ export default function Employee() {
   // description : path 상태 //
   const { pathname } = useLocation();  
   // description: 조회조건 정보 store //
-  const { employeeCode, departmentCode, employmentType, employmentTypeName, setEmployeeCode, setDepartmentCode, setEmploymentType, setEmploymentTypeName, resetHumanReqeust} = useHumanRequestStore();
+  const { humanEmployeeCode, humanDepartmentCode, humanEmploymentType, sethumanEmployeeCode, sethumanDepartmentCode, sethumanEmploymentType, resetHumanReqeust} = useHumanRequestStore();
   // description: 조회조건 : 조건 검색창 오픈상태 //
   const [ open, setOpen ] = useState<boolean>(false);  
   // description: 조회조건 : 조건 검색창 상단제목라벨 //
@@ -31,16 +31,19 @@ export default function Employee() {
   const [ departmentName, setDepartmentName ] =useState<string>('');  
   // description: 조회조건 : 재직구분 리스트 Store //
   const [ employmentTypeList, setEmploymentTypeList ] = useState<HumanEmploymentTypeResponseDto[]>([]);
+  // description: 사원List 상태 //
+  const { humanList, setHumanList } = useHumanResponseStore();
+
 
     //          event handler           //
     // description: 검색창 조회목록 아이템 클릭 이벤트 //
     const onDataItemClickHandler = ( item : SearchCodeResponseDto ) => {
       if(label.includes('사원')){
-        setEmployeeCode(item.detailCode);
+        sethumanEmployeeCode(item.detailCode);
         setEmployeeName(item.name);
       }
       else if(label.includes('부서')){
-        setDepartmentCode(item.detailCode);
+        sethumanDepartmentCode(item.detailCode);
         setDepartmentName(item.name);
       }    
     }
@@ -66,7 +69,7 @@ export default function Employee() {
       setOpen(true);
       setLabel('사원코드도움');
       const data: GetEmployeeCodeListRequestDto = {
-        employeeCode : employeeCode,
+        employeeCode : humanEmployeeCode,
       }
       getEmployeeCodeListRequest(data).then(getEmployeeCodeListResponseHandelr);
     }
@@ -89,7 +92,7 @@ export default function Employee() {
       setOpen(true);
       setLabel('부서코드도움');
       const data: GetDepartmentCodeListRequestDto = {
-        departmentCode : departmentCode,
+        departmentCode : humanDepartmentCode,
       }
       getDepartmentCodeListRequest(data).then(getDepartmentCodeListResponseHandelr);
     }    
@@ -107,11 +110,10 @@ export default function Employee() {
       setEmploymentTypeList(employmentTypeList);
 
     }
-    // description : 전표 유형 선택 이벤트 //
+    // description : 재직구분 선택 이벤트 //
     const onInvoiceTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-      setEmploymentTypeName(event.target.value);
+      sethumanEmploymentType(parseInt(event.target.value));
     }    
-
     
 
     //          effect            //
@@ -129,7 +131,6 @@ export default function Employee() {
     // description : path가 바뀔 때마다 실행 //
     useEffect(()=>{
       resetHumanReqeust();
-      // resetInvoiceList();
       
  }, [pathname])    
 
@@ -147,7 +148,7 @@ export default function Employee() {
                 <div className='employee-info-right-top-search-dept-text'>부서</div>
                 <div className='employee-info-right-top-search-dept-box'>
                   <div className='employee-info-right-top-search-dept-box-code-box'>
-                    <div className='employee-info-right-top-search-dept-box-code-box-text'>{departmentCode? departmentCode : ''}</div>
+                    <div className='employee-info-right-top-search-dept-box-code-box-text'>{humanDepartmentCode? humanDepartmentCode : ''}</div>
                   </div>
                   <div className='employee-info-right-top-search-button' onClick={ onDepartmentSearchOpenButtonClickHandler }>검색</div>
                   <div className='employee-info-right-top-search-dept-box-name-box'>
@@ -159,7 +160,7 @@ export default function Employee() {
               <div className='employee-info-right-top-search-employee-text'>사원</div>
                 <div className='employee-info-right-top-search-employee-box'>
                   <div className='employee-info-right-top-search-employee-box-code-box'>
-                    <div className='employee-info-right-top-search-employee-box-code-box-text'>{employeeCode? employeeCode : ''}</div>
+                    <div className='employee-info-right-top-search-employee-box-code-box-text'>{humanEmployeeCode? humanEmployeeCode : ''}</div>
                   </div>
                   <div className='employee-info-right-top-search-button' onClick={ onEmployeeSearchOpenButtonClickHandler } >검색</div>
                   <div className='employee-info-right-top-search-employee-box-name-box'>
@@ -172,8 +173,8 @@ export default function Employee() {
                 <div className='employee-info-right-top-search-employment-status-box'>
                   <div className='employee-info-right-top-search-employment-status-box-combo-box'>
                     <select className='invoice-right-top-search-employment-status-box-combo-box-text' onChange={onInvoiceTypeChangeHandler} name="employment-type" id="employment-type">
-                      <option value="">전체</option>
-                      { employmentTypeList.map( ({userDefineDetailName}) => (<option value={userDefineDetailName}>{userDefineDetailName}</option>))  }
+                      <option value="0">전체</option>
+                      { employmentTypeList.map( ({userDefineDetailName, userDefineDetailCode}) => (<option value={userDefineDetailCode}>{userDefineDetailName}</option>))  }
                     </select>
                   </div>
                 </div>
@@ -194,12 +195,15 @@ export default function Employee() {
                     <div className='employee-info-middle-left-bottom-table-title-employee-name'>사원명</div>
                     <div className='employee-info-middle-left-bottom-table-title-dept-name'>부서명</div>
                   </div>
-                  <div className='employee-info-middle-left-bottom-table-body'>
-                    <div className='employee-info-middle-left-bottom-table-body-no'></div>
-                      <div className='employee-info-middle-left-bottom-table-body-employee-code'></div>
-                      <div className='employee-info-middle-left-bottom-table-body-employee-name'></div>
-                      <div className='employee-info-middle-left-bottom-table-body-dept-name'></div>
-                    </div>
+                  { humanList !== null &&
+                    humanList.map((item) => (                  
+                      <div className='employee-info-middle-left-bottom-table-body'>
+                        <div className='employee-info-middle-left-bottom-table-body-no'>{item.no}</div>
+                        <div className='employee-info-middle-left-bottom-table-body-employee-code'>{item.employeeCode}</div>
+                        <div className='employee-info-middle-left-bottom-table-body-employee-name'>{item.employeeName}</div>
+                        <div className='employee-info-middle-left-bottom-table-body-dept-name'>{item.departmentName}</div>
+                        </div>
+                  ))}
                 </div>
               </div>
             </div>

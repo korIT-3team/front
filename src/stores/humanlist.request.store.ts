@@ -1,30 +1,26 @@
 import { create } from 'zustand';
 export interface HumanListRequestStore {
-     departmentCode : number | null;
-     employeeCode : number | null;
-     employmentType : number | null;
-     employmentTypeName : string;
+     humanDepartmentCode : number | null;
+     humanEmployeeCode : number | null;
+     humanEmploymentType : number | null;
 
-     setDepartmentCode: (departmentCode: number | null) => void;
-     setEmployeeCode: (employeeCode: number | null) => void;
-     setEmploymentType: (employmentType: number | null) => void;
-     setEmploymentTypeName: (employmentTypeName: string) => void;
+     sethumanDepartmentCode: (humanDepartmentCode: number | null) => void;
+     sethumanEmployeeCode: (humanEmployeeCode: number | null) => void;
+     sethumanEmploymentType: (humanEmploymentType: number | null) => void;
 
      resetHumanReqeust: () => void;
 }
 
 const useStore = create<HumanListRequestStore>((set) => ({
-     departmentCode : null,
-     employeeCode : null,
-     employmentType : null,
-     employmentTypeName : "",
+     humanDepartmentCode : null,
+     humanEmployeeCode : null,
+     humanEmploymentType : null,
 
-     setDepartmentCode: (departmentCode) => set((state) => ({ ...state, departmentCode })),
-     setEmployeeCode: (employeeCode) => set((state) => ({ ...state, employeeCode })),
-     setEmploymentType: (employmentType) => set((state) => ({ ...state, employmentType })),
-     setEmploymentTypeName: (employmentTypeName) => set((state) => ({...state, employmentTypeName})),
+     sethumanDepartmentCode: (humanDepartmentCode) => set((state) => ({ ...state, humanDepartmentCode })),
+     sethumanEmployeeCode: (humanEmployeeCode) => set((state) => ({ ...state, humanEmployeeCode })),
+     sethumanEmploymentType: (humanEmploymentType) => set((state) => ({ ...state, humanEmploymentType })),
 
-     resetHumanReqeust: () => set((state) => ({ ...state, departmentCode : null, employeeCode : null, employmentType : null, employmentTypeName: ""}))
+     resetHumanReqeust: () => set((state) => ({ ...state, humanDepartmentCode : null, humanEmployeeCode : null, humanEmploymentType : null}))
 }));
 
 export default useStore;

@@ -29,6 +29,8 @@ import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetProj
 import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 //! ----
 import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
+import { HumanListRequestDto } from 'src/interfaces/request/human';
+import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -509,6 +511,20 @@ export const getHumanEmploymentTypeRequest = async () => {
   });
   return result;
 }
+// 사원List 불러오기
+export const getHumanListRequest = async (data : HumanListRequestDto) => {
+  const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
+  .then((response) => {
+    const responsebody : GetHumanListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
 
 // ! CUSTOMER
 
