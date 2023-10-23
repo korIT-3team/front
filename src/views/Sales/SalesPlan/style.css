@@ -31,1071 +31,214 @@
   align-items: center;
 }
 
+/* 조회 기능 */
+/* ---------------------------------------------------------------- */
+.sales-plan-search-function {
+  display: flex;
+}
+
 .sales-plan-search-container {
-  display: flex;
-
-  flex-direction: column;
-}
-
-.sales-plan-search-container-top {
-  display: flex;
-
-  margin-top: 15px;
   margin-left: 22px;
-
-  width: 1085px;
+  width: 260px;
   height: 35px;
 
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
 
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.30);
   background: #F9F9F9;
 }
 
-/* 부서 */
-.sales-plan-search-container-top-dept {
-  width: 340px;
-  height: 35px;
+/* 판매계획 코드 */
 
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-}
-
-.sales-plan-search-container-top-dept-text {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 110px;
-  height: 35px;
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-search-container-top-dept-box {
-  width: 240px;
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-  background-color: #FFF;
-}
-
-.sales-plan-search-container-top-dept-box-input {
-  display : flex;
-  align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  width: 70px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-search-dept-search-button {
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 5px;
-
-  width: 40px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: rgba(0, 0, 0, 0.30);
-
-  color: #FFF;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.sales-plan-search-dept-search-button:hover {
-  cursor: pointer;
-}
-
-.sales-plan-search-dept-search-input-box-display {
-  display: flex;
-  align-items: center;
-
-  margin-left: 5px;
-  margin-right: 5px;
-
-  width: 100px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.sales-plan-search-dept-search-input-box-display-text {
-  margin-left: 10px;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 사원 */
-.sales-plan-search-container-top-employee {
-  width: 340px;
-  height: 35px;
-
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-}
-
-.sales-plan-search-container-top-employee-text {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 110px;
-  height: 35px;
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-search-container-top-employee-box {
-  width: 240px;
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-  background-color: #FFF;
-}
-
-.sales-plan-search-container-top-employee-box-input {
-  display : flex;
-  align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  width: 70px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-search-employee-search-button {
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 5px;
-
-  width: 40px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: rgba(0, 0, 0, 0.30);
-
-  color: #FFF;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.sales-plan-search-employee-search-button:hover {
-  cursor: pointer;
-}
-
-.sales-plan-search-employee-search-input-box-display {
-  display: flex;
-  align-items: center;
-
-  margin-left: 5px;
-  margin-right: 5px;
-
-  width: 100px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.sales-plan-search-employee-search-input-box-display-text {
-  margin-left: 10px;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 계획 일자 */
-.sales-plan-search-container-top-plan-date {
-  width: 380px;
-  height: 35px;
-
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-}
-
-.sales-plan-search-container-top-plan-date-text {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 110px;
-  height: 35px;
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-search-container-top-plan-date-container {
-  width: 150px;
-  height: 35px;
-  
-  display : flex;
-  margin-right: 2px;
-  margin-left: 2px;
-  align-items : center;
-  background-color: #FFF;
-}
-
-.sales-plan-search-container-top-plan-date-select-box {
+.sales-plan-search-plan-code {
   width: 120px;
-  height: 27px;
-  
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-  display : flex;
-  align-items : center;
-  justify-content: center;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
 }
 
-.sales-plan-search-container-top-plan-date-select {
-  width: 110px;
-  height: 25px;
+.sales-plan-search-plan-code-text {
+  width: 118px;
+  height: 35px;
 
-  background-color: #FFF;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.sales-plan-search-plan-code-box-name-box-text {
+  width: calc(260px - 120px - 4px);
+  height: 31px;
 
   display : flex;
   align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
   border: none;
-  outline: none;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
 }
 
+/* 프로젝트 명 */
 
-
-
-
-
-/* 조회 버튼 */
-
-.sales-plan-search-button-container {
-  display: flex;
-
-  margin-top: 8px;
-}
-
-.sales-plan-search-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 982px;
-  margin-right: 5px;
-
-  width: 125px;
+.sales-plan-search-project-name {
+  width: 120px;
   height: 35px;
 
-  border: 0.8px solid rgba(52, 117, 181, 1);
-
-  background-color: rgba(52, 117, 181, 1);
-}
-
-.sales-plan-search-button:hover {
-  cursor: pointer;
-  background-color: rgba(52, 117, 181, 0.7);
-}
-
-.sales-plan-search-button-text {
-  color: #FFFFFF;
-  text-align: center;
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-/* 등록 상단 */
-
-.sales-plan-register-container-top {
   display: flex;
-
-  margin-top: 15px;
-  margin-left: 22px;
-
-  width: 1085px;
-  height: 35px;
-
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background: #F9F9F9;
-}
-
-/* 품번 */
-.sales-plan-register-container-top-product-code {
-  display: flex;
-
   justify-self: center;
   align-items: center;
   text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
 }
 
-.sales-plan-register-container-top-product-code-text {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 90px;
+.sales-plan-search-project-name-text {
+  width: 118px;
   height: 35px;
 
   border-right: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
 
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-top-product-code-box {
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-  background-color: #FFF;
-}
-
-.sales-plan-register-product-code-input {
-  display : flex;
-  align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  width: 172px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 품명 */
-.sales-plan-register-container-top-product-name {
-  display: flex;
-
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
-}
-
-.sales-plan-register-container-top-product-name-text {
-  display: flex;
-
-  margin-left: 10px;
-  justify-content: center;
-  align-items: center;
-
-  width: 90px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-top-product-name-box {
-  height: 35px;
-  
-  display : flex;
+	display : flex;
   justify-content : center;
   align-items : center;
 
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.sales-plan-register-product-name-input {
+.sales-plan-search-project-name-box-name-box-text {
+  width: calc(260px - 120px - 4px);
+  height: 31px;
+
   display : flex;
   align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  width: 172px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 단위 */
-
-.sales-plan-register-container-top-unit {
-  display: flex;
-
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
-}
-
-.sales-plan-register-container-top-unit-text {
-  display: flex;
-
-  margin-left: 10px;
-  justify-content: center;
-  align-items: center;
-
-  width: 90px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
 
   color: rgba(0, 0, 0, 0.80);
   text-align: center;
-  font-family: Inter;
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-top-unit-box {
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
-}
-
-.sales-plan-register-unit-input {
-  display : flex;
-  align-items : center;
-
-  margin-left: 5px;
-
-  width: 160px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 계획수량 */
-.sales-plan-register-container-top-quantity {
-  display: flex;
-
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
-}
-
-.sales-plan-register-container-top-quantity-text {
-  display: flex;
-
-  margin-left: 10px;
-  justify-content: center;
-  align-items: center;
-
-  width: 90px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-top-quantity-box {
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
-}
-
-.sales-plan-register-quantity-input {
-  display : flex;
-  align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  width: 172px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 등록 하단 */
-
-
-.sales-plan-register-container-bottom {
-  display: flex;
-
-  margin-top: 15px;
-  margin-left: 22px;
-
-  width: 1085px;
-  height: 35px;
-
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background: #F9F9F9;
-}
-
-/* 환종 */
-.sales-plan-register-container-bottom-exchange-type {
-  display: flex;
-
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
-}
-
-.sales-plan-register-container-bottom-exchange-type-text {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 90px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-bottom-exchange-type-box {
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
-}
-
-.sales-plan-register-container-bottom-exchange-type-combo-box {
-  display : flex;
-  align-items : center;
-
-  margin-left: 4px;
-  margin-right: 4px;
-
-  width: 180px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-.sales-plan-register-container-bottom-exchange-typer-combo-box-text {
-  width: 180px;
-  height: 27px;
   border: none;
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-size: 12px;
-  font-weight: 400;
 }
 
+/* 프로젝트 명 */
 
-/* 환율 */
-.sales-plan-register-container-bottom-exchange-rate {
+.sales-plan-search-plan-date {
+  width: 120px;
+  height: 35px;
+
   display: flex;
-
   justify-self: center;
   align-items: center;
   text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
 }
 
-.sales-plan-register-container-bottom-exchange-rate-text {
-  display: flex;
-
-  margin-left: 10px;
-  justify-content: center;
-  align-items: center;
-
-  width: 90px;
+.sales-plan-search-plan-date-text {
+  width: 118px;
   height: 35px;
 
   border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
 
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-bottom-exchange-rate-box {
-  height: 35px;
-  
-  display : flex;
+	display : flex;
   justify-content : center;
   align-items : center;
 
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.sales-plan-register-container-bottom-exchange-rate-container {
+.sales-plan-search-plan-date-box-name-box-text {
+  width: calc(260px - 120px - 4px);
+  height: 31px;
+
   display : flex;
   align-items : center;
 
-  margin: 4px 0px 4px 4px;
-
-  width: 172px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-}
-
-.exchange-rate-display {
-  margin-left: 5px;
-  
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 예상 단가 */
-
-.sales-plan-register-container-bottom-price {
-  display: flex;
-
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
-}
-
-.sales-plan-register-container-bottom-price-text {
-  display: flex;
-
-  margin-left: 10px;
-  justify-content: center;
-  align-items: center;
-
-  width: 90px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-
   color: rgba(0, 0, 0, 0.80);
   text-align: center;
-  font-family: Inter;
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-bottom-price-box {
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
-}
-
-.sales-plan-register-price-input {
-  display : flex;
-  align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-/* 예상 금액 */
-.sales-plan-register-container-bottom-total-price {
-  display: flex;
-
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-
-  width: 270px;
-  height: 35px;
-
-  background-color: #F9F9F9;
-}
-
-.sales-plan-register-container-bottom-total-price-text {
-  display: flex;
-
-  margin-left: 10px;
-  justify-content: center;
-  align-items: center;
-
-  width: 90px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #F9F9F9;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.sales-plan-register-container-bottom-total-price-box {
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: #FFF;
-}
-
-.sales-plan-register-container-bottom-total-price-container {
-  display : flex;
-  align-items : center;
-
-  margin: 4px 0px 4px 4px;
-
-  width: 172px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-}
-
-.total-price-display {
-  margin-left: 5px;
-  
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  border: none;
 }
 
 
+/* ---------------------------------------------------------------- */
 
-.sales-plan-register-button-container {
-  display: flex;
-
-  margin-top: 8px;
-}
-
-.sales-plan-register-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 982px;
-  margin-right: 5px;
-
-  width: 125px;
-  height: 35px;
-
-  border: 0.8px solid rgba(52, 117, 181, 1);
-
-  background-color: rgba(52, 117, 181, 1);
-}
-
-.sales-plan-register-button:hover {
-  cursor: pointer;
-  background-color: rgba(52, 117, 181, 0.7);
-}
-
-.sales-plan-register-button-text {
-  color: #FFFFFF;
-  text-align: center;
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
 
 .sales-plan-view-top {
   margin-top: 25px;
-  margin-bottom: 15px;
   margin-left: 27px;
 }
 
 .sales-plan-view-top-text {
+  padding-bottom: 17px;
   color: rgba(0, 0, 0, 0.80);
+  text-align: left;
   font-family: Inter;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
+/* ---------------------------------------------------------------- */
+
+
 .sales-plan-view-container {
   display: flex;
-}
-
-.sales-plan-view-container-box {
-  display: flex;
-
-  margin-left: 22px;
-
+  align-items: center;
   justify-content: center;
 
-  width: 1085px;
-  height: 400px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+
+  width: 1100px;
+  height: 250px;
 
   border: 1px solid #CFCFCF;
 }
 
-.sales-plan-view-container-table {
-  display: flex;
-  flex-direction: column;
+.sales-plan-view-container-box {
+  width: 1080px;
+  height: 230px;
+
+  border: 1px solid #CFCFCF;
 }
 
-.sales-plan-view-container-table-title {
-  display: flex;
+/* ---------------------------------------------------------------- */
+/* first table 타이틀 */
 
-  margin-top: 10px;
-
+.sales-plan-view-container-first-table-title {
   width: 100%;
   height: 35px;
+  display: flex;
 }
 
-.sales-plan-view-container-table-title-no {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
+.sales-plan-view-container-first-table-title-no {
   width: 60px;
   height: 35px;
 
   background-color: #184A7D;
   border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: #FFF;
   text-align: center;
@@ -1103,17 +246,15 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-title-product-code {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
+.sales-plan-view-container-first-table-title-plan-code {
+  width: 180px;
   height: 35px;
 
   background-color: #184A7D;
   border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: #FFF;
   text-align: center;
@@ -1121,17 +262,15 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-title-product-name {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
+.sales-plan-view-container-first-table-title-project-name {
+  width: 300px;
   height: 35px;
 
   background-color: #184A7D;
   border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: #FFF;
   text-align: center;
@@ -1139,17 +278,15 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-title-unit {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
+.sales-plan-view-container-first-table-title-dept-code {
+  width: 180px;
   height: 35px;
 
   background-color: #184A7D;
   border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: #FFF;
   text-align: center;
@@ -1157,17 +294,15 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-title-plan-quantity {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
+.sales-plan-view-container-first-table-title-emp-code {
+  width: 180px;
   height: 35px;
 
   background-color: #184A7D;
   border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: #FFF;
   text-align: center;
@@ -1175,111 +310,428 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-title-exchange-rate-type {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
+.sales-plan-view-container-first-table-title-plan-date {
+  width: 180px;
   height: 35px;
 
   background-color: #184A7D;
   border-right: 1px solid #FFF;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-table-title-exchange-rate {
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
 
-  width: 110px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-
   color: #FFF;
   text-align: center;
   font-size: 14px;
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-title-expect-price {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
+/* ---------------------------------------------------------------- */
+/* first table 바디 */
 
-  width: 110px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-table-title-expect-total-price {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-table-title-expect-korean-price {
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-
-  width: 110px;
-  height: 35px;
-
-  background-color: #184A7D;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-table-body {
-  display: flex;
-
+.sales-plan-view-container-first-table-body {
   width: 100%;
   height: 35px;
+  display: flex;
 }
 
-.sales-plan-view-container-table-body-no {
+.sales-plan-view-container-first-table-body-no {
+  width: 61px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
 
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-first-table-body-plan-code {
+  width: 175px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-project-name {
+  width: 303px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-dept-code {
+  width: 176px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-emp-code {
+  width: 176px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-plan-date {
+  width: 176px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* ---------------------------------------------------------------- */
+/* 새로 저장하는 first body */
+.sales-plan-view-container-first-table-body-new {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.sales-plan-view-container-first-table-body-new-no {
+  width: 61px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-first-table-body-new-plan-code {
+  width: 175px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-new-project-name {
+  width: 303px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-new-dept-code {
+  width: 176px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-new-emp-code {
+  width: 176px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-first-table-body-new-plan-date {
+  width: 176px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* ---------------------------------------------------------------- */
+/* second table title*/
+
+.sales-plan-view-container-second-table-title {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.sales-plan-view-container-second-table-title-no {
   width: 60px;
   height: 35px;
 
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-product-code {
+  width: 100px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-product-name {
+  width: 150px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-unit {
+  width: 70px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-plan-quantity {
+  width: 120px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-exchange-type {
+  width: 100px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-exchange-rate {
+  width: 100px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-expect-price {
+  width: 125px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-expect-total-price {
+  width: 125px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-second-table-title-expect-korean-price {
+  width: 125px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------------- */
+/* second table body */
+
+.sales-plan-view-container-second-table-body {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.sales-plan-view-container-second-table-body-no {
+  width: 60px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   border-right: 1px solid #FFF;
 
   color: rgba(44, 43, 43, 0.70);
@@ -1288,14 +740,175 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-body-product-code {
+.sales-plan-view-container-second-table-body-product-code {
+  width: 96px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
+  
+  border-right: 1px solid #FFF;
 
-  width: 110px;
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-product-name {
+  width: 146px;
   height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-unit {
+  width: 66px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-plan-quantity {
+  width: 116px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-exchange-type {
+  width: 97px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-exchange-rate {
+  width: 97px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-expect-price {
+  width: 121px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-expect-total-price {
+  width: 121px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-second-table-body-expect-korean-price {
+  width: 125px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* ---------------------------------------------------------------- */
+/* 새로 저장하는 second body */
+
+.sales-plan-view-container-second-table-body-new {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.sales-plan-view-container-second-table-body-new-no {
+  width: 60px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   border-right: 1px solid #FFF;
 
@@ -1305,14 +918,13 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-table-body-product-name {
+.sales-plan-view-container-second-table-body-new-product-code {
+  width: 96px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1320,16 +932,16 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-unit {
+.sales-plan-view-container-second-table-body-new-product-name {
+  width: 146px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1337,16 +949,16 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-plan-quantity {
+.sales-plan-view-container-second-table-body-new-unit {
+  width: 66px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1354,16 +966,16 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-exchange-rate-type {
+.sales-plan-view-container-second-table-body-new-plan-quantity {
+  width: 116px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1371,16 +983,16 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-exchange-rate {
+.sales-plan-view-container-second-table-body-new-exchange-type {
+  width: 97px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1388,16 +1000,16 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-expect-price {
+.sales-plan-view-container-second-table-body-new-exchange-rate {
+  width: 97px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1405,16 +1017,16 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-expect-total-price {
+.sales-plan-view-container-second-table-body-new-expect-price {
+  width: 121px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
   
   border-right: 1px solid #FFF;
 
@@ -1422,22 +1034,44 @@
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
 
-.sales-plan-view-container-table-body-expect-korean-price {
+.sales-plan-view-container-second-table-body-new-expect-total-price {
+  width: 121px;
+  height: 35px;
+
   display: flex;
-  
   flex-direction: column;
   justify-content: center;
-
-  width: 110px;
-  height: 35px;
+  
+  border-right: 1px solid #FFF;
 
   color: rgba(44, 43, 43, 0.70);
   text-align: center;
   font-size: 14px;
   font-weight: 700;
+  border:none;
 }
+
+.sales-plan-view-container-second-table-body-new-expect-korean-price {
+  width: 125px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* ---------------------------------------------------------------- */
 
 .sales-plan-bottom {
   display: flex;

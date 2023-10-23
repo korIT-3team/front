@@ -1,32 +1,36 @@
 import { create } from "zustand";
 
 export interface ProductInfoStore {
-  productCode: Number;
-  productName: string;
-  procurementCategory: number;
-  productPrice: number;
+  productCodeInfo: number;
+  productCompanyCode: number;
+  productNameInfo: string;
+  procurementCategoryInfo: number;
+  productPriceInfo: number;
 
-  setProductCode: (productCode: number) => void;
-  setProductName: (productName: string) => void;
-  setProcurementCategory: (procurementCategory: number) => void;
-  setProductPrice: (productPrice: number) => void;
+  setProductCodeInfo: (productCodeInfo: number) => void;
+  setProductCompanyCode: (productCompanyCode: number) => void;
+  setProductNameInfo: (productNameInfo: string) => void;
+  setProcurementCategoryInfo: (procurementCategoryInfo: number) => void;
+  setProductPriceInfo: (productPriceInfo: number) => void;
 
   resetProductInfo: () => void;
 
 }
 
 const useStore = create<ProductInfoStore>((set) => ({
-  productCode: 0,
-  productName: "",
-  procurementCategory: 0,
-  productPrice: 0,
+  productCodeInfo: 0,
+  productCompanyCode: 1,
+  productNameInfo: "",
+  procurementCategoryInfo: 0,
+  productPriceInfo: 0,
 
-  setProductCode: (productCode) => set((state) => ({ ...state, productCode })),
-  setProductName: (productName) => set((state) => ({ ...state, productName })),
-  setProcurementCategory: (procurementCategory) => set((state) => ({ ...state, procurementCategory })),
-  setProductPrice: (productPrice) => set((state) => ({ ...state, productPrice })),
+  setProductCodeInfo: (productCodeInfo) => set((state) => ({ ...state, productCodeInfo })),
+  setProductCompanyCode: (productCompanyCode) => set((state) => ({ ...state, productCompanyCode })),
+  setProductNameInfo: (productNameInfo) => set((state) => ({ ...state, productNameInfo })),
+  setProcurementCategoryInfo: (procurementCategoryInfo) => set((state) => ({ ...state, procurementCategoryInfo })),
+  setProductPriceInfo: (productPriceInfo) => set((state) => ({ ...state, productPriceInfo })),
 
-  resetProductInfo: () => set((state) => ({ ...state, productCode: 0, productName: "", procurementCategory: 0, productPrice:0 }))
+  resetProductInfo: () => set((state) => ({ ...state, productCodeInfo: 0, productCompanyCode: 0, productNameInfo: "", procurementCategoryInfo: 0, productPriceInfo:0 }))
 }));
 
 export default useStore;

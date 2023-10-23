@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export interface ProductInfo {
   no: number;
+  companyCode: number;
   productCode: number;
   productName: string;
   procurementCategory: number;
