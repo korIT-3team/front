@@ -7,7 +7,6 @@ import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfa
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
 import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import GetEmploymentTypeListResponseDto from 'src/interfaces/response/searchView/get-Employment-type-list.response.dto';
 import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
@@ -28,6 +27,8 @@ import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/
 import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetProjectCodeListRequestDto } from 'src/interfaces/request/common';
 //! ----
 import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+//! ----
+import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -71,6 +72,9 @@ const GET_SYSTEM_EMP_USER_DEFINE_LIST_URL = (userDefineCode: number | null) => `
 const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee-info/department`;
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
+
+// 사원Detail(HUMAN)
+const GET_HUMAN_EMPLOYEE_LIST_URL = () => `${API_DOMAIN}/human/employee-info-detail`;
 
 // 거래처
 const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string | null) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
@@ -482,6 +486,21 @@ export const getSystemEmpDepartmentListRequest = async() => {
   const result = await axios.get(GET_SYSTEM_EMP_DEPARTMENT_LIST_URL())
   .then((response) => {
     const responsebody : GetSystemEmpDepartmentListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+//! Human
+// 재직구분 리스트 불러오기
+export const getHumanEmploymentTypeRequest = async () => {
+  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL())
+  .then((response) => {
+    const responsebody : GetInvoiceTypeListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {

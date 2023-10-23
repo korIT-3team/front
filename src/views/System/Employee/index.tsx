@@ -15,15 +15,13 @@ export default function SystemEmployee() {
   //          state           //
   // description: path 상태
   const {pathname} = useLocation();
-  // description: 암호화 상태 //
-  const [ passwordState, setPasswordState ] = useState<boolean>(true);
   // description: 사원 - 신규등록 시 사용자정의코드 정보 //
   const [ selectedNewUserDefineCode, setSelectedNewUserDefineCode ] = useState<number>(0);
   // description: 사원 - 신규등록 정보 //
   const { employeeName, gender, genderCode, empDepartmentName, empDepartmentCode, joinDate, resignationDate, 
-          password, registrationNumber,  employmentType, employmentTypeCode} = useSystemEmployeeInfoStore();
+          registrationNumber,  employmentType, employmentTypeCode} = useSystemEmployeeInfoStore();
   const { setEmployeeName, setGender, setGenderCode, setDepartmentName, setDepartmentCode, setJoinDate, setResignationDate, 
-          setPassword, setRegistrationNumber, setEmploymentType, setEmploymentTypeCode, resetSystemEmployeeInfo } = useSystemEmployeeInfoStore();
+          setRegistrationNumber, setEmploymentType, setEmploymentTypeCode, resetSystemEmployeeInfo } = useSystemEmployeeInfoStore();
   // description: 사원조회 조건
   const { setSystemEmployeeName, resetSystemEmployeeRequest } = useSystemEmployeeRequestStore();
   // description: 사원List 정보 불러오기
@@ -35,9 +33,9 @@ export default function SystemEmployee() {
   // description: 부서 창 상태
   const { systemEmpDepartmentOpen, setSystemEmpDepartmentOpen } = useSelectedEmployeeInfoStore();
   // description: 사원 - 선택된 부서명 //
-  const { selectedDepartmentName, setSelectedDepartmentName } = useSelectedEmployeeInfoStore();
+  const { selectedEmpDepartmentName, setSelectedEmpDepartmentName } = useSelectedEmployeeInfoStore();
   // description: 사원 - 선택된 부서코드 //
-  const { selectedDepartmentCode, setSelectedDepartmentCode } = useSelectedEmployeeInfoStore();
+  const { selectedEmpDepartmentCode, setSelectedEmpDepartmentCode } = useSelectedEmployeeInfoStore();
 
 
   //! 사용자정의
@@ -49,9 +47,10 @@ export default function SystemEmployee() {
   // description: 사원 - 선택된 사용자정의코드 //
   const { selectedUserDefineCode, setSelectedUserDefineCode }  = useSelectedEmployeeInfoStore();
   // description: 사원 - 선택된 사용자정의코드 detailName //
-  const { selectedUserDefineDetailName, setSelectedUserDefineDetailName } = useSelectedEmployeeInfoStore();
-  // description: 사원 - 선택된 사용자정의코드 detailCode //
-  const { selectedUserDefineDetailCode, setSelectedUserDefineDetailCode } = useSelectedEmployeeInfoStore();
+  const { selectedEmploymentType, setSelectedEmploymentTypeName } = useSelectedEmployeeInfoStore();
+  const { selectedEmploymentTypeCode, setSelectedEmploymentTypeCode } = useSelectedEmployeeInfoStore();
+  const { selectedGenderName, setSelectedGenderName } = useSelectedEmployeeInfoStore();
+  const { selectedGenderCode, setSelectedGenderCode } = useSelectedEmployeeInfoStore();
   
   //          function            //
 
@@ -66,21 +65,16 @@ export default function SystemEmployee() {
     setSystemEmpDepartmentOpen(false);
     setSystemEmpUserDefineOpen(false);
 
-    setSelectedDepartmentCode(0);
-    setSelectedDepartmentName("");
+    setSelectedEmpDepartmentCode(0);
+    setSelectedEmpDepartmentName("");
 
     setSelectedEmployeeCode(0);
     setSelectedUserDefineCode(0);
-    setSelectedUserDefineDetailCode(0);
-    setSelectedUserDefineDetailName("");
-  }
-  // description: 암호 type => text
-  const onPasswordToTextOnClickHandler = () => {
-    setPasswordState(false);
-  }
-  // description: 암호 type => password
-  const onPasswordToPasswordOnClickHandler = () => {
-    setPasswordState(true);
+
+    setSelectedGenderCode(0);
+    setSelectedGenderName("");
+    setSelectedEmploymentTypeCode(0);
+    setSelectedEmploymentTypeName("");
   }
 
   //! 부서 창
@@ -105,12 +99,9 @@ export default function SystemEmployee() {
   // description: 부서조회 이벤트 핸들러 //
   const onDepartmentListSearchButtonClickHandler = ( EmployeeCode: number) => {
     setSelectedEmployeeCode(EmployeeCode);
-
-    setSelectedUserDefineDetailCode(0);
-    setSelectedUserDefineDetailName("");
     
-    setSelectedDepartmentCode(0);
-    setSelectedDepartmentName("");
+    setSelectedEmpDepartmentCode(0);
+    setSelectedEmpDepartmentName("");
     setDepartmentCode(0);
     setDepartmentName("");
 
@@ -123,13 +114,14 @@ export default function SystemEmployee() {
   // description: 사원 - 부서코드 Detail 선택 //
   const onDepartmentDetailDoubleClickHandler = (DepartmentCode: number, DepartmentName: string ) => {
     if (selectedEmployeeCode != 0){
-      setSelectedDepartmentCode(DepartmentCode);
-      setSelectedDepartmentName(DepartmentName);
+      setSelectedEmpDepartmentCode(DepartmentCode);
+      setSelectedEmpDepartmentName(DepartmentName);
 
     } else {
       setDepartmentCode(DepartmentCode);
       setDepartmentName(DepartmentName);
     }    
+
     setSystemEmpDepartmentOpen(false);
   }
 
@@ -154,35 +146,42 @@ export default function SystemEmployee() {
   //# 조회된 사원List - 사용자정의코드 선택 //
   // description: 사용자정의코드 더블클릭
   const onUserDefineDoubleClickHandler = (UserDefineNumber: number, EmployeeCode: number) => {
-    setSelectedDepartmentCode(0);
-    setSelectedDepartmentName("");
-        
     setSelectedEmployeeCode(EmployeeCode);
     setSelectedUserDefineCode(UserDefineNumber);
-    setSelectedUserDefineDetailCode(0);
-    setSelectedUserDefineDetailName("");
+    setSelectedGenderCode(0);
+    setSelectedGenderName("");
+    setSelectedEmploymentTypeCode(0);
+    setSelectedEmploymentTypeName("");
     getSystemEmpUserDefineListRequest(UserDefineNumber).then(getSystemEmpUserDefineDetialResponseHandler)    
   } 
 
   //# 신규사원 - 사용자정의코드 선택 //
   // description: 사용자정의코드 더블클릭
   const onNewUserDefineDoubleClickHandler = (UserDefineNumber: number) => {
-    setSelectedDepartmentCode(0);
-    setSelectedDepartmentName("");
+    setSelectedEmpDepartmentCode(0);
+    setSelectedEmpDepartmentName("");
 
     setSelectedEmployeeCode(0);
     setSelectedUserDefineCode(0);
-    setSelectedUserDefineDetailCode(0);
-    setSelectedUserDefineDetailName("");   
+    setSelectedEmployeeCode(0);
+    setSelectedUserDefineCode(0);
+    setSelectedEmploymentTypeCode(0);
+    setSelectedEmploymentTypeName(""); 
     setSelectedNewUserDefineCode(UserDefineNumber);
     getSystemEmpUserDefineListRequest(UserDefineNumber).then(getSystemEmpUserDefineDetialResponseHandler)    
   }
 
   // description: 사원 - 코드도움 detail 선택 //
   const onUserDefineDetailDoubleClickHandler = (UserDefineDetailCode: number, UserDefineDetailName: string ) => {
+    console.log("selectedUserDefineCode" + selectedUserDefineCode)
     if (selectedEmployeeCode != 0){
-      setSelectedUserDefineDetailCode(UserDefineDetailCode);
-      setSelectedUserDefineDetailName(UserDefineDetailName); 
+      if (selectedUserDefineCode == 9011) {
+        setSelectedGenderName(UserDefineDetailName);
+        setSelectedGenderCode(UserDefineDetailCode);
+      } else if (selectedUserDefineCode == 9003) {
+        setSelectedEmploymentTypeName(UserDefineDetailName);
+        setSelectedEmploymentTypeCode(UserDefineDetailCode);
+      }
     } else {
       if (selectedNewUserDefineCode == 9011) {
         setGender(UserDefineDetailName);
@@ -215,15 +214,6 @@ export default function SystemEmployee() {
     setSystemEmployeeList(newSystemEmployeeList);
   }    
 
-  // 기존사원 - 암호 변경 이벤트 //
-  const onExistPasswordEvent = (event: ChangeEvent<HTMLInputElement>, systemEmployeeInfo: SystemEmployeeInfo) => {
-    if (!systemEmployeeList) return;
-    const value = event.target.value;
-    const newSystemEmployeeInfo: SystemEmployeeInfo = { ...systemEmployeeInfo, password: value };
-    const newSystemEmployeeList: SystemEmployeeInfo[] = systemEmployeeList.map(item => item.employeeCode === newSystemEmployeeInfo.employeeCode ? newSystemEmployeeInfo : item);
-    setSystemEmployeeList(newSystemEmployeeList);
-  }  
-
   // 기존사원 - 주민번호 변경 이벤트 //
   const onExistRegistrationNumberChangeEvent = (event: ChangeEvent<HTMLInputElement>, systemEmployeeInfo: SystemEmployeeInfo) => {
     if (!systemEmployeeList) return;
@@ -248,11 +238,6 @@ export default function SystemEmployee() {
     setResignationDate(event.target.value);
   }  
 
-  // 신규사원 - 암호 변경 이벤트 //
-  const onPasswordChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  }
-
   // 신규사원 - 주민번호 변경 이벤트 //
   const onRegistrationNumberChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
     setRegistrationNumber(event.target.value);
@@ -268,7 +253,6 @@ export default function SystemEmployee() {
   return (
      <div id='system-employee-info-wrapper'>
       <SystemMenu />
-      <>{selectedEmployeeCode}</>
       <div className='system-employee-info-right'>
         <div className='system-employee-info-right-body'>
           <div className='system-employee-info-right-body-top'>
@@ -301,7 +285,6 @@ export default function SystemEmployee() {
                       <div className='system-employee-info-middle-left-bottom-table-title-department-code'></div>
                       <div className='system-employee-info-middle-left-bottom-table-title-join-date'>입사일</div>
                       <div className='system-employee-info-middle-left-bottom-table-title-resignation-date'>퇴사일</div>
-                      <div className='system-employee-info-middle-left-bottom-table-title-password'>암호</div>
                       <div className='system-employee-info-middle-left-bottom-table-title-registration-number'>주민번호</div>
                       <div className='system-employee-info-middle-left-bottom-table-title-employment-type' onDoubleClick={() => onUserDefineDoubleClickHandler} >재직구분</div>
                       <div className='system-employee-info-middle-left-bottom-table-title-employment-type-code'></div>
@@ -313,16 +296,15 @@ export default function SystemEmployee() {
                               <div className='system-employee-info-middle-left-bottom-table-body-list-no'>{item.no}</div>
                               <div className='system-employee-info-middle-left-bottom-table-body-list-employee-code'>{item.employeeCode}</div>
                               <div className='system-employee-info-middle-left-bottom-table-body-list-employee-name'>{item.employeeName}</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender'                 onDoubleClick={() => onUserDefineDoubleClickHandler(9011, item.employeeCode)} >{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailName != "" && selectedUserDefineCode == 9011) ? selectedUserDefineDetailName : item.gender }</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender-code' >{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailCode != 0 && selectedUserDefineCode == 9011) ? selectedUserDefineDetailCode : item.genderCode }</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-department-name'        onDoubleClick={() => onDepartmentListSearchButtonClickHandler(item.employeeCode)} >{(selectedEmployeeCode == item.employeeCode && selectedDepartmentName != "") ? selectedDepartmentName : item.departmentName}</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-department-code'        hidden>{(selectedEmployeeCode == item.employeeCode && selectedDepartmentCode != 0) ? selectedDepartmentCode : item.departmentCode}</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender'                 onDoubleClick={() => onUserDefineDoubleClickHandler(9011, item.employeeCode)} >{ (selectedEmployeeCode == item.employeeCode && selectedGenderName != "")  ? selectedGenderName : item.gender }</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-gender-code'            hidden >{ (selectedEmployeeCode == item.employeeCode && selectedGenderCode != 0) ? selectedGenderCode : item.genderCode }</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-department-name'        onDoubleClick={() => onDepartmentListSearchButtonClickHandler(item.employeeCode)} >{(selectedEmployeeCode == item.employeeCode && selectedEmpDepartmentName != "") ? selectedEmpDepartmentName : item.departmentName}</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-department-code'        hidden>{(selectedEmployeeCode == item.employeeCode && selectedEmpDepartmentCode != 0) ? selectedEmpDepartmentCode : item.departmentCode}</div>
                               <input className='system-employee-info-middle-left-bottom-table-body-list-join-date'            defaultValue={item.joinDate}            onChange={event => onExistJoinDateChangeEvent(event, item)}           onFocus={() => setSelectedEmployeeCode(item.employeeCode)}/>
                               <input className='system-employee-info-middle-left-bottom-table-body-list-resignation-date'     defaultValue={item.resignationDate}     onChange={event => onExistResignationDateChangeEvent(event, item)}    onFocus={() => setSelectedEmployeeCode(item.employeeCode)} />
-                              <input className='system-employee-info-middle-left-bottom-table-body-list-password'             defaultValue={item.password}            onChange={event => onExistPasswordEvent(event, item)}                 onFocus={() => setSelectedEmployeeCode(item.employeeCode)}    type='password' />
                               <input className='system-employee-info-middle-left-bottom-table-body-list-registration-number'  defaultValue={item.registrationNumber}  onChange={event => onExistRegistrationNumberChangeEvent(event, item)} onFocus={() => setSelectedEmployeeCode(item.employeeCode)} />
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type'        onDoubleClick={() => onUserDefineDoubleClickHandler(9003, item.employeeCode)}>{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailName != "" && selectedUserDefineCode == 9003) ? selectedUserDefineDetailName : item.employmentType }</div>
-                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type-code'   hidden>{ (selectedEmployeeCode == item.employeeCode && selectedUserDefineDetailCode != 0 && selectedUserDefineCode == 9003) ? selectedUserDefineDetailCode : item.employmentTypeCode }</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type'        onDoubleClick={() => onUserDefineDoubleClickHandler(9003, item.employeeCode)} >{ (selectedEmployeeCode == item.employeeCode && selectedEmploymentType != "") ? selectedEmploymentType : item.employmentType }</div>
+                              <div className='system-employee-info-middle-left-bottom-table-body-list-employment-type-code'   hidden>{ (selectedEmployeeCode == item.employeeCode && selectedEmploymentTypeCode != 0) ? selectedEmploymentTypeCode : item.employmentTypeCode }</div>                              
                             </div>
                       ))}
                       <div className='system-employee-info-middle-left-bottom-table-body-new'>
@@ -335,7 +317,6 @@ export default function SystemEmployee() {
                         <div className='system-employee-info-middle-left-bottom-table-body-new-department-code' hidden>{empDepartmentCode}</div>
                         <input className='system-employee-info-middle-left-bottom-table-body-new-join-date' value={joinDate} type="text" onChange={onJoinDateChangeEvent} />
                         <input className='system-employee-info-middle-left-bottom-table-body-new-resignation-date' value={resignationDate} type="text" onChange={onResignationDateChangeEvent} />
-                        <input className='system-employee-info-middle-left-bottom-table-body-new-password' value={password} type='password' onChange={onPasswordChangeEvent} />
                         <input className='system-employee-info-middle-left-bottom-table-body-new-registration-number' value={registrationNumber} type="text" onChange={onRegistrationNumberChangeEvent} />
                         <div className='system-employee-info-middle-left-bottom-table-body-new-employment-type' onDoubleClick={() => onNewUserDefineDoubleClickHandler(9003)}>{employmentType}</div>
                         <div className='system-employee-info-middle-left-bottom-table-body-new-employment-type-code' hidden>{employmentTypeCode}</div>                
