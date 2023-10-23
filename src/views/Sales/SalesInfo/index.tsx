@@ -13,81 +13,65 @@ export default function SalesInfo() {
           <div className='sales-info-top-text'>매출 정보 등록</div>
         </div>
         <div className='sales-info-divider'></div>
-        {/* ---------------------------------------------------------- */}
-        <div className='sales-info-register-container'>
-          <div className='sales-info-register-container-box'>
-            <div className='sales-info-dept'>
-              <div className='sales-info-dept-text'>부서*</div>
-              <div className='sales-info-dept-box'>
-                <div className='sales-info-dept-box-code-box'>
-                  <input className='sales-info-dept-box-code-box-text'/>
-                </div>
-                <div className='sales-info-dept-search-button'>검색</div>
-                <div className='sales-info-dept-box-name-box'>
-                  <div className='sales-info-dept-box-name-box-text'>부서명</div>
-                </div>
-              </div>
-            </div>
-            <div className='sales-info-employee'>
-              <div className='sales-info-employee-text'>사원*</div>
-              <div className='sales-info-employee-box'>
-                <div className='sales-info-employee-box-code-box'>
-                  <input className='sales-info-employee-box-code-box-text'/>
-                </div>
-                <div className='sales-info-employee-search-button'>검색</div>
-                <div className='sales-info-employee-box-name-box'>
-                  <div className='sales-info-employee-box-name-box-text'>사원명</div>
-                </div>
-              </div>
-            </div>
-            <div className='sales-info-customer'>
-              <div className='sales-info-customer-text'>거래처코드*</div>
-              <div className='sales-info-customer-box'>
-                <div className='sales-info-customer-box-code-box'>
-                  <input className='sales-info-customer-box-code-box-text'/>
-                </div>
-                <div className='sales-info-customer-search-button'>검색</div>
-                <div className='sales-info-customer-box-name-box'>
-                  <div className='sales-info-customer-box-name-box-text'>거래처명</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='sales-info-register-container-box'>
-            <div className='sales-info-sales-detail'>
-              <div className='sales-info-sales-detail-text'>매출상세*</div>
-              <div className='sales-info-sales-detail-box'>
-                <input className='sales-info-sales-detail-input' />
-              </div>
-            </div>
-            <div className='sales-info-sales-price'>
-              <div className='sales-info-sales-price-text'>매출금액*</div>
-              <div className='sales-info-sales-price-box'>
-                <input className='sales-info-sales-price-input' />
-              </div>
-            </div>
-            <div className='sales-info-deadline-date'>
-              <div className='sales-info-deadline-date-text'>매출마감일자*</div>
-              <div className='sales-info-deadline-date-container'>
-                <div className='sales-info-deadline-date-select-box'>
-                  <input className='sales-info-deadline-date-select' />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className='sales-info-view-top'>
+          <div className='sales-info-view-top-text'>매출 정보 조회</div>
         </div>
-        {/* ---------------------------------------------------------- */}
-        <div className='sales-info-register-button-container'>
-          <div className='sales-info-register-button'>
-            <div className='sales-info-register-button-text'>등록</div>
+        <div className='sales-info-search-function'>
+          <div className='sales-info-search-container'>
+            <div className='sales-info-search-sales-code'>
+              <div className='sales-info-search-sales-code-text'>매출마감번호</div>
+            </div>
+            <input className='sales-info-search-sales-code-box-name-box-text' />
+          </div>
+          <div className='sales-info-search-container'>
+            <div className='sales-info-search-deadline-date'>
+              <div className='sales-info-search-deadline-date-text'>마감일자</div>
+            </div>
+            <input className='sales-info-search-deadline-date-box-name-box-text' />
           </div>
         </div>
         <div className='sales-info-view-top'>
-          <div className='sales-info-view-top-text'>매출 정보 현황</div>
+          <div className='sales-info-view-top-text'>매출 정보 등록</div>
         </div>
         <div className='sales-info-view-container'>
-          <div className='sales-info-view-container-top'></div>
-          <div className='sales-info-view-container-bottom'></div>
+          <div className='sales-info-view-container-box'>
+            <div className='sales-info-view-container-first-table'>
+              <div className='sales-info-view-container-first-table-title'>
+                <div className='sales-info-view-container-first-table-title-no'>No</div>
+                <div className='sales-info-view-container-first-table-title-sales-code'>마감번호</div>
+                <div className='sales-info-view-container-first-table-title-deadline-date'>마감일자</div>
+                <div className='sales-info-view-container-first-table-title-dept-code'>부서코드</div>
+                <div className='sales-info-view-container-first-table-title-emp-code'>사원코드</div>
+                <div className='sales-info-view-container-first-table-title-cust-code'>거래처코드</div>
+                <div className='sales-info-view-container-first-table-title-sales-detail'>매출상세</div>
+                <div className='sales-info-view-container-first-table-title-sales-price'>매출금액</div>
+              </div>
+              {/* 아래 바디 리스트 뷰를 만들어서 불러오기 */}
+              <div className='sales-info-view-container-first-table-body-container'>
+                <div className='sales-info-view-container-first-table-body'>
+                  <div className='sales-info-view-container-first-table-body-no'></div>
+                  <input className='sales-info-view-container-first-table-body-sales-code'/>
+                  <input className='sales-info-view-container-first-table-body-deadline-date'/>
+                  <input className='sales-info-view-container-first-table-body-dept-code'/>
+                  <input className='sales-info-view-container-first-table-body-emp-code'/>
+                  <input className='sales-info-view-container-first-table-body-cust-code'/>
+                  <input className='sales-info-view-container-first-table-body-sales-detail'/>
+                  <input className='sales-info-view-container-first-table-body-sales-price'/>
+                </div>
+                <div className='sales-info-view-container-first-table-body-new'>
+                  <div className='sales-info-view-container-first-table-body-new-no'></div>
+                  <input className='sales-info-view-container-first-table-body-new-sales-code'/>
+                  <input className='sales-info-view-container-first-table-body-new-deadline-date'/>
+                  <input className='sales-info-view-container-first-table-body-new-dept-code'/>
+                  <input className='sales-info-view-container-first-table-body-new-emp-code'/>
+                  <input className='sales-info-view-container-first-table-body-new-cust-code'/>
+                  <input className='sales-info-view-container-first-table-body-new-sales-detail'/>
+                  <input className='sales-info-view-container-first-table-body-new-sales-price'/>
+                </div>
+              </div>
+              {/* 여기까지 */}
+            </div>
+          </div>
         </div>
         <div className='sales-info-bottom'>
           <div className='sales-info-bottom-button-save'>

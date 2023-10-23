@@ -1,19 +1,15 @@
 import { create } from "zustand";
 
 interface SelectedCustomerStore {
-  selectedProcurementCategory: number | null;
-  selectedProductName: string | null;
+  selectedProductCode: number | null;
 
-  setSelectedProcurementCategory: (selectedProcurementCategory: number | null) => void;
-  setSelectedProductName: (selectedProductName: string | null) => void;
+  setSelectedProductCode: (selectedProductCode: number | null) => void;
 }
 
 const useStore = create<SelectedCustomerStore>((set) => ({
-  selectedProcurementCategory: null,
-  selectedProductName: null,
+  selectedProductCode: null,
 
-  setSelectedProcurementCategory: (selectedProcurementCategory) => set((state) => ({ ...state, selectedProcurementCategory })),
-  setSelectedProductName: (selectedProductName) => set((state) => ({ ...state, selectedProductName })),
+  setSelectedProductCode: (selectedProductCode) => set((state) => ({ ...state, selectedProductCode })),
 }));
 
 export default useStore;

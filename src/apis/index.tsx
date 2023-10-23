@@ -73,7 +73,7 @@ const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
 // 거래처
-const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string | null) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
+const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
 const DELETE_CUSTOMER_INFO_URL = (deleteCustomerCode: number) => `${API_DOMAIN}/system/customer-info/${deleteCustomerCode}`; 
 
@@ -83,9 +83,9 @@ const GET_SALES_PLAN_DETAIL_RUL = (salesPlanCode: number) => `${API_DOMAIN}/sale
 const PUT_SALES_PLAN_INFO_RUL = () => `${API_DOMAIN}/sales/sales-plan`;
 
 // 품목
-const GET_PRODUCT_LIST_URL = (productName: string, procurementCategory: number) => `${API_DOMAIN}/system/product-info/${productName}/${procurementCategory}`;
+const GET_PRODUCT_LIST_URL = (productCode: number, productName: string) => `${API_DOMAIN}/system/product-info/${productCode}/${productName}`;
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
-const DELETE_PRODUCT_INFO_URL = (deleteProductName: string) => `${API_DOMAIN}/system/product-info/${deleteProductName}`;
+const DELETE_PRODUCT_INFO_URL = (deleteProductCode: number) => `${API_DOMAIN}/system/product-info/${deleteProductCode}`;
 
 // 로그인 메서드
 export const signInRequest = async (data: SignInRequestDto) => {
@@ -524,7 +524,7 @@ export const deleteCustomerInfoRequest = async (deleteCustomerCode: number, toke
 }
 
 // 거래처 리스트 불러오기 메서드
-export const getCustomerListRequest = async (customerCode: number, customerName: string | null) => {
+export const getCustomerListRequest = async (customerCode: number, customerName: string) => {
   const result = await axios.get(GET_CUSTOMER_LIST_URL(customerCode, customerName))
   .then((response) => {
     const responsebody : GetCustomerListResponseDto = response.data;
@@ -540,8 +540,8 @@ export const getCustomerListRequest = async (customerCode: number, customerName:
 // ! PRODUCT
 
 // 제품 정보 불러오기
-export const getProductListRequest = async (productNameInfo: string, procurementCategoryInfo: number) => {
-  const result = await axios.get(GET_PRODUCT_LIST_URL(productNameInfo, procurementCategoryInfo))
+export const getProductListRequest = async (productCode: number, productName: string) => {
+  const result = await axios.get(GET_PRODUCT_LIST_URL(productCode, productName))
   .then((response) => {
     const responsebody: GetProductListResponseDto = response.data;
     return responsebody;
@@ -570,8 +570,8 @@ export const putProductInfoRequest = async (data: PutProductInfoRequestDto, toke
 }
 
 // 제품 정보 삭제 메서드
-export const deleteProductInfoRequest = async (deleteProductName: string, token: string) => {
-  const result = await axios.delete(DELETE_PRODUCT_INFO_URL(deleteProductName), {headers: { 'Authorization' : `Bearer ${token}`}})
+export const deleteProductInfoRequest = async (deleteProductCode: number, token: string) => {
+  const result = await axios.delete(DELETE_PRODUCT_INFO_URL(deleteProductCode), {headers: { 'Authorization' : `Bearer ${token}`}})
   .then((response) => {
     const responsebody: DeleteProductInfoResponseDto = response.data;
     return responsebody;

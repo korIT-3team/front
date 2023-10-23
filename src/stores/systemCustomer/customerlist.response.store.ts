@@ -3,6 +3,7 @@ import { create } from "zustand";
 export interface CustomerInfo {
   no: number;
   customerCode: number;
+  companyCode: number;
   customerName: string;
   customerBusinessNumber: string;
   customerPostCode: string;
