@@ -173,7 +173,6 @@ export default function SystemEmployee() {
 
   // description: 사원 - 코드도움 detail 선택 //
   const onUserDefineDetailDoubleClickHandler = (UserDefineDetailCode: number, UserDefineDetailName: string ) => {
-    console.log("selectedUserDefineCode" + selectedUserDefineCode)
     if (selectedEmployeeCode != 0){
       if (selectedUserDefineCode == 9011) {
         setSelectedGenderName(UserDefineDetailName);
