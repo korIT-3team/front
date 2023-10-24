@@ -534,13 +534,6 @@
   display: flex;
 }
 
-.employee-info-middle-right-bottom-employee-info-detail-box {
-  width: 720px;
-  height: calc(550px - 245px);
-
-  display: flex;
-}
-
 .employee-info-middle-right-bottom-employee-info-box-left {
   margin: 15px 0px 0px 20px;
 }
@@ -564,42 +557,87 @@
   margin: 15px 0px 0px 21px;
 }
 
-.employee-info-middle-right-bottom-employee-info-box-right-raw1 {
-  width: 363px;
-  height: 44px;
+.employee-info-middle-right-bottom-employee-info-box-right-raw {
+  margin-top: 16px;
+
+  width: 450px;
+  height: 27px;
+
+  display: flex;
+}
+
+.employee-info-middle-right-bottom-employee-info-box-right-raw-text {
+  margin-right: 12px;
+  width: 100px;
+  height: 27px;
   
   display: flex;
+  justify-content: right;
+  align-items: center;  
 
-  background-color: aqua;
-}
-.employee-info-middle-right-bottom-employee-info-box-right-raw2 {
-  width: 363px;
-  height: 44px;
-
-  background-color: beige;
-}
-.employee-info-middle-right-bottom-employee-info-box-right-raw3 {
-  width: 363px;
-  height: 44px;
-
-  background-color: aqua;
-}
-.employee-info-middle-right-bottom-employee-info-box-right-raw4 {
-  width: 363px;
-  height: 44px;
-
-  background-color: beige;
-}
-.employee-info-middle-right-bottom-employee-info-box-right-raw5 {
-  width: 363px;
-  height: 44px;
-
-  background-color: aqua;
+  color: rgba(0, 0, 0, 0.80);
+  font-size: 12px;
+  font-family: Inter;
+  font-weight: 400;
+  text-align: center;
 }
 
-.employee-info-middle-right-bottom-container {
+.employee-info-middle-right-bottom-employee-info-box-right-raw-box {
+  width: 100px;
+
+  background: rgba(0, 0, 0, 0.10);
+  border: 1px rgba(0, 0, 0, 0.30);
+}
+
+.employee-info-middle-right-bottom-employee-info-box-right-raw-box2 {
+  width: 312px;
+
+  background: rgba(0, 0, 0, 0.10);
+  border: 1px rgba(0, 0, 0, 0.30);
+}
+
+.employee-info-middle-right-bottom-employee-info-detail-box {
+  width: 720px;
+  height: calc(550px - 245px);
+
+}
+
+
+.employee-info-middle-right-bottom-employee-info-detail-box-raw {
+  margin-top: 16px;
+
   width: 700px;
-  height: 530px;
+  height: 27px;
 
-  border: 1px solid #CFCFCF;
+  display: flex;
+}
+
+.employee-info-middle-right-bottom-employee-info-detail-box-raw-box1-border {
+  width: 100px;
+  height: 27px;
+  border: 1px rgba(0, 0, 0, 0.30);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.employee-info-middle-right-bottom-employee-info-detail-box-raw-box1 {
+  width: 100px;
+  height: 27px;
+}
+
+.employee-info-middle-right-bottom-employee-info-detail-box-raw-box2-border {
+  width: 150px;
+  height: 27px;
+  border: 1px rgba(0, 0, 0, 0.30);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.employee-info-middle-right-bottom-employee-info-detail-box-raw-box2 {
+  width: 150px;
+  height: 27px;
 }

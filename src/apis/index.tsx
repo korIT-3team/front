@@ -29,7 +29,6 @@ import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetProj
 import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 //! ----
 import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
-import { HumanListRequestDto } from 'src/interfaces/request/human';
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -76,7 +75,8 @@ const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
 // 사원Detail(HUMAN)
-const GET_HUMAN_EMPLOYEE_LIST_URL = () => `${API_DOMAIN}/human/employee-info-detail`;
+const GET_HUMAN_EMPLOYMENT_TYPE_URL = () => `${API_DOMAIN}/human/employee-info-detail`
+const GET_HUMAN_EMPLOYEE_LIST_URL = (humanDepartment:string, humanEmployeeCode:string, humanEmploymentType:string) => `${API_DOMAIN}/human/employee-info-detail/${humanDepartment}/${humanEmployeeCode}/${humanEmploymentType}`;
 
 // 거래처
 const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
@@ -500,9 +500,9 @@ export const getSystemEmpDepartmentListRequest = async() => {
 //! Human
 // 재직구분 리스트 불러오기
 export const getHumanEmploymentTypeRequest = async () => {
-  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL())
+  const result = await axios.get(GET_HUMAN_EMPLOYMENT_TYPE_URL())
   .then((response) => {
-    const responsebody : GetInvoiceTypeListResponseDto = response.data;
+    const responsebody : GetEmploymentTypeListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
@@ -512,8 +512,14 @@ export const getHumanEmploymentTypeRequest = async () => {
   return result;
 }
 // 사원List 불러오기
-export const getHumanListRequest = async (data : HumanListRequestDto) => {
-  const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
+export const getHumanListRequest = async (departmentCode: number | null, employeeCode: number | null, employmentType: number | null) => {
+
+  const humanDepartment = (!departmentCode)? "0" : departmentCode.toString();
+  const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
+  const humanEmploymentType = (!employmentType) ? "0" : employmentType.toString();
+
+
+  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL(humanDepartment, humanEmployeeCode, humanEmploymentType))
   .then((response) => {
     const responsebody : GetHumanListResponseDto = response.data;
     return responsebody;
@@ -524,6 +530,21 @@ export const getHumanListRequest = async (data : HumanListRequestDto) => {
   });
   return result;
 }
+
+
+
+// export const getHumanListRequest = async (data : HumanListRequestDto) => {
+//   const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
+//   .then((response) => {
+//     const responsebody : GetHumanListResponseDto = response.data;
+//     return responsebody;
+//   })
+//   .catch((error) => {
+//     const responsebody : ResponseDto = error.response.data;
+//     return responsebody;
+//   });
+//   return result;
+// }
 
 
 // ! CUSTOMER

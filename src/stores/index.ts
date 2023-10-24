@@ -41,6 +41,7 @@ import useSystemEmployeeInfoStore from './systemEmployee/systemEmployeeInfo.stor
 import useSelectedProductStore from './systemProduct/selectecproduct.store';
 import useHumanRequestStore from './humanlist.request.store';
 import useHumanResponseStore from './humanlist.response.store';
+import useSelectedHumanInfoStore from './selectedHumanInfo.store';
 
 export { 
      useUserStore,
@@ -86,5 +87,6 @@ export {
      useSystemEmployeeInfoStore,
 
      useHumanRequestStore,
-     useHumanResponseStore
+     useHumanResponseStore,
+     useSelectedHumanInfoStore
 };
