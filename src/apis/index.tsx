@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { InOutComeListRequestDto, InvoiceListRequestDto, InvoiceDetailRequestDto } from 'src/interfaces/request/accounting';
-import { SignInRequestDto } from 'src/interfaces/request/auth';
+import { KakaoSignInRequestDto, SignInRequestDto } from 'src/interfaces/request/auth';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfaces/request/sales';
@@ -20,11 +20,13 @@ import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetI
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetEmployeeCodeListRequestDto, GetProjectCodeListRequestDto } from 'src/interfaces/request/common';
+import KakaoSignInResponseDto from 'src/interfaces/response/auth/kakao-sign-in.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
 // 로그인
 const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
+const KAKAO_SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in/kakao`;
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/auth/user`;
 
 // 회사등록
@@ -81,8 +83,7 @@ const DELETE_PRODUCT_INFO_URL = (deleteProductCode: number) => `${API_DOMAIN}/sy
 
 // 로그인 메서드
 export const signInRequest = async (data: SignInRequestDto) => {
-     const result = 
-     await axios.post(SIGN_IN_URL(), data)
+     const result = await axios.post(SIGN_IN_URL(), data)
      .then((response) => {
        const responseBody: SignInResponseDto = response.data;
        return responseBody;
@@ -93,6 +94,22 @@ export const signInRequest = async (data: SignInRequestDto) => {
      });
 
      return result;
+}
+// 카카오 로그인
+export const KakaoSignInRequest = async (data : KakaoSignInRequestDto, token : string) => {
+  const headers = { headers: { 'Authorization': `Bearer ${token}` } };
+  const result = await axios.post(KAKAO_SIGN_IN_URL(), data, headers)
+  .then((response) => {
+    const responsebody : KakaoSignInResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
 }
 
 // 로그인유저 정보 불러오기 메서드
@@ -106,7 +123,6 @@ export const getSignInUserRequest = async (token: string) => {
        const responseBody: ResponseDto = error.response.data;
        return responseBody;
   });
-
   return result;
 }
 
@@ -362,7 +378,6 @@ export const getProjectCodeListRequest = async (data : GetProjectCodeListRequest
   });
   return result;
 }
-
 
 // ! 부서
 // 부서정보등록 메서드

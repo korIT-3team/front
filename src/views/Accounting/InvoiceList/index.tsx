@@ -115,7 +115,6 @@ export default function InvoiceList() {
     const onInvoiceTypeChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
       setInvoiceTypeName(event.target.value);
     }
-    //? todo : hook에 넣어서 가져와서 쓰는 형태로 한번 만들어볼까
     // description : 검색버튼 사원코드창 열기 이벤트 //
     const onEmployeeSearchOpenButtonClickHandler = () => {
       setOpen(true);
