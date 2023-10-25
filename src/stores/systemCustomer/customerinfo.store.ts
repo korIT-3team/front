@@ -1,7 +1,8 @@
 import { create } from "zustand";
 
 interface CustomerInfoStore {
-  customerCodeInfo: number | null;
+  customerCodeInfo: number;
+  customerCompanyCode: number;
   customerNameInfo: string,
   customerBusinessNumber: string,
   customerPostCode: string,
@@ -9,8 +10,9 @@ interface CustomerInfoStore {
   customerAddressDetail: string | null;
   customerTelNumber: string;
 
-  setCustomerCodeInfo: (customerCodeInfo: number | null) => void;
-  setCustomerNameInfo: (customerName: string) => void;
+  setCustomerCodeInfo: (customerCodeInfo: number) => void;
+  setCustomerCompanyCode: (customerCompanyCode: number) => void;
+  setCustomerNameInfo: (customerNameInfo: string) => void;
   setCustomerBusinessNumber: (customerBusinessNumber: string) => void;
   setCustomerPostCode: (customerPostCode: string) => void;
   setCustomerAddress: (customerAddress: string) => void;
@@ -22,6 +24,7 @@ interface CustomerInfoStore {
 
 const useStore = create<CustomerInfoStore>((set) => ({
   customerCodeInfo: 0,
+  customerCompanyCode: 1,
   customerNameInfo: "",
   customerBusinessNumber: "",
   customerPostCode: "",
@@ -30,6 +33,7 @@ const useStore = create<CustomerInfoStore>((set) => ({
   customerTelNumber: "",
 
   setCustomerCodeInfo:(customerCodeInfo) => set((state) => ({ ...state, customerCodeInfo })),
+  setCustomerCompanyCode:(customerCompanyCode) => set((state) => ({ ...state, customerCompanyCode })),
   setCustomerNameInfo: (customerNameInfo) => set((state) => ({ ...state, customerNameInfo})),
   setCustomerBusinessNumber: (customerBusinessNumber) => set((state) => ({ ...state, customerBusinessNumber })),
   setCustomerPostCode: (customerPostCode) => set((state) => ({ ...state, customerPostCode })),
@@ -37,7 +41,7 @@ const useStore = create<CustomerInfoStore>((set) => ({
   setCustomerAddressDetail: (customerAddressDetail) => set((state) => ({ ...state, customerAddressDetail })),
   setCustomerTelNumber: (customerTelNumber) => set((state) => ({ ...state, customerTelNumber })),
 
-  resetCustomerInfo: () => set((state) => ({ ...state, customerCodeInfo:0, customerNameInfo:"", customerBusinessNumber:"", customerPostCode:"", customerAddress:"", customerAddressDetail:"", customerTelNumber:"" }))
+  resetCustomerInfo: () => set((state) => ({ ...state, customerCodeInfo:0, customerCompanyCode: 1, customerNameInfo:"", customerBusinessNumber:"", customerPostCode:"", customerAddress:"", customerAddressDetail:"", customerTelNumber:"" }))
 
 }));
 

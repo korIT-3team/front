@@ -5,22 +5,28 @@ import { SignInResponseDto } from 'src/interfaces/response/auth';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfaces/request/sales';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
-import { PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto, PutSystemEmployeeInfoRequestDto, PutCustomerInfoRequestDto } from 'src/interfaces/request/system';
+import PutCustomerInfoRequestDto from 'src/interfaces/request/system/put-customer-info.request.dto';
+import ResponseDto from 'src/interfaces/response/response.dto';
+import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/delete-department-info.response.dto';
+import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
+import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
+import { PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
 import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
-import { GetEmployeeListViewResponseDto, GetEmploymentTypeListResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto, GetIncentiveTypeListResponseDto } from 'src/interfaces/response/searchView';
-import { PutDepartmentInfoResponseDto, PutCustomerInfoResponseDto, DeleteCustomerInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto, PutProductInfoResponseDto, DeleteDepartmentInfoResponseDto } from 'src/interfaces/response/system';
-//! todo : index.ts 추가 필요 ----
+import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
+import { DeleteProductInfoResponseDto, DeleteCustomerInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto, PutProductInfoResponseDto } from 'src/interfaces/response/system';
 import PutSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/put-system-employee-info.response.dto';
 import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-department-list.response.dto';
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
-import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
-//! ----
-import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
-import ResponseDto from 'src/interfaces/response/response.dto';
+import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
+import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
+import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetEmployeeCodeListRequestDto, GetProjectCodeListRequestDto } from 'src/interfaces/request/common';
 import KakaoSignInResponseDto from 'src/interfaces/response/auth/kakao-sign-in.response.dto';
+import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
+import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -66,8 +72,12 @@ const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
+// 사원Detail(HUMAN)
+const GET_HUMAN_EMPLOYMENT_TYPE_URL = () => `${API_DOMAIN}/human/employee-info-detail`
+const GET_HUMAN_EMPLOYEE_LIST_URL = (humanDepartment:string, humanEmployeeCode:string, humanEmploymentType:string) => `${API_DOMAIN}/human/employee-info-detail/${humanDepartment}/${humanEmployeeCode}/${humanEmploymentType}`;
+
 // 거래처
-const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string | null) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
+const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
 const DELETE_CUSTOMER_INFO_URL = (deleteCustomerCode: number) => `${API_DOMAIN}/system/customer-info/${deleteCustomerCode}`; 
 
@@ -77,7 +87,7 @@ const GET_SALES_PLAN_DETAIL_RUL = (salesPlanCode: number) => `${API_DOMAIN}/sale
 const PUT_SALES_PLAN_INFO_RUL = () => `${API_DOMAIN}/sales/sales-plan`;
 
 // 품목
-const GET_PRODUCT_LIST_URL = (productName: string, procurementCategory: number) => `${API_DOMAIN}/system/product-info/${productName}/${procurementCategory}`;
+const GET_PRODUCT_LIST_URL = (productCode: number, productName: string) => `${API_DOMAIN}/system/product-info/${productCode}/${productName}`;
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
 const DELETE_PRODUCT_INFO_URL = (deleteProductCode: number) => `${API_DOMAIN}/system/product-info/${deleteProductCode}`;
 
@@ -447,6 +457,7 @@ export const deleteSystemEmployeeInfoRequest = async (deleteSystemEmployeeCode: 
   const result = await axios.delete(DELETE_SYSTEM_EMPLOYEE_INFO_URL(deleteSystemEmployeeCode), {headers: { 'Authorization' : `Bearer ${token}`}})
   .then((response) => {
     const responsebody : DeleteSystemEmployeeInfoResponseDto = response.data;
+    
     return responsebody;
   })
   .catch((error) => {
@@ -497,6 +508,56 @@ export const getSystemEmpDepartmentListRequest = async() => {
   return result;
 }
 
+//! Human
+// 재직구분 리스트 불러오기
+export const getHumanEmploymentTypeRequest = async () => {
+  const result = await axios.get(GET_HUMAN_EMPLOYMENT_TYPE_URL())
+  .then((response) => {
+    const responsebody : GetEmploymentTypeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+// 사원List 불러오기
+export const getHumanListRequest = async (departmentCode: number | null, employeeCode: number | null, employmentType: number | null) => {
+
+  const humanDepartment = (!departmentCode)? "0" : departmentCode.toString();
+  const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
+  const humanEmploymentType = (!employmentType) ? "0" : employmentType.toString();
+
+
+  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL(humanDepartment, humanEmployeeCode, humanEmploymentType))
+  .then((response) => {
+    const responsebody : GetHumanListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+
+
+// export const getHumanListRequest = async (data : HumanListRequestDto) => {
+//   const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
+//   .then((response) => {
+//     const responsebody : GetHumanListResponseDto = response.data;
+//     return responsebody;
+//   })
+//   .catch((error) => {
+//     const responsebody : ResponseDto = error.response.data;
+//     return responsebody;
+//   });
+//   return result;
+// }
+
+
 // ! CUSTOMER
 
 // 거래처정보등록 메서드
@@ -530,7 +591,7 @@ export const deleteCustomerInfoRequest = async (deleteCustomerCode: number, toke
 }
 
 // 거래처 리스트 불러오기 메서드
-export const getCustomerListRequest = async (customerCode: number, customerName: string | null) => {
+export const getCustomerListRequest = async (customerCode: number, customerName: string) => {
   const result = await axios.get(GET_CUSTOMER_LIST_URL(customerCode, customerName))
   .then((response) => {
     const responsebody : GetCustomerListResponseDto = response.data;
@@ -546,8 +607,8 @@ export const getCustomerListRequest = async (customerCode: number, customerName:
 // ! PRODUCT
 
 // 제품 정보 불러오기
-export const getProductListRequest = async (productName: string, procurementCategory: number) => {
-  const result = await axios.get(GET_PRODUCT_LIST_URL(productName, procurementCategory))
+export const getProductListRequest = async (productCode: number, productName: string) => {
+  const result = await axios.get(GET_PRODUCT_LIST_URL(productCode, productName))
   .then((response) => {
     const responsebody: GetProductListResponseDto = response.data;
     return responsebody;
@@ -574,6 +635,21 @@ export const putProductInfoRequest = async (data: PutProductInfoRequestDto, toke
   });
   return result;
 }
+
+// 제품 정보 삭제 메서드
+export const deleteProductInfoRequest = async (deleteProductCode: number, token: string) => {
+  const result = await axios.delete(DELETE_PRODUCT_INFO_URL(deleteProductCode), {headers: { 'Authorization' : `Bearer ${token}`}})
+  .then((response) => {
+    const responsebody: DeleteProductInfoResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody: ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
 
 // ! SALES_PLAN
 

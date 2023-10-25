@@ -7,8 +7,6 @@ import OrderInfo from './views/Sales/OrderInfo';
 import ReleaseInfo from './views/Sales/ReleaseInfo';
 import SalesInfo from './views/Sales/SalesInfo';
 import Company from './views/System/Company';
-import CustomerInfo from './views/System/Customer';
-import ProductInfo from './views/System/Product';
 import './App.css';
 import Employee from './views/Human/Employee';
 import { ACCOUNTING_INVOICE_DETAIL_PATH, ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, SEARCHVIEW_FUNDS_LIST_PATH, HOME_PATH, HUMAN_ANNUAL_PRICE, HUMAN_APPLY_DAY_OFF, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, HUMAN_MANAGE_DAY_OFF, HUMAN_WORK_TIME, INVOICE_CODE_PATH_VARIABLE, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, CHAT_PATH } from './constants';
@@ -32,6 +30,8 @@ import EmplyoeeListVeiw from './views/SearchView/EmployeeListVeiw';
 import IncentiveViewList from './views/SearchView/IncentiveViewList';
 import ChatPage from './views/Chat/ChatPage';
 import OAuth from './views/Chat/OAuth';
+import Customer from './views/System/Customer';
+import Product from './views/System/Product';
 
 
 function App() {
@@ -72,8 +72,8 @@ function App() {
         <Route path={ SYSTEM_COMPANY_INFO } element={ <Company/> } />
         <Route path={ SYSTEM_DEPT_INFO } element={ <Department /> } />
         <Route path={ SYSTEM_EMPLOYEE_INFO } element={ <SystemEmployee /> } />
-        <Route path={ SYSTEM_CUSTOMER_INFO } element={ <CustomerInfo/> } />
-        <Route path={ SYSTEM_PRODUCT_INFO } element={ <ProductInfo/> } />
+        <Route path={ SYSTEM_CUSTOMER_INFO } element={ <Customer/> } />
+        <Route path={ SYSTEM_PRODUCT_INFO } element={ <Product/> } />
         <Route path={ HUMAN_EMPLOYEE_INFO } element={ <Employee/> } />
         <Route path={ HUMAN_ANNUAL_PRICE } element={ <AnnualPrice/> } />
         <Route path={ HUMAN_INCENTIVE } element={ <Incentive/> } />

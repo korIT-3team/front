@@ -10,156 +10,100 @@ export default function OrderInfo() {
       <SalesMenu/>
       <div className='order-info-right'>
         <div className='order-info-top-container'>
-          <div className='order-info-top-text'>수주 등록</div>
+          <div className='order-info-top-text'>수주 정보 등록</div>
         </div>
         <div className='order-info-divider'></div>
-        <div className='order-info-register-container'>
-          <div className='order-info-register-container-box'>
-            <div className='order-info-dept'>
-              <div className='order-info-dept-text'>부서*</div>
-              <div className='order-info-dept-box'>
-                <div className='order-info-dept-box-code-box'>
-                  <input className='order-info-dept-box-code-box-text'/>
-                </div>
-                <div className='order-info-dept-search-button'>검색</div>
-                <div className='order-info-dept-box-name-box'>
-                  <div className='order-info-dept-box-name-box-text'>부서명</div>
-                </div>
-              </div>
-            </div>
-            <div className='order-info-employee'>
-              <div className='order-info-employee-text'>사원*</div>
-              <div className='order-info-employee-box'>
-                <div className='order-info-employee-box-code-box'>
-                  <input className='order-info-employee-box-code-box-text'/>
-                </div>
-                <div className='order-info-employee-search-button'>검색</div>
-                <div className='order-info-employee-box-name-box'>
-                  <div className='order-info-employee-box-name-box-text'>사원명</div>
-                </div>
-              </div>
-            </div>
-            <div className='order-info-customer'>
-              <div className='order-info-customer-text'>거래처코드*</div>
-              <div className='order-info-customer-box'>
-                <div className='order-info-customer-box-code-box'>
-                  <input className='order-info-customer-box-code-box-text'/>
-                </div>
-                <div className='order-info-customer-search-button'>검색</div>
-                <div className='order-info-customer-box-name-box'>
-                  <div className='order-info-customer-box-name-box-text'>거래처명</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='order-info-register-container-box-second'>
-            <div className='order-info-date'>
-              <div className='order-info-date-text'>주문 일자*</div>
-              <div className='order-info-date-container'>
-                <div className='order-info-date-select-box'>
-                  <input className='order-info-date-select' />
-                </div>
-              </div>
-            </div>
-            <div className='order-info-manager'>
-              <div className='order-info-manager-text'>담당자*</div>
-              <div className='order-info-manager-box'>
-                <div className='order-info-manager-box-code-box'>
-                  <input className='order-info-manager-box-code-box-text'/>
-                </div>
-                <div className='order-info-manager-search-button'>검색</div>
-                <div className='order-info-manager-box-name-box'>
-                  <div className='order-info-manager-box-name-box-text'>담당자명</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='order-info-register-container-box'>
-            <div className='order-info-product-code'>
-              <div className='order-info-product-code-text'>품번*</div>
-              <div className='order-info-product-code-box'>
-                <div className='order-info-product-code-box-code-box'>
-                  <input className='order-info-product-code-box-code-box-text'/>
-                </div>
-                <div className='order-info-product-code-search-button'>검색</div>
-                <div className='order-info-product-code-box-name-box'>
-                  <div className='order-info-product-code-box-name-box-text'>품번</div>
-                </div>
-              </div>
-            </div>
-            <div className='order-info-product-name'>
-              <div className='order-info-product-name-text'>품명*</div>
-              <div className='order-info-product-name-box'>
-                <div className='order-info-product-name-box-code-box'>
-                  <input className='order-info-product-name-box-code-box-text'/>
-                </div>
-                <div className='order-info-product-name-search-button'>검색</div>
-                <div className='order-info-product-name-box-name-box'>
-                  <div className='order-info-product-name-box-name-box-text'>품명</div>
-                </div>
-              </div>
-            </div>
-            <div className='order-info-order-quantity'>
-              <div className='order-info-order-quantity-text'>주문 수량*</div>
-              <div className='order-info-order-quantity-box'>
-                <input className='order-info-order-quantity-input' />
-              </div>
-            </div>
-            <div className='order-info-price'>
-              <div className='order-info-price-text'>단가*</div>
-              <div className='order-info-price-box'>
-                <input className='order-info-price-input' />
-              </div>
-            </div>
-          </div>
+        <div className='order-info-view-top'>
+          <div className='order-info-view-top-text'>수주 정보 조회</div>
         </div>
-        <div className='order-info-register-button-container'>
-          <div className='order-info-register-button'>
-            <div className='order-info-register-button-text'>등록</div>
+        <div className='order-info-search-function'>
+          <div className='order-info-search-container'>
+            <div className='order-info-search-order-code'>
+              <div className='order-info-search-order-code-text'>주문번호</div>
+            </div>
+            <input className='order-info-search-order-code-box-name-box-text' />
+          </div>
+          <div className='order-info-search-container'>
+            <div className='order-info-search-order-date'>
+              <div className='order-info-search-order-date-text'>주문일자</div>
+            </div>
+            <input className='order-info-search-order-date-box-name-box-text' />
           </div>
         </div>
         <div className='order-info-view-top'>
-          <div className='order-info-view-top-text'>수주 등록 현황</div>
+          <div className='order-info-view-top-text'>수주 등록</div>
         </div>
         <div className='order-info-view-container'>
-          <div className='order-info-view-container-box-top'>
-            <div className='order-info-view-container-top-table'>
-              <div className='order-info-view-container-top-table-title'>
-                <div className='order-info-view-container-top-table-title-no'>No</div>
-                <div className='order-info-view-container-top-table-title-order-code'>주문번호</div>
-                <div className='order-info-view-container-top-table-title-order-date'>주문일자</div>
-                <div className='order-info-view-container-top-table-title-customer'>거래처</div>
-                <div className='order-info-view-container-top-table-title-manager'>담당자</div>
+          <div className='order-info-view-container-box'>
+            <div className='order-info-view-container-first-table'>
+              <div className='order-info-view-container-first-table-title'>
+                <div className='order-info-view-container-first-table-title-no'>No</div>
+                <div className='order-info-view-container-first-table-title-order-code'>주문번호</div>
+                <div className='order-info-view-container-first-table-title-order-date'>주문일자</div>
+                <div className='order-info-view-container-first-table-title-dept-code'>부서코드</div>
+                <div className='order-info-view-container-first-table-title-emp-code'>사원코드</div>
+                <div className='order-info-view-container-first-table-title-cust-code'>거래처코드</div>
+                <div className='order-info-view-container-first-table-title-manager'>담당자</div>
               </div>
-              <div className='order-info-view-container-top-table-body'>
-                <div className='order-info-view-container-top-table-body-no'>1</div>
-                <div className='order-info-view-container-top-table-body-order-code'>5000</div>
-                <div className='order-info-view-container-top-table-body-order-date'>2023-09-05</div>
-                <div className='order-info-view-container-top-table-body-customer'>1001</div>
-                <div className='order-info-view-container-top-table-body-manager'>조수인</div>
+              {/* 아래 바디 리스트 뷰를 만들어서 불러오기 */}
+              <div className='order-info-view-container-first-table-body-container'>
+                <div className='order-info-view-container-first-table-body'>
+                  <div className='order-info-view-container-first-table-body-no'></div>
+                  <input className='order-info-view-container-first-table-body-order-code'/>
+                  <input className='order-info-view-container-first-table-body-order-date'/>
+                  <input className='order-info-view-container-first-table-body-dept-code'/>
+                  <input className='order-info-view-container-first-table-body-emp-code'/>
+                  <input className='order-info-view-container-first-table-body-cust-code'/>
+                  <input className='order-info-view-container-first-table-body-manager'/>
+                </div>
+                <div className='order-info-view-container-first-table-body-new'>
+                  <div className='order-info-view-container-first-table-body-new-no'></div>
+                  <input className='order-info-view-container-first-table-body-new-order-code'/>
+                  <input className='order-info-view-container-first-table-body-new-order-date'/>
+                  <input className='order-info-view-container-first-table-body-new-dept-code'/>
+                  <input className='order-info-view-container-first-table-body-new-emp-code'/>
+                  <input className='order-info-view-container-first-table-body-new-cust-code'/>
+                  <input className='order-info-view-container-first-table-body-new-manager'/>
+                </div>
               </div>
+              {/* 여기까지 */}
             </div>
           </div>
-          <div className='order-info-view-container-box-bottom'>
-            <div className='order-info-view-container-bottom-table'>
-              <div className='order-info-view-container-bottom-table-title'>
-                <div className='order-info-view-container-bottom-table-title-no'>No</div>
-                <div className='order-info-view-container-bottom-table-title-product-code'>품번</div>
-                <div className='order-info-view-container-bottom-table-title-product-name'>품명</div>
-                <div className='order-info-view-container-bottom-table-title-unit'>단위</div>
-                <div className='order-info-view-container-bottom-table-title-order-quantity'>주문수량</div>
-                <div className='order-info-view-container-bottom-table-title-price'>단가</div>
-                <div className='order-info-view-container-bottom-table-title-total-price'>합계 금액</div>
+        </div>
+        <div className='order-info-view-container'>
+          <div className='order-info-view-container-box'>
+            <div className='order-info-view-container-second-table'>
+              <div className='order-info-view-container-second-table-title'>
+                <div className='order-info-view-container-second-table-title-no'>No</div>
+                <div className='order-info-view-container-second-table-title-product-code'>품번</div>
+                <div className='order-info-view-container-second-table-title-product-name'>품명</div>
+                <div className='order-info-view-container-second-table-title-unit'>단위</div>
+                <div className='order-info-view-container-second-table-title-order-quantity'>주문수량</div>
+                <div className='order-info-view-container-second-table-title-price'>단가</div>
+                <div className='order-info-view-container-second-table-title-total-price'>합계금액</div>
               </div>
-              <div className='order-info-view-container-bottom-table-body'>
-                <div className='order-info-view-container-bottom-table-body-no'>1</div>
-                <div className='order-info-view-container-bottom-table-body-product-code'>3001</div>
-                <div className='order-info-view-container-bottom-table-body-product-name'>책1</div>
-                <div className='order-info-view-container-bottom-table-body-unit'>EA</div>
-                <div className='order-info-view-container-bottom-table-body-order-quantity'>30</div>
-                <div className='order-info-view-container-bottom-table-body-price'>20,000원</div>
-                <div className='order-info-view-container-bottom-table-body-total-price'>600,000원</div>
+              {/* 아래 바디 리스트 뷰를 만들어서 불러오기 */}
+              <div className='order-info-view-container-second-table-body-container'>
+                <div className='order-info-view-container-second-table-body'>
+                  <div className='order-info-view-container-second-table-body-no'></div>
+                  <input className='order-info-view-container-second-table-body-product-code'/>
+                  <input className='order-info-view-container-second-table-body-product-name'/>
+                  <input className='order-info-view-container-second-table-body-unit'/>
+                  <input className='order-info-view-container-second-table-body-order-quantity'/>
+                  <input className='order-info-view-container-second-table-body-price'/>
+                  <input className='order-info-view-container-second-table-body-total-price'/>
+                </div>
+                <div className='order-info-view-container-second-table-body'>
+                  <div className='order-info-view-container-second-table-body-new-no'></div>
+                  <input className='order-info-view-container-second-table-body-new-product-code'/>
+                  <input className='order-info-view-container-second-table-body-new-product-name'/>
+                  <input className='order-info-view-container-second-table-body-new-unit'/>
+                  <input className='order-info-view-container-second-table-body-new-order-quantity'/>
+                  <input className='order-info-view-container-second-table-body-new-price'/>
+                  <input className='order-info-view-container-second-table-body-new-total-price'/>
+                </div>
               </div>
+              {/* 여기까지 */}
             </div>
           </div>
         </div>

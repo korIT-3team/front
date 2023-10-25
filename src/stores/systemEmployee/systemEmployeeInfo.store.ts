@@ -9,7 +9,6 @@ interface SystemEmployeeInfoStore {
   empDepartmentCode: number,
   joinDate: string,
   resignationDate: string,
-  password: string,
   registrationNumber: string,
   employmentType: string,
   employmentTypeCode: number
@@ -19,11 +18,10 @@ interface SystemEmployeeInfoStore {
   setEmployeeName: (employeeName: string) => void;
   setGender: (gender: string) => void;
   setGenderCode: (genderCode: number) => void;
-  setDepartmentName: (departmentName: string) => void;
+  setDepartmentName: (empDepartmentName: string) => void;
   setDepartmentCode: (departmentCode: number) => void;
   setJoinDate: (joinDate: string) => void;
   setResignationDate: (resignationDate: string) => void;
-  setPassword: (password: string) => void;
   setRegistrationNumber: (registrationNumber: string) => void;
   setEmploymentType: (employmentType: string) => void;
   setEmploymentTypeCode: (employmentTypeCode: number) => void;
@@ -40,7 +38,6 @@ const useStore = create<SystemEmployeeInfoStore>((set) => ({
   empDepartmentCode: 0,
   joinDate: "",
   resignationDate: "",
-  password:  "",
   registrationNumber: "",
   employmentType: "",
   employmentTypeCode: 0,
@@ -53,12 +50,11 @@ const useStore = create<SystemEmployeeInfoStore>((set) => ({
   setDepartmentCode: (empDepartmentCode) => set((state) => ({ ...state, empDepartmentCode })),
   setJoinDate: (joinDate) => set((state) => ({ ...state, joinDate })),
   setResignationDate: (resignationDate) => set((state) => ({ ...state, resignationDate })),
-  setPassword: (password) => set((state) => ({ ...state, password })),
   setRegistrationNumber: (registrationNumber) => set((state) => ({ ...state, registrationNumber })),
   setEmploymentType: (employmentType) => set((state) => ({ ...state, employmentType })),
   setEmploymentTypeCode: (employmentTypeCode) => set((state) => ({ ...state, employmentTypeCode })),
 
-  resetSystemEmployeeInfo: () => set((state) => ({ ...state, sysEmployeeCode : 0, employeeName: "", gender: "", genderCode: 0, departmentName: "", departmentCode: 0,
-                                                              joinDate: "", resignationDate:"", password: "", registrationNumber: "", employmentType: "", employmentTypeCode:0}))
+  resetSystemEmployeeInfo: () => set((state) => ({ ...state, sysEmployeeCode : 0, employeeName: "", gender: "", genderCode: 0, empDepartmentName: "", empDepartmentCode: 0,
+                                                              joinDate: "", resignationDate:"",registrationNumber : "", employmentType: "", employmentTypeCode:0}))
 }));
 export default useStore;

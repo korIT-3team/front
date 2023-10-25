@@ -12,8 +12,6 @@ export default function HumanMenu() {
   const clickEmployeeInfoMenu = pathname.includes(HUMAN_EMPLOYEE_INFO);
   const clickAnnualPriceMenu = pathname.includes(HUMAN_ANNUAL_PRICE);
   const clickIncentiveMenu = pathname.includes(HUMAN_INCENTIVE);
-  const clickManageDayOffMenu = pathname.includes(HUMAN_MANAGE_DAY_OFF);
-  const clickApplyDayOffMenu = pathname.includes(HUMAN_APPLY_DAY_OFF);
   const cliskWorkTimeMenu = pathname.includes(HUMAN_WORK_TIME);
 
   //          event handler          //
@@ -31,15 +29,6 @@ export default function HumanMenu() {
   }
   const onIncentiveDeleteButtonClickHandler = (incentive_code: number | string) => {
     navigator(HUMAN_INCENTIVE_DELETE(incentive_code));
-  }
-  const onManageDayOffButtonClickHandler = () => {
-    navigator(HUMAN_MANAGE_DAY_OFF);
-  }
-  const onApplyDayOffButtonClickHandler = () => {
-    navigator(HUMAN_APPLY_DAY_OFF);
-  }
-  const onApplyDayOffDeleteButtonClickHandler = (apply_day_off_code: number | string) => {
-    navigator(HUMAN_APPLY_DAY_OFF_CANCEL(apply_day_off_code));
   }
   const onWorkTimeButtonClickHandler = () => {
     navigator(HUMAN_WORK_TIME);
@@ -67,10 +56,6 @@ export default function HumanMenu() {
                 onClick={onAnnualPriceButtonClickHandler}>연봉정보등록</div>
               <div className={clickIncentiveMenu ? 'incentive-info-registration-active' : 'incentive-info-registration'}
                 onClick={onIncentiveButtonClickHandler}>급/상여정보등록</div>
-              <div className={clickManageDayOffMenu ? 'manage-day-off-info-registration-active' :'manage-day-off-info-registration'}
-                onClick={onManageDayOffButtonClickHandler}>연차관리</div>
-              <div className={clickApplyDayOffMenu ? 'apply-day-off-info-registration-active': 'apply-day-off-info-registration'} 
-                onClick={onApplyDayOffButtonClickHandler}>연차신청</div>
               <div className={cliskWorkTimeMenu ? 'worktime-info-registration-active' : 'worktime-info-registration'} 
                 onClick={onWorkTimeButtonClickHandler}>근태정보입력</div>
             </div>

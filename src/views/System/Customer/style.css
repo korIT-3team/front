@@ -3,51 +3,60 @@
 }
 
 .customer-info-wrapper {
-  display: flex;
-  flex-direction: column;
-
-  padding-left: 20px;
-
-  width: 1440px;
-  height: calc(100vh - 10vh);
+  width: calc(194.858vh - 24.62vh);
 }
 
 .customer-info-top {
   display: flex;
-  padding-top: 30px;
-  padding-bottom: 15px;
+
 }
 
 .customer-info-top-text {
 
   color: rgba(0, 0, 0, 0.80);
-
-  font-family: Inter;
+  text-align: left;
   font-size: 14px;
+  font-weight: 700;
+}
+
+.divider {
+
+  width: 1100px;
+  height: 1px;
+  background-color: #7698B7;
+  display: flex;
+  align-items: center;
+}
+
+/* ---------------------------------------------------------- */
+
+.customer-info-view-top {
+  margin-top: 25px;
+}
+
+.customer-info-view-top-text {
+  padding-bottom: 17px;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
-.divider {
-  border-top: 1px solid rgba(118, 152, 183, 1);
 
-  width: 1100px;
-  height: 0px;
+/* ---------------------------------------------------------- */
 
-  stroke-width: 1px;
-  stroke: #7698B7;
-}
+/* 조회 기능 */
 
-.customer-info-search {
+.customer-info-search-function {
   display: flex;
-
-  margin-top: 20px;
 }
 
 .customer-info-search-container {
-  margin-top: 15px;
-  margin-left: 22px;
-  width: 1080px;
+  margin-right: 22px;
+  width: 260px;
   height: 35px;
 
   display: flex;
@@ -59,8 +68,12 @@
   background: #F9F9F9;
 }
 
-.customer-info-search-code {
-  width: 540px;
+/* ---------------------------------------------------------- */
+
+/* 거래처코드 */
+
+.customer-info-search-customer-code {
+  width: 120px;
   height: 35px;
 
   display: flex;
@@ -69,665 +82,532 @@
   text-align: center;
 }
 
-.customer-info-search-code-text-container {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 140px;
+.customer-info-search-customer-code-text {
+  width: 118px;
   height: 35px;
-  border-radius: 5px 0px 0px 5px;
-}
 
-.customer-info-search-code-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 140px;
-  height: 35px;
   border-right: 1px solid rgba(0, 0, 0, 0.30);
 
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-info-search-code-container {
-  width: 400px;
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-  background-color: #FFF;
-}
-
-.code-search-input-box {
-  margin: 4px 0px 4px 4px;
-  width: 100px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
-  display : flex;
-  align-items : center;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-code-search-button {
-  margin-left: 11px;
-  width: 40px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: rgba(0, 0, 0, 0.30);
-
-  display : flex;
+	display : flex;
   justify-content : center;
   align-items : center;
 
-  color: #FFF;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.customer-code-search-button:hover {
-  cursor: pointer;
-}
-
-.code-search-input-box-display {
-  display: flex;
-  align-items: center;
-
-  margin-left: 14px;
-  margin-right: 14px;
-
-  width: 200px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.code-search-input-box-display-text {
-  margin-left: 14px;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-info-search-name {
-  width: 540px;
-  height: 35px;
-
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-}
-
-.customer-info-search-name-text-container {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  width: 140px;
-  height: 35px;
-}
-
-.customer-info-search-name-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 140px;
-  height: 35px;
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-  border-left: 1px solid rgba(0, 0, 0, 0.30);
-
   color: rgba(0, 0, 0, 0.80);
   text-align: center;
-  font-family: Inter;
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 
-.customer-info-search-name-container {
-  width: 400px;
-  height: 35px;
-  
-  display : flex;
-  justify-content : center;
-  align-items : center;
-  background-color: #FFF;
+.customer-info-search-customer-code-box-name-box-text {
+  width: calc(260px - 120px - 4px);
+  height: 31px;
 
-  border-radius: 0 5px 5px 0;
-}
-
-.name-search-input-box {
-  margin: 4px 0px 4px 4px;
-  width: 100px;
-  height: 25px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: #FFF;
-  
   display : flex;
   align-items : center;
 
   color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-name-search-button {
-  margin-left: 11px;
-  width: 40px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-  background-color: rgba(0, 0, 0, 0.30);
-
-  display : flex;
-  justify-content : center;
-  align-items : center;
-
-  color: #FFF;
   text-align: center;
   font-size: 12px;
   font-weight: 400;
-}
-
-.customer-name-search-button:hover {
-  cursor: pointer;
-}
-
-.name-search-input-box-display {
-  display: flex;
-  align-items: center;
-
-  margin-left: 14px;
-
-  width: 200px;
-  height: 27px;
-
-  border: 1px solid rgba(0, 0, 0, 0.3);
-}
-
-.name-search-input-box-display-text {
-  margin-left: 14px;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-info-middle {
-  display: flex;
-
-  padding-top: 30px;
-  padding-bottom: 18px;
-}
-
-.customer-info-middle-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.customer-info-middle-left-top {
-  margin-left: 20px;
-}
-
-.customer-info-middle-left-top-text {
-  padding-bottom: 17px;
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.customer-info-middle-left-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 340px;
-  height: 550px;
-
-  border: 1px solid #CFCFCF;
-}
-
-.customer-info-middle-left-bottom-container {
-  width: 320px;
-  height: 530px;
-
-  border: 1px solid #CFCFCF;
-}
-
-.customer-info-middle-left-bottom-table {
-  display: flex;
-  flex-direction: column;
-}
-
-.customer-info-middle-left-bottom-table-title {
-  display: flex;
-
-  width: 100%;
-  height: 35px;
-}
-
-.customer-info-middle-left-bottom-table-title-no {
-  width: 50px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.customer-info-middle-left-bottom-table-title-customer-code {
-  width: 135px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.customer-info-middle-left-bottom-table-title-customer-name {
-  width: 135px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.customer-info-middle-left-bottom-table-body {
-  width: 100%;
-  height: 35px;
-  display: flex;
-}
-.customer-info-middle-left-bottom-table-body-no {
-  width: 50px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.customer-info-middle-left-bottom-table-body-customer-code {
-  width: 135px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.customer-info-middle-left-bottom-table-body-customer-name {
-  width: 135px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.customer-info-middle-right {
-  display: flex;
-
-  padding-left: 22px;
-
-  flex-direction: column;
-}
-
-.customer-info-middle-right-top {
-  margin-left: 20px;
-}
-
-.customer-info-middle-right-top-text {
-  padding-bottom: 17px;
-  color: rgba(0, 0, 0, 0.80);
-  text-align: left;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.customer-info-middle-right-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 720px;
-  height: 550px;
-
-  border: 1px solid #CFCFCF;
-}
-
-.customer-info-middle-right-bottom-container {
-  width: 700px;
-  height: 530px;
-
-  border: 1px solid #CFCFCF;
-}
-
-.customer-name {
-  display: flex;
-  align-items: center;
-
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.customer-name-text {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  width: 100px;
-  height: 27px;
-
-  color: rgba(0, 0, 0, 0.80);
-
-  text-align: right;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-name-input {
-  width: 400px;
-  height: 27px;
-
-  margin-left: 20px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-.customer-business-number {
-  display: flex;
-
-  align-items: center;
-
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.customer-business-number-text {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  width: 100px;
-  height: 27px;
-
-  color: rgba(0, 0, 0, 0.80);
-
-  text-align: right;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-business-number-input {
-  width: 400px;
-  height: 27px;
-
-  margin-left: 20px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-.customer-postcode {
-  display: flex;
-
-  align-items: center;
-
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.customer-postcode-text {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  width: 100px;
-  height: 27px;
-
-  color: rgba(0, 0, 0, 0.80);
-
-  text-align: right;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.customer-postcode-container {
-  display: flex;
-
-  align-items: center;
-  margin-left: 20px;
-
-  width: 140px;
-  
-  border: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-.customer-postcode-input {
-  flex: 1;
-  display: block;
-
-
-  width: 100%;
-  height: 27px;
-  background: none;
   border: none;
-  outline: none;
-  color: rgba(0, 0, 0, 0.7);
 }
 
-.customer-postcode-icon {
-  border-radius: 24px;
-  width: 24px;
-  height: 24px;
+/* 거래처명 */
 
-  background-image: url(./asset/postcode_icon.PNG);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: 50% 50%;
-}
-.customer-postcode-icon:hover {
-  cursor: pointer;
-}
+.customer-info-search-customer-name {
+  width: 120px;
+  height: 35px;
 
-.customer-address {
   display: flex;
-
+  justify-self: center;
   align-items: center;
-
-  margin-top: 20px;
-  margin-left: 20px;
+  text-align: center;
 }
 
-.customer-address-text {
-  display: flex;
-  align-items: center;
-  justify-content: right;
+.customer-info-search-customer-name-text {
+  width: 118px;
+  height: 35px;
 
-  width: 100px;
-  height: 27px;
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
 
   color: rgba(0, 0, 0, 0.80);
-
-  text-align: right;
-  font-family: Inter;
+  text-align: center;
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 
-.customer-address-input {
-  width: 400px;
-  height: 27px;
+.customer-info-search-customer-name-box-name-box-text {
+  width: calc(260px - 120px - 4px);
+  height: 31px;
 
-  margin-left: 20px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-.customer-address-detail {
-  display: flex;
-
-  align-items: center;
-
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.customer-address-detail-text {
-  display: flex;
-  align-items: center;
-  justify-content: right;
-
-  width: 100px;
-  height: 27px;
+  display : flex;
+  align-items : center;
 
   color: rgba(0, 0, 0, 0.80);
-
-  text-align: right;
-  font-family: Inter;
+  text-align: center;
   font-size: 12px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  border: none;
 }
 
-.customer-address-detail-input {
-  width: 400px;
-  height: 27px;
 
-  margin-left: 20px;
+/* ---------------------------------------------------------- */
 
-  border: 1px solid rgba(0, 0, 0, 0.30);
-}
-
-.customer-tel-number {
-  display: flex;
-
-  align-items: center;
-
-  margin-top: 20px;
-  margin-left: 20px;
-}
-
-.customer-tel-number-text {
+.customer-info-view-container {
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: center;
 
-  width: 100px;
-  height: 27px;
+  margin-bottom: 20px;
 
-  color: rgba(0, 0, 0, 0.80);
+  width: 1100px;
+  height: 550px;
 
-  text-align: right;
-  font-family: Inter;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  border: 1px solid #CFCFCF;
 }
 
-.customer-tel-number-input {
-  width: 400px;
-  height: 27px;
+.customer-info-view-container-box {
+  width: 1080px;
+  height: 530px;
 
-  margin-left: 20px;
-
-  border: 1px solid rgba(0, 0, 0, 0.30);
+  border: 1px solid #CFCFCF;
 }
+
+/* ---------------------------------------------------------- */
+
+/* table title */
+
+.customer-info-view-container-table-title {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.customer-info-view-container-table-title-no {
+  width: 40px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-customer-code {
+  width: 90px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-customer-name {
+  width: 160px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-business-number {
+  width: 150px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-postcode {
+  width: 80px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-address {
+  width: 200px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-address-detail {
+  width: 200px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-title-tel-number {
+  width: 150px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------- */
+
+/* table body */
+
+.customer-info-view-container-table-body {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.customer-info-view-container-table-body-no {
+  width: 40px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-body-customer-code {
+  width: 87px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-customer-name {
+  width: 157px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-business-number {
+  width: 147px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-postcode {
+  width: 77px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-address {
+  width: 197px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-address-detail {
+  width: 197px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-tel-number {
+  width: 147px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* ---------------------------------------------------------- */
+
+/* 새로 저장하는 second body */
+
+.customer-info-view-container-table-body-new {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.customer-info-view-container-table-body-new-no {
+  width: 40px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customer-info-view-container-table-body-new-customer-code {
+  width: 87px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-new-customer-name {
+  width: 157px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-new-business-number {
+  width: 147px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-new-postcode {
+  width: 77px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-new-address {
+  width: 197px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-new-address-detail {
+  width: 197px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.customer-info-view-container-table-body-new-tel-number {
+  width: 147px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* ---------------------------------------------------------- */
+
 
 .customer-info-bottom {
   display: flex;
