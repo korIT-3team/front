@@ -27,6 +27,7 @@ import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetEmpl
 import KakaoSignInResponseDto from 'src/interfaces/response/auth/kakao-sign-in.response.dto';
 import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
+import GetEmployeeListResponseDto from 'src/interfaces/response/human/get-employee-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -72,9 +73,10 @@ const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
-// 사원Detail(HUMAN)
+// (HUMAN)
 const GET_HUMAN_EMPLOYMENT_TYPE_URL = () => `${API_DOMAIN}/human/employee-info-detail`
 const GET_HUMAN_EMPLOYEE_LIST_URL = (humanDepartment:string, humanEmployeeCode:string, humanEmploymentType:string) => `${API_DOMAIN}/human/employee-info-detail/${humanDepartment}/${humanEmployeeCode}/${humanEmploymentType}`;
+const GET_HUMAN_INCENTIVE_URL = (employeeCode: string, incentiveCategory: string) => `${API_DOMAIN}/human/incentive/${employeeCode}/${incentiveCategory}`;
 
 // 거래처
 const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
@@ -542,7 +544,22 @@ export const getHumanListRequest = async (departmentCode: number | null, employe
   return result;
 }
 
+// 급/상여 리스트 불러오기 메서드
+export const getIncentiveListRequest = async (employeeCode:  number | null, incentiveCategory:  number | null) => {
+  const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
+  const humanIncentiveCategory = (!incentiveCategory)? "0" : incentiveCategory.toString();
 
+  const result = await axios.get(GET_HUMAN_INCENTIVE_URL(humanEmployeeCode, humanIncentiveCategory))
+  .then((response) => {
+    const responsebody : GetEmployeeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 
 // export const getHumanListRequest = async (data : HumanListRequestDto) => {
 //   const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
