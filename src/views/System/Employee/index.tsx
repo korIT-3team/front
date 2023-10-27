@@ -173,7 +173,6 @@ export default function SystemEmployee() {
 
   // description: 사원 - 코드도움 detail 선택 //
   const onUserDefineDetailDoubleClickHandler = (UserDefineDetailCode: number, UserDefineDetailName: string ) => {
-    console.log("selectedUserDefineCode" + selectedUserDefineCode)
     if (selectedEmployeeCode != 0){
       if (selectedUserDefineCode == 9011) {
         setSelectedGenderName(UserDefineDetailName);
@@ -336,7 +335,7 @@ export default function SystemEmployee() {
                           <div className='system-employee-info-middle-right-user-define-top-right-code'>( {systemEmpUserDefineList !== null && systemEmpUserDefineList[0].systemUserDefineCode} )</div>
                         </div>
                         <div className='system-employee-info-middle-right-user-define-top-left'>
-                          <div className='system-employee-info-middle-right-user-define-top-left-text' onClick={onCloseButtonClickHandler}>닫기</div>
+                          <div className='system-employee-info-middle-right-user-define-top-left-text' onClick={onCloseButtonClickHandler}>X</div>
                           <div className='system-employee-info-middle-right-user-define-top-left-icon'></div>
                         </div>
                       </div>

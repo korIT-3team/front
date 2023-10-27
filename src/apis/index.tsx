@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { InOutComeListRequestDto, InvoiceListRequestDto, InvoiceDetailRequestDto } from 'src/interfaces/request/accounting';
-import { SignInRequestDto } from 'src/interfaces/request/auth';
+import { KakaoSignInRequestDto, SignInRequestDto } from 'src/interfaces/request/auth';
 import { SignInResponseDto } from 'src/interfaces/response/auth';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import { PutSalesPlanInfoRequestDto, SalesPlanListRequestDto } from 'src/interfaces/request/sales';
@@ -20,22 +20,21 @@ import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/syste
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
 import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-employee-list.response.dto';
 import GetIncentiveTypeListResponseDto from 'src/interfaces/response/searchView/get-incentive-type-list.response.dto';
-import GetEmployeeCodeListRequestDto from 'src/interfaces/request/common/get-employee-code-list.request.dto';
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
 import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
-import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetProjectCodeListRequestDto } from 'src/interfaces/request/common';
-//! ----
 import { GetInOutComeListResponseDto, GetInvoiceDetailIncentiveResponseDto, GetInvoiceDetailOrderResponseDto, GetInvoiceDetailSalesResponseDto, GetInvoiceListResponseDto, GetInvoiceTypeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
-//! ----
+import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetEmployeeCodeListRequestDto, GetProjectCodeListRequestDto } from 'src/interfaces/request/common';
+import KakaoSignInResponseDto from 'src/interfaces/response/auth/kakao-sign-in.response.dto';
 import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
-import { HumanListRequestDto } from 'src/interfaces/request/human';
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
+import GetEmployeeListResponseDto from 'src/interfaces/response/human/get-employee-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
 // 로그인
 const SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in`;
+const KAKAO_SIGN_IN_URL = () => `${API_DOMAIN}/auth/sign-in/kakao`;
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/auth/user`;
 
 // 회사등록
@@ -76,8 +75,10 @@ const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee
 
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
-// 사원Detail(HUMAN)
-const GET_HUMAN_EMPLOYEE_LIST_URL = () => `${API_DOMAIN}/human/employee-info-detail`;
+// (HUMAN)
+const GET_HUMAN_EMPLOYMENT_TYPE_URL = () => `${API_DOMAIN}/human/employee-info-detail`
+const GET_HUMAN_EMPLOYEE_LIST_URL = (humanDepartment:string, humanEmployeeCode:string, humanEmploymentType:string) => `${API_DOMAIN}/human/employee-info-detail/${humanDepartment}/${humanEmployeeCode}/${humanEmploymentType}`;
+const GET_HUMAN_INCENTIVE_URL = (employeeCode: string, incentiveCategory: string) => `${API_DOMAIN}/human/incentive/${employeeCode}/${incentiveCategory}`;
 
 // 거래처
 const GET_CUSTOMER_LIST_URL = (customerName: string) => `${API_DOMAIN}/system/customer-info/${customerName}`;
@@ -98,8 +99,7 @@ const GET_PROCUREMENT_CATEGORY_LIST_URL = () => `${API_DOMAIN}/system/product-in
 
 // 로그인 메서드
 export const signInRequest = async (data: SignInRequestDto) => {
-     const result = 
-     await axios.post(SIGN_IN_URL(), data)
+     const result = await axios.post(SIGN_IN_URL(), data)
      .then((response) => {
        const responseBody: SignInResponseDto = response.data;
        return responseBody;
@@ -110,6 +110,22 @@ export const signInRequest = async (data: SignInRequestDto) => {
      });
 
      return result;
+}
+// 카카오 로그인
+export const KakaoSignInRequest = async (data : KakaoSignInRequestDto, token : string) => {
+  const headers = { headers: { 'Authorization': `Bearer ${token}` } };
+  const result = await axios.post(KAKAO_SIGN_IN_URL(), data, headers)
+  .then((response) => {
+    const responsebody : KakaoSignInResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
 }
 
 // 로그인유저 정보 불러오기 메서드
@@ -123,7 +139,6 @@ export const getSignInUserRequest = async (token: string) => {
        const responseBody: ResponseDto = error.response.data;
        return responseBody;
   });
-
   return result;
 }
 
@@ -398,7 +413,6 @@ export const getProjectCodeListRequest = async (data : GetProjectCodeListRequest
   return result;
 }
 
-
 // ! 부서
 // 부서정보등록 메서드
 export const putDepartmentInfoRequest = async (data: PutDepartmentInfoRequestDto, token : string) => {
@@ -521,9 +535,9 @@ export const getSystemEmpDepartmentListRequest = async() => {
 //! Human
 // 재직구분 리스트 불러오기
 export const getHumanEmploymentTypeRequest = async () => {
-  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL())
+  const result = await axios.get(GET_HUMAN_EMPLOYMENT_TYPE_URL())
   .then((response) => {
-    const responsebody : GetInvoiceTypeListResponseDto = response.data;
+    const responsebody : GetEmploymentTypeListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
@@ -533,8 +547,14 @@ export const getHumanEmploymentTypeRequest = async () => {
   return result;
 }
 // 사원List 불러오기
-export const getHumanListRequest = async (data : HumanListRequestDto) => {
-  const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
+export const getHumanListRequest = async (departmentCode: number | null, employeeCode: number | null, employmentType: number | null) => {
+
+  const humanDepartment = (!departmentCode)? "0" : departmentCode.toString();
+  const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
+  const humanEmploymentType = (!employmentType) ? "0" : employmentType.toString();
+
+
+  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL(humanDepartment, humanEmployeeCode, humanEmploymentType))
   .then((response) => {
     const responsebody : GetHumanListResponseDto = response.data;
     return responsebody;
@@ -545,6 +565,36 @@ export const getHumanListRequest = async (data : HumanListRequestDto) => {
   });
   return result;
 }
+
+// 급/상여 리스트 불러오기 메서드
+export const getIncentiveListRequest = async (employeeCode:  number | null, incentiveCategory:  number | null) => {
+  const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
+  const humanIncentiveCategory = (!incentiveCategory)? "0" : incentiveCategory.toString();
+
+  const result = await axios.get(GET_HUMAN_INCENTIVE_URL(humanEmployeeCode, humanIncentiveCategory))
+  .then((response) => {
+    const responsebody : GetEmployeeListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// export const getHumanListRequest = async (data : HumanListRequestDto) => {
+//   const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
+//   .then((response) => {
+//     const responsebody : GetHumanListResponseDto = response.data;
+//     return responsebody;
+//   })
+//   .catch((error) => {
+//     const responsebody : ResponseDto = error.response.data;
+//     return responsebody;
+//   });
+//   return result;
+// }
 
 
 // ! CUSTOMER

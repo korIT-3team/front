@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedProductInfoStore, useSelectedSalesPlanStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+import {   } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedProductInfoStore, useSelectedSalesPlanStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
 import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
@@ -8,8 +9,8 @@ import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfa
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
-import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
+import { PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteCustomerInfoResponseDto, DeleteDepartmentInfoResponseDto, DeleteProductInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto } from 'src/interfaces/response/system';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
 import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
@@ -17,9 +18,6 @@ import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/sys
 import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
 import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
-import { HumanListRequestDto } from 'src/interfaces/request/human';
-import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
-import { PutSalesPlanInfoRequestDto } from 'src/interfaces/request/sales';
 
 export default function Header() {
      //!              state             //
@@ -205,10 +203,6 @@ export default function Header() {
      const isHumanList = pathname.includes(HUMAN_EMPLOYEE_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
      const isProductList = pathname.includes(SYSTEM_PRODUCT_INFO);
-     const isSalesPlanList = pathname.includes(SALES_PLAN_PATH);
-     const isOrderInfoList = pathname.includes(ORDER_INFO_PATH);
-     const isReleaseInfoList = pathname.includes(RELEASE_INFO_PATH);
-     const isSalesInfoList = pathname.includes(SALES_INFO_PATH);
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
      const isEmployeeViewList = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH);
      const isIncentiveViewList = pathname.includes(SEARCHVIEW_INCENTIVE_LIST_PATH);
@@ -487,7 +481,6 @@ export default function Header() {
           if (selectedEmployeeCode) {
                if (!systemEmployeeList) return;
                const selectedEmployee = systemEmployeeList.find((item) => item.employeeCode === selectedEmployeeCode);
-
                const data: PutSystemEmployeeInfoRequestDto = {
                     sysEmployeeCode: selectedEmployee?.employeeCode as number,
                     employeeName: selectedEmployee?.employeeName as string,
@@ -593,11 +586,15 @@ export default function Header() {
      //                       component                          //
      //! 사원Detail
      // description: 사원Detail조회 조건 정보 store //
-     const { humanDepartmentCode, humanEmployeeCode, humanEmploymentType } = useHumanRequestStore();     
+     const { humanDepartmentCode, humanEmployeeCode, humanEmploymentType, resetHumanReqeust } = useHumanRequestStore();     
      // description: 조회된 사원 정보 store //
      const { setHumanList, resetHumanList } = useHumanResponseStore();     
+     // description: 사원List - 선택된 사원 코드 //
+     const { selectedHumanCode, setSelectedHumanCode } = useSelectedHumanInfoStore();     
+
      // description: 사원Detail정보 조회 응답 함수 //
      const getHumanListResponseHandler = (responsebody: GetHumanListResponseDto | ResponseDto ) => {
+
           const {code} = responsebody;
           if(code === 'NE') alert('존재하지않는 회원입니다.');
           if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
@@ -606,19 +603,16 @@ export default function Header() {
           if(code !== 'SU') return;
 
           const { humanList } = responsebody as GetHumanListResponseDto;
-          // setHumanList(humanList);
-     }  
+          setHumanList(humanList);
+     }        
 
-     // description: 사원조회 이벤트 핸들러 //
+     // description: 사원Detail조회 이벤트 핸들러 //
      const onHumanListSearchButtonClickHandler = () => {
+          resetHumanReqeust();
           resetHumanList();
-          const data: HumanListRequestDto = {
-               humanDepartmentCode: humanDepartmentCode,
-               humanEmployeeCode: humanEmployeeCode,
-               humanEmploymentType: humanEmploymentType,
-          }
-          getHumanListRequest(data).then(getHumanListResponseHandler);
-     }
+          setSelectedHumanCode(0);
+          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType).then(getHumanListResponseHandler);
+     }          
 //! ============================================================================================
 
      // description : 회사 정보 등록 응답 함수 //
