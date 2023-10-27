@@ -23,10 +23,6 @@ import useSalesPlanRequestStore from './sales/salesPlan/salesplanlist.request.st
 import useSalesPlanResponseStore from './sales/salesPlan/salesplanlist.response.store';
 import useSelectedSalesPlanStore from './sales/salesPlan/selectedsalesplan.store';
 
-import useOrderInfoInfoStore from './sales/orderInfo/orderinfoinfo.store';
-import useOrderInfoRequestStore from './sales/orderInfo/orderinfolist.request.store';
-import useOrderInfoResponseStore from './sales/orderInfo/orderinfolist.response.store';
-
 import useSelectedDepartmentStore from './selecteddepartment.store';
 import useInOutComeRequestStore from './inoutcome.request.store';
 import useInOutComeListStore from './inoutcomelist.response.store';
@@ -72,10 +68,6 @@ export {
      useSalesPlanRequestStore,
      useSalesPlanResponseStore,
      useSelectedSalesPlanStore,
-
-     useOrderInfoInfoStore,
-     useOrderInfoRequestStore,
-     useOrderInfoResponseStore,
 
      useSelectedDepartmentStore,
      useInOutComeRequestStore,
