@@ -1,25 +1,19 @@
 import { create } from "zustand";
 
 export interface SalesPlanListRequestStore {
-  salesPlanCode: number;
-  projectName: string;
+  salesProjectName: string;
 
-  setSalesPlanCode: (salesPlanCode: number) => void;
-  setProjectName: (projectName: string) => void;
+  setSalesProjectName: (salesProjectName: string) => void;
 
   resetSalesPlanRequest: () => void;
 }
 
 const useStore = create<SalesPlanListRequestStore> ((set) => ({
 
-  salesPlanCode: 0,
-  projectName: "",
+  salesProjectName: "",
+  setSalesProjectName: (salesProjectName) => set((state) => ({ ...state, salesProjectName })),
 
-  setSalesPlanCode: (salesPlanCode) => set((state) => ({ ...state, salesPlanCode })),
-  setProjectName: (projectName) => set((state) => ({ ...state, projectName })),
-
-  resetSalesPlanRequest: () => set((state) => ({ ...state, salesPlanCode: 0, projectName: "" })),
-
+  resetSalesPlanRequest: () => set((state) => ({ ...state, salesProjectName: "" })),
 }));
 
 export default useStore;

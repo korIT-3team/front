@@ -13,6 +13,9 @@ import GetProductListResponseDto from './get-product-list.response.dto';
 import PutProductInfoResponseDto from './put-product-info.response.dto';
 import DeleteProductInfoResponseDto from './delete-product-info.response.dto';
 
+import ProcurementCategoryResponseDto from './procurement-category.response.dto';
+import GetProcurementCategoryListResponseDto from './get-procurement-category-list.response.dto';
+
 export type {
   PutCompanyInfoResponseDto,
   GetompanyInfoResponseDto,
@@ -28,5 +31,8 @@ export type {
   GetProductListResponseDto,
   PutProductInfoResponseDto,
   DeleteProductInfoResponseDto,
+
+  ProcurementCategoryResponseDto,
+  GetProcurementCategoryListResponseDto
 
 }
