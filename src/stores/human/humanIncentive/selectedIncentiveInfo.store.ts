@@ -18,6 +18,8 @@ interface SelectedIncentiveInfoStore {
 
   setSelectedIncentiveCategoryName: (selectedIncentiveCategoryName: string) => void;
   setSelectedIncentiveCategory: (selectedIncentiveCategory: number | null) => void;  
+
+  resetSelectedIncentiveInfo : () => void;
 }
 
 const useStore = create<SelectedIncentiveInfoStore>((set) => ({
@@ -38,6 +40,8 @@ const useStore = create<SelectedIncentiveInfoStore>((set) => ({
 
   setSelectedIncentiveCategoryName: (selectedIncentiveCategoryName) => set((state) => ({...state, selectedIncentiveCategoryName})),
   setSelectedIncentiveCategory: (selectedIncentiveCategory) => set((state) => ({...state, selectedIncentiveCategory})),
+
+  resetSelectedIncentiveInfo: () => set((state) => ({ ...state, humanEmployeeOpen: false, humanIncentiveUserDefineOpen: false, selectedEmployeeName: '', selectedEmployeeCode: 0, selectedIncentiveCategoryName: '', selectedIncentiveCategory: 0})),
 
 }));
 
