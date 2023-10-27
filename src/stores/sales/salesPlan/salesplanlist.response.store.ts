@@ -2,14 +2,16 @@ import { create } from "zustand";
 
 export interface SalesPlanInfo {
   no: number;
+  salesPlanCode: number;
+  projectName: string;
+  planDate: string;
   productCode: number;
-  porductName: string;
-  unit: string;
+  productName: string;
   planQuantity: number;
-  exchangeRateType: number;
-  exchangeRate: number;
   expectPrice: number;
   expectTotalPrice: number;
+  employeeCode: number;
+  employeeName: string;
 }
 
 interface SalesPlanInfoStore {

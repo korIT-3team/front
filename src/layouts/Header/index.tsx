@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedProductStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedProductInfoStore, useSelectedSalesPlanStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest } from 'src/apis';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, ORDER_INFO_PATH, RELEASE_INFO_PATH, SALES_INFO_PATH, SALES_PLAN_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
 import { DepartmentListRequestDto, PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteCustomerInfoResponseDto, DeleteDepartmentInfoResponseDto, DeleteProductInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto } from 'src/interfaces/response/system';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
@@ -18,6 +18,8 @@ import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-s
 import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
 import { HumanListRequestDto } from 'src/interfaces/request/human';
+import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
+import { PutSalesPlanInfoRequestDto } from 'src/interfaces/request/sales';
 
 export default function Header() {
      //!              state             //
@@ -55,15 +57,17 @@ export default function Header() {
      
      //                       component                          //
 
+     //! PRODUCT
+     //   state     //
      // description: product 조회 조건 정보 store //
-     const { productCode, productName, resetProductRequest } = useProductRequestStore()
+     const { productName, resetProductRequest } = useProductRequestStore()
      // description: 조회된 product 정보 store //
      const { setProductList, resetProductList } = useProductResponseStore();
      // description: product 정보 상태
      const { productCodeInfo, productNameInfo, procurementCategoryInfo, productCompanyCode, productPriceInfo, 
                resetProductInfo } = useProductInfoStore();
      // description: 선택 product //
-     const { selectedProductCode, setSelectedProductCode  } = useSelectedProductStore();
+     const { selectedProductCode, setSelectedProductCode  } = useSelectedProductInfoStore();
 
      //   event handler  //
      // description: product 정보 등록 응답 함수 //
@@ -85,7 +89,7 @@ export default function Header() {
           setSelectedProductCode(null);
           resetProductInfo();
           resetProductList();
-          getProductListRequest(productCode, productName).then(getProductListResponseHandler);
+          getProductListRequest(productName).then(getProductListResponseHandler);
 
           navigator(SYSTEM_PRODUCT_INFO);
      
@@ -106,7 +110,7 @@ export default function Header() {
           setSelectedProductCode(null);
           resetProductInfo();
           resetProductList();
-          getProductListRequest(productCode, productName).then(getProductListResponseHandler);
+          getProductListRequest(productName).then(getProductListResponseHandler);
      
           alert('품목 삭제에 성공했습니다.');
      }
@@ -182,7 +186,7 @@ export default function Header() {
           setSelectedProductCode(null);
           resetProductInfo();
           resetProductList();
-          getProductListRequest(productCode, productName).then(getProductListResponseHandler);
+          getProductListRequest(productName).then(getProductListResponseHandler);
      }
 
      
@@ -201,6 +205,10 @@ export default function Header() {
      const isHumanList = pathname.includes(HUMAN_EMPLOYEE_INFO);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
      const isProductList = pathname.includes(SYSTEM_PRODUCT_INFO);
+     const isSalesPlanList = pathname.includes(SALES_PLAN_PATH);
+     const isOrderInfoList = pathname.includes(ORDER_INFO_PATH);
+     const isReleaseInfoList = pathname.includes(RELEASE_INFO_PATH);
+     const isSalesInfoList = pathname.includes(SALES_INFO_PATH);
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
      const isEmployeeViewList = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH);
      const isIncentiveViewList = pathname.includes(SEARCHVIEW_INCENTIVE_LIST_PATH);
@@ -633,7 +641,7 @@ export default function Header() {
 
      // state //
      // description: 거래처 조회 조건 정보 store //
-     const { customerCode, customerName, setCustomerCode, setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
+     const { customerName, setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
      // description: 조회된 거래처 정보 store //
      const { setCustomerList, resetCustomerList } = useCustomerResponseStore();
      // description: 거래처 정보 상태
@@ -676,7 +684,7 @@ export default function Header() {
           setSelectedCustomerCode(null);
           resetCustomerInfo();
           resetCustomerList();
-          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
+          getCustomerListRequest(customerName).then(getCustomerListResponseHandler);
 
           navigator(SYSTEM_CUSTOMER_INFO);
 
@@ -697,7 +705,7 @@ export default function Header() {
           setSelectedCustomerCode(null);
           resetCustomerInfo();
           resetCustomerList();
-          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
+          getCustomerListRequest(customerName).then(getCustomerListResponseHandler);
 
           alert('거래처 삭제에 성공했습니다.');
      }
@@ -766,7 +774,7 @@ export default function Header() {
           setSelectedCustomerCode(null);
           resetCustomerInfo();
           resetCustomerList();
-          getCustomerListRequest(customerCode, customerName).then(getCustomerListResponseHandler);
+          getCustomerListRequest(customerName).then(getCustomerListResponseHandler);
      }
 
      // description: 거래처정보삭제 이벤트 핸들러 //
@@ -776,6 +784,42 @@ export default function Header() {
           deleteCustomerInfoRequest(selectedCustomerCode, token).then(deleteCustomerInfoResponseHandler);
      }
 
+
+//! ============================================================================================
+
+     //                       component                          //
+     // description: salesPlan 정보
+
+     //   state     //
+     // description: salesPlan 조회 조건 정보 store //
+     const { salesProjectName, setSalesProjectName, resetSalesPlanRequest } = useSalesPlanRequestStore();
+
+     // description: 조회된 salesPlan 정보 store //
+     const { setSalesPlanList, resetSalesPlanList } = useSalesPlanResponseStore();
+
+     // description: salesPlan - 사원 창 상태 //
+     const { salesPlanEmployeeOpen, setSalesPlanEmployeeOpen } = useSelectedSalesPlanStore();
+     // description: salesPlan - 품목 창 상태 //
+     const { salesPlanProductOpen, setSalesPlanProductOpen } = useSelectedSalesPlanStore();
+
+     // description: salesPlan - 선택된 salesPlanCode 정보 //
+     const { selectedSalesPlanCode, setSelectedSalesPlanCode } = useSelectedSalesPlanStore();
+     // description: salesPlan - 선택된 사원 정보 //
+     const { selectedSalesPlanEmployeeCode, setSelectedSalesPlanEmployeeCode } = useSelectedSalesPlanStore();
+     // description: salesPlan - 선택된 품목 정보 //
+     const { selectedSalesPlanProductCode, setSelectedSalesPlanProductCode } = useSelectedSalesPlanStore();
+
+     // description: salesPlan 정보 상태 //
+     const { salesPlanCodeInfo, salesPlanProjectName, salesPlanDate, salesPlanProductCode, salesPlanProductName,
+          salesPlanQuantity, salesPlanExpectPrice, salesPlanExpectTotalPrice, salesPlanEmployeeCode, salesPlanEmployeeName} = useSalesPlanInfoStore();
+     const { setSalesPlanCodeInfo, setSalesPlanProjectName, setSalesPlanDate, setSalesPlanProductCode, setSalesPlanProductName,
+          setSalesPlanQuantity, setSalesPlanExpectPrice, setSalesPlanExpectTotalPrice, setSalesPlanEmployeeCode, setSalesPlanEmployeeName, resetSalesPlanInfo } = useSalesPlanInfoStore();
+
+
+     //   event handler  //
+
+    
+     
 
 //! ============================================================================================
 
@@ -887,6 +931,7 @@ export default function Header() {
                               isHumanList ? onHumanListSearchButtonClickHandler :
                               isCustomerList ? onCustomerListSearchButtonClickHandler :
                               isProductList ? onProductListSearchButtonClickHandler :
+                              // isSalesPlanList ? onSalesPlanListSearchButtonClickHandler : 
                               isInOutComeList ? onInOutComeListSearchButtonClickHandler : 
                               isFundsList ? onFundsListSearchButtonClickHandler :
                               isEmployeeViewList ? onEmployeeViewListSearchButtonClickHandler :
@@ -896,12 +941,14 @@ export default function Header() {
                          <div className="header-function-search-text">조회</div>
                     </div>
                     <div className="header-function-save" onClick={
-                              isCompanyInfo ? onCompanyInfoSaveButtonClickHandler : (
+                              isCompanyInfo ? onCompanyInfoSaveButtonClickHandler : 
                               isDepartmentList ? onDepartmentListSaveButtonClickHandler :
                               isSystemEmployeeList ? onSystemEmployeeListSaveButtonClickHandler :
                               isCustomerList ? onCustomerListSaveButtonClickHandler :
-                              isProductList ? onProductListSaveButtonClickHandler : () => {} 
-                              )}>
+                              isProductList ? onProductListSaveButtonClickHandler : 
+                              // isSalesPlanList ? onSalesPlanListSaveButtonClickHandler :
+                               () => {} 
+                              }>
                          <div className="header-function-save-icon"></div>
                          <div className="header-function-save-text">저장</div>
                     </div>
@@ -910,10 +957,12 @@ export default function Header() {
                          <div className="header-function-print-text">인쇄</div>
                     </div>
                     <div className="header-function-delete" onClick={
-                              isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler :
+                              isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler : 
                               isSystemEmployeeList ? onDeleteEmployeeInfoButtonClickHandler :
                               isCustomerList ? onDeleteCustomerInfoButtonClickHandler : 
-                              isProductList ? onDeleteProductInfoButtonClickHandler : () => {}
+                              isProductList ? onDeleteProductInfoButtonClickHandler : 
+                              // isSalesPlanList ? onDeleteSalesPlanInfoButtonClickHandler :
+                               () => {}
                               }>
                          <div className="header-function-delete-icon"></div>
                          <div className="header-function-delete-text">삭제</div>

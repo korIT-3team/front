@@ -3,12 +3,14 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import SystemMenu from '../SystemMenu'
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HOME_PATH, SYSTEM_PRODUCT_INFO } from 'src/constants';
 
-import { useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedProductStore } from 'src/stores';
+import { useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedProductInfoStore } from 'src/stores';
 
 import './style.css'
 import { ProductInfo } from 'src/stores/systemProduct/productlist.response.store';
+import { GetProcurementCategoryListResponseDto, ProcurementCategoryResponseDto } from 'src/interfaces/response/system';
+import { getProcurementCategoryRequest } from 'src/apis';
+import ResponseDto from 'src/interfaces/response/response.dto';
 
 export default function Product() {
 
@@ -16,8 +18,11 @@ export default function Product() {
   // description: path 상태 //
   const { pathname } = useLocation();
 
+  // description: product 신규 등록시 사용자정의코드 정보 //
+  const [ selectedNewUserDefineCode, setSelectedNewUserDefineCode ] = useState<number>(0);
+
   // description: 조회 조건 정보 store //
-  const { setProductCode, setProductName, resetProductRequest } = useProductRequestStore();
+  const { productName, setProductName, resetProductRequest } = useProductRequestStore();
   
   // description: Product 정보 상태 //
   const { productCodeInfo, productCompanyCode, productNameInfo, procurementCategoryInfo, productPriceInfo } = useProductInfoStore();
@@ -27,7 +32,18 @@ export default function Product() {
   const { productList, setProductList, resetProductList } = useProductResponseStore();
   
   // description: 선택 품목 코드 //
-  const {selectedProductCode, setSelectedProductCode} = useSelectedProductStore();
+  const {selectedProductCode, setSelectedProductCode} = useSelectedProductInfoStore();
+
+  //! 조달구분 //
+  // description: 조달구분 창 상태 //
+  const { productProcurementCategoryOpen, setProductProcurementCategoryOpen } = useSelectedProductInfoStore();
+  // description: product - 선택된 조달구분 //
+  const { selectedProcurementCategory, setSelectedProcurementCategory } = useSelectedProductInfoStore();
+  // description: product - 선택된 조달구분코드 //
+  const { selectedProcurementCategoryCode, setSelectedProcurementCategoryCode } = useSelectedProductInfoStore();
+
+  //! 사용자정의
+  // description: product - 조회된 사용자정의코드 정보 store //
 
   // description: 기존 품목 선택 상태 //
   const [prodInfoList, setProdInfoList] = useState<boolean>(false);
@@ -35,12 +51,13 @@ export default function Product() {
   // description: 새로 품목 선택 상태 //
   const [newProdInfo, setNewProdInfo] = useState<boolean>(true);
   
+  // description: 조달구분 리스트 store //
+  const [ procurementCategoryList, setProcurementCategoryList ] = useState<ProcurementCategoryResponseDto[]>([]);
   
   // function //
   const navigator = useNavigate();
 
   // event handler //
-  // -------------------------------------------------------------------
   // description: 품목정보 수정을 위한 클릭 //
   const onProductInfoListClickHandler = () => {
     setProdInfoList(true);
@@ -53,25 +70,16 @@ export default function Product() {
     setNewProdInfo(true);
   }
 
-  // description: 품목코드 입력 //
-  const onProductCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const reg = /^[0-9]*$/;
-    const value = event.target.value;
+  // -------------------------------------------------------------------
 
-    const isNumber = reg.test(value);
-    if (isNumber) setProductCodeInfo(Number(value));
-  }
-
+  //! 품명 조회 //
   // description: 품명 입력 이벤트 //
   const onProductNameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const reg = /^[A-Za-z0-9ㄱ-ㅎㅏ-ㅣ가-힣]*$/ // 알파벳, 숫자, 한글만 허용하는 정규식, 특수문자 제외 
-    const value = event.target.value;
-
-    const isValid = reg.test(value);
-    if (isValid) setProductNameInfo(value);
+    setProductName(event.target.value);
   }
 
   // -------------------------------------------------------------------
+  
   //!       존재하는 품목       //
   // description: 품명 변경 이벤트 처리 //
   const onExistProductNameChangeEvent = (event: ChangeEvent<HTMLInputElement>, productInfo: ProductInfo) => {
@@ -83,34 +91,12 @@ export default function Product() {
     setProductList(newProductList);
   }
 
-  // description: 조달구분 변경 이벤트 처리 //
-  const onExistProcurementCategoryChangeEvent = (event: ChangeEvent<HTMLSelectElement>, productInfo: ProductInfo) => {
-    
-    if(!productList) return;
-    const value = event.target.value;
-
-    let type = 0;
-    
-    if(value === '전체'){
-      type = 0;
-    }
-    else if(value === '생산'){
-      type = 1;
-    }
-    else if(value === '구매'){
-      type = 2;
-    }
-    setProcurementCategoryInfo(type);
-    const newProductInfo: ProductInfo = { ...productInfo, procurementCategory: type };
-    const newProductList: ProductInfo[] = productList.map(item => item.productCode === newProductInfo.productCode ? newProductInfo : item);
-    setProductList(newProductList);
-  }
 
   // description: price 변경 이벤트 처리 //
   const onExistProductPriceChangeEvent = (event: ChangeEvent<HTMLInputElement>, productInfo: ProductInfo) => {
 
     if(!productList) return;
-    const value = parseInt(event.target.value, 10)
+    const value = parseFloat(event.target.value);
     const newProductInfo: ProductInfo = { ...productInfo, productPrice:value };
     const newProductList: ProductInfo[] = productList.map(item => item.productCode === newProductInfo.productCode ? newProductInfo : item);
     setProductList(newProductList);
@@ -118,76 +104,38 @@ export default function Product() {
 
   // -------------------------------------------------------------------
 
-  //!       신규 품목 변경 이벤트 처리       //
-  // description: product name //
+  //!       신규 품목       //
+  // description: 품명 변경 이벤트 처리 //
   const onProductNameChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
-    setProductName(event.target.value);
+    setProductNameInfo(event.target.value);
   }
 
-  // description: procurementCategory //
-  const onProcurementCategoryChangeEvent = (event: ChangeEvent<HTMLSelectElement>) => {
-    if(!productList) return;
-    const value = event.target.value;
-
-    let type = 0;
-    
-    if(value === '전체'){
-      type = 0;
-    }
-    else if(value === '생산'){
-      type = 1;
-    }
-    else if(value === '구매'){
-      type = 2;
-    }
-    setProcurementCategoryInfo(type);
-  }
-
-  // description: productPrice //
+  // description: 단가 변경 이벤트 처리 //
   const onProductPriceChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
-    setProductPriceInfo(event.target.valueAsNumber);
+    const value = parseFloat(event.target.value);
+    if (!isNaN(value)) {
+      setProductPriceInfo(value);
+    }
   }
+  
+
+  
   
   // -------------------------------------------------------------------
 
 
 
-  // -------------------------------------------------------------------
-
-  // description: 수정 및 저장 버튼 클릭 이벤트 //
-  const onSaveButtonClickHandler = () => {
-    navigator(SYSTEM_PRODUCT_INFO);
-  }
-
-  // description: 취소버튼 클릭 이벤트 //
-  const onCancelButtonClickHandler = () => {
-    navigator(HOME_PATH);
-  }
 
   // -------------------------------------------------------------------
 
+ 
 
-
-  // // description: 조달구분 선택 이벤트 //
-  // const onProcurementCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   const value = event.target.value;
-  //   let type = 0;
-  //   if(value === '전체'){
-  //     type = 0;
-  //   }
-  //   else if(value === '생산'){
-  //     type = 1;
-  //   }
-  //   else if(value === '구매'){
-  //     type = 2;
-  //   }
-  //   setProcurementCategory(type);
-  // }
 
   // component //
 
   // effect //
-  useEffect(() => {
+  // description : path가 바뀔 때마다 실행 //
+  useEffect(()=> {
     resetProductList();
     resetProductRequest();
   }, [pathname])
@@ -205,12 +153,6 @@ export default function Product() {
           <div className='product-info-view-top-text'>품목 정보 조회</div>
         </div>
         <div className='product-info-search-function'>
-          <div className='product-info-search-container'>
-            <div className='product-info-search-product-code'>
-              <div className='product-info-search-product-code-text'>품목 코드</div>
-            </div>
-            <input className='product-info-search-product-code-box-name-box-text' type='text' onChange={onProductCodeChangeHandler} />
-          </div>
           <div className='product-info-search-container'>
             <div className='product-info-search-product-name'>
               <div className='product-info-search-product-name-text'>품명</div>
@@ -233,35 +175,25 @@ export default function Product() {
               </div>
               {/* 아래 바디 리스트 뷰를 만들어서 불러오기 */}
               <div className='product-info-view-container-table-body-container'>
-                { productList !== null &&
-                  productList.map((item) => (
-                    <div className='product-info-view-container-table-body'>
-                      <div className='product-info-view-container-table-body-no'            onClick={onProductInfoListClickHandler}>{item.no}</div>
-                      <div className='product-info-view-container-table-body-product-code'  onClick={onProductInfoListClickHandler}>{item.productCode}</div>
-                      { productList ? (<input className='product-info-view-container-table-body-product-name' defaultValue={item.productName} type='text' onChange={event => onExistProductNameChangeEvent(event, item)} onFocus={() => setSelectedProductCode(item.productCode)} />) : (<input className='product-info-view-container-table-body-product-name' defaultValue={item.productName} type='text' disabled />) }
-                      { productList ? (<select className='product-info-view-container-table-body-procurement-category' defaultValue={item.procurementCategory} onChange={event => onExistProcurementCategoryChangeEvent(event, item)} name='procurement-category' id='procurement-category' onFocus={() => setSelectedProductCode(item.productCode)} ><option value="">전체</option></select>) : (<select  className='product-info-view-container-table-body-procurement-category' defaultValue={item.procurementCategory} name='procurement-category' id='procurement-category' ><option value="">전체</option></select>)}
-                      { productList ? (<input className='product-info-view-container-table-body-product-price' defaultValue={(item.productPrice)} onChange={event => onExistProductPriceChangeEvent(event, item)} onFocus={() => setSelectedProductCode(item.productCode)} />) : (<input className='product-info-view-container-table-body-product-price' defaultValue={item.productPrice} disabled />)}
-                    </div>
-                  ))}
-
-                <div className='product-info-view-container-table-body-new' onClick={onNewProductInfoClickHandler} onFocus={() => setSelectedProductCode(null)} >
+                { productList !== null && productList.map((item) => (
+                  <div className='product-info-view-container-table-body'>
+                    <div className='product-info-view-container-table-body-no' onClick={onProductInfoListClickHandler} >{item.no}</div>
+                    <div className='product-info-view-container-table-body-product-code' onClick={onProductInfoListClickHandler} >{item.productCode}</div>
+                    { productList ? (<input className='product-info-view-container-table-body-product-name' defaultValue={item.productName} type='text' onChange={event => onExistProductNameChangeEvent(event, item)} onFocus={() => setSelectedProductCode(item.productCode)} />) : (<input className='product-info-view-container-table-body-product-name' defaultValue={item.productName} type='text' disabled />) }
+                    <div className='product-info-view-container-table-body-procurement-category'></div>                   
+                    { productList ? (<input className='product-info-view-container-table-body-product-price' defaultValue={item.productPrice} onChange={event => onExistProductPriceChangeEvent(event, item)} onFocus={() => setSelectedProductCode(item.productCode)} />) : (<input className='product-info-view-container-table-body-product-price'/>) }
+                  </div>
+                ))}
+                <div className='product-info-view-container-table-body-new' onClick={onNewProductInfoClickHandler} onFocus={() => setSelectedProductCode(null)}>
                   <div className='product-info-view-container-table-body-new-no'></div>
                   <div className='product-info-view-container-table-body-new-product-code'></div>
-                  <input className='product-info-view-container-table-body-new-product-name'          value={productNameInfo} type='text' onChange={onProductNameChangeEvent} />
-                  <select className='product-info-view-container-table-body-new-procurement-category'  value={procurementCategoryInfo} onChange={onProcurementCategoryChangeEvent}><option value="">전체</option></select>
-                  <input className='product-info-view-container-table-body-new-product-price'         value={productPriceInfo} onChange={onProductPriceChangeEvent}/>
+                  <input className='product-info-view-container-table-body-new-product-name' value={productNameInfo} type='text' onChange={onProductNameChangeEvent}/>
+                  <div className='product-info-view-container-table-body-new-procurement-category'></div>
+                  <input className='product-info-view-container-table-body-new-product-price' value={productPriceInfo} onChange={onProductPriceChangeEvent}/>
                 </div>
               </div>
               {/* 여기까지 */}
             </div>
-          </div>
-        </div>
-        <div className='product-info-bottom'>
-          <div className='product-info-bottom-button-save'>
-            <div className='product-info-bottom-button-save-text' onClick={onSaveButtonClickHandler}>수정 및 저장</div>
-          </div>
-          <div className='product-info-bottom-button-cancel'>
-            <div className='product-info-bottom-button-cancel-text' onClick={onCancelButtonClickHandler}>취소</div>
           </div>
         </div>
       </div>
