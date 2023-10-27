@@ -20,7 +20,7 @@ export default function Customer() {
   // description: 쿠키 상태 //
   const [cookies, setCookie] = useCookies ();
   // description: 조회 조건 //
-  const {setCustomerCode, setCustomerName, resetCustomerRequest} = useCustomerRequestStore();
+  const { setCustomerName, resetCustomerRequest } = useCustomerRequestStore();
   // description: 거래처 정보 상태 //
   const {customerCodeInfo, customerNameInfo, customerBusinessNumber, customerPostCode, customerAddress, customerAddressDetail, customerTelNumber, 
     setCustomerCodeInfo, setCustomerNameInfo, setCustomerBusinessNumber, setCustomerPostCode, setCustomerAddress, setCustomerAddressDetail, setCustomerTelNumber} = useCustomerInfoStore();
@@ -48,15 +48,6 @@ export default function Customer() {
   const onNewCustomerInfoClickHandler = () => {
     setCustInfoList(false);
     setNewCustInfo(true);
-  }
-
-  // description: 거래처 코드 입력 이벤트 //
-  const onCustomerCodeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const reg = /^[0-9]*$/;
-    const value = event.target.value;
-
-    const isNumber = reg.test(value);
-    if (isNumber) setCustomerCode(Number(value));
   }
 
   // description: 거래처 명 입력 이벤트 //
@@ -165,12 +156,6 @@ export default function Customer() {
   }
 
   // ----------------------------------------------------------------------
-  // description: 취소 버튼 클릭 이벤트 //
-  const onCancelButtonClickHandler = () => {
-    navigator(HOME_PATH);
-  }
-
-  // ----------------------------------------------------------------------
 
 
 
@@ -196,12 +181,6 @@ export default function Customer() {
           <div className='customer-info-view-top-text'>거래처 정보 조회</div>
         </div>
         <div className='customer-info-search-function'>
-          <div className='customer-info-search-container'>
-            <div className='customer-info-search-customer-code'>
-              <div className='customer-info-search-customer-code-text'>거래처 코드</div>
-            </div>
-            <input className='customer-info-search-customer-code-box-name-box-text' onChange={onCustomerCodeChangeHandler} />
-          </div>
           <div className='customer-info-search-container'>
             <div className='customer-info-search-customer-name'>
               <div className='customer-info-search-customer-name-text'>거래처 명</div>
@@ -256,15 +235,6 @@ export default function Customer() {
               </div>
               {/* 여기까지 */}
             </div>
-          </div>
-        </div>
-        
-        <div className='customer-info-bottom'>
-          <div className='customer-info-bottom-button-save' >
-            <div className='customer-info-bottom-button-save-text' >수정 및 저장</div>
-          </div>
-          <div className='customer-info-bottom-button-cancel'>
-            <div className='customer-info-bottom-button-cancel-text' onClick={onCancelButtonClickHandler}>취소</div>
           </div>
         </div>
       </div>

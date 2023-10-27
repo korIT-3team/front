@@ -11,9 +11,10 @@ import DeleteDepartmentInfoResponseDto from 'src/interfaces/response/system/dele
 import PutCustomerInfoResponseDto from 'src/interfaces/response/system/put-customer-info.response.dto';
 import PutDepartmentInfoResponseDto from 'src/interfaces/response/system/put-department-info.response.dto';
 import { PutCompanyInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
-import { GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
+import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto, PutSalesPlanInfoResponseDto, SalesPlanListResponseDto } from 'src/interfaces/response/sales';
 import { GetEmployeeListViewResponseDto, GetFundsListResponseDto, GetIncentiveViewListResponseDto } from 'src/interfaces/response/searchView';
-import { DeleteProductInfoResponseDto, DeleteCustomerInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto, PutProductInfoResponseDto } from 'src/interfaces/response/system';
+import { DeleteProductInfoResponseDto, DeleteCustomerInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto, GetompanyInfoResponseDto, PutCompanyInfoResponseDto, PutProductInfoResponseDto, GetProcurementCategoryListResponseDto } from 'src/interfaces/response/system';
+//! todo : index.ts 추가 필요 ----
 import PutSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/put-system-employee-info.response.dto';
 import GetSystemEmpDepartmentListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-department-list.response.dto';
 import GetSystemEmpUserDefineListResponseDto from 'src/interfaces/response/system/systemEmployee/get-system-emp-user-define-detail-list.response.dto';
@@ -54,6 +55,7 @@ const GET_FUNDS_LIST_URL = () => `${API_DOMAIN}/searchView/check-funds`;
 const GET_EMPLOYEE_LIST_VIEW_URL = () => `${API_DOMAIN}/searchView/employee-list`;
 const GET_INCENTIVE_VIEW_LIST_URL = () => `${API_DOMAIN}/searchView/incentive-list`;
 
+
 // 검색
 const GET_EMPLOYEE_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code/employee`;
 const GET_DEPARTMENT_CODE_LIST_URL = () => `${API_DOMAIN}/detail-code/department`;
@@ -82,19 +84,21 @@ const GET_HUMAN_INCENTIVE_EMPLOYEE_INFO_URL = () => `${API_DOMAIN}/human/incenti
 
 
 // 거래처
-const GET_CUSTOMER_LIST_URL = (customerCode: number, customerName: string) => `${API_DOMAIN}/system/customer-info/${customerCode}/${customerName}`;
+const GET_CUSTOMER_LIST_URL = (customerName: string) => `${API_DOMAIN}/system/customer-info/${customerName}`;
 const PUT_CUSTOMER_INFO_URL = () => `${API_DOMAIN}/system/customer-info`;
 const DELETE_CUSTOMER_INFO_URL = (deleteCustomerCode: number) => `${API_DOMAIN}/system/customer-info/${deleteCustomerCode}`; 
 
 // 판매계획
-const GET_SALES_PLAN_LIST_URL = () => `${API_DOMAIN}/sales/sales-plan`;
-const GET_SALES_PLAN_DETAIL_RUL = (salesPlanCode: number) => `${API_DOMAIN}/sales/sales-plan/${salesPlanCode}`
 const PUT_SALES_PLAN_INFO_RUL = () => `${API_DOMAIN}/sales/sales-plan`;
+const DELETE_SALES_PLAN_INFO_URL = (deleteSalesPlanCode: number) => `${API_DOMAIN}/sales/sales-plan/${deleteSalesPlanCode}`;
+const GET_SALES_PLAN_LIST_URL = (salesProjectName: string) => `${API_DOMAIN}/sales/sales-plan/${salesProjectName}`;
 
 // 품목
-const GET_PRODUCT_LIST_URL = (productCode: number, productName: string) => `${API_DOMAIN}/system/product-info/${productCode}/${productName}`;
+const GET_PRODUCT_LIST_URL = (productName: string) => `${API_DOMAIN}/system/product-info/${productName}`;
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
 const DELETE_PRODUCT_INFO_URL = (deleteProductCode: number) => `${API_DOMAIN}/system/product-info/${deleteProductCode}`;
+const GET_PROCUREMENT_CATEGORY_LIST_URL = () => `${API_DOMAIN}/system/product-info`;
+
 
 // 로그인 메서드
 export const signInRequest = async (data: SignInRequestDto) => {
@@ -209,6 +213,22 @@ export const getInvoiceTypeRequest = async () => {
   });
   return result;
 }
+
+
+// 조달 구분 리스트 불러오기
+export const getProcurementCategoryRequest = async () => {
+  const result = await axios.get(GET_PROCUREMENT_CATEGORY_LIST_URL())
+  .then((response) => {
+    const responsebody : GetProcurementCategoryListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
 // 재직 구분 리스트 불러오기
 export const getEmploymentTypeRequest = async () => {
   const result = await axios.get(GET_EMPLOYEE_LIST_VIEW_URL())
@@ -222,6 +242,8 @@ export const getEmploymentTypeRequest = async () => {
   });
   return result;
 }
+
+
 // 급상여 구분 리스트 불러오기
 export const getIncentiveTypeRequest = async () => {
   const result = await axios.get(GET_INCENTIVE_VIEW_LIST_URL())
@@ -611,8 +633,8 @@ export const deleteCustomerInfoRequest = async (deleteCustomerCode: number, toke
 }
 
 // 거래처 리스트 불러오기 메서드
-export const getCustomerListRequest = async (customerCode: number, customerName: string) => {
-  const result = await axios.get(GET_CUSTOMER_LIST_URL(customerCode, customerName))
+export const getCustomerListRequest = async (customerName: string) => {
+  const result = await axios.get(GET_CUSTOMER_LIST_URL(customerName))
   .then((response) => {
     const responsebody : GetCustomerListResponseDto = response.data;
     return responsebody;
@@ -627,8 +649,8 @@ export const getCustomerListRequest = async (customerCode: number, customerName:
 // ! PRODUCT
 
 // 제품 정보 불러오기
-export const getProductListRequest = async (productCode: number, productName: string) => {
-  const result = await axios.get(GET_PRODUCT_LIST_URL(productCode, productName))
+export const getProductListRequest = async (productName: string) => {
+  const result = await axios.get(GET_PRODUCT_LIST_URL(productName))
   .then((response) => {
     const responsebody: GetProductListResponseDto = response.data;
     return responsebody;
@@ -673,34 +695,6 @@ export const deleteProductInfoRequest = async (deleteProductCode: number, token:
 
 // ! SALES_PLAN
 
-// 판매계획 리스트 불러오기 메서드
-export const getSalesPlanListRequest = async (data: SalesPlanListRequestDto) => {
-  const result = await axios.post(GET_SALES_PLAN_LIST_URL(), data)
-  .then((response) => {
-    const responsebody: GetSalesPlanListResponseDto = response.data;
-    return responsebody;
-  })
-  .catch((error) => {
-    const responsebody: ResponseDto = error.response.data;
-    return responsebody;
-  });
-  return result;
-}
-
-// 판매계획 상세 리스트 불러오기 메서드
-export const getSalesPlanDetailRequest = async (salesPlanCode: number) => {
-  const result = await axios.get(GET_SALES_PLAN_DETAIL_RUL(salesPlanCode))
-  .then((response) => {
-    const responsebody: SalesPlanListResponseDto = response.data;
-    return responsebody;
-  })
-  .catch((error) => {
-    const responsebody: ResponseDto = error.response.data;
-    return responsebody;
-  });
-  return result;
-}
-
 // 판매계획 등록 메서드
 export const putSalesPlanInfoRequest = async (data: PutSalesPlanInfoRequestDto, token: string) => {
   const result = await axios.put(PUT_SALES_PLAN_INFO_RUL(), data, {headers: { 'Authorization' : `Bearer ${token}` }})
@@ -713,6 +707,34 @@ export const putSalesPlanInfoRequest = async (data: PutSalesPlanInfoRequestDto, 
     const responsebody: ResponseDto = error.response.data;
     const { code } = responsebody;
     return code;
+  });
+  return result;
+}
+
+// 판매계획 정보 삭제 메서드
+export const deleteSalesPlanInfoRequest = async (deleteSalesPlanCode: number, token : string) => {
+  const result = await axios.delete(DELETE_SALES_PLAN_INFO_URL(deleteSalesPlanCode), {headers: { 'Authorization' : `Bearer ${token}`}})
+  .then((response) => {
+    const responsebody : DeleteSalesPlanInfoResponseDto = response.data;
+    return responsebody;
   })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
+
+// 판매계획 불러오기 메서드
+export const getSalesPlanListRequest = async (salesProjectName: string) => {
+  const result = await axios.post(GET_SALES_PLAN_LIST_URL(salesProjectName))
+  .then((response) => {
+    const responsebody: GetSalesPlanListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody: ResponseDto = error.response.data;
+    return responsebody;
+  });
   return result;
 }
