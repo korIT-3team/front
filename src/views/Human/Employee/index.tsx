@@ -32,7 +32,7 @@ export default function Employee() {
   // description: 조회조건 : 재직구분 리스트 Store //
   const [ employmentTypeList, setEmploymentTypeList ] = useState<HumanEmploymentTypeResponseDto[]>([]);
   // description: 사원List 상태 //
-  const { humanList, setHumanList } = useHumanResponseStore();
+  const { humanList, setHumanList, resetHumanList } = useHumanResponseStore();
   // description: 사원List - 선택된 사원 코드 //
   const { selectedHumanCode, setSelectedHumanCode } = useSelectedHumanInfoStore();
 
@@ -139,7 +139,7 @@ export default function Employee() {
     // description : path가 바뀔 때마다 실행 //
     useEffect(()=>{
       resetHumanReqeust();
-      
+      resetHumanList();
  }, [pathname])    
 
 

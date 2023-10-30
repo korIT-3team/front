@@ -18,7 +18,7 @@ const useStore = create<IncentiveListRequestStore>((set) => ({
   setIncentiveEmployeeCode: (incentiveEmployeeCode: number | null) => set((state) => ({ ...state, incentiveEmployeeCode})),
   setIncentiveCategory:  (incentiveCategory: number | null) => set((state) => ({ ...state, incentiveCategory})),
 
-  resetIncentiveRequest: () => set((state) => ({ ...state, incentivEmployeeCode: 0, incentiveCategory: 0 }))
+  resetIncentiveRequest: () => set((state) => ({ ...state, incentiveEmployeeCode: 0, incentiveCategory: 0 }))
 }));
 
 export default useStore;

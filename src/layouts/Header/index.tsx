@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './style.css';
-<<<<<<< HEAD
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveListRequestStore, useIncentiveListResponseStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSelectedProductStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveListRequestStore, useIncentiveListResponseStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSelectedProductInfoStore, useSelectedSalesPlanStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getIncentiveListRequest } from 'src/apis';
-=======
-import {   } from 'src/stores';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedProductInfoStore, useSelectedSalesPlanStore } from 'src/stores';
-import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest } from 'src/apis';
->>>>>>> dcc81b4a96523df0a07d9b73918a05f6fa233101
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest, getIncentiveListRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
@@ -616,10 +609,11 @@ export default function Header() {
 
      // description: 인사정보등록 - 조회 이벤트 핸들러 //
      const onHumanListSearchButtonClickHandler = () => {
+          const accessToken = cookies.accessToken;
           resetHumanReqeust();
           resetHumanList();
           setSelectedHumanCode(0);
-          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType).then(getHumanListResponseHandler);
+          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType,accessToken).then(getHumanListResponseHandler);
      }          
 
      //                       component                          //
@@ -640,12 +634,13 @@ export default function Header() {
 
           const { incentiveList } = responsebody as GetIncentiveListResponseDto;
           setIncentiveList(incentiveList);
-     }      
+     } 
+     //! =================================     
      // description: 급/상여 리스트 조회 이벤트 핸들러 //
      const onIncentiveListSearchButtonClickHandler = () => {
-          resetIncentiveRequest();
+          const accessToken = cookies.accessToken;
           resetIncentiveList();
-          getIncentiveListRequest(incentiveEmployeeCode, incentiveCategory);//.then(getIncentiveListResponseHandler);
+          getIncentiveListRequest(incentiveEmployeeCode, incentiveCategory, accessToken).then(getIncentiveListResponseHandler);
      } 
 //! ============================================================================================
 
@@ -924,7 +919,7 @@ export default function Header() {
                paymentDateStart : incentiveviewlistDateStart,
                paymentDateEnd : incentiveviewlistDateEnd,
           }
-          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler)
+          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler);
      }
 //! ============================================================================================
 

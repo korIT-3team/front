@@ -30,6 +30,8 @@ export default function Incentive() {
   const { humanList, setHumanList } = useHumanResponseStore();
   // description: 조회조건 정보 store //
   const {incentiveEmployeeCode, incentiveCategory, setIncentiveEmployeeCode, setIncentiveCategory, resetIncentiveRequest } = useIncentiveListRequestStore();
+  // description: 급/상여 리스트 조회 store //
+  const { incentiveList, setIncentiveList, resetIncentiveList } = useIncentiveListResponseStore();
   // description: 급/상여조회 - 코드도움 store //
   const { humanEmployeeOpen, humanIncentiveUserDefineOpen, selectedEmployeeCode, selectedEmployeeName, selectedIncentiveCategory, selectedIncentiveCategoryName,
           setHumanEmployeeOpen, setHumanIncentiveUserDefineOpen, setSelectedEmployeeCode, setSelectedEmployeeName, setSelectedIncentiveCategory, setSelectedIncentiveCategoryName,
@@ -131,7 +133,7 @@ const getHumanIncentiveTypeListResponseHandler = (responsebody:GetIncentiveTypeL
   useEffect(()=>{
     resetIncentiveRequest();
     resetSelectedIncentiveInfo();
-    
+    resetIncentiveList();
  }, [pathname])      
 
 
@@ -188,26 +190,32 @@ return (
                   <div className='incentive-info-middle-left-bottom-table-title-content'>내역</div>
                 </div>
                 <div className='incentive-info-middle-left-bottom-table-container'>
-                <div className='incentive-info-middle-left-bottom-table-body' /*onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}*/>
-                    <div className='incentive-info-middle-left-bottom-table-body-no' ></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-incentive-code'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-employee-code'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-employee-name'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-incentive-category'></div>
-                    <input className='incentive-info-middle-left-bottom-table-body-payment-date' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-incentive-price' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-content' type='text' />
-                  </div>
-                  <div className='incentive-info-middle-left-bottom-table-body-new' /*onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}*/>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-no' ></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-incentive-code'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-employee-code' hidden>{(selectedEmployeeCode!= 0) && selectedEmployeeCode}</div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-employee-name' onDoubleClick={() => onEmployeeListSearchButtonClickHandler()}>{selectedEmployeeName}</div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-incentive-category'></div>
-                    <input className='incentive-info-middle-left-bottom-table-body-new-payment-date' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-new-incentive-price' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-new-content' type='text' />
-                  </div>
+                {
+                  (incentiveList) && (
+                    incentiveList.map((item) => (
+                        <div className='incentive-info-middle-left-bottom-table-body' >
+                          <div className='incentive-info-middle-left-bottom-table-body-no' >{item.no}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-incentive-code'>{item.incentiveCode}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-employee-code'>{item.employeeCode}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-employee-name'>{item.employeeName}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-incentive-category'>{item.incentiveCategoryName}</div>
+                          <input className='incentive-info-middle-left-bottom-table-body-payment-date' type='text' defaultValue={item.paymentDate} />
+                          <input className='incentive-info-middle-left-bottom-table-body-incentive-price' type='text' defaultValue={item.incentivePrice} />
+                          <input className='incentive-info-middle-left-bottom-table-body-content' type='text' defaultValue={item.content} />
+                        </div>
+                    ))
+                  )
+                }
+                <div className='incentive-info-middle-left-bottom-table-body-new' >
+                          <div className='incentive-info-middle-left-bottom-table-body-new-no' ></div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-incentive-code'></div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-employee-code' hidden>{(selectedEmployeeCode!= 0) && selectedEmployeeCode}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-employee-name' onDoubleClick={() => onEmployeeListSearchButtonClickHandler()}>{selectedEmployeeName}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-incentive-category'></div>
+                          <input className='incentive-info-middle-left-bottom-table-body-new-payment-date' type='text' />
+                          <input className='incentive-info-middle-left-bottom-table-body-new-incentive-price' type='text' />
+                          <input className='incentive-info-middle-left-bottom-table-body-new-content' type='text' />
+                        </div>                
                 </div>
               </div>
             </div>
