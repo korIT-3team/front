@@ -608,10 +608,11 @@ export default function Header() {
 
      // description: 인사정보등록 - 조회 이벤트 핸들러 //
      const onHumanListSearchButtonClickHandler = () => {
+          const accessToken = cookies.accessToken;
           resetHumanReqeust();
           resetHumanList();
           setSelectedHumanCode(0);
-          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType).then(getHumanListResponseHandler);
+          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType,accessToken).then(getHumanListResponseHandler);
      }          
 
      //                       component                          //
@@ -632,12 +633,13 @@ export default function Header() {
 
           const { incentiveList } = responsebody as GetIncentiveListResponseDto;
           setIncentiveList(incentiveList);
-     }      
+     } 
+     //! =================================     
      // description: 급/상여 리스트 조회 이벤트 핸들러 //
      const onIncentiveListSearchButtonClickHandler = () => {
-          resetIncentiveRequest();
+          const accessToken = cookies.accessToken;
           resetIncentiveList();
-          getIncentiveListRequest(incentiveEmployeeCode, incentiveCategory);//.then(getIncentiveListResponseHandler);
+          getIncentiveListRequest(incentiveEmployeeCode, incentiveCategory, accessToken).then(getIncentiveListResponseHandler);
      } 
 //! ============================================================================================
 
@@ -916,7 +918,7 @@ export default function Header() {
                paymentDateStart : incentiveviewlistDateStart,
                paymentDateEnd : incentiveviewlistDateEnd,
           }
-          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler)
+          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler);
      }
 //! ============================================================================================
 
