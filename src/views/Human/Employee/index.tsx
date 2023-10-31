@@ -42,7 +42,8 @@ export default function Employee() {
   const { employeeImage, email, nationality, address, addressDetail, postCode, telNumber, education, militaryService, career, position, job ,
           setEmployeeImage, setEmail, setNationality, setAddress, setAddressDetail, setPostCode, setTelNumber, setEducation, setMilitaryService, setCareer, setPosition, setJob
   } = useHumanDetailInfoStore();
-    //          event handler           //
+  
+  //          event handler           //
   // description: 우편번호 조회버튼클릭 이벤트 //
   const onPostCodeIconClickHandler = () => {
     postOpen({ onComplete });
@@ -108,7 +109,6 @@ export default function Employee() {
       setEmploymentTypeList(employmentTypeList);
 
     }
-
 
     //          function            //
     // description : 사원 리스트 더블클릭 이벤트 //

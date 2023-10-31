@@ -1,22 +1,22 @@
 import { create } from "zustand";
 
 export interface IncentiveListRequestStore {
-  incentiveEmployeeCode : number | null;
-  incentiveCategory : number | null;
+  incentiveEmployeeCodeSearch : number | null;
+  incentiveCategorySearch : number | null;
 
-  setIncentiveEmployeeCode: (incentiveEmployeeCode: number | null) => void;
-  setIncentiveCategory: (incentiveCategory: number | null) => void;
+  setIncentiveEmployeeCodeSearch: (incentiveEmployeeCodeSearch: number | null) => void;
+  setIncentiveCategorySearch: (incentiveCategorySearch: number | null) => void;
 
   resetIncentiveRequest: () => void;
 }
 
 const useStore = create<IncentiveListRequestStore>((set) => ({
 
-  incentiveEmployeeCode : 0,
-  incentiveCategory : 0,
+  incentiveEmployeeCodeSearch : 0,
+  incentiveCategorySearch : 0,
 
-  setIncentiveEmployeeCode: (incentiveEmployeeCode: number | null) => set((state) => ({ ...state, incentiveEmployeeCode})),
-  setIncentiveCategory:  (incentiveCategory: number | null) => set((state) => ({ ...state, incentiveCategory})),
+  setIncentiveEmployeeCodeSearch: (incentiveEmployeeCodeSearch: number | null) => set((state) => ({ ...state, incentiveEmployeeCodeSearch})),
+  setIncentiveCategorySearch:  (incentiveCategorySearch: number | null) => set((state) => ({ ...state, incentiveCategorySearch})),
 
   resetIncentiveRequest: () => set((state) => ({ ...state, incentiveEmployeeCode: 0, incentiveCategory: 0 }))
 }));

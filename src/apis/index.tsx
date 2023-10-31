@@ -30,6 +30,10 @@ import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
 import GetProductUserDefineListResponseDto from 'src/interfaces/response/system/get-product-user-define-detail-list.response.dto';
 import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
+import PutIncentiveRequestDto from 'src/interfaces/request/human/put-incentive-info.request.dto';
+import PutIncentiveInfoResponseDto from 'src/interfaces/response/human/put-incentive-info.response.dto';
+import DeleteIncentiveInfoResponseDto from 'src/interfaces/response/human/delete-incentive-info.response.dto';
+import GetEmployeeListResponseDto from 'src/interfaces/response/human/get-employee-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -77,9 +81,10 @@ const GET_SYSTEM_EMP_DEPARTMENT_LIST_URL = () =>  `${API_DOMAIN}/system/employee
 const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 
 // (HUMAN)
+const PUT_HUMAN_INCENTIVE_INFO_URL = () => `${API_DOMAIN}/human/incentive`;
+const DELETE_HUMAN_INCENTIVE_INFO_URL = (deleteIncentiveCode: number) => `${API_DOMAIN}/human/incentive/${deleteIncentiveCode}`;
 const GET_HUMAN_EMPLOYMENT_TYPE_URL = () => `${API_DOMAIN}/human/employee-info-detail`
 const GET_HUMAN_EMPLOYEE_LIST_URL = (humanDepartment:string, humanEmployeeCode:string, humanEmploymentType:string) => `${API_DOMAIN}/human/employee-info-detail/${humanDepartment}/${humanEmployeeCode}/${humanEmploymentType}`;
-//!===================================
 const GET_HUMAN_INCENTIVE_URL = (humanEmployeeCode: string, humanIncentiveCategory: string) => `${API_DOMAIN}/human/incentive/${humanEmployeeCode}/${humanIncentiveCategory}`;
 const GET_HUMAN_INCENTIVE_EMPLOYEE_INFO_URL = () => `${API_DOMAIN}/human/incentive/employee`
 
@@ -556,6 +561,37 @@ export const getHumanListRequest = async (departmentCode: number | null, employe
   return result;
 }
 
+// 급/상여 정보등록 메서드
+export const putIncentiveInfoRequest = async (data: PutIncentiveRequestDto, token : string) => {
+
+  const result = await axios.put(PUT_HUMAN_INCENTIVE_INFO_URL(), data, {headers: { 'Authorization' : `Bearer ${token}` }})
+  .then((response) => {
+    const responsebody : PutIncentiveInfoResponseDto = response.data;
+    const { code } = responsebody;
+    return code;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    const { code } = responsebody;
+    return code;
+  });
+  return result;
+}
+
+// 급/상여 정보삭제 메서드
+export const deleteIncentiveInfoRequest = async (deleteIncentiveCode: number, token : string) => {
+  const result = await axios.delete(DELETE_HUMAN_INCENTIVE_INFO_URL(deleteIncentiveCode), {headers: { 'Authorization' : `Bearer ${token}`}})
+  .then((response) => {
+    const responsebody : DeleteIncentiveInfoResponseDto = response.data;
+    
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 // 급/상여 리스트 불러오기 메서드
 export const getIncentiveListRequest = async (incentiveEmployeeCode:  number | null, incentiveCategory:  number | null, token: string) => {
   const humanEmployeeCode = (!incentiveEmployeeCode)? "0" : incentiveEmployeeCode.toString();
@@ -573,16 +609,17 @@ export const getIncentiveListRequest = async (incentiveEmployeeCode:  number | n
   return result;
 }
 
-export const getIncentiveEmployeeListRequest = async () => {
-  const result = await axios.get(GET_HUMAN_INCENTIVE_EMPLOYEE_INFO_URL())
+export const  getIncentiveEmployeeListRequest = async (token: string) => {
+  const result = await axios.get(GET_HUMAN_INCENTIVE_EMPLOYEE_INFO_URL(), {headers: {'Authorization' : `Bearer ${token}`}})
   .then((response) => {
-      const responsebody : GetSystemEmployeeListResponseDto = response.data;
+      const responsebody : GetEmployeeListResponseDto = response.data;
       return responsebody;
     })
     .catch((error) => {
       const responsebody : ResponseDto = error.response.data;
       return responsebody;
     });
+
     return result;
   }
   

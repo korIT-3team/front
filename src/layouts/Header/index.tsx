@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveListRequestStore, useIncentiveListResponseStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedProductInfoStore, useSelectedSalesPlanStore } from 'src/stores';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getIncentiveListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest } from 'src/apis';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveListRequestStore, useIncentiveListResponseStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedProductInfoStore, useSelectedSalesPlanStore, useHumanEmployeeInfo, useSelectedIncentiveInfoStore, useIncentiveInfoStore } from 'src/stores';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getIncentiveListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest, putIncentiveInfoRequest, deleteIncentiveInfoRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
 import { GetInOutComeListResponseDto, GetInvoiceListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
@@ -19,6 +19,8 @@ import { PutSalesPlanInfoRequestDto } from 'src/interfaces/request/sales';
 import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
 import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
 import './style.css';
+import PutIncentiveRequestDto from 'src/interfaces/request/human/put-incentive-info.request.dto';
+import DeleteIncentiveInfoResponseDto from 'src/interfaces/response/human/delete-incentive-info.response.dto';
 
 export default function Header() {
      //!              state             //
@@ -620,9 +622,61 @@ export default function Header() {
      //                       component                          //
      //! 급/상여등록 
      // description: 급/상여 - 조회조건 //
-     const { incentiveEmployeeCode, incentiveCategory, resetIncentiveRequest } = useIncentiveListRequestStore();
+     const { incentiveEmployeeCodeSearch, incentiveCategorySearch, resetIncentiveRequest } = useIncentiveListRequestStore();
+     // description: 급/상여 - 선택된 급/상여 정보 //
+     const { humanEmployeeOpen, humanIncentiveUserDefineOpen,selectedIncentiveCode, selectedIncentiveCategory, 
+             setHumanEmployeeOpen ,setHumanIncentiveUserDefineOpen ,setSelectedIncentiveCode, setSelectedIncentiveCategory } = useSelectedIncentiveInfoStore();     
+     // description: 급/상여 store //
+     const {incentiveCode, incentiveEmployeeCode, incentiveCategory, paymentDate, incentivePrice, content, resetIncentiveInfo} = useIncentiveInfoStore();       
      // description: 조회된 급/상여 정보 store //
-     const { setIncentiveList, resetIncentiveList } = useIncentiveListResponseStore();    
+     const { incentiveList, setIncentiveList, resetIncentiveList } = useIncentiveListResponseStore();    
+     
+     //   function  //
+     // description: 급/상여정보 등록 응답 함수 //
+     const putIncentiveInfoResponseHandler = (code: string) => {
+          const accessToken = cookies.accessToken;
+          
+          // description: BACK 오류
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+
+          if(code !== 'SU') return;
+          
+          if(!user) return;
+          alert('급/상여등록 완료');
+
+          resetIncentiveList();
+          resetHumanList();
+          getIncentiveListRequest(incentiveEmployeeCodeSearch, incentiveCategorySearch, accessToken).then(getIncentiveListResponseHandler);
+
+          navigator(HUMAN_INCENTIVE);
+     }          
+
+     // description: 급/상여정보 삭제 응답 함수 //
+     const deleteIncentiveInfoResponseHandler = (responsebody: DeleteIncentiveInfoResponseDto | ResponseDto) => {
+          const accessToken = cookies.accessToken;
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code !== 'SU') return;
+
+          // 전체 조회
+          setSelectedIncentiveCode(null);
+          setHumanEmployeeOpen(false);
+          setHumanIncentiveUserDefineOpen(false);
+          resetIncentiveInfo();
+          resetIncentiveList();          
+          resetIncentiveRequest();
+          getIncentiveListRequest(incentiveEmployeeCodeSearch, incentiveCategorySearch, accessToken).then(getIncentiveListResponseHandler);     
+          
+          alert('급/상여 삭제에 성공했습니다.');
+     }     
+
      // description: 급/상여 리스트 조회 응답 함수 //
      const getIncentiveListResponseHandler = (responsebody: GetIncentiveListResponseDto | ResponseDto ) => {
 
@@ -636,12 +690,59 @@ export default function Header() {
           const { incentiveList } = responsebody as GetIncentiveListResponseDto;
           setIncentiveList(incentiveList);
      } 
-     //! =================================     
+     //   event handler  //
+     // description: 급/상여 저장 이벤트 핸들러 //
+     const onIncentiveListSaveButtonClickHandler = async () => {
+
+          const token = cookies.accessToken;
+          if (selectedIncentiveCode) {
+               if (!incentiveList) return;
+               const selectedIncentive = incentiveList.find((item) => item.incentiveCode === selectedIncentiveCode);
+               const data: PutIncentiveRequestDto = {
+                    incentiveCode: selectedIncentive?.incentiveCode as number,
+                    incentiveEmployeeCode: selectedIncentive?.employeeCode as number,
+                    incentiveCategory: (selectedIncentiveCategory == 0) ? selectedIncentive?.incentiveCategoryCode as number : selectedIncentiveCategory as number,
+                    paymentDate: selectedIncentive?.paymentDate as string,
+                    incentivePrice: selectedIncentive?.incentivePrice as number,
+                    content: selectedIncentive?.content as string
+               }
+
+               // description: 필수값 검사
+               if (!data.incentiveCategory || !data.paymentDate || !data.incentivePrice ) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               putIncentiveInfoRequest(data, token).then(putIncentiveInfoResponseHandler);
+
+          } else {
+               const data: PutIncentiveRequestDto = {
+                    incentiveCode,
+                    incentiveEmployeeCode,
+                    incentiveCategory,
+                    paymentDate,
+                    incentivePrice,
+                    content
+               }
+               if (!data.incentiveCode || !data.incentiveEmployeeCode || !data.paymentDate || !data.paymentDate || !data.incentivePrice) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+
+               putIncentiveInfoRequest(data, token).then(putIncentiveInfoResponseHandler);
+          };
+     }     
+     // description: 급/상여정보 삭제 이벤트 핸들러 //
+     const onDeleteIncentiveInfoButtonClickHandler = () => {
+          if (!selectedIncentiveCode) return;
+          const token = cookies.accessToken;
+          deleteIncentiveInfoRequest(selectedIncentiveCode, token).then(deleteIncentiveInfoResponseHandler);
+     }          
      // description: 급/상여 리스트 조회 이벤트 핸들러 //
      const onIncentiveListSearchButtonClickHandler = () => {
           const accessToken = cookies.accessToken;
           resetIncentiveList();
-          getIncentiveListRequest(incentiveEmployeeCode, incentiveCategory, accessToken).then(getIncentiveListResponseHandler);
+          resetHumanList();
+          getIncentiveListRequest(incentiveEmployeeCodeSearch, incentiveCategorySearch, accessToken).then(getIncentiveListResponseHandler);
      } 
 //! ============================================================================================
 
@@ -1108,6 +1209,7 @@ export default function Header() {
                               isCompanyInfo ? onCompanyInfoSaveButtonClickHandler : 
                               isDepartmentList ? onDepartmentListSaveButtonClickHandler :
                               isSystemEmployeeList ? onSystemEmployeeListSaveButtonClickHandler :
+                              isIncentiveList ? onIncentiveListSaveButtonClickHandler :
                               isCustomerList ? onCustomerListSaveButtonClickHandler :
                               isProductList ? onProductListSaveButtonClickHandler : 
                               isSalesPlanList ? onSalesPlanListSaveButtonClickHandler : () => {} 
@@ -1122,6 +1224,7 @@ export default function Header() {
                     <div className="header-function-delete" onClick={
                               isDepartmentList ? onDeleteDepartmentInfoButtonClickHandler : 
                               isSystemEmployeeList ? onDeleteEmployeeInfoButtonClickHandler :
+                              isIncentiveList ? onDeleteIncentiveInfoButtonClickHandler :
                               isCustomerList ? onDeleteCustomerInfoButtonClickHandler : 
                               isProductList ? onDeleteProductInfoButtonClickHandler : 
                               isSalesPlanList ? onDeleteSalesPlanInfoButtonClickHandler : () => {}
