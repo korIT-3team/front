@@ -1,0 +1,11 @@
+.kakao-login{
+     width: 65px;
+     height: 35px;
+   
+     background-image: url(./assets/kakao_login_small.png);
+     background-position: 50% 50%;
+     background-size: 100% 100%;
+}
+.kakao-login:hover{
+     cursor: pointer;
+}

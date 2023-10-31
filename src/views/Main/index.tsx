@@ -8,6 +8,7 @@ import { SignInResponseDto } from 'src/interfaces/response/auth';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import GetLoginUserResponseDto from 'src/interfaces/response/user/get-login-user.response.dto';
 import { useUserStore } from 'src/stores';
+import './style.css';
 
 export default function Main() {
   //!               state                //
@@ -96,9 +97,21 @@ export default function Main() {
     <div>
       { user ? ( <div> {user.employeeName} 님 환영합니다.</div> ) : 
         (<div className='main-login-box'>
-          사원번호 <input type="text" placeholder='사원번호를 입력해주세요' value={employeeCode} onChange={onEmployeeCodeChangeHandler} />
-          비밀번호 <input type="password" value={password} onChange={onPasswordChangeHandler} onKeyDown={onPasswordKeyDownHandler}/>
-          <button onClick={onSignInButtonClickHandler}>로그인</button>
+          <div className="login-text">Login</div>
+          <div className='login-divider'></div>
+          <div className="id-pw-button-box">
+            <div className="id-pw-box">
+              <div className="id-box">
+                <div className="id-text">사원번호</div>
+                <input className='id-input' type="text" placeholder='사원번호를 입력해주세요' value={employeeCode == 0 ? '' : employeeCode} onChange={onEmployeeCodeChangeHandler} />
+              </div>
+              <div className="pw-box">
+                <div className="pw-text">비밀번호</div>
+                <input className='pw-input' type="password" value={password} onChange={onPasswordChangeHandler} onKeyDown={onPasswordKeyDownHandler}/>
+              </div>
+            </div>
+            <div className="button-box" onClick={onSignInButtonClickHandler}>Sign In</div>
+          </div>
         </div>) 
       }
       

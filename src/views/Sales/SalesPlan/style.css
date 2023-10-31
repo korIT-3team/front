@@ -51,47 +51,6 @@
   background: #F9F9F9;
 }
 
-/* 판매계획 코드 */
-
-.sales-plan-search-plan-code {
-  width: 120px;
-  height: 35px;
-
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-}
-
-.sales-plan-search-plan-code-text {
-  width: 118px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-
-	display : flex;
-  justify-content : center;
-  align-items : center;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.sales-plan-search-plan-code-box-name-box-text {
-  width: calc(260px - 120px - 4px);
-  height: 31px;
-
-  display : flex;
-  align-items : center;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-  border: none;
-}
 
 /* 프로젝트 명 */
 
@@ -135,47 +94,6 @@
   border: none;
 }
 
-/* 프로젝트 명 */
-
-.sales-plan-search-plan-date {
-  width: 120px;
-  height: 35px;
-
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  text-align: center;
-}
-
-.sales-plan-search-plan-date-text {
-  width: 118px;
-  height: 35px;
-
-  border-right: 1px solid rgba(0, 0, 0, 0.30);
-
-	display : flex;
-  justify-content : center;
-  align-items : center;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.sales-plan-search-plan-date-box-name-box-text {
-  width: calc(260px - 120px - 4px);
-  height: 31px;
-
-  display : flex;
-  align-items : center;
-
-  color: rgba(0, 0, 0, 0.80);
-  text-align: center;
-  font-size: 12px;
-  font-weight: 400;
-  border: none;
-}
 
 
 /* ---------------------------------------------------------------- */
@@ -209,29 +127,29 @@
   margin-left: 20px;
 
   width: 1100px;
-  height: 250px;
+  height: 550px;
 
   border: 1px solid #CFCFCF;
 }
 
 .sales-plan-view-container-box {
   width: 1080px;
-  height: 230px;
+  height: 530px;
 
   border: 1px solid #CFCFCF;
 }
 
 /* ---------------------------------------------------------------- */
-/* first table 타이틀 */
+/* table 타이틀 */
 
-.sales-plan-view-container-first-table-title {
+.sales-plan-view-container-table-title {
   width: 100%;
   height: 35px;
   display: flex;
 }
 
-.sales-plan-view-container-first-table-title-no {
-  width: 60px;
+.sales-plan-view-container-table-title-no {
+  width: 50px;
   height: 35px;
 
   background-color: #184A7D;
@@ -246,331 +164,7 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-first-table-title-plan-code {
-  width: 180px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-first-table-title-project-name {
-  width: 300px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-first-table-title-dept-code {
-  width: 180px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-first-table-title-emp-code {
-  width: 180px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-first-table-title-plan-date {
-  width: 180px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-/* ---------------------------------------------------------------- */
-/* first table 바디 */
-
-.sales-plan-view-container-first-table-body {
-  width: 100%;
-  height: 35px;
-  display: flex;
-}
-
-.sales-plan-view-container-first-table-body-no {
-  width: 61px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-first-table-body-plan-code {
-  width: 175px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-project-name {
-  width: 303px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-dept-code {
-  width: 176px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-emp-code {
-  width: 176px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-plan-date {
-  width: 176px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-/* ---------------------------------------------------------------- */
-/* 새로 저장하는 first body */
-.sales-plan-view-container-first-table-body-new {
-  width: 100%;
-  height: 35px;
-  display: flex;
-}
-
-.sales-plan-view-container-first-table-body-new-no {
-  width: 61px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-first-table-body-new-plan-code {
-  width: 175px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-new-project-name {
-  width: 303px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-new-dept-code {
-  width: 176px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-new-emp-code {
-  width: 176px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-first-table-body-new-plan-date {
-  width: 176px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-/* ---------------------------------------------------------------- */
-/* second table title*/
-
-.sales-plan-view-container-second-table-title {
-  width: 100%;
-  height: 35px;
-  display: flex;
-}
-
-.sales-plan-view-container-second-table-title-no {
-  width: 60px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-second-table-title-product-code {
+.sales-plan-view-container-table-title-plan-code {
   width: 100px;
   height: 35px;
 
@@ -586,7 +180,7 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-product-name {
+.sales-plan-view-container-table-title-project-name {
   width: 150px;
   height: 35px;
 
@@ -602,23 +196,7 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-unit {
-  width: 70px;
-  height: 35px;
-
-  background-color: #184A7D;
-  border-right: 1px solid #FFF;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  color: #FFF;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.sales-plan-view-container-second-table-title-plan-quantity {
+.sales-plan-view-container-table-title-plan-date {
   width: 120px;
   height: 35px;
 
@@ -634,7 +212,7 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-exchange-type {
+.sales-plan-view-container-table-title-product-code {
   width: 100px;
   height: 35px;
 
@@ -650,7 +228,23 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-exchange-rate {
+.sales-plan-view-container-table-title-product-name {
+  width: 120px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sales-plan-view-container-table-title-plan-quantity {
   width: 100px;
   height: 35px;
 
@@ -666,8 +260,8 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-expect-price {
-  width: 125px;
+.sales-plan-view-container-table-title-expect-price {
+  width: 110px;
   height: 35px;
 
   background-color: #184A7D;
@@ -682,8 +276,8 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-expect-total-price {
-  width: 125px;
+.sales-plan-view-container-table-title-expect-total-price {
+  width: 110px;
   height: 35px;
 
   background-color: #184A7D;
@@ -698,12 +292,12 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-title-expect-korean-price {
-  width: 125px;
+
+.sales-plan-view-container-table-title-employee-name {
+  width: 110px;
   height: 35px;
 
   background-color: #184A7D;
-  border-right: 1px solid #FFF;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -713,19 +307,18 @@
   font-size: 14px;
   font-weight: 700;
 }
-
 
 /* ---------------------------------------------------------------- */
-/* second table body */
+/* table 바디 */
 
-.sales-plan-view-container-second-table-body {
+.sales-plan-view-container-table-body {
   width: 100%;
   height: 35px;
   display: flex;
 }
 
-.sales-plan-view-container-second-table-body-no {
-  width: 60px;
+.sales-plan-view-container-table-body-no {
+  width: 50px;
   height: 35px;
 
   display: flex;
@@ -740,25 +333,8 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-body-product-code {
-  width: 96px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-second-table-body-product-name {
-  width: 146px;
+.sales-plan-view-container-table-body-plan-code {
+  width: 101px;
   height: 35px;
 
   display: flex;
@@ -774,8 +350,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-unit {
-  width: 66px;
+.sales-plan-view-container-table-body-project-name {
+  width: 147px;
   height: 35px;
 
   display: flex;
@@ -791,8 +367,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-plan-quantity {
-  width: 116px;
+.sales-plan-view-container-table-body-plan-date {
+  width: 117px;
   height: 35px;
 
   display: flex;
@@ -808,8 +384,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-exchange-type {
-  width: 97px;
+.sales-plan-view-container-table-body-product-code {
+  width: 101px;
   height: 35px;
 
   display: flex;
@@ -825,24 +401,7 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-exchange-rate {
-  width: 97px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-second-table-body-expect-price {
+.sales-plan-view-container-table-body-product-name {
   width: 121px;
   height: 35px;
 
@@ -859,8 +418,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-expect-total-price {
-  width: 121px;
+.sales-plan-view-container-table-body-plan-quantity {
+  width: 97px;
   height: 35px;
 
   display: flex;
@@ -876,8 +435,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-expect-korean-price {
-  width: 125px;
+.sales-plan-view-container-table-body-expect-price {
+  width: 107px;
   height: 35px;
 
   display: flex;
@@ -885,6 +444,38 @@
   justify-content: center;
   
   border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-table-body-expect-total-price {
+  width: 110px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-table-body-employee-name {
+  width: 110px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: rgba(44, 43, 43, 0.70);
   text-align: center;
@@ -894,16 +485,16 @@
 }
 
 /* ---------------------------------------------------------------- */
-/* 새로 저장하는 second body */
+/* 새로 저장하는 body */
 
-.sales-plan-view-container-second-table-body-new {
+.sales-plan-view-container-table-body-new {
   width: 100%;
   height: 35px;
   display: flex;
 }
 
-.sales-plan-view-container-second-table-body-new-no {
-  width: 60px;
+.sales-plan-view-container-table-body-new-no {
+  width: 50px;
   height: 35px;
 
   display: flex;
@@ -918,25 +509,8 @@
   font-weight: 700;
 }
 
-.sales-plan-view-container-second-table-body-new-product-code {
-  width: 96px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-second-table-body-new-product-name {
-  width: 146px;
+.sales-plan-view-container-table-body-new-plan-code {
+  width: 101px;
   height: 35px;
 
   display: flex;
@@ -952,8 +526,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-new-unit {
-  width: 66px;
+.sales-plan-view-container-table-body-new-project-name {
+  width: 147px;
   height: 35px;
 
   display: flex;
@@ -969,8 +543,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-new-plan-quantity {
-  width: 116px;
+.sales-plan-view-container-table-body-new-plan-date {
+  width: 117px;
   height: 35px;
 
   display: flex;
@@ -986,8 +560,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-new-exchange-type {
-  width: 97px;
+.sales-plan-view-container-table-body-new-product-code {
+  width: 101px;
   height: 35px;
 
   display: flex;
@@ -1003,24 +577,7 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-new-exchange-rate {
-  width: 97px;
-  height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  border-right: 1px solid #FFF;
-
-  color: rgba(44, 43, 43, 0.70);
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  border:none;
-}
-
-.sales-plan-view-container-second-table-body-new-expect-price {
+.sales-plan-view-container-table-body-new-product-name {
   width: 121px;
   height: 35px;
 
@@ -1037,8 +594,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-new-expect-total-price {
-  width: 121px;
+.sales-plan-view-container-table-body-new-plan-quantity {
+  width: 97px;
   height: 35px;
 
   display: flex;
@@ -1054,8 +611,8 @@
   border:none;
 }
 
-.sales-plan-view-container-second-table-body-new-expect-korean-price {
-  width: 125px;
+.sales-plan-view-container-table-body-new-expect-price {
+  width: 107px;
   height: 35px;
 
   display: flex;
@@ -1063,6 +620,38 @@
   justify-content: center;
   
   border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-table-body-new-expect-total-price {
+  width: 110px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  border-right: 1px solid #FFF;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.sales-plan-view-container-table-body-new-employee-name {
+  width: 110px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   color: rgba(44, 43, 43, 0.70);
   text-align: center;
@@ -1073,66 +662,5 @@
 
 /* ---------------------------------------------------------------- */
 
-.sales-plan-bottom {
-  display: flex;
 
-  margin-top: 20px;
-  margin-left: 22px;
-}
-
-.sales-plan-bottom-button-save {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 827px;
-  margin-right: 5px;
-
-  width: 125px;
-  height: 35px;
-
-  border: 0.8px solid rgba(52, 117, 181, 1);
-
-  background-color: rgba(52, 117, 181, 1);
-}
-
-.sales-plan-bottom-button-save:hover {
-  cursor: pointer;
-  background-color: rgba(52, 117, 181, 0.7);
-}
-
-.sales-plan-bottom-button-save-text {
-  color: #FFFFFF;
-  text-align: center;
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.sales-plan-bottom-button-cancel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 125px;
-  height: 35px;
-
-  border: 0.8px solid rgba(0, 0, 0, 0.5);
-}
-
-.sales-plan-bottom-button-cancel:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.sales-plan-bottom-button-cancel-text {
-  color: #000000;
-  text-align: center;
-  font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
+/* ---------------------------------------------------------------- */

@@ -1,0 +1,658 @@
+#incentive-info-wrapper {
+  display: flex;
+}
+
+.incentive-info-right {
+  width: calc(194.858vh - 24.62vh);
+}
+
+.incentive-info-right-top-title {
+  margin-left: 27px;
+  margin-top: 30px;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-right-top-divider{
+  margin-left: 22px;
+  margin-top: 15px;
+  width: 1100px;
+  height: 1px;
+  background-color: #7698B7;
+  display: flex;
+  align-items: center;
+}
+
+.incentive-info-right-top-search-condition {
+  margin-top: 15px;
+  margin-left: 22px;
+  width: 730px;
+  height: 35px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background: #F9F9F9;
+}
+
+/* 사원 */
+.incentive-info-right-top-search-employee {
+  width: 360px;
+  height: 35px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+.incentive-info-right-top-search-employee-text {
+  width: 120px;
+  height: 35px;
+
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.incentive-info-right-top-search-employee-box {
+  width: 240px;
+  height: 35px;
+  
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color: #FFF;
+}
+
+.incentive-info-right-top-search-employee-box-code-box {
+  margin: 4px 0px 4px 4px;
+  width: 70px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  
+  display : flex;
+  align-items : center;
+}
+
+.incentive-info-right-top-search-employee-box-code-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 50px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.incentive-info-right-top-search-button {
+  margin-left: 11px;
+  width: 40px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.incentive-info-right-top-search-employee-box-name-box {
+  margin: 4px 4px 4px 11px;
+  width: 102px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #FFF;
+
+  
+  display : flex;
+  align-items : center;
+}
+
+.incentive-info-right-top-search-employee-box-name-box-text {
+  margin: 4px 0px 4px 9px;
+  width: 80px;
+  height: 15px;
+
+  display : flex;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* 급/상여 구분 */
+.incentive-info-right-top-search-incentive-category {
+  width: 100%;
+  height: 35px;
+
+  background-color:#FFF;
+  border-radius: 5px;
+
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  text-align: center;
+}
+
+.incentive-info-right-top-search-incentive-category-text {
+  width: 120px;
+  height: 35px;
+  border-left: 1px solid rgba(0, 0, 0, 0.30);
+  border-right: 1px solid rgba(0, 0, 0, 0.30);
+  background-color: #F9F9F9;
+
+	display : flex;
+  justify-content : center;
+  align-items : center;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.incentive-info-right-top-search-incentive-category-box {
+  width: 240px;
+  height: 35px;
+
+  display : flex;
+  justify-content : center;
+  align-items : center;
+}
+
+.incentive-info-right-top-search-incentive-category-box-combo-box {
+  margin-left: 4px;
+  width: 232px;
+  height: 27px;
+
+  border: 1px solid rgba(0, 0, 0, 0.30);
+
+  display : flex;
+  align-items : center;
+}
+
+.employee-info-right-top-search-employment-status-box-combo-box-text {
+  margin-left: 9px;
+  width: 70px;
+  height: 15px;
+
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.incentive-info-right-top-search-incentive-category-box-combo-box-text {
+  width: 232px;
+  height: 27px;
+  border: none;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+  }
+
+.incentive-info-middle {
+  display: flex;
+
+  padding-top: 30px;
+  padding-bottom: 18px;
+}
+  
+.incentive-info-middle-left {
+  margin-left: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.incentive-info-middle-left-top {
+  margin-left: 20px;
+}
+
+.incentive-info-middle-left-top-text {
+  padding-bottom: 17px;
+  color: rgba(0, 0, 0, 0.80);
+  text-align: left;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.incentive-info-middle-left-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1100px;
+  height: 550px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.incentive-info-middle-left-bottom-container {
+  width: 1080px;
+  height: 530px;
+
+  border: 1px solid #CFCFCF;
+}
+
+.incentive-info-middle-left-bottom-table-title {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+.incentive-info-middle-left-bottom-table-title-no {
+  width: 35px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-incentive-code {
+  width: 89px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-employee-code {
+  width: 100px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-employee-name {
+  width: 100px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-incentive-category {
+  width: 95px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-payment-date {
+  width: 95px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-incentive-price {
+  width: 290px;
+  height: 35px;
+
+  background-color: #184A7D;
+  border-right: 1px solid #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-title-content {
+  width: 290px;
+  height: 35px;
+
+  background-color: #184A7D;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 급/상여 리스트 */
+.incentive-info-middle-left-bottom-table-body {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.incentive-info-middle-left-bottom-table-body-no {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-body-incentive-code {
+  width: 89px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-employee-code {
+  width: 100px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-employee-name {
+  width: 100px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-incentive-category {
+  width: 95px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-payment-date {
+  /* width: 95px; */
+  width: 91px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-incentive-price {
+  /* width: 290px; */
+  width: 282px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-content {
+  width: 282px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+/* 새로 저장하는 raw */
+.incentive-info-middle-left-bottom-table-body-new {
+  width: 100%;
+  height: 35px;
+  display: flex;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-no {
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-incentive-code {
+  width: 89px;
+  height: 35px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-employee-code {
+  width: 100px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-employee-name {
+  width: 100px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-incentive-category {
+  width: 95px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-payment-date {
+  /* width: 95px; */
+  width: 91px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-incentive-price {
+  /* width: 290px; */
+  width: 282px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
+
+.incentive-info-middle-left-bottom-table-body-new-content {
+  width: 282px;
+  height: 31px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  color: rgba(44, 43, 43, 0.70);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  border:none;
+}
