@@ -12,14 +12,14 @@ export default function OrderListItem({item} : Props) {
      // description: 리스트 상태 //
      const { no, orderCode, orderDate,  projectName , customerName, employeeName } = item;
      return (
-          <div className='order-info-view-container-first-table-body-container'>
-               <div className='order-info-view-container-first-table-body'>
-                    <div className='order-info-view-container-first-table-body-no'>{no}</div>
-                    <div className='order-info-view-container-first-table-body-order-code'>{orderCode}</div>
-                    <div className='order-info-view-container-first-table-body-order-date'>{orderDate}</div>
-                    <div className='order-info-view-container-first-table-body-customer-code'>{customerName}</div>
-                    <div className='order-info-view-container-first-table-body-project-code'>{projectName}</div>
-                    <div className='order-info-view-container-first-table-body-manager'>{employeeName}</div>
+          <div className='order-item-view-container-first-table-body-container'>
+               <div className='order-item-view-container-first-table-body'>
+                    <div className='order-item-view-container-first-table-body-no'>{no}</div>
+                    <div className='order-item-view-container-first-table-body-order-code'>{orderCode}</div>
+                    <div className='order-item-view-container-first-table-body-order-date'>{orderDate}</div>
+                    <div className='order-item-view-container-first-table-body-customer-code'>{customerName}</div>
+                    <div className='order-item-view-container-first-table-body-project-code'>{projectName}</div>
+                    <div className='order-item-view-container-first-table-body-manager'>{employeeName}</div>
                </div>
           </div>
      )

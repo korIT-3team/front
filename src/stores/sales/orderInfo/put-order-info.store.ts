@@ -4,15 +4,15 @@ import { create } from "zustand";
 export interface PutOrderInfoStore {
   putOrderInfoOrderCode: number;
   putOrderInfoOrderDate: string;
-  putOrderInfoProjectCode : number | null;
-  putOrderInfoCustomerCode: number | null;
-  putOrderInfoEmployeeCode: number | null;
+  putOrderInfoProjectCode : number;
+  putOrderInfoCustomerCode: number;
+  putOrderInfoEmployeeCode: number;
 
   setPutOrderInfoOrderCode: (putOrderInfoOrderCode: number) => void;
   setPutOrderInfoOrderDate: (putOrderInfoOrderDate: string) => void;
-  setPutOrderInfoProjectCode: (putOrderInfoProjectCode: number | null) => void;
-  setPutOrderInfoCustomerCode: (putOrderInfoCustomerCode: number | null) => void;
-  setPutOrderInfoEmployeeCode: (putOrderInfoEmployeeCode: number | null) => void;
+  setPutOrderInfoProjectCode: (putOrderInfoProjectCode: number) => void;
+  setPutOrderInfoCustomerCode: (putOrderInfoCustomerCode: number) => void;
+  setPutOrderInfoEmployeeCode: (putOrderInfoEmployeeCode: number) => void;
 
   resetOrderInfo: () => void;
 }
@@ -20,9 +20,9 @@ export interface PutOrderInfoStore {
 const useStore = create<PutOrderInfoStore>((set) => ({
   putOrderInfoOrderCode: 0,
   putOrderInfoOrderDate: '',
-  putOrderInfoProjectCode: null,
-  putOrderInfoCustomerCode: null,
-  putOrderInfoEmployeeCode: null,
+  putOrderInfoProjectCode: 0,
+  putOrderInfoCustomerCode: 0,
+  putOrderInfoEmployeeCode: 0,
 
   setPutOrderInfoOrderCode: (putOrderInfoOrderCode) => set((state) => ({ ...state, putOrderInfoOrderCode })),
   setPutOrderInfoOrderDate: (putOrderInfoOrderDate) => set((state) => ({ ...state, putOrderInfoOrderDate })),
@@ -30,6 +30,6 @@ const useStore = create<PutOrderInfoStore>((set) => ({
   setPutOrderInfoCustomerCode: (putOrderInfoCustomerCode) => set((state) => ({ ...state, putOrderInfoCustomerCode })),
   setPutOrderInfoEmployeeCode: (putOrderInfoEmployeeCode) => set((state) => ({ ...state, putOrderInfoEmployeeCode })),
 
-  resetOrderInfo: () => set((state) => ({ ...state, putOrderInfoOrderCode: 0, putOrderInfoOrderDate: '', putOrderInfoProjectCode: null, putOrderInfoCustomerCode: null, putOrderInfoEmployeeCode: null })),
+  resetOrderInfo: () => set((state) => ({ ...state, putOrderInfoOrderCode: 0, putOrderInfoOrderDate: '', putOrderInfoProjectCode: 0, putOrderInfoCustomerCode: 0, putOrderInfoEmployeeCode: 0 })),
 }));
 export default useStore;
