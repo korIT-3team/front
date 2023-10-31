@@ -10,8 +10,8 @@ import useProductInfoStore from './systemProduct/productinfo.store';
 import useProductRequestStore from './systemProduct/productlist.request.store';
 import useProductResponseStore from './systemProduct/productlist.response.store';
 import useSelectedProductInfoStore from './systemProduct/selectecproduct.store';
-import { ProductUserDefineRequestStore } from "./systemProduct/productUserDefine.request.store";
-
+import useProductUserDefineRequestStore from './systemProduct/productUserDefine.request.store';
+import useProductUserDefineResponseStore from './systemProduct/productUserDefine.response.store';
 
 import useCustomerInfoStore from './systemCustomer/customerinfo.store';
 import useCustomerRequestStore from './systemCustomer/customerlist.request.store';
@@ -63,6 +63,8 @@ export {
      useProductRequestStore,
      useProductResponseStore,
      useSelectedProductInfoStore,
+     useProductUserDefineRequestStore,
+     useProductUserDefineResponseStore,
 
      useCustomerInfoStore,
      useCustomerRequestStore,

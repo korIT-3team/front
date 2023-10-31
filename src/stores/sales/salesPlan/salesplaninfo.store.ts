@@ -5,29 +5,29 @@ interface SalesPlanInfoStore {
   salesPlanProjectName: string,
   salesPlanDate: string,
   
-  salesPlanProductCode: number,
-  salesPlanProductName: string,
+  salesPlanProductCodeInfo: number,
+  salesPlanProductNameInfo: string,
   
   salesPlanQuantity: number,
   salesPlanExpectPrice: number,
   salesPlanExpectTotalPrice: number,
   
-  salesPlanEmployeeCode: number,
-  salesPlanEmployeeName: string,
+  salesPlanEmployeeCodeInfo: number,
+  salesPlanEmployeeNameInfo: string,
 
   setSalesPlanCodeInfo: (salesPlanCodeInfo: number) => void;
   setSalesPlanProjectName: (salesPlanProjectName: string) => void;
   setSalesPlanDate: (salesPlanDate: string) => void;
   
-  setSalesPlanProductCode: (salesPlanProductCode: number) => void;
-  setSalesPlanProductName: (salesPlanProductName: string) => void;
+  setSalesPlanProductCodeInfo: (salesPlanProductCodeInfo: number) => void;
+  setSalesPlanProductNameInfo: (salesPlanProductNameInfo: string) => void;
 
   setSalesPlanQuantity: (salesPlanQuantity: number) => void;
   setSalesPlanExpectPrice: (salesPlanExpectPrice: number) => void;
   setSalesPlanExpectTotalPrice: (salesPlanExpectTotalPrice: number) => void;
 
-  setSalesPlanEmployeeCode: (salesPlanEmployeeCode: number) => void;
-  setSalesPlanEmployeeName: (salesPlanEmployeeName: string) => void;
+  setSalesPlanEmployeeCodeInfo: (salesPlanEmployeeCodeInfo: number) => void;
+  setSalesPlanEmployeeNameInfo: (salesPlanEmployeeNameInfo: string) => void;
   
   resetSalesPlanInfo: () => void;
   
@@ -38,34 +38,34 @@ const useStore = create<SalesPlanInfoStore>((set) => ({
   salesPlanProjectName: "",
   salesPlanDate: "",
   
-  salesPlanProductCode: 0,
-  salesPlanProductName: "",
+  salesPlanProductCodeInfo: 0,
+  salesPlanProductNameInfo: "",
   
   salesPlanQuantity: 0,
   salesPlanExpectPrice: 0,
   salesPlanExpectTotalPrice: 0,
   
-  salesPlanEmployeeCode: 0,
-  salesPlanEmployeeName: "",
+  salesPlanEmployeeCodeInfo: 0,
+  salesPlanEmployeeNameInfo: "",
 
   setSalesPlanCodeInfo: (salesPlanCodeInfo) => set((state) => ({ ...state, salesPlanCodeInfo })),
   setSalesPlanProjectName: (salesPlanProjectName) => set((state) => ({ ...state, salesPlanProjectName })),
   setSalesPlanDate: (salesPlanDate) => set((state) => ({ ...state, salesPlanDate })),
   
-  setSalesPlanProductCode: (salesPlanProductCode) => set((state) => ({ ...state, salesPlanProductCode })),
-  setSalesPlanProductName: (salesPlanProductName) => set((state) => ({ ...state, salesPlanProductName })),
+  setSalesPlanProductCodeInfo: (salesPlanProductCodeInfo) => set((state) => ({ ...state, salesPlanProductCodeInfo })),
+  setSalesPlanProductNameInfo: (salesPlanProductNameInfo) => set((state) => ({ ...state, salesPlanProductNameInfo })),
 
   setSalesPlanQuantity: (salesPlanQuantity) => set((state) => ({ ...state, salesPlanQuantity })),
   setSalesPlanExpectPrice: (salesPlanExpectPrice) => set((state) => ({ ...state, salesPlanExpectPrice })),
   setSalesPlanExpectTotalPrice: (salesPlanExpectTotalPrice) => set((state) => ({ ...state, salesPlanExpectTotalPrice })),
 
-  setSalesPlanEmployeeCode: (salesPlanEmployeeCode) => set((state) => ({ ...state, salesPlanEmployeeCode })),
-  setSalesPlanEmployeeName: (salesPlanEmployeeName) => set((state) => ({ ...state, salesPlanEmployeeName })),
+  setSalesPlanEmployeeCodeInfo: (salesPlanEmployeeCodeInfo) => set((state) => ({ ...state, salesPlanEmployeeCodeInfo })),
+  setSalesPlanEmployeeNameInfo: (salesPlanEmployeeNameInfo) => set((state) => ({ ...state, salesPlanEmployeeNameInfo })),
   
   resetSalesPlanInfo: () => set((state) => ({ ...state, salesPlanCodeInfo: 0, salesPlanProjectName: "", salesPlanDate: "",
-                                                        salesPlanProductCode: 0, salesPlanProductName: "",
+                                                        salesPlanProductCodeInfo: 0, salesPlanProductNameInfo: "",
                                                         salesPlanQuantity: 0, salesPlanExpectPrice: 0, salesPlanExpectTotalPrice: 0,
-                                                        salesPlanEmployeeCode: 0, salesPlanEmployeeName: "" })),
+                                                        salesPlanEmployeeCodeInfo: 0, salesPlanEmployeeNameInfo: "" })),
 
 }));
 

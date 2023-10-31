@@ -6,7 +6,7 @@ import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/r
 import { GetInOutComeListResponseDto, GetInvoiceListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, SALES_PLAN_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
 import { PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteCustomerInfoResponseDto, DeleteDepartmentInfoResponseDto, DeleteProductInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto } from 'src/interfaces/response/system';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
@@ -15,6 +15,8 @@ import GetSystemEmployeeListResponseDto from 'src/interfaces/response/system/sys
 import PutSystemEmployeeInfoRequestDto from 'src/interfaces/request/system/put-system-employee-info.request.dto';
 import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/systemEmployee/delete-system-employee-info.response.dto';
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
+import { PutSalesPlanInfoRequestDto } from 'src/interfaces/request/sales';
+import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
 import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
 import './style.css';
 import PutIncentiveRequestDto from 'src/interfaces/request/human/put-incentive-info.request.dto';
@@ -63,7 +65,7 @@ export default function Header() {
      // description: 조회된 product 정보 store //
      const { setProductList, resetProductList } = useProductResponseStore();
      // description: product 정보 상태
-     const { productCodeInfo, productNameInfo, procurementCategoryInfo, productCompanyCode, productPriceInfo, 
+     const { productCodeInfo, productNameInfo, procurementCategoryCode, procurementCategoryName, productPriceInfo, 
                resetProductInfo } = useProductInfoStore();
      // description: 선택 product //
      const { selectedProductCode, setSelectedProductCode  } = useSelectedProductInfoStore();
@@ -142,13 +144,12 @@ export default function Header() {
                const data: PutProductInfoRequestDto = {
                     productCodeInfo: selectedProduct?.productCode as number,
                     productNameInfo: selectedProduct?.productName as string,
-                    procurementCategoryInfo: selectedProduct?.procurementCategory as number,
-                    productPriceInfo: selectedProduct?.productPrice as number,
-                    productCompanyCode: 1
+                    procurementCategoryCode: selectedProduct?.procurementCategoryCode as number,
+                    productPriceInfo: selectedProduct?.productPrice as number
                }
 
                // description: 필수값 검사
-               if (!data.productNameInfo || !data.procurementCategoryInfo || !data.productPriceInfo) {
+               if (!data.productNameInfo || !data.procurementCategoryCode || !data.productPriceInfo) {
                     alert("필수값을 입력하세요.");
                     return;
                }
@@ -159,12 +160,11 @@ export default function Header() {
                const data: PutProductInfoRequestDto = {
                     productCodeInfo,
                     productNameInfo,
-                    procurementCategoryInfo,
-                    productPriceInfo,
-                    productCompanyCode: 1
+                    procurementCategoryCode,
+                    productPriceInfo
                }
                
-               if (!data.productNameInfo || !data.procurementCategoryInfo || !data.productPriceInfo) {
+               if (!data.productNameInfo || !data.procurementCategoryCode || !data.productPriceInfo) {
                     alert("필수값을 입력하세요.");
                     return;
                }
@@ -208,6 +208,7 @@ export default function Header() {
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
      const isEmployeeViewList = pathname.includes(SEARCHVIEW_EMPLOYEE_LIST_PATH);
      const isIncentiveViewList = pathname.includes(SEARCHVIEW_INCENTIVE_LIST_PATH);
+     const isSalesPlanList = pathname.includes(SALES_PLAN_PATH);
      
      //                       event handler                           //
      // description: 전표 리스트 조회 응답 처리 함수 //
@@ -583,6 +584,7 @@ export default function Header() {
           resetSystemEmployeeInfo();
           resetSystemEmployeeList();
           getSystemEmployeeListRequest(systemEmployeeName).then(getSystemEmployeeListResponseHandler)
+          
      }  
 
      //                       component                          //
@@ -910,39 +912,6 @@ export default function Header() {
 
 //! ============================================================================================
 
-     //                       component                          //
-     // description: salesPlan 정보
-
-     //   state     //
-     // description: salesPlan 조회 조건 정보 store //
-     const { salesProjectName, setSalesProjectName, resetSalesPlanRequest } = useSalesPlanRequestStore();
-
-     // description: 조회된 salesPlan 정보 store //
-     const { setSalesPlanList, resetSalesPlanList } = useSalesPlanResponseStore();
-
-     // description: salesPlan - 사원 창 상태 //
-     const { salesPlanEmployeeOpen, setSalesPlanEmployeeOpen } = useSelectedSalesPlanStore();
-     // description: salesPlan - 품목 창 상태 //
-     const { salesPlanProductOpen, setSalesPlanProductOpen } = useSelectedSalesPlanStore();
-
-     // description: salesPlan - 선택된 salesPlanCode 정보 //
-     const { selectedSalesPlanCode, setSelectedSalesPlanCode } = useSelectedSalesPlanStore();
-     // description: salesPlan - 선택된 사원 정보 //
-     const { selectedSalesPlanEmployeeCode, setSelectedSalesPlanEmployeeCode } = useSelectedSalesPlanStore();
-     // description: salesPlan - 선택된 품목 정보 //
-     const { selectedSalesPlanProductCode, setSelectedSalesPlanProductCode } = useSelectedSalesPlanStore();
-
-     // description: salesPlan 정보 상태 //
-     const { salesPlanCodeInfo, salesPlanProjectName, salesPlanDate, salesPlanProductCode, salesPlanProductName,
-          salesPlanQuantity, salesPlanExpectPrice, salesPlanExpectTotalPrice, salesPlanEmployeeCode, salesPlanEmployeeName} = useSalesPlanInfoStore();
-     const { setSalesPlanCodeInfo, setSalesPlanProjectName, setSalesPlanDate, setSalesPlanProductCode, setSalesPlanProductName,
-          setSalesPlanQuantity, setSalesPlanExpectPrice, setSalesPlanExpectTotalPrice, setSalesPlanEmployeeCode, setSalesPlanEmployeeName, resetSalesPlanInfo } = useSalesPlanInfoStore();
-
-
-     //   event handler  //
-
-    
-     
 
 //! ============================================================================================
 
@@ -1023,6 +992,178 @@ export default function Header() {
      }
 //! ============================================================================================
 
+     //  component  //
+     // description: salesPlan 정보 //
+
+     // state //
+     // description: salesPlan 조회 조건 정보 store //
+     const { salesProjectName } = useSalesPlanRequestStore();
+     // description: 조회된 salesPlan 정보 store //
+     const { setSalesPlanList, resetSalesPlanList } = useSalesPlanResponseStore();
+     
+     // description: salesPlan - 품목 창 상태 //
+     const { setSalesPlanProductOpen } = useSelectedSalesPlanStore();
+     // description: salesPlan - 선택된 품목 상태 //
+     const { selectedSalesPlanProductCode, setSelectedSalesPlanProductCode } = useSelectedSalesPlanStore();
+     const { selectedSalesPlanProductName, setSelectedSalesPlanProductName } = useSelectedSalesPlanStore();
+
+     // description: salesPlan - 사원 창 상태 //
+     const { setSalesPlanEmployeeOpen } = useSelectedSalesPlanStore();
+     // description: salesPlan - 선택된 사원 상태 //
+     const { selectedSalesPlanEmployeeCode, setSelectedSalesPlanEmployeeCode } = useSelectedSalesPlanStore();
+     const { setSelectedSalesPlanEmployeeName } = useSelectedSalesPlanStore();
+
+     // description: salesPlan - 선택된 salesPlan 상태 //
+     const { selectedSalesPlanCode, setSelectedSalesPlanCode } = useSelectedSalesPlanStore();
+
+     // description: salesPlan - 신규입력 초기화 //
+     const { resetSalesPlanInfo } = useSalesPlanInfoStore();
+
+     // description: salesPlan 정보 상태 //
+     const { salesPlanCodeInfo, salesPlanProjectName, salesPlanDate, salesPlanProductCodeInfo, salesPlanProductNameInfo,
+          salesPlanQuantity, salesPlanExpectPrice, salesPlanExpectTotalPrice, salesPlanEmployeeCodeInfo } = useSalesPlanInfoStore();
+     
+     // event handler //
+     // description: salesPlan 정보 불러오기 //
+     const { salesPlanList } = useSalesPlanResponseStore();
+
+     // description: salesPlan 등록 응답 함수 //
+     const putSalesPlanInfoResponseHandler = (code: string) => {
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'ESPN') alert('중복되는 프로젝트명입니다.');
+
+          if(code !== 'SU') return;
+          
+          if(!user) return;
+          alert('판매계획 등록 완료!');
+
+          // 전체 조회 //
+          setSelectedSalesPlanCode(null);
+          resetSalesPlanInfo();
+          resetSalesPlanList();
+          getSalesPlanListRequest(salesProjectName).then(getSalesPlanListResponseHandler);
+
+          navigator(SALES_PLAN_PATH);
+     }
+
+     // description: salesPlan 저장 이벤트 핸들러 //
+     const onSalesPlanListSaveButtonClickHandler = async () => {
+
+          const token = cookies.accessToken;
+          if (selectedSalesPlanCode) {
+               if (!salesPlanList) return;
+               const selectedSalesPlan = salesPlanList.find((item) => item.salesPlanCode === selectedSalesPlanCode);
+               const data: PutSalesPlanInfoRequestDto = {
+                    salesPlanCodeInfo: selectedSalesPlan?.salesPlanCode as number,
+                    salesPlanProjectName: selectedSalesPlan?.projectName as string,
+                    salesPlanDate: selectedSalesPlan?.planDate as string,
+                    salesPlanProductCodeInfo: (selectedSalesPlanProductCode == 0) ? selectedSalesPlan?.productCode as number : selectedSalesPlanProductCode as number,
+                    salesPlanProductNameInfo: (selectedSalesPlanProductName == "") ? selectedSalesPlan?.productName as string : selectedSalesPlanProductName as string,
+                    salesPlanQuantity: selectedSalesPlan?.planQuantity as number,
+                    salesPlanExpectPrice: selectedSalesPlan?.expectPrice as number,
+                    salesPlanExpectTotalPrice: selectedSalesPlan?.expectTotalPrice as number,
+                    salesPlanEmployeeCodeInfo: (selectedSalesPlanEmployeeCode == 0) ? selectedSalesPlan?.employeeCode as number : selectedSalesPlanEmployeeCode as number
+               }
+               
+               // description: 필수값 검사 //
+               if (!data.salesPlanProjectName || !data.salesPlanDate || !data.salesPlanProductCodeInfo || !data.salesPlanProductNameInfo || !data.salesPlanQuantity || !data.salesPlanExpectPrice || !data.salesPlanEmployeeCodeInfo) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+
+
+          } else {
+               const data: PutSalesPlanInfoRequestDto = {
+                    salesPlanCodeInfo,
+                    salesPlanProjectName,
+                    salesPlanDate,
+                    salesPlanProductCodeInfo,
+                    salesPlanProductNameInfo,
+                    salesPlanQuantity,
+                    salesPlanExpectPrice,
+                    salesPlanExpectTotalPrice,
+                    salesPlanEmployeeCodeInfo
+               }
+               // description: 필수값 검사 //
+               if (!data.salesPlanProjectName || !data.salesPlanDate || !data.salesPlanProductCodeInfo || !data.salesPlanProductNameInfo || !data.salesPlanQuantity || !data.salesPlanExpectPrice || !data.salesPlanEmployeeCodeInfo) {
+                    alert("필수값을 입력하세요.");
+                    return;
+               }
+               putSalesPlanInfoRequest(data, token).then(putSalesPlanInfoResponseHandler);
+          };
+
+     }
+
+     // description: salesPlan정보 삭제 응답 함수 //
+     const deleteSalesPlanInfoResponseHandler = (responsebody: DeleteSalesPlanInfoResponseDto | ResponseDto) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code !== 'SU') return;
+
+          // 전체 조회 //
+          setSelectedSalesPlanCode(null);
+          setSalesPlanProductOpen(false);
+          setSalesPlanEmployeeOpen(false);
+          resetSalesPlanInfo();
+          resetSalesPlanList();
+          getSalesPlanListRequest(salesProjectName).then(getSalesPlanListResponseHandler);
+
+          alert('판매계획 삭제에 성공했습니다.');
+
+     }
+     
+     // description: 판매계획 삭제 이벤트 핸들러 //
+     const onDeleteSalesPlanInfoButtonClickHandler = () => {
+          if (!selectedSalesPlanCode) return;
+          const token = cookies.accessToken;
+          deleteSalesPlanInfoRequest(selectedSalesPlanCode, token).then(deleteSalesPlanInfoResponseHandler);
+     }
+
+     // description: 판매계획 조회 응답 함수 //
+     const getSalesPlanListResponseHandler = (responsebody: GetSalesPlanListResponseDto | ResponseDto) => {
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code !== 'SU') return;
+
+          const { salesPlanList } = responsebody as GetSalesPlanListResponseDto;
+          setSalesPlanList(salesPlanList);
+     }
+
+     // description: 판매계획 조회 이벤트 핸들러 //
+     const onSalesPlanListSearchButtonClickHandler = () => {
+          setSalesPlanProductOpen(false);
+          setSalesPlanEmployeeOpen(false);
+          setSelectedSalesPlanCode(0);
+          setSelectedSalesPlanProductCode(0);
+          setSelectedSalesPlanProductName("");
+          setSelectedSalesPlanEmployeeCode(0);
+          setSelectedSalesPlanEmployeeName("");
+          resetSalesPlanInfo();
+          resetSalesPlanList();
+          getSalesPlanListRequest(salesProjectName).then(getSalesPlanListResponseHandler);
+     }
+
+
+
+
+//! ============================================================================================
+
+
+//! ============================================================================================
+
+
+//! ============================================================================================
+
      
 
      //!                    effect                   //
@@ -1055,7 +1196,7 @@ export default function Header() {
                               isIncentiveList ? onIncentiveListSearchButtonClickHandler :
                               isCustomerList ? onCustomerListSearchButtonClickHandler :
                               isProductList ? onProductListSearchButtonClickHandler :
-                              // isSalesPlanList ? onSalesPlanListSearchButtonClickHandler : 
+                              isSalesPlanList ? onSalesPlanListSearchButtonClickHandler : 
                               isInOutComeList ? onInOutComeListSearchButtonClickHandler : 
                               isFundsList ? onFundsListSearchButtonClickHandler :
                               isEmployeeViewList ? onEmployeeViewListSearchButtonClickHandler :
@@ -1071,8 +1212,7 @@ export default function Header() {
                               isIncentiveList ? onIncentiveListSaveButtonClickHandler :
                               isCustomerList ? onCustomerListSaveButtonClickHandler :
                               isProductList ? onProductListSaveButtonClickHandler : 
-                              // isSalesPlanList ? onSalesPlanListSaveButtonClickHandler :
-                               () => {} 
+                              isSalesPlanList ? onSalesPlanListSaveButtonClickHandler : () => {} 
                               }>
                          <div className="header-function-save-icon"></div>
                          <div className="header-function-save-text">저장</div>
@@ -1087,8 +1227,7 @@ export default function Header() {
                               isIncentiveList ? onDeleteIncentiveInfoButtonClickHandler :
                               isCustomerList ? onDeleteCustomerInfoButtonClickHandler : 
                               isProductList ? onDeleteProductInfoButtonClickHandler : 
-                              // isSalesPlanList ? onDeleteSalesPlanInfoButtonClickHandler :
-                               () => {}
+                              isSalesPlanList ? onDeleteSalesPlanInfoButtonClickHandler : () => {}
                               }>
                          <div className="header-function-delete-icon"></div>
                          <div className="header-function-delete-text">삭제</div>

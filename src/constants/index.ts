@@ -30,7 +30,7 @@ export const HUMAN_WORK_TIME_DELETE = ( work_date: Date, employee_code: number |
 // salse path
 export const SALES_PATH = "/sales";
 export const SALES_PLAN_PATH = "/sales/sales-plan";
-export const SALES_PLAN_DETAIL_PATH = (salesPlanCode: number | string) => `/sales/sales-plan/${salesPlanCode}`;
+export const SALES_PLAN_DETAIL_PATH = (project_name: number | string) => `/sales/sales-plan/${project_name}`;
 export const ORDER_INFO_PATH = "/sales/order-info";
 export const ORDER_INFO_DETAIL_PATH = (orderCode: number | string) => `/sales/order-info/${orderCode}`;
 export const RELEASE_INFO_PATH = "/sales/release-info";
