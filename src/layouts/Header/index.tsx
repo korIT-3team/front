@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import './style.css';
-import {   } from 'src/stores';
-import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedProductInfoStore, useSelectedSalesPlanStore } from 'src/stores';
 import { useCookies } from 'react-cookie';
-import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest } from 'src/apis';
+import { useCompoanyInfoStore, useCustomerInfoStore, useCustomerRequestStore, useCustomerResponseStore, useDepartmentInfoStore, useDepartmentRequestStore, useDepartmentResponseStore, useEmployeeListViewRequestStore, useEmployeeListViewStore, useFundsListStore, useFundslistsRequestStore, useHumanRequestStore, useHumanResponseStore, useInOutComeListStore, useInOutComeRequestStore, useIncentiveListRequestStore, useIncentiveListResponseStore, useIncentiveViewListRequestStore, useIncentiveViewListStore, useInvoiceListStore, useInvoiceRequestStore, useProductInfoStore, useProductRequestStore, useProductResponseStore, useSelectedCustomerStore, useSelectedDepartmentStore, useSelectedEmployeeInfoStore, useSelectedHumanInfoStore, useSystemEmpUserDefineResponseStore, useSystemEmployeeInfoStore, useSystemEmployeeRequestStore, useSystemEmployeeResponseStore, useUserStore, useSalesPlanInfoStore, useSalesPlanRequestStore, useSalesPlanResponseStore, useSelectedProductInfoStore, useSelectedSalesPlanStore } from 'src/stores';
+import { deleteDepartmentInfoRequest, getCustomerListRequest, getDepartmentListRequest, getProductListRequest, getEmployeeListViewRequest, getFundsListRequest, getInOutComeListRequest, getIncentiveViewListRequest, getInvoiceListRequest, getSystemEmployeeListRequest, putCompanyInfoRequest, putCustomerInfoRequest, putDepartmentInfoRequest, putSystemEmployeeInfoRequest, uploadFileRequest, putProductInfoRequest, deleteProductInfoRequest, deleteCustomerInfoRequest, deleteSystemEmployeeInfoRequest, getHumanListRequest, getIncentiveListRequest, getSalesPlanListRequest, putSalesPlanInfoRequest, deleteSalesPlanInfoRequest } from 'src/apis';
 import { InOutComeListRequestDto, InvoiceListRequestDto } from 'src/interfaces/request/accounting';
-import { GetInOutComeListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
+import { GetInOutComeListResponseDto, GetInvoiceListResponseDto, InvoiceListResponseDto } from 'src/interfaces/response/accounting';
 import ResponseDto from 'src/interfaces/response/response.dto';
-import GetInvoiceListResponseDto from 'src/interfaces/response/accounting/get-invoice-list.response.dto';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, SALES_PLAN_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
+import { ACCOUNTING_INVOICE_PATH, ACCOUNTING_IN_OUT_COME_PATH, HOME_PATH, HUMAN_EMPLOYEE_INFO, HUMAN_INCENTIVE, SALES_PLAN_PATH, SEARCHVIEW_EMPLOYEE_LIST_PATH, SEARCHVIEW_FUNDS_LIST_PATH, SEARCHVIEW_INCENTIVE_LIST_PATH, SYSTEM_COMPANY_INFO, SYSTEM_CUSTOMER_INFO, SYSTEM_DEPT_INFO, SYSTEM_EMPLOYEE_INFO, SYSTEM_PRODUCT_INFO, faxPattern, registrationNumberPattern, telNumberPattern } from 'src/constants';
 import { PutCompanyInfoRequestDto, PutCustomerInfoRequestDto, PutDepartmentInfoRequestDto, PutProductInfoRequestDto } from 'src/interfaces/request/system';
 import { DeleteCustomerInfoResponseDto, DeleteDepartmentInfoResponseDto, DeleteProductInfoResponseDto, GetCustomerListResponseDto, GetDepartmentListResponseDto, GetProductListResponseDto } from 'src/interfaces/response/system';
 import { EmployeeListViewRequestDto, FundsListRequestDto, IncentiveViewListRequestDto } from 'src/interfaces/request/searchView';
@@ -20,6 +17,8 @@ import DeleteSystemEmployeeInfoResponseDto from 'src/interfaces/response/system/
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
 import { PutSalesPlanInfoRequestDto } from 'src/interfaces/request/sales';
 import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
+import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
+import './style.css';
 
 export default function Header() {
      //!              state             //
@@ -201,6 +200,7 @@ export default function Header() {
      const isDepartmentList = pathname.includes(SYSTEM_DEPT_INFO);
      const isSystemEmployeeList = pathname.includes(SYSTEM_EMPLOYEE_INFO);
      const isHumanList = pathname.includes(HUMAN_EMPLOYEE_INFO);
+     const isIncentiveList = pathname.includes(HUMAN_INCENTIVE);
      const isCustomerList = pathname.includes(SYSTEM_CUSTOMER_INFO);
      const isProductList = pathname.includes(SYSTEM_PRODUCT_INFO);
      const isFundsList = pathname.includes(SEARCHVIEW_FUNDS_LIST_PATH);
@@ -586,15 +586,15 @@ export default function Header() {
      }  
 
      //                       component                          //
-     //! 사원Detail
-     // description: 사원Detail조회 조건 정보 store //
+     //! 인사정보등록
+     // description: 인사정보등록 조회 조건 정보 store //
      const { humanDepartmentCode, humanEmployeeCode, humanEmploymentType, resetHumanReqeust } = useHumanRequestStore();     
      // description: 조회된 사원 정보 store //
      const { setHumanList, resetHumanList } = useHumanResponseStore();     
      // description: 사원List - 선택된 사원 코드 //
      const { selectedHumanCode, setSelectedHumanCode } = useSelectedHumanInfoStore();     
 
-     // description: 사원Detail정보 조회 응답 함수 //
+     // description: 인사정보등록 정보 조회 응답 함수 //
      const getHumanListResponseHandler = (responsebody: GetHumanListResponseDto | ResponseDto ) => {
 
           const {code} = responsebody;
@@ -608,13 +608,41 @@ export default function Header() {
           setHumanList(humanList);
      }        
 
-     // description: 사원Detail조회 이벤트 핸들러 //
+     // description: 인사정보등록 - 조회 이벤트 핸들러 //
      const onHumanListSearchButtonClickHandler = () => {
+          const accessToken = cookies.accessToken;
           resetHumanReqeust();
           resetHumanList();
           setSelectedHumanCode(0);
-          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType).then(getHumanListResponseHandler);
+          getHumanListRequest(humanDepartmentCode, humanEmployeeCode, humanEmploymentType,accessToken).then(getHumanListResponseHandler);
      }          
+
+     //                       component                          //
+     //! 급/상여등록 
+     // description: 급/상여 - 조회조건 //
+     const { incentiveEmployeeCode, incentiveCategory, resetIncentiveRequest } = useIncentiveListRequestStore();
+     // description: 조회된 급/상여 정보 store //
+     const { setIncentiveList, resetIncentiveList } = useIncentiveListResponseStore();    
+     // description: 급/상여 리스트 조회 응답 함수 //
+     const getIncentiveListResponseHandler = (responsebody: GetIncentiveListResponseDto | ResponseDto ) => {
+
+          const {code} = responsebody;
+          if(code === 'NE') alert('존재하지않는 회원입니다.');
+          if(code === 'VF') alert('필수 데이터를 입력하지 않았습니다.');
+          if(code === 'DE') alert('데이터베이스 에러');
+          if(code === 'NP') alert('권한이 없습니다.');
+          if(code !== 'SU') return;
+
+          const { incentiveList } = responsebody as GetIncentiveListResponseDto;
+          setIncentiveList(incentiveList);
+     } 
+     //! =================================     
+     // description: 급/상여 리스트 조회 이벤트 핸들러 //
+     const onIncentiveListSearchButtonClickHandler = () => {
+          const accessToken = cookies.accessToken;
+          resetIncentiveList();
+          getIncentiveListRequest(incentiveEmployeeCode, incentiveCategory, accessToken).then(getIncentiveListResponseHandler);
+     } 
 //! ============================================================================================
 
      // description : 회사 정보 등록 응답 함수 //
@@ -859,7 +887,7 @@ export default function Header() {
                paymentDateStart : incentiveviewlistDateStart,
                paymentDateEnd : incentiveviewlistDateEnd,
           }
-          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler)
+          getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler);
      }
 //! ============================================================================================
 
@@ -1064,6 +1092,7 @@ export default function Header() {
                               isDepartmentList ? onDepartmentListSearchButtonClickHandler : 
                               isSystemEmployeeList ? onSystemEmployeeListSearchButtonClickHandler :
                               isHumanList ? onHumanListSearchButtonClickHandler :
+                              isIncentiveList ? onIncentiveListSearchButtonClickHandler :
                               isCustomerList ? onCustomerListSearchButtonClickHandler :
                               isProductList ? onProductListSearchButtonClickHandler :
                               isSalesPlanList ? onSalesPlanListSearchButtonClickHandler : 

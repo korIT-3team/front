@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.css'
 import HumanMenu from '../HumanMenu'
 import { GetEmployeeCodeListRequestDto } from 'src/interfaces/request/common';
-import { getEmployeeCodeListRequest, getIncentiveListRequest, getIncentiveTypeRequest } from 'src/apis';
-import { useHumanEmployeeInfo, useHumanIncentiveListRequestStore, useSelectedIncentiveInfoStore } from 'src/stores';
+import { getEmployeeCodeListRequest, getIncentiveEmployeeListRequest, getIncentiveListRequest, getIncentiveTypeRequest } from 'src/apis';
+import { useHumanEmployeeInfo, useHumanResponseStore, useIncentiveListRequestStore, useIncentiveListResponseStore, useSelectedIncentiveInfoStore } from 'src/stores';
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import SearchCodeResponseDto from 'src/interfaces/response/common/search-code.response.dto';
@@ -26,12 +26,16 @@ export default function Incentive() {
   const [ employeeName, setEmployeeName ] =useState<string>('');    
   // description: 조회조건 : 조건 검색창 내부 데이터 상태 //
   const [ searchCodeList, setSearchCodeList ] = useState<SearchCodeResponseDto[]>([]);    
+  // description: 코드도움 - 사원List //
+  const { humanList, setHumanList } = useHumanResponseStore();
   // description: 조회조건 정보 store //
-  const { humanEmployeeCode, humanIncentiveCategory, setHumanEmployeeCode, setHumanIncentiveCategory, resetHumanIncentiveReqeust } = useHumanIncentiveListRequestStore();
+  const {incentiveEmployeeCode, incentiveCategory, setIncentiveEmployeeCode, setIncentiveCategory, resetIncentiveRequest } = useIncentiveListRequestStore();
+  // description: 급/상여 리스트 조회 store //
+  const { incentiveList, setIncentiveList, resetIncentiveList } = useIncentiveListResponseStore();
   // description: 급/상여조회 - 코드도움 store //
-  const { humanEmployeeOpen, humanIncentiveUserDefineOpen, selectedEmployeeCode, selectedEmployeeName, selectedIncentiveCategory, selectedIncentiveCategoryName ,
-          setHumanEmployeeOpen, setHumanIncentiveUserDefineOpen, setSelectedEmployeeCode, setSelectedEmployeeName, setSelectedIncentiveCategory, setSelectedIncentiveCategoryName
-        } = useSelectedIncentiveInfoStore();
+  const { humanEmployeeOpen, humanIncentiveUserDefineOpen, selectedEmployeeCode, selectedEmployeeName, selectedIncentiveCategory, selectedIncentiveCategoryName,
+          setHumanEmployeeOpen, setHumanIncentiveUserDefineOpen, setSelectedEmployeeCode, setSelectedEmployeeName, setSelectedIncentiveCategory, setSelectedIncentiveCategoryName,
+          resetSelectedIncentiveInfo } = useSelectedIncentiveInfoStore();
   // description: 급/상여 리스트 store //
   const { employeeList, setEmployeeList, resetEmployeeList } = useHumanEmployeeInfo();
   // description: 조회조건 : 전표유형 리스트 정보 store //
@@ -50,7 +54,8 @@ export default function Incentive() {
   // description: 검색창 조회목록 아이템 클릭 이벤트 //
   const onDataItemClickHandler = ( item : SearchCodeResponseDto ) => {
     setOpen(false);
-    setHumanEmployeeCode(item.detailCode);
+    // setHumanEmployeeCode(item.detailCode);
+    setIncentiveEmployeeCode(item.detailCode);
     setEmployeeName(item.name);
   }  
   // description: 사원 정보(창) 조회 응답 함수 //
@@ -61,7 +66,6 @@ export default function Incentive() {
     if(code === 'DE') alert('데이터베이스 에러');
     if(code === 'NP') alert('권한이 없습니다.');
     if(code !== 'SU') return
-    console.log("Test");
     setHumanEmployeeOpen(true);
     setHumanIncentiveUserDefineOpen(false);
   
@@ -82,16 +86,19 @@ const getHumanIncentiveTypeListResponseHandler = (responsebody:GetIncentiveTypeL
 }
 
   //          function            //
+  // description : 재직구분 선택 이벤트 //
+  const onIncentiveCategoryChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
+    setIncentiveCategory(parseInt(event.target.value));
+  }         
   // description : 검색버튼 사원코드창 열기 이벤트 //
   const onEmployeeSearchOpenButtonClickHandler = () => {
-    setHumanEmployeeCode(0);
+    // setHumanEmployeeCode(0);
+    setIncentiveEmployeeCode(0);
     setOpen(true);
     setLabel('사원코드도움');
-    console.log(humanEmployeeCode);
     const data: GetEmployeeCodeListRequestDto = {
-      employeeCode : humanEmployeeCode,
+      employeeCode : incentiveEmployeeCode,
     }
-    console.log(data);
     getEmployeeCodeListRequest(data).then(getEmployeeCodeListResponseHandelr);
   }    
   // description: 검색창 닫기 //
@@ -99,16 +106,19 @@ const getHumanIncentiveTypeListResponseHandler = (responsebody:GetIncentiveTypeL
     setOpen(false);
     setHumanEmployeeOpen(false);
   }    
-  // description: 사원조회 이벤트 핸들러 //
-  const onEmployeeListSearchButtonClickHandler = ( EmployeeCode: number) => {
-    setSelectedEmployeeCode(EmployeeCode);
-    
+  // description: 급/상여 신규등록 - 코드도움 : 사원조회 이벤트 핸들러 //
+  const onEmployeeListSearchButtonClickHandler = () => {
     setSelectedEmployeeCode(0);
     setSelectedEmployeeName("");
-    setHumanEmployeeOpen(true);
-
-    // getIncentiveListRequest(selectedEmployeeCode, selectedIncentiveCategory).then(getEmployeeListResponseHandler)
+    getIncentiveEmployeeListRequest().then(getEmployeeListResponseHandler);
   }       
+  // description : 코드도움(사원) 클릭 이벤트 핸들러 //
+  const onCodeHelpEmpClickHandler = (employeeCode: number, employeeName: string) => {
+    setSelectedEmployeeCode(employeeCode);
+    setSelectedEmployeeName(employeeName);
+  }
+  
+
   // description : 뷰에 들어올 때 한번만 실행 //
   let flag = false;
   useEffect(()=>{
@@ -121,8 +131,9 @@ const getHumanIncentiveTypeListResponseHandler = (responsebody:GetIncentiveTypeL
   }, [])   
   // description : path가 바뀔 때마다 실행 //
   useEffect(()=>{
-    resetHumanIncentiveReqeust();
-    
+    resetIncentiveRequest();
+    resetSelectedIncentiveInfo();
+    resetIncentiveList();
  }, [pathname])      
 
 
@@ -130,7 +141,6 @@ const getHumanIncentiveTypeListResponseHandler = (responsebody:GetIncentiveTypeL
 return (
   <div id='incentive-info-wrapper'>
     <HumanMenu />
-    <>{humanEmployeeOpen}</>
     <div className='incentive-info-right'>
       <div className='incentive-info-right-top'>
         <div className='incentive-info-right-top-title'>급/상여정보등록</div>
@@ -141,11 +151,11 @@ return (
         <div className='incentive-info-right-top-search-employee-text'>사원</div>
           <div className='incentive-info-right-top-search-employee-box'>
             <div className='incentive-info-right-top-search-employee-box-code-box'>
-              <div className='incentive-info-right-top-search-employee-box-code-box-text'>{humanEmployeeCode ? humanEmployeeCode : ''}</div>
+              <div className='incentive-info-right-top-search-employee-box-code-box-text'>{incentiveEmployeeCode ? incentiveEmployeeCode : ''}</div>
             </div>
             <div className='incentive-info-right-top-search-button' onClick={ onEmployeeSearchOpenButtonClickHandler } >검색</div>
             <div className='incentive-info-right-top-search-employee-box-name-box'>
-              <div className='incentive-info-right-top-search-employee-box-name-box-text'>{humanEmployeeCode ? employeeName : ''}</div>
+              <div className='incentive-info-right-top-search-employee-box-name-box-text'>{incentiveEmployeeCode ? employeeName : ''}</div>
             </div>
           </div>              
         </div>
@@ -153,7 +163,7 @@ return (
           <div className='incentive-info-right-top-search-incentive-category-text'>급/상여구분</div>
           <div className='incentive-info-right-top-search-incentive-category-box'>
             <div className='incentive-info-right-top-search-incentive-category-box-combo-box'>
-              <select className='incentive-info-right-top-search-incentive-category-box-combo-box-text' /*onChange={onInvoiceTypeChangeHandler}*/ name="incentive-category" id="incentive-category">
+              <select className='incentive-info-right-top-search-incentive-category-box-combo-box-text' onChange={onIncentiveCategoryChangeHandler} name="incentive-category" id="incentive-category">
                 <option value="0">전체</option>
                 { incentiveTypeList.map( ({userDefineDetailName, userDefineDetailCode}) => (<option value={userDefineDetailCode}>{userDefineDetailName}</option>))  }
               </select>
@@ -180,26 +190,32 @@ return (
                   <div className='incentive-info-middle-left-bottom-table-title-content'>내역</div>
                 </div>
                 <div className='incentive-info-middle-left-bottom-table-container'>
-                <div className='incentive-info-middle-left-bottom-table-body' /*onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}*/>
-                    <div className='incentive-info-middle-left-bottom-table-body-no' ></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-incentive-code'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-employee-code'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-employee-name' onDoubleClick={() => onEmployeeListSearchButtonClickHandler(0)}></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-incentive-category'></div>
-                    <input className='incentive-info-middle-left-bottom-table-body-payment-date' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-incentive-price' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-content' type='text' />
-                  </div>
-                  <div className='incentive-info-middle-left-bottom-table-body-new' /*onClick={onNewDepartmentInfoClickHandler} onFocus={() => setSelectedDepartmentCode(null)}*/>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-no' ></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-incentive-code'></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-employee-name' onDoubleClick={() => onEmployeeListSearchButtonClickHandler(0)}></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-employee-code' hidden></div>
-                    <div className='incentive-info-middle-left-bottom-table-body-new-incentive-category'></div>
-                    <input className='incentive-info-middle-left-bottom-table-body-new-payment-date' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-new-incentive-price' type='text' />
-                    <input className='incentive-info-middle-left-bottom-table-body-new-content' type='text' />
-                  </div>
+                {
+                  (incentiveList) && (
+                    incentiveList.map((item) => (
+                        <div className='incentive-info-middle-left-bottom-table-body' >
+                          <div className='incentive-info-middle-left-bottom-table-body-no' >{item.no}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-incentive-code'>{item.incentiveCode}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-employee-code'>{item.employeeCode}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-employee-name'>{item.employeeName}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-incentive-category'>{item.incentiveCategoryName}</div>
+                          <input className='incentive-info-middle-left-bottom-table-body-payment-date' type='text' defaultValue={item.paymentDate} />
+                          <input className='incentive-info-middle-left-bottom-table-body-incentive-price' type='text' defaultValue={item.incentivePrice} />
+                          <input className='incentive-info-middle-left-bottom-table-body-content' type='text' defaultValue={item.content} />
+                        </div>
+                    ))
+                  )
+                }
+                <div className='incentive-info-middle-left-bottom-table-body-new' >
+                          <div className='incentive-info-middle-left-bottom-table-body-new-no' ></div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-incentive-code'></div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-employee-code' hidden>{(selectedEmployeeCode!= 0) && selectedEmployeeCode}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-employee-name' onDoubleClick={() => onEmployeeListSearchButtonClickHandler()}>{selectedEmployeeName}</div>
+                          <div className='incentive-info-middle-left-bottom-table-body-new-incentive-category'></div>
+                          <input className='incentive-info-middle-left-bottom-table-body-new-payment-date' type='text' />
+                          <input className='incentive-info-middle-left-bottom-table-body-new-incentive-price' type='text' />
+                          <input className='incentive-info-middle-left-bottom-table-body-new-content' type='text' />
+                        </div>                
                 </div>
               </div>
             </div>
@@ -226,16 +242,16 @@ return (
                     <div className='system-employee-info-middle-right-user-define-list-title-detail-code'>사원코드</div>
                     <div className='system-employee-info-middle-right-user-define-list-title-detail-name'>사원명</div>
                   </div>
-                  {/* {
-                    employeeList !== null &&
-                    employeeList.map((item) => (
+                  {
+                    humanList !== null &&
+                    humanList.map((item) => (
                       <div className='system-employee-info-middle-right-user-define-list-body'>
                         <div className='system-employee-info-middle-right-user-define-list-body-detail-no'>{item.no}</div>
                         <div className='system-employee-info-middle-right-user-define-list-body-detail-code'>{item.employeeCode}</div>
-                        <div className='system-employee-info-middle-right-user-define-list-body-detail-name'>{item.employeeName}</div>                      
+                        <div className='system-employee-info-middle-right-user-define-list-body-detail-name' onClick={() => onCodeHelpEmpClickHandler(item.employeeCode, item.employeeName)}>{item.employeeName}</div>                      
                       </div>
                     ))
-                  } */}
+                  }
                 </div>
               </div>
             </div>

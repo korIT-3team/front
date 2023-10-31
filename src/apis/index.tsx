@@ -28,8 +28,8 @@ import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetEmpl
 import KakaoSignInResponseDto from 'src/interfaces/response/auth/kakao-sign-in.response.dto';
 import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
-import GetEmployeeListResponseDto from 'src/interfaces/response/human/get-employee-list.response.dto';
 import GetProductUserDefineListResponseDto from 'src/interfaces/response/system/get-product-user-define-detail-list.response.dto';
+import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
@@ -79,7 +79,10 @@ const UPLOAD_FILE = () => `${API_DOMAIN}/file/upload`;
 // (HUMAN)
 const GET_HUMAN_EMPLOYMENT_TYPE_URL = () => `${API_DOMAIN}/human/employee-info-detail`
 const GET_HUMAN_EMPLOYEE_LIST_URL = (humanDepartment:string, humanEmployeeCode:string, humanEmploymentType:string) => `${API_DOMAIN}/human/employee-info-detail/${humanDepartment}/${humanEmployeeCode}/${humanEmploymentType}`;
-const GET_HUMAN_INCENTIVE_URL = (employeeCode: string, incentiveCategory: string) => `${API_DOMAIN}/human/incentive/${employeeCode}/${incentiveCategory}`;
+//!===================================
+const GET_HUMAN_INCENTIVE_URL = (humanEmployeeCode: string, humanIncentiveCategory: string) => `${API_DOMAIN}/human/incentive/${humanEmployeeCode}/${humanIncentiveCategory}`;
+const GET_HUMAN_INCENTIVE_EMPLOYEE_INFO_URL = () => `${API_DOMAIN}/human/incentive/employee`
+
 
 // 거래처
 const GET_CUSTOMER_LIST_URL = (customerName: string) => `${API_DOMAIN}/system/customer-info/${customerName}`;
@@ -534,14 +537,14 @@ export const getHumanEmploymentTypeRequest = async () => {
   return result;
 }
 // 사원List 불러오기
-export const getHumanListRequest = async (departmentCode: number | null, employeeCode: number | null, employmentType: number | null) => {
+export const getHumanListRequest = async (departmentCode: number | null, employeeCode: number | null, employmentType: number | null, token: string) => {
 
   const humanDepartment = (!departmentCode)? "0" : departmentCode.toString();
   const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
   const humanEmploymentType = (!employmentType) ? "0" : employmentType.toString();
 
 
-  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL(humanDepartment, humanEmployeeCode, humanEmploymentType))
+  const result = await axios.get(GET_HUMAN_EMPLOYEE_LIST_URL(humanDepartment, humanEmployeeCode, humanEmploymentType), { headers: {'Authorization' : `Bearer ${token}`}})
   .then((response) => {
     const responsebody : GetHumanListResponseDto = response.data;
     return responsebody;
@@ -554,13 +557,13 @@ export const getHumanListRequest = async (departmentCode: number | null, employe
 }
 
 // 급/상여 리스트 불러오기 메서드
-export const getIncentiveListRequest = async (employeeCode:  number | null, incentiveCategory:  number | null) => {
-  const humanEmployeeCode = (!employeeCode)? "0" : employeeCode.toString();
+export const getIncentiveListRequest = async (incentiveEmployeeCode:  number | null, incentiveCategory:  number | null, token: string) => {
+  const humanEmployeeCode = (!incentiveEmployeeCode)? "0" : incentiveEmployeeCode.toString();
   const humanIncentiveCategory = (!incentiveCategory)? "0" : incentiveCategory.toString();
 
-  const result = await axios.get(GET_HUMAN_INCENTIVE_URL(humanEmployeeCode, humanIncentiveCategory))
+  const result = await axios.get(GET_HUMAN_INCENTIVE_URL(humanEmployeeCode, humanIncentiveCategory), {headers: { 'Authorization' : `Bearer ${token}`}})
   .then((response) => {
-    const responsebody : GetEmployeeListResponseDto = response.data;
+    const responsebody : GetIncentiveListResponseDto = response.data;
     return responsebody;
   })
   .catch((error) => {
@@ -570,19 +573,19 @@ export const getIncentiveListRequest = async (employeeCode:  number | null, ince
   return result;
 }
 
-// export const getHumanListRequest = async (data : HumanListRequestDto) => {
-//   const result = await axios.post(GET_HUMAN_EMPLOYEE_LIST_URL(), data)
-//   .then((response) => {
-//     const responsebody : GetHumanListResponseDto = response.data;
-//     return responsebody;
-//   })
-//   .catch((error) => {
-//     const responsebody : ResponseDto = error.response.data;
-//     return responsebody;
-//   });
-//   return result;
-// }
-
+export const getIncentiveEmployeeListRequest = async () => {
+  const result = await axios.get(GET_HUMAN_INCENTIVE_EMPLOYEE_INFO_URL())
+  .then((response) => {
+      const responsebody : GetSystemEmployeeListResponseDto = response.data;
+      return responsebody;
+    })
+    .catch((error) => {
+      const responsebody : ResponseDto = error.response.data;
+      return responsebody;
+    });
+    return result;
+  }
+  
 
 // ! CUSTOMER
 
