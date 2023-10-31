@@ -38,14 +38,9 @@ import useIncentiveViewListRequestStore from './incentiveviewlist.request.store'
 import useIncentiveViewListStore from './incentiveviewlist.response.store';
 import useSelectedEmployeeInfoStore from './systemEmployee/selectedEmployeeInfo.store'
 import useSystemEmployeeInfoStore from './systemEmployee/systemEmployeeInfo.store'
-<<<<<<< HEAD
 import useSelectedProductStore from './systemProduct/selectecproduct.store';
 
-import useHumanRequestStore from './humanlist.request.store';
-import useHumanResponseStore from './humanlist.response.store';
-import useSelectedHumanInfoStore from './selectedHumanInfo.store';
 import useHumanDetailInfoStore from './humanDetailInfo.store';
-=======
 import useHumanRequestStore from './humanlist.request.store';
 import useHumanResponseStore from './humanlist.response.store';
 import useSelectedHumanInfoStore from './selectedHumanInfo.store';
@@ -53,7 +48,6 @@ import useSelectedIncentiveInfoStore from './human/humanIncentive/selectedIncent
 import useHumanEmployeeInfo from './human/humanIncentive/humanEmployeelist.response.store';
 import useIncentiveListRequestStore from './human/humanIncentive/Incentivelist.request.store';
 import useIncentiveListResponseStore from './human/humanIncentive/incentivelist.response.store'
->>>>>>> db6ca14a6ae5861a53c4d0f8b3d00a26a4dbf024
 
 export { 
      useUserStore,
@@ -98,12 +92,9 @@ export {
      useHumanRequestStore,
      useHumanResponseStore,
      useSelectedHumanInfoStore,
-<<<<<<< HEAD
-     useHumanDetailInfoStore
-=======
+     useHumanDetailInfoStore,
      useSelectedIncentiveInfoStore,
      useHumanEmployeeInfo,
      useIncentiveListRequestStore,
      useIncentiveListResponseStore
->>>>>>> db6ca14a6ae5861a53c4d0f8b3d00a26a4dbf024
 };
