@@ -28,7 +28,7 @@ import { GetCustomerCodeListRequestDto, GetDepartmentCodeListRequestDto, GetEmpl
 import KakaoSignInResponseDto from 'src/interfaces/response/auth/kakao-sign-in.response.dto';
 import {GetEmploymentTypeListResponseDto} from 'src/interfaces/response/human'
 import GetHumanListResponseDto from 'src/interfaces/response/human/get-human-list.response.dto';
-import GetEmployeeListResponseDto from 'src/interfaces/response/human/get-employee-list.response.dto';
+import GetProductUserDefineListResponseDto from 'src/interfaces/response/system/get-product-user-define-detail-list.response.dto';
 import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
@@ -98,7 +98,7 @@ const GET_SALES_PLAN_LIST_URL = (salesProjectName: string) => `${API_DOMAIN}/sal
 const GET_PRODUCT_LIST_URL = (productName: string) => `${API_DOMAIN}/system/product-info/${productName}`;
 const PUT_PRODUCT_INFO_URL = () => `${API_DOMAIN}/system/product-info`;
 const DELETE_PRODUCT_INFO_URL = (deleteProductCode: number) => `${API_DOMAIN}/system/product-info/${deleteProductCode}`;
-const GET_PROCUREMENT_CATEGORY_LIST_URL = () => `${API_DOMAIN}/system/product-info`;
+const GET_PRODUCT_USER_DEFINE_LIST_URL = (userDefineCode: number | null) => `${API_DOMAIN}/system/product/user-define/${userDefineCode}`;
 
 
 // 로그인 메서드
@@ -215,20 +215,6 @@ export const getInvoiceTypeRequest = async () => {
   return result;
 }
 
-
-// 조달 구분 리스트 불러오기
-export const getProcurementCategoryRequest = async () => {
-  const result = await axios.get(GET_PROCUREMENT_CATEGORY_LIST_URL())
-  .then((response) => {
-    const responsebody : GetProcurementCategoryListResponseDto = response.data;
-    return responsebody;
-  })
-  .catch((error) => {
-    const responsebody : ResponseDto = error.response.data;
-    return responsebody;
-  });
-  return result;
-}
 
 // 재직 구분 리스트 불러오기
 export const getEmploymentTypeRequest = async () => {
@@ -648,6 +634,20 @@ export const getCustomerListRequest = async (customerName: string) => {
 }
 
 // ! PRODUCT
+
+// PRODUCT - 사용자정의코드 불러오기 메서드
+export const getProductUserDefineListRequest = async(userDefineCode: number | null) => {
+  const result = await axios.get(GET_PRODUCT_USER_DEFINE_LIST_URL(userDefineCode))
+  .then((response) => {
+    const responsebody : GetProductUserDefineListResponseDto = response.data;
+    return responsebody;
+  })
+  .catch((error) => {
+    const responsebody : ResponseDto = error.response.data;
+    return responsebody;
+  });
+  return result;
+}
 
 // 제품 정보 불러오기
 export const getProductListRequest = async (productName: string) => {

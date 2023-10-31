@@ -2,10 +2,10 @@ import { create } from "zustand";
 
 export interface ProductUserDefineInfo {
   no: number;
-  productUserDefineCode: number;
-  productUserDefineName: string;
-  productUserDefineDetailCode: number;
-  productUserDefineDetailName: string;
+  systemUserDefineCode: number;
+  systemUserDefineName: string;
+  systemUserDefineDetailCode: number;
+  systemUserDefineDetailName: string;
 }
 
 interface ProductUserDefineInfoStore {
