@@ -19,6 +19,8 @@ import { PutSalesPlanInfoRequestDto } from 'src/interfaces/request/sales';
 import { DeleteSalesPlanInfoResponseDto, GetSalesPlanListResponseDto } from 'src/interfaces/response/sales';
 import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incentive-list.response.dto';
 import './style.css';
+import { usePutOrderInfoStore } from 'src/stores/sales/orderInfo';
+import { PutOrderInfoRequestDto } from 'src/interfaces/request/sales';
 import PutIncentiveRequestDto from 'src/interfaces/request/human/put-incentive-info.request.dto';
 import DeleteIncentiveInfoResponseDto from 'src/interfaces/response/human/delete-incentive-info.response.dto';
 
@@ -53,6 +55,9 @@ export default function Header() {
      const { incentiveViewListEmployeeCode, incentiveViewListCategory, incentiveviewlistDateStart, incentiveviewlistDateEnd } = useIncentiveViewListRequestStore();
      // description: 사원목록 리스트 store //
      const { setIncentiveViewList } = useIncentiveViewListStore();
+     // description: 수주 등록 : 윗줄 데이터 입력 store //
+     const { setPutOrderInfoCustomerCode,setPutOrderInfoEmployeeCode,setPutOrderInfoProjectCode,
+          putOrderInfoOrderCode, putOrderInfoCustomerCode, putOrderInfoEmployeeCode, putOrderInfoProjectCode, putOrderInfoOrderDate } = usePutOrderInfoStore();
      
 //! ============================================================================================
      
@@ -927,7 +932,6 @@ export default function Header() {
           }
           getInvoiceListRequest(data).then(getInvoiceListResponseHandler)
      }
-
      // description: 회사정보등록 이벤트 핸들러 //
      const onCompanyInfoSaveButtonClickHandler = async () => {
           const token = cookies.accessToken;
@@ -989,6 +993,30 @@ export default function Header() {
                paymentDateEnd : incentiveviewlistDateEnd,
           }
           getIncentiveViewListRequest(data).then(getIncentiveViewListResponseHandler);
+     }
+     // description: 수주 저장 이벤트 핸들러 //
+     const onOrderInfoSaveButtonClickHandler = async () => {
+          const token = cookies.accessToken;
+          if(putOrderInfoProjectCode == 0){
+               alert('프로젝트는 필수 입력값입니다.');
+               return;
+          }
+          if(putOrderInfoCustomerCode == 0){
+               alert('거래처는 필수 입력값입니다.');
+               return;
+          }
+          if(putOrderInfoEmployeeCode == 0){
+               alert('담당자는 필수 입력값입니다.');
+               return;
+          }
+          const data : PutOrderInfoRequestDto = {
+               orderCode: putOrderInfoOrderCode,
+               salesPlanCode: putOrderInfoProjectCode,
+               orderDate: putOrderInfoOrderDate,
+               customerCode: putOrderInfoCustomerCode,
+               managerCode: putOrderInfoEmployeeCode
+          };
+          // putOrderInfoRequest(data, token).then(putOrderInfoResponseHandler);
      }
 //! ============================================================================================
 

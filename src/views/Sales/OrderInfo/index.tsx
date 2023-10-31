@@ -24,7 +24,7 @@ export default function OrderInfo() {
       orderInfoCustomerCode, orderInfoSalesPlanCode} = useOrderInfoListRequestStore();
     // description: 윗줄 데이터 입력 store //
     const { setPutOrderInfoOrderDate,setPutOrderInfoCustomerCode,setPutOrderInfoEmployeeCode,setPutOrderInfoProjectCode,
-      putOrderInfoCustomerCode,putOrderInfoEmployeeCode,putOrderInfoProjectCode } = usePutOrderInfoStore();
+      putOrderInfoCustomerCode,putOrderInfoEmployeeCode,putOrderInfoProjectCode, putOrderInfoOrderDate } = usePutOrderInfoStore();
     // description: 윗줄 조회 리스트 store //
     const { orderList, resetOrderList } = useOrderListStore();
     // description: 아랫줄 리스트 store //
@@ -47,6 +47,12 @@ export default function OrderInfo() {
     const [ inputCustomerName, setInputCustomerName ] =useState<string>('');
     // description: 입력창 프로젝트명 //
     const [ inputProjectName, setInputProjectName ] =useState<string>('');
+    // description: 코드 도움용 거래처코드 널 변수 //
+    const [ codeHelpCustomerCode, setCodeHelpCustomerCode ] =useState<number | null>(null);
+    // description: 코드 도움용 사원코드 널 변수 //
+    const [ codeHelpEmployeeCode, setCodeHelpEmployeeCode ] =useState<number | null>(null);
+    // description: 코드 도움용 판매계획코드 널 변수 //
+    const [ codeHelpSalesPlanCode, setCodeHelpSalesPlanCode ] =useState<number | null>(null);
 
     //!               function              //
     // description: 거래처목록 조회 응답 함수 //
@@ -132,7 +138,6 @@ export default function OrderInfo() {
       else if(clickState.includes('프로젝트')){
         setPutOrderInfoProjectCode(item.detailCode);
         setInputProjectName(item.name);
-        console.log('vvvv');
         return;
       }
       if(label.includes('거래처')){
@@ -147,40 +152,41 @@ export default function OrderInfo() {
     // description: 윗줄 입력 : 판매계획코드 코드도움 클릭 이벤트 처리 //
     const onSalesPlanCodeInputClickHandler = () => {
       setInputProjectName('');
-      setPutOrderInfoProjectCode(null);
+      setPutOrderInfoProjectCode(0);
       setOpen(true);
       setLabel('프로젝트코드도움');
       setClickState('프로젝트코드');
       const data: GetProjectCodeListRequestDto = {
-        salesPlanCode : putOrderInfoProjectCode,
+        salesPlanCode : codeHelpSalesPlanCode,
       }
       getProjectCodeListRequest(data).then(getProjectCodeListResponseHandelr);
     }
     // description: 윗줄 입력 : 사원번호 코드도움 클릭 이벤트 처리 //
     const onEmployeeCodeInputClickHandler = () => {
       setInputEmployeeName('');
-      
+      setPutOrderInfoEmployeeCode(0);
       setOpen(true);
       setLabel('사원코드도움');
       setClickState('사원코드');
       const data: GetEmployeeCodeListRequestDto = {
-        employeeCode : putOrderInfoEmployeeCode,
+        employeeCode : codeHelpEmployeeCode,
       }
       getEmployeeCodeListRequest(data).then(getEmployeeCodeListResponseHandelr);
     }
     // description: 윗줄 입력 : 거래처 코드도움 클릭 이벤트 처리 //
     const onCustomerCodeInputClickHandler = () => {
       setInputCustomerName('');
-      setPutOrderInfoCustomerCode(null);
+      setPutOrderInfoCustomerCode(0);
       setOpen(true);
       setLabel('거래처코드도움');
       setClickState('거래처코드');
       const data: GetCustomerCodeListRequestDto = {
-        customerCode : putOrderInfoCustomerCode,
+        customerCode : codeHelpCustomerCode,
       }
       getCustomerCodeListRequest(data).then(getCustomerCodeListResponseHandelr);
     }
-    // description : 검색버튼 사원코드창 열기 이벤트 //
+
+    // description : 검색 버튼 : 사원코드창 열기 이벤트 //
     const onCustomerSearchOpenButtonClickHandler = () => {
       setOpen(true);
       setLabel('거래처코드도움');
@@ -189,7 +195,7 @@ export default function OrderInfo() {
       }
       getCustomerCodeListRequest(data).then(getCustomerCodeListResponseHandelr);
     }
-    // description : 검색버튼 부서코드창 열기 이벤트 //
+    // description : 검색 버튼 : 부서코드창 열기 이벤트 //
     const onProjectSearchOpenButtonClickHandler = () => {
       setOpen(true);
       setLabel('프로젝트코드도움');
@@ -200,6 +206,10 @@ export default function OrderInfo() {
     }
     // description: 검색창 닫기 //
     const onCloseButtonClickHandler = () => {
+      // description : 검색창을 닫으면 검색용 널 변수 다시 null 세팅
+      setCodeHelpEmployeeCode(null);
+      setCodeHelpCustomerCode(null);
+      setCodeHelpSalesPlanCode(null);
       setOpen(false);
     }
 
@@ -210,7 +220,7 @@ export default function OrderInfo() {
           <div className='order-info-view-container-first-table-body'>
                <div className='order-info-view-container-first-table-body-no'></div>
                <div className='order-info-view-container-first-table-body-order-code'></div> 
-               <input className='order-info-view-container-first-table-body-order-date' onChange={onOrderDateInputChangeHandler}/>
+               <input className='order-info-view-container-first-table-body-order-date' value={putOrderInfoOrderDate} type='date' onChange={onOrderDateInputChangeHandler}/>
                <input className='order-info-view-container-first-table-body-customer-code' value={inputCustomerName} onClick={onCustomerCodeInputClickHandler}/>
                <input className='order-info-view-container-first-table-body-project-code' value={inputProjectName} onClick={onSalesPlanCodeInputClickHandler}/>
                <input className='order-info-view-container-first-table-body-manager' value={inputEmployeeName} onClick={onEmployeeCodeInputClickHandler}/>

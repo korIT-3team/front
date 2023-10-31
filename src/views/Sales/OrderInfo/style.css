@@ -323,7 +323,7 @@
 }
 
 .order-info-view-container-first-table-body-no {
-  width: 57px;
+  width: 60px;
   height: 35px;
 
   display: flex;
@@ -339,7 +339,7 @@
 }
 
 .order-info-view-container-first-table-body-order-code {
-  width: 166px;
+  width: 180px;
   height: 35px;
 
   display: flex;
@@ -356,12 +356,8 @@
 }
 
 .order-info-view-container-first-table-body-order-date {
-  width: 166px;
+  width: 179px;
   height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   
   border-right: 1px solid #FFF;
 
@@ -373,13 +369,9 @@
 }
 
 .order-info-view-container-first-table-body-customer-code {
-  width: 166px;
+  padding: 0px 0px 0px 1px;
+  width: 180px;
   height: 35px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
   border-right: 1px solid #FFF;
 
   color: rgba(44, 43, 43, 0.70);
@@ -390,7 +382,8 @@
 }
 
 .order-info-view-container-first-table-body-project-code {
-  width: 166px;
+  padding: 0px 0px 0px 1px;
+  width: 180px;
   height: 35px;
 
   display: flex;
@@ -407,7 +400,8 @@
 }
 
 .order-info-view-container-first-table-body-cust-code {
-  width: 166px;
+  padding: 0px 0px 0px 1px;
+  width: 180px;
   height: 35px;
 
   display: flex;
@@ -424,7 +418,8 @@
 }
 
 .order-info-view-container-first-table-body-manager {
-  width: 166px;
+  padding: 0px 0px 0px 1px;
+  width: 180px;
   height: 35px;
 
   display: flex;
