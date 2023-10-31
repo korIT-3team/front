@@ -39,9 +39,11 @@ import useIncentiveViewListStore from './incentiveviewlist.response.store';
 import useSelectedEmployeeInfoStore from './systemEmployee/selectedEmployeeInfo.store'
 import useSystemEmployeeInfoStore from './systemEmployee/systemEmployeeInfo.store'
 import useSelectedProductStore from './systemProduct/selectecproduct.store';
+
 import useHumanRequestStore from './humanlist.request.store';
 import useHumanResponseStore from './humanlist.response.store';
 import useSelectedHumanInfoStore from './selectedHumanInfo.store';
+import useHumanDetailInfoStore from './humanDetailInfo.store';
 
 export { 
      useUserStore,
@@ -88,5 +90,6 @@ export {
 
      useHumanRequestStore,
      useHumanResponseStore,
-     useSelectedHumanInfoStore
+     useSelectedHumanInfoStore,
+     useHumanDetailInfoStore
 };

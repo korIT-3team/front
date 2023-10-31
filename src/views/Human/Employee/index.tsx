@@ -6,15 +6,18 @@ import { getDepartmentCodeListRequest, getEmployeeCodeListRequest, getEmployment
 import GetSearchCodeListResponseDto from 'src/interfaces/response/common/get-search-code-list.response.dto';
 import ResponseDto from 'src/interfaces/response/response.dto';
 import SearchCodeResponseDto from 'src/interfaces/response/common/search-code.response.dto';
-import { useHumanRequestStore, useHumanResponseStore, useSelectedHumanInfoStore } from 'src/stores';
+import { useHumanDetailInfoStore, useHumanRequestStore, useHumanResponseStore, useSelectedHumanInfoStore } from 'src/stores';
 import CodeSearchListItem from 'src/components/CodeSearchListItem';
 import { useLocation } from 'react-router-dom';
 import { HumanEmploymentTypeResponseDto } from 'src/interfaces/response/human';
 import { GetEmploymentTypeListResponseDto } from 'src/interfaces/response/searchView';
+import { useDaumPostcodePopup, Address } from 'react-daum-postcode';
 
 export default function Employee() {
 
   //          state           //
+  // description: 다음 포스트 (우편번호검색) 팝업 상태 //
+  const postOpen = useDaumPostcodePopup();
   // description : path 상태 //
   const { pathname } = useLocation();  
   // description: 조회조건 정보 store //
@@ -35,8 +38,21 @@ export default function Employee() {
   const { humanList, setHumanList } = useHumanResponseStore();
   // description: 사원List - 선택된 사원 코드 //
   const { selectedHumanCode, setSelectedHumanCode } = useSelectedHumanInfoStore();
-
+  // description: 
+  const { employeeImage, email, nationality, address, addressDetail, postCode, telNumber, education, militaryService, career, position, job ,
+          setEmployeeImage, setEmail, setNationality, setAddress, setAddressDetail, setPostCode, setTelNumber, setEducation, setMilitaryService, setCareer, setPosition, setJob
+  } = useHumanDetailInfoStore();
     //          event handler           //
+  // description: 우편번호 조회버튼클릭 이벤트 //
+  const onPostCodeIconClickHandler = () => {
+    postOpen({ onComplete });
+  };
+  const onComplete = (data: Address) => {
+    const address = data.address;
+    const zonecode = data.zonecode;
+    setAddress(address);
+    setPostCode(zonecode);
+  };
     // description: 검색창 조회목록 아이템 클릭 이벤트 //
     const onDataItemClickHandler = ( item : SearchCodeResponseDto ) => {
       if(label.includes('사원')){
@@ -180,7 +196,7 @@ export default function Employee() {
                 <div className='employee-info-right-top-search-employment-status-text'>재직구분</div>
                 <div className='employee-info-right-top-search-employment-status-box'>
                   <div className='employee-info-right-top-search-employment-status-box-combo-box'>
-                    <select className='invoice-right-top-search-employment-status-box-combo-box-text' onChange={onInvoiceTypeChangeHandler} name="employment-type" id="employment-type">
+                    <select className='employee-info-right-top-search-employment-status-box-combo-box-text' onChange={onInvoiceTypeChangeHandler} name="employment-type" id="employment-type">
                       <option value="0">전체</option>
                       { employmentTypeList.map( ({userDefineDetailName, userDefineDetailCode}) => (<option value={userDefineDetailCode}>{userDefineDetailName}</option>))  }
                     </select>
@@ -257,13 +273,9 @@ export default function Employee() {
                 <div className='employee-info-middle-right-bottom-employee-info-detail-box'>
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>국적</div>
-                    <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box1-border'>
-                      <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box1'/>
-                    </div>
+                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box1' defaultValue={(!nationality)? "" : nationality} type='text'/>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>전화번호</div>
-                    <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box2-border'>                    
-                      <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box2'/>                  
-                    </div>
+                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box2' defaultValue={(!telNumber)? "" : telNumber} type='text'/>                  
                   </div>
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>직위</div>
@@ -279,23 +291,26 @@ export default function Employee() {
                   </div>    
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>email</div>
-                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box3'/>
+                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box3' defaultValue={(!email)? "" : email} type='text'/>
                   </div>                                                 
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>우편번호</div>
-                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box1'/>
+                    <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw-post-container'>
+                      <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-post' defaultValue={(!postCode)? "" : postCode} type='text'/>
+                      <div className="employee-info-middle-right-bottom-employee-info-detail-box-raw-post-icon" onClick={onPostCodeIconClickHandler}></div>
+                    </div>
                   </div>           
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>주소</div>
-                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box3'/>
+                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box3' defaultValue={(!address)? "" : address} type='text'/>
                   </div>         
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>상세주소</div>
-                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box4'/>
+                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw-box4' defaultValue={(!addressDetail)? "" : addressDetail} type='text'/>
                   </div>       
                   <div className='employee-info-middle-right-bottom-employee-info-detail-box-raw2'>
                     <div className='employee-info-middle-right-bottom-employee-info-box-right-raw-text'>경력</div>
-                    <input className='employee-info-middle-right-bottom-employee-info-detail-box-raw2-box5'/>
+                    <textarea className='employee-info-middle-right-bottom-employee-info-detail-box-raw2-box5' defaultValue={(!career)? "" : career} />
                   </div>                                                      
                 </div>
             </div>
