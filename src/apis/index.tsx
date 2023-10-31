@@ -33,6 +33,7 @@ import GetIncentiveListResponseDto from 'src/interfaces/response/human/get-incen
 import PutIncentiveRequestDto from 'src/interfaces/request/human/put-incentive-info.request.dto';
 import PutIncentiveInfoResponseDto from 'src/interfaces/response/human/put-incentive-info.response.dto';
 import DeleteIncentiveInfoResponseDto from 'src/interfaces/response/human/delete-incentive-info.response.dto';
+import GetEmployeeListResponseDto from 'src/interfaces/response/human/get-employee-list.response.dto';
 
 const API_DOMAIN = 'http://localhost:4040';
 
